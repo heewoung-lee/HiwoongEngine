@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+# Visual Studio
+.vs/
+*.ipch
+*.suo
+*.user
+
+# Build output
+[Bb]in/
+Intermediate/
