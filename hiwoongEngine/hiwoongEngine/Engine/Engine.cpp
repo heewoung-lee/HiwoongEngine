@@ -103,6 +103,9 @@ namespace Hiwoong
 		{
 			return;
 		}
+
+		if (mainScene->HasInitialized()) return;
+
 		mainScene->SceneInitialize();
 
 	}
@@ -112,7 +115,7 @@ namespace Hiwoong
 		{
 			return;
 		}
-		mainScene->SceneInitialize();
+		mainScene-> Start();
 	}
 
 	void Engine::Update(double deltaTime)
