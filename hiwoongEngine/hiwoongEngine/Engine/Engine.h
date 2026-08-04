@@ -1,62 +1,73 @@
-#pragma once
+#include <memory>
 
 namespace Hiwoong
 {
+	//Forward decaration
+	class Scene;
 	class Engine
 	{
-		//Setting Engine Structure
 		struct EngineSetting
 		{
-			float framerate = 120.0f;
+			float frameRate = 120.0f;
 		};
 
 	public:
 		Engine();
 		virtual ~Engine();
 
-		// Game Loop Method
 		void Run();
 
-		// Game Quit Method
 		void Quit();
 
-		// acesses singleton
+
+		//request add Level
+		template<typename T,
+			typename = std::enable_if_t<std::is_base_of<Scene, T> :: value>>
+
+			void AddNewScene()
+		{
+			nextScene = std::make_shared<T>();
+		}
+
+
 		static Engine& Get();
 
 	protected:
-		// Processing Input Method.
+		// Process input
 		void ProcessInput();
 
-		// Level Initialize Method.
+		//Initilize Scene
 		void SceneInitialize();
 
-		// Object initialize Method.
-		void ObjectInitialize();
-
-		// Update Method.
-		void Update(float deltaTime);
-
-		// Draw Method.
+		//Intialize Object
+		void Start();
+		//Update frame
+		void Update(double deltaTime);
+		//Renderfing
 		void Draw();
 
-		// Saving previous Input Method
-		void SavePreviousInput();
+		//Save Previous input state and compare to current
+		void SavePreviousInputState();
 
-		// Organizing Method after Engine Quit
+		//ShotDown
 		void ShutDown();
 
-
 	protected:
-		//EngineSetting
+		//Setting Engine
 		EngineSetting setting;
 
-		//Engine Quit Flag
+
+		//Flag for Engine quit
 		bool isQuit = false;
 
-		//Singleton 
+		//Singleton Engine
 		static Engine* instance;
+
+
+		// Main Level
+		std::shared_ptr<Scene> mainScene;
+
+		std::shared_ptr<Scene> nextScene;
+		
 	};
-
-
-
 }
