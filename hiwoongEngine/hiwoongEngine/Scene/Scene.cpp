@@ -1,4 +1,4 @@
-#include "Scene.h";
+#include "Scene.h"
 
 namespace Hiwoong
 {
@@ -36,7 +36,7 @@ namespace Hiwoong
 
 
 	}
-	void Scene::Update(float deltaTime)
+	void Scene::Update(double deltaTime)
 	{
 		for (std::shared_ptr<GameObject> actor : gameObjectList)
 		{
@@ -87,6 +87,5 @@ namespace Hiwoong
 		}
 
 		addRequestedGameObjectList.clear();
-		// 
 	}
 }

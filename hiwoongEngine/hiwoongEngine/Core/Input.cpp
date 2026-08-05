@@ -31,14 +31,6 @@ namespace Hiwoong
 		return keystates[keycode].isKeydown;
 	}
 
-
-
-	//Input construct
-	
-	//getkeydown
-
-	//getkeyup
-
 	//getkey
 
 	//acceces singleton
@@ -48,7 +40,7 @@ namespace Hiwoong
 		return *instance;
 	}
 
-
+	//PrecessInput
 	void Input::ProcessInput()
 	{
 		for (int ix = 0; ix < keyboardCnt; ++ix)
@@ -57,6 +49,7 @@ namespace Hiwoong
 		}
 	}
 
+	//Save currentPressed button state to Previous Button
 	void Input::SavePreviousInput()
 	{
 		for (KeyState& state : keystates)

@@ -1,4 +1,5 @@
 #pragma once
+#include "Core/Core.h"
 #include <memory>
 
 namespace Hiwoong
@@ -6,7 +7,8 @@ namespace Hiwoong
 	//Forward decaration
 	class Scene;
 	class Input;
-	class Engine
+
+	class Hiwoong_API Engine
 	{
 		struct EngineSetting
 		{

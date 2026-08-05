@@ -1,8 +1,10 @@
 #pragma once
 
+#include "Core/Core.h"
+
 namespace Hiwoong
 {
-	class Input
+	class Hiwoong_API Input
 	{
 		//declaraion friend Engine Class to accept PrecessInput method
 		friend class Engine;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameObject/GameObject.h"
+#include "Core/Core.h"
 #include <type_traits>
 #include <utility>
 #include <vector>
@@ -13,7 +14,7 @@ namespace Hiwoong
 	// Manages GameObjects in this Scene
 	// Send frame Event to Actor
 	// Provide some funtional setting.
-	class Scene : public std::enable_shared_from_this<Scene>
+	class Hiwoong_API Scene : public std::enable_shared_from_this<Scene>
 	{
 		// declaraion Frind class Engine 
 		friend class Engine;
@@ -28,7 +29,7 @@ namespace Hiwoong
 
 		//Frame Event Function
 		virtual void Start();
-		virtual void Update(float deltaTime);
+		virtual void Update(double deltaTime);
 		virtual void Draw();
 
 		// template of game object spawner

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Core/Core.h"
 #include <memory>
 
 namespace Hiwoong
@@ -8,7 +9,7 @@ namespace Hiwoong
 
 	class Scene;
 
-	class GameObject
+	class Hiwoong_API GameObject
 	{
 	public:
 		GameObject();
