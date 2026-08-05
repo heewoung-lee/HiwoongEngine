@@ -80,6 +80,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Input.cpp" />
     <ClCompile Include="GameObject\GameObject.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="GameObject\TestGameObject.cpp" />
@@ -88,6 +89,7 @@
     <ClCompile Include="Scene\TestScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Input.h" />
     <ClInclude Include="GameObject\GameObject.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="GameObject\TestGameObject.h" />

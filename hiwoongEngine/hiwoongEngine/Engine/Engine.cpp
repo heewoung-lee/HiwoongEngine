@@ -1,5 +1,6 @@
-#include "Engine.h"
+#include "Engine/Engine.h"
 #include "Scene/Scene.h"
+#include "Core/Input.h"
 #include <assert.h>
 #include <windows.h>
 #include <stdint.h>
@@ -14,6 +15,9 @@ namespace Hiwoong
 	{
 		assert(instance == nullptr);
 		instance = this;
+
+		//etting owner and create Input instance
+		input = std::make_unique<Input>();
 	}
 	Engine::~Engine()
 	{
@@ -96,6 +100,9 @@ namespace Hiwoong
 	}
 	void Engine::ProcessInput()
 	{
+		assert(input != nullptr);
+
+		input->ProcessInput();
 	}
 	void Engine::SceneInitialize()
 	{
@@ -141,10 +148,15 @@ namespace Hiwoong
 
 	void Engine::SavePreviousInputState()
 	{
+		//Excuse PrecessInput of Input
+		assert(input != nullptr);
+		
+		input->SavePreviousInput();
 	}
 
 	void Engine::ShutDown()
 	{
+
 	}
 
 

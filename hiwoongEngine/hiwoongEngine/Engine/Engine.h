@@ -1,9 +1,11 @@
+#pragma once
 #include <memory>
 
 namespace Hiwoong
 {
 	//Forward decaration
 	class Scene;
+	class Input;
 	class Engine
 	{
 		struct EngineSetting
@@ -41,11 +43,10 @@ namespace Hiwoong
 
 		//Intialize Object
 		void Start();
-		//Update frame
+		 //Update frame
 		void Update(double deltaTime);
-		//Renderfing
+		 //Renderfing
 		void Draw();
-
 		//Save Previous input state and compare to current
 		void SavePreviousInputState();
 
@@ -69,5 +70,6 @@ namespace Hiwoong
 
 		std::shared_ptr<Scene> nextScene;
 		
+		std::unique_ptr<Input> input;
 	};
 }
