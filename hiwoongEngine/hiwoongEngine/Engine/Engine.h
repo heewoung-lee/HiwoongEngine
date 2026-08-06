@@ -13,13 +13,13 @@ namespace Hiwoong
 	{
 		struct EngineSetting
 		{
-			float frameRate = 120.0f;
+			float frameRate = 0.0f;
 
 			//Screen Width
-			int width = 60;
+			int width = 0;
 
 			//Screen height
-			int height = 25;
+			int height = 0;
 		};
 
 	public:
@@ -43,6 +43,10 @@ namespace Hiwoong
 
 		static Engine& Get();
 
+		//Getter
+		inline int GetWidth() const { return setting.width; }
+		inline int GetHeight() const { return setting.height; }
+
 	protected:
 		// Process input
 		void ProcessInput();
@@ -61,6 +65,9 @@ namespace Hiwoong
 
 		//ShotDown
 		void ShutDown();
+
+		//Load EngineSetting Method
+		void LoadEngineSetting();
 
 	protected:
 		//Setting Engine

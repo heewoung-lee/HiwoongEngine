@@ -6,6 +6,8 @@
 #include <windows.h>
 #include <stdint.h>
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
 namespace Hiwoong
 {
@@ -16,6 +18,9 @@ namespace Hiwoong
 	{
 		assert(instance == nullptr);
 		instance = this;
+
+		//Load Engine Setting Value
+		LoadEngineSetting();
 
 		//etting owner and create Input instance
 		input = std::make_unique<Input>();
@@ -164,6 +169,84 @@ namespace Hiwoong
 	void Engine::ShutDown()
 	{
 
+	}
+
+	void Engine::LoadEngineSetting()
+	{
+
+		// load setting file
+		std::ifstream file("../Config/Setting.txt");
+
+		// check
+		assert(file.is_open());
+
+		// read line by line
+		std::string line;
+		while (std::getline(file, line))
+		{
+			if (line.empty() || line[0] == '#')
+			{
+				continue;
+			}
+
+			// key == value
+			const size_t equalPosition = line.find('=');
+
+			// = character check
+			assert(equalPosition != std::string::npos);
+
+			//remove empty space
+			auto trim = [](std::string& s)
+				{
+					// ' ' :space
+					// \t : tap
+					// \n : enter
+					const char* whiteSpace = " \t\r\n";
+
+					const size_t begin = s.find_first_not_of(whiteSpace);
+
+					if (begin == std::string::npos)
+					{
+						s.clear();
+						return;
+					}
+					const size_t end = s.find_last_not_of(whiteSpace);
+					
+					s = s.substr(begin, end - begin + 1);
+				};
+
+			std::string key = line.substr(0, equalPosition);
+			std::string value = line.substr(equalPosition + 1);
+
+			trim(key);
+			trim(value);
+
+			assert(!key.empty() && !value.empty());
+
+			if (key == "framerate")
+			{
+				setting.frameRate = static_cast<float>(atof(value.c_str()));
+				assert(setting.frameRate > 0.0f);
+				continue;
+			}
+
+			if (key == "width")
+			{
+				setting.width = static_cast<int>(atoi(value.c_str()));
+				assert(setting.width > 0);
+				continue;
+			}
+
+			if (key == "height")
+			{
+				setting.height = static_cast<int>(atoi(value.c_str()));
+				assert(setting.height > 0);
+			}
+
+		}
+
+		//close the file
+		file.close();
 	}
 
 

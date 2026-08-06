@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Core/Core.h"
-#include  "Math/Vector2.h"
+#include "Core/HiwoongObject.h"
+#include "Math/Vector2.h"
 #include "Math/Color.h"
 #include <memory>
 #include <string>
@@ -12,8 +13,11 @@ namespace Hiwoong
 
 	class Scene;
 
-	class Hiwoong_API GameObject
+	class Hiwoong_API GameObject : public HiwoongObject
 	{
+		// add Macro
+		TYPE_DECALRATIONS(GameObject,HiwoongObject)
+
 	public:
 		GameObject(
 			const std::string& image = "",

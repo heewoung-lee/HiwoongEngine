@@ -70,7 +70,9 @@
     <PostBuildEvent>
       <Command>xcopy $(OutDir)\HiwoongEngine.dll ..\Library\HiwoongEngine\$(Configuration)\ /e /y /i
 
-xcopy $(OutDir)\HiwoongEngine.lib ..\Library\HiwoongEngine\$(Configuration)\ /e /y /i</Command>
+xcopy $(OutDir)\HiwoongEngine.lib ..\Library\HiwoongEngine\$(Configuration)\ /e /y /i
+
+xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -93,7 +95,9 @@ xcopy $(OutDir)\HiwoongEngine.lib ..\Library\HiwoongEngine\$(Configuration)\ /e 
     <PostBuildEvent>
       <Command>xcopy $(OutDir)\HiwoongEngine.dll ..\Library\HiwoongEngine\$(Configuration)\ /e /y /i
 
-xcopy $(OutDir)\HiwoongEngine.lib ..\Library\HiwoongEngine\$(Configuration)\ /e /y /i</Command>
+xcopy $(OutDir)\HiwoongEngine.lib ..\Library\HiwoongEngine\$(Configuration)\ /e /y /i
+
+xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -107,6 +111,7 @@ xcopy $(OutDir)\HiwoongEngine.lib ..\Library\HiwoongEngine\$(Configuration)\ /e 
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Core.h" />
+    <ClInclude Include="Core\HiwoongObject.h" />
     <ClInclude Include="Core\Input.h" />
     <ClInclude Include="GameObject\GameObject.h" />
     <ClInclude Include="Engine\Engine.h" />
