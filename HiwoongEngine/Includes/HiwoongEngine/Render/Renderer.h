@@ -5,8 +5,12 @@
 #include "Math/Color.h"
 #include <iostream>
 #include <vector>
+#include <memory>
+
 namespace Hiwoong
 {
+	class ScreenBuffer;
+
 	//Draw to Screen 
 	class Hiwoong_API Renderer
 	{
@@ -26,8 +30,28 @@ namespace Hiwoong
 			int sortingorder = -1;
 		};
 		
+
+		//Screen Frame(2 dimention Array)
+		struct Frame
+		{
+			// Create Size width X horizontal
+			Frame(int bufferCount);
+			~Frame();
+
+			//Initialize Frame
+			void Clear(const Vector2& screenSize);
+
+			//2d charater Array
+			std::unique_ptr<CHAR_INFO[]> charInfoArray;
+
+			// 2d Array to sort to draw
+			std::unique_ptr<int[]> sortingOrderArray;
+
+		};
+
+
 	public:
-		Renderer();
+		Renderer(const Vector2& screenSize);
 		~Renderer();
 
 		//GameObject request rendercommand to Renderer with SummitMethod
@@ -46,7 +70,7 @@ namespace Hiwoong
 
 
 	private:
-		// when engine starts the frame, it starts remove the screen
+		// when engine starts the frame, it starts removing the screen
 		void Clear();
 
 		//DrawRenderQueue
@@ -55,6 +79,8 @@ namespace Hiwoong
 		//TODO: when we use the Twice Buffer Backfuffer draws next frame;
 		void Present();
 
+		// Buffer can draw this frame
+		const ScreenBuffer* const GetCurrentBuffer() const;
 
 	private:
 
@@ -63,6 +89,18 @@ namespace Hiwoong
 
 		// Colleting Datas which drawing Datas in this frame
 		std::vector<RenderCommand> renderQueue;
+
+		//Screen Size
+		Vector2 screenSize;
+
+		// organizing 2 dimention Array of drawing the characters 
+		std::unique_ptr<Frame> frame;
+
+		// screen consle buffer
+		std::unique_ptr<ScreenBuffer> screenBufferArray[2] = {};
+
+		// Back bufferIdx(draw buffer)
+		int currentBufferIndex = 0;
 
 	};
 }

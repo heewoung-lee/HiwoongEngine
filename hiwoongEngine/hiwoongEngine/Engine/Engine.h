@@ -14,6 +14,12 @@ namespace Hiwoong
 		struct EngineSetting
 		{
 			float frameRate = 120.0f;
+
+			//Screen Width
+			int width = 60;
+
+			//Screen height
+			int height = 25;
 		};
 
 	public:

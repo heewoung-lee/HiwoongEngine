@@ -102,6 +102,7 @@ xcopy $(OutDir)\HiwoongEngine.lib ..\Library\HiwoongEngine\$(Configuration)\ /e 
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Math\Vector2.cpp" />
     <ClCompile Include="Render\Renderer.cpp" />
+    <ClCompile Include="Render\ScreenBuffer.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +113,7 @@ xcopy $(OutDir)\HiwoongEngine.lib ..\Library\HiwoongEngine\$(Configuration)\ /e 
     <ClInclude Include="Math\Color.h" />
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Render\Renderer.h" />
+    <ClInclude Include="Render\ScreenBuffer.h" />
     <ClInclude Include="Scene\Scene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
