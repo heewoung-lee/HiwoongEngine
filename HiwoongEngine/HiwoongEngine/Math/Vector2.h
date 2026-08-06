@@ -6,9 +6,8 @@ namespace Hiwoong
 {
 	class Hiwoong_API Vector2
 	{
-		
 
-	private:
+	public:
 
 		int x = 0;
 		int y = 0;
@@ -23,10 +22,11 @@ namespace Hiwoong
 		Vector2(int x = 0, int y = 0);
 		~Vector2();
 
+
 		Vector2 operator+(const Vector2& other) const;
 		Vector2 operator-(const Vector2& other) const;
 		Vector2 operator*(const Vector2& other) const;
-		Vector2 operator*(float value) const;
+		Vector2 operator*(int value) const;
 		Vector2 operator/(const Vector2& other) const;
 
 		Vector2& operator= (const Vector2& other);

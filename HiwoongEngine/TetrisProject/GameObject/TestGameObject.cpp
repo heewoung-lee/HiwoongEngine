@@ -5,6 +5,11 @@
 
 using namespace Hiwoong;
 
+TestGameObject::TestGameObject(): GameObject("P",Vector2(5,5),Color::Green)
+{
+	sortingOrder = 5;
+}
+
 void TestGameObject::Update(double deltaTime)
 {
 	GameObject::Update(deltaTime);
@@ -14,21 +19,24 @@ void TestGameObject::Update(double deltaTime)
 		QuitGame();
 	}
 
-
-	if (Input::Get().GetKeyDown('A'))
+	if (Input::Get().GetKey(VK_LEFT) && position.x > 0)
 	{
-		std::cout << "'A' Å° ´­¸²" << std::endl;
+		position.x -= 1;
+	}
+
+	if (Input::Get().GetKey(VK_RIGHT) && position.x < 39)
+	{
+		position.x += 1;
+	}
+
+	if (Input::Get().GetKey(VK_UP) && position.y > 0 )
+	{
+		position.y -= 1;
 	}
 
 
-	if (Input::Get().GetKeyUP('A'))
+	if (Input::Get().GetKey(VK_DOWN) && position.y < 24)
 	{
-		std::cout << "'A' Å° ¶¼Áü" << std::endl;
+		position.y += 1;
 	}
-
-	if (Input::Get().GetKey('A'))
-	{
-		std::cout << "'A' Å°" << std::endl;
-	}
-
 }

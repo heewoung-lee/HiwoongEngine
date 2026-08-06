@@ -7,6 +7,7 @@ namespace Hiwoong
 	//Forward decaration
 	class Scene;
 	class Input;
+	class Renderer;
 
 	class Hiwoong_API Engine
 	{
@@ -73,5 +74,7 @@ namespace Hiwoong
 		std::shared_ptr<Scene> nextScene;
 		
 		std::unique_ptr<Input> input;
+
+		std::unique_ptr<Renderer> renderer;
 	};
 }

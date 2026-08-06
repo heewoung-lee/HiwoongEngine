@@ -1,6 +1,7 @@
 #include "Engine/Engine.h"
 #include "Scene/Scene.h"
 #include "Core/Input.h"
+#include "Render/Renderer.h"
 #include <assert.h>
 #include <windows.h>
 #include <stdint.h>
@@ -18,6 +19,8 @@ namespace Hiwoong
 
 		//etting owner and create Input instance
 		input = std::make_unique<Input>();
+
+		renderer = std::make_unique<Renderer>();
 	}
 	Engine::~Engine()
 	{
@@ -142,8 +145,12 @@ namespace Hiwoong
 		{
 			return;
 		}
-		mainScene->Draw();
 
+		//Scene's GameObjects request to draw to the renderQueue
+		mainScene->Draw();
+		
+		//RenderQueue draws GameObjects in thier storigies
+		renderer->Draw();
 	}
 
 	void Engine::SavePreviousInputState()

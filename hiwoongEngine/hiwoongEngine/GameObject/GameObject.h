@@ -1,7 +1,10 @@
 #pragma once
 
 #include "Core/Core.h"
+#include  "Math/Vector2.h"
+#include "Math/Color.h"
 #include <memory>
+#include <string>
 
 namespace Hiwoong
 {
@@ -12,7 +15,11 @@ namespace Hiwoong
 	class Hiwoong_API GameObject
 	{
 	public:
-		GameObject();
+		GameObject(
+			const std::string& image = "",
+			const Vector2& position = Vector2::Zero,
+			Color color = Color::White
+		);
 		virtual ~GameObject();
 
 		//Intialize Object
@@ -26,18 +33,19 @@ namespace Hiwoong
 
 		void QuitGame();
 
-
+		//Getter / Setter
 		inline bool HasBeganPlay() const { return hasBeganPlay; }
 		inline bool IsActive() const { return isActive && !hasExpired; }
 		inline bool HasExpired() const { return hasExpired; }
 
-
 		std::shared_ptr<Scene> GetOnwer();
 		void SetOwner(std::weak_ptr<Scene> newOwner);
 
+		inline Vector2 GetPosition() const { return position; }
+		void SetPosition(const Vector2& newPosition);
+
 
 	protected:
-
 		// check process beginplay event
 		bool hasBeganPlay = false;
 
@@ -50,6 +58,16 @@ namespace Hiwoong
 		//onwership
 		std::weak_ptr<Scene> owner;
 
+		std::string image;
+
+		Color color = Color::White;
+
+		//GameObject Width
+		int width = 0;
+
+		int sortingOrder = 0;
+
+		Vector2 position;
 	};
 
 }
