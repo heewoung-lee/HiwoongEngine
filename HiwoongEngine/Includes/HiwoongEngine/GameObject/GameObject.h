@@ -2,10 +2,16 @@
 
 #include "Core/Core.h"
 #include "Core/HiwoongObject.h"
+#include "Component/Component.h"
+#include "Component/TransformComponent.h"
 #include "Math/Vector2.h"
 #include "Math/Color.h"
 #include <memory>
 #include <string>
+#include <type_traits> //is_base_of
+#include <utility> //std::forward
+#include <vector>
+
 
 namespace Hiwoong
 {
@@ -13,14 +19,20 @@ namespace Hiwoong
 
 	class Scene;
 
-	class Hiwoong_API GameObject : public HiwoongObject
+	class Hiwoong_API GameObject : public HiwoongObject, public std::enable_shared_from_this<GameObject>
 	{
+		// declaration friend class to aceess
+		friend class Scene;
+
 		// add Macro
-		TYPE_DECALRATIONS(GameObject,HiwoongObject)
+		TYPE_DECALRATIONS(GameObject, HiwoongObject)
 
 	public:
+
+		GameObject(const Vector2& position = Vector2::Zero);
+
 		GameObject(
-			const std::string& image = "",
+			const std::string& image,
 			const Vector2& position = Vector2::Zero,
 			Color color = Color::White
 		);
@@ -37,6 +49,48 @@ namespace Hiwoong
 
 		void QuitGame();
 
+		void SavePreviousState();
+
+		// Attached Component to GameObejct
+		template<typename T, typename ...Args,
+			typename = std::enable_if_t<std::is_base_of<Component, T>::value>>
+			std::shared_ptr<T> AddComponent(Args&& ...args)
+		{
+			// Check Transform
+			assert(!std::is_same<T, TransformComponent>::value, "TransformComponent is created by an GameOjbect");
+
+			//add new Component
+			std::shared_ptr<T> newComponent = std::make_shared<T>(std::forward<Args>...);
+
+			addRequestedComponentList.emplace_back(newComponent);
+
+			return newComponent;
+		}
+
+		// find component in GameObject
+		template<typename T,
+			typename = std::enable_if_t<std::is_base_of<Component, T>::value>>
+			std::shared_ptr<T> GetComponent() const
+		{
+			for (const std::shared_ptr<Component>& component : componentList)
+			{
+				if (component && component->IsTypeOf<T>())
+				{
+					return std::static_pointer_cast<T>(component);
+				}
+			}
+
+			for (const std::shared_ptr<Component>& component : addRequestedComponentList)
+			{
+				if (component && component->IsTypeOf<T>())
+				{
+					return std::static_pointer_cast<T>(component);
+				}
+			}
+
+			return nullptr;
+		}
+
 		//Getter / Setter
 		inline bool HasBeganPlay() const { return hasBeganPlay; }
 		inline bool IsActive() const { return isActive && !hasExpired; }
@@ -48,6 +102,16 @@ namespace Hiwoong
 		inline Vector2 GetPosition() const { return position; }
 		void SetPosition(const Vector2& newPosition);
 
+		inline Vector2 GetPreviousPosition() const{ return previousPosition; }
+		
+		inline int GetWidth() const { return width; }
+		inline std::shared_ptr<TransformComponent> GetWorldTransform() const { return transform; }
+
+
+	protected:
+		void ProcessAddComponents();
+
+		void BindComponentOwners();
 
 	protected:
 		// check process beginplay event
@@ -61,6 +125,16 @@ namespace Hiwoong
 
 		//onwership
 		std::weak_ptr<Scene> owner;
+
+
+		//Attched TransformComponent for GameObject default
+		std::shared_ptr<TransformComponent> transform;
+
+		//list addComponents
+		std::vector<std::shared_ptr<Component>> componentList;
+
+		// list Requests AddComponent
+		std::vector<std::shared_ptr<Component>> addRequestedComponentList;
 
 		std::string image;
 

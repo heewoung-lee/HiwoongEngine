@@ -6,7 +6,7 @@
 namespace Hiwoong
 {
 	// Managing GameObject Position
-	class Hiwoong_API TransformComponent : Component
+	class Hiwoong_API TransformComponent : public Component
 	{
 		TYPE_DECALRATIONS(TransformComponent, Component)
 

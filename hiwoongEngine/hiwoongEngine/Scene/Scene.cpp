@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "GameObject/GameObject.h"
 
 namespace Hiwoong
 {
@@ -49,17 +50,25 @@ namespace Hiwoong
 	}
 	void Scene::Draw()
 	{
-		for (std::shared_ptr<GameObject> actor : gameObjectList)
+		for (std::shared_ptr<GameObject> gameObject : gameObjectList)
 		{
-			if (actor->IsActive() == false)
+			if (gameObject->IsActive() == false)
 			{
 				continue;
 			}
-			actor->Draw();
+			gameObject->Draw();
 		}
 	}
 	void Scene::ProcessAddAndDestoryActors()
 	{
+		for (const std::shared_ptr<GameObject>& gameObejct : gameObjectList)
+		{
+			if (gameObejct == nullptr) continue;
+
+			gameObejct->ProcessAddComponents();
+		}
+
+
 		//Process Actor delete.
 		for (auto iterator = gameObjectList.begin(); iterator != gameObjectList.end();)
 		{

@@ -5,7 +5,7 @@
 #include <string>
 namespace Hiwoong
 {
-	class Hiwoong_API SpriteRendererComponent : Component
+	class Hiwoong_API SpriteRendererComponent : public Component
 	{
 		TYPE_DECALRATIONS(SpriteRendererComponent,Component)
 		
