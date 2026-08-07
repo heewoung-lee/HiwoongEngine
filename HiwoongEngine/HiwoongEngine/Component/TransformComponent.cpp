@@ -13,10 +13,31 @@ namespace Hiwoong
 	}
 	Vector2 TransformComponent::GetWorldPosition() const
 	{
-		return localPosition;
+		//Parent Transform
+		std::shared_ptr<TransformComponent> parentTransform = parent.lock();
+
+		if (parentTransform == nullptr)
+		{
+			return localPosition;
+		}
+		else
+		{
+			return parentTransform->GetWorldPosition() + localPosition;
+		}
 	}
 	void TransformComponent::SetWorldPosition(const Vector2& newPosition)
 	{
-		localPosition = newPosition;
+		//Parent Transform
+		std::shared_ptr<TransformComponent> parentTransform = parent.lock();
+
+		if (parentTransform == nullptr)
+		{
+			localPosition = newPosition;
+			return;
+		}
+		else
+		{
+			localPosition = newPosition - parentTransform->GetWorldPosition();
+		}
 	}
 }

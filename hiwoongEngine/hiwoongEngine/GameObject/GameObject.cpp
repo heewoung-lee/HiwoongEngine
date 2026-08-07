@@ -86,6 +86,16 @@ namespace Hiwoong
 		//revservation to remove actor
 		//actor will be delted next frame.
 		hasExpired = true;
+
+		for (const std::weak_ptr<GameObject>& child : children)
+		{
+			std::shared_ptr<GameObject> childGameObject = child.lock();
+			if (childGameObject != nullptr)
+			{
+				childGameObject->Destroy();
+			}
+		}
+
 	}
 
 	void GameObject::QuitGame()
@@ -100,6 +110,63 @@ namespace Hiwoong
 		if (transform)
 		{
 			transform->SavePreviousWorldPosition();
+		}
+	}
+
+	void GameObject::AttachTo(const std::shared_ptr<GameObject>& newParent, bool keepWorldPosition)
+	{
+		// if there are no parents and pointer that we will set for parent is this continue
+		if (newParent == nullptr || newParent.get() == this ) return;
+
+		//delete previsous parents
+		DetachFromParent();
+
+		parent = newParent;
+		newParent->children.emplace_back(weak_from_this());
+
+		if (transform && newParent->GetTransform())
+		{
+			Vector2 worldPosition = transform->GetWorldPosition();
+
+			transform->SetParent(newParent->GetTransform());
+
+			if (keepWorldPosition)
+			{
+				transform->SetWorldPosition(worldPosition);
+			}
+		}
+
+	}
+
+	void GameObject::DetachFromParent()
+	{
+		std::shared_ptr<GameObject> oldParent = parent.lock();
+
+		if (oldParent)
+		{
+			//Load previos Chilren List
+			auto& siblingList = oldParent->children;
+
+			for (auto iterator = siblingList.begin(); iterator != siblingList.end();++iterator)
+			{
+				//Find me from list of previous parent 
+				if ((*iterator).lock().get() == this)
+				{
+					siblingList.erase(iterator);
+					break;
+				}
+			}
+
+		}
+
+		// initialzie 
+		parent.reset();
+
+		if (transform)
+		{
+			Vector2 worldPosition = transform->GetWorldPosition();
+			transform->SetParent(std::weak_ptr<TransformComponent>());
+			transform->SetWorldPosition(worldPosition);
 		}
 	}
 

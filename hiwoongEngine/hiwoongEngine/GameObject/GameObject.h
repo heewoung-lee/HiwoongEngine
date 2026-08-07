@@ -55,6 +55,15 @@ namespace Hiwoong
 
 		void SavePreviousState();
 
+		//Select ParentGameobject in Scene Graph
+		void AttachTo(
+			const std::shared_ptr<GameObject>& newParent,
+			bool keepWorldPosition = true);
+
+		void DetachFromParent();
+
+
+
 		// Attached Component to GameObejct
 		template<typename T, typename ...Args,
 			typename = std::enable_if_t<std::is_base_of<Component, T>::value>>
@@ -112,7 +121,14 @@ namespace Hiwoong
 		Vector2 GetPreviousPosition() const;
 		
 		inline int GetWidth() const { return width; }
-		inline std::shared_ptr<TransformComponent> GetWorldTransform() const { return transform; }
+		
+		inline std::shared_ptr<TransformComponent> GetTransform() const { return transform; }
+
+		// return Parent GameObject 
+		inline std::shared_ptr<GameObject> GetParent() const { return parent.lock(); }
+
+		// return child GameObject
+		inline const std::vector<std::weak_ptr<GameObject>> GetChildren() const { return children; }
 
 
 	protected:
@@ -142,6 +158,12 @@ namespace Hiwoong
 
 		// list Requests AddComponent
 		std::vector<std::shared_ptr<Component>> addRequestedComponentList;
+
+		//Parent GameObject in Scene Graph
+		std::weak_ptr<GameObject> parent;
+
+		//Child Objects in Scene Graph
+		std::vector<std::weak_ptr<GameObject>> children;
 
 		std::string image;
 

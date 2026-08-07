@@ -2,6 +2,7 @@
 
 #include "Component.h"
 #include "Math/Vector2.h"
+#include <memory>
 
 namespace Hiwoong
 {
@@ -26,6 +27,9 @@ namespace Hiwoong
 
 		inline Vector2 GetPreviousWorldPosition() const { return previousWorldPosition; }
 
+		inline std::shared_ptr<TransformComponent> GetParent() const { return parent.lock(); }
+		inline void SetParent(std::weak_ptr<TransformComponent> newParent) { parent = newParent; }
+
 	protected:
 		// Base on Parent Transform 
 		Vector2 localPosition;
@@ -33,7 +37,8 @@ namespace Hiwoong
 		// Previous before Position
 		Vector2 previousWorldPosition;
 
-		int sortingOrder = -1;
+		//Get ParentTransform from Scene Graph
+		std::weak_ptr<TransformComponent> parent;
 
 	};
 }
