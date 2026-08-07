@@ -25,7 +25,7 @@ namespace Hiwoong
 	{
 
 	}
-	void  Component::OnCollision(const std::shared_ptr<GameObject>& other)
+	void Component::OnCollision(const std::shared_ptr<GameObject>& other)
 	{
 
 	}

@@ -27,10 +27,29 @@ namespace Hiwoong
 	{
 
 		hasBeganPlay = true;
+
+		//Send Event to Component
+		for (const std::shared_ptr<Component>& component : componentList)
+		{
+			if (component->HasStared() == false)
+			{
+				component->Start();
+			}
+
+		}
 	}
 	//Update frame
 	void GameObject::Update(double deltaTime)
 	{
+		if (IsActive() == false)
+		{
+			return;
+		}
+
+		for (const std::shared_ptr<Component>& component : componentList)
+		{
+			component->Update(deltaTime);
+		}
 
 	}
 	//Renderfing
@@ -42,6 +61,24 @@ namespace Hiwoong
 			return;
 		}
 		Renderer::Get().Submit(image, position, color, sortingOrder);
+
+		for (const std::shared_ptr<Component>& component : componentList)
+		{
+			component->Draw();
+		}
+	}
+
+	void GameObject::OnCollision(const std::shared_ptr<GameObject>& other)
+	{
+		if (IsActive() == false)
+		{
+			return;
+		}
+		for (const std::shared_ptr<Component>& component : componentList)
+		{
+			component->OnCollision(other);
+		}
+
 	}
 
 	void GameObject::Destroy()
@@ -59,7 +96,11 @@ namespace Hiwoong
 
 	void GameObject::SavePreviousState()
 	{
-		previousPosition = position;
+		//previousPosition = position;
+		if (transform)
+		{
+			transform->SavePreviousWorldPosition();
+		}
 	}
 
 	std::shared_ptr<Scene> GameObject::GetOnwer()
@@ -70,13 +111,38 @@ namespace Hiwoong
 	void GameObject::SetOwner(std::weak_ptr<Scene> newOwner)
 	{
 		owner = newOwner;
+		
+		//changing ownership
+		BindComponentOwners();
+	}
+
+	Vector2 GameObject::GetPosition() const
+	{
+		// return transform position
+		return transform ? transform->GetLocalPosition() : Vector2::Zero;
+	}
+	Vector2 GameObject::GetWorldPosition() const
+	{
+		return transform ? transform->GetWorldPosition() : Vector2::Zero;
 	}
 
 	void GameObject::SetPosition(const Vector2& newPosition)
 	{
-		if (position == newPosition) return;
+		if (GetPosition() == newPosition) return;
 
-		position = newPosition;
+		//position = newPosition;
+
+		if (transform != nullptr)
+		{
+			transform->SetLocalPosition(newPosition);
+		}
+	}
+
+
+	Vector2 GameObject::GetPreviousPosition() const
+	{
+		// return previous frame position which manged by transform.
+		return transform ? transform->GetPreviousWorldPosition() : Vector2::Zero;
 	}
 
 	void GameObject::ProcessAddComponents()

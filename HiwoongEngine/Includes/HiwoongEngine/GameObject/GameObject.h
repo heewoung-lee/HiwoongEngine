@@ -45,9 +45,13 @@ namespace Hiwoong
 		//Renderfing
 		virtual void Draw();
 
+
+
 		void Destroy();
 
 		void QuitGame();
+
+		void OnCollision(const std::shared_ptr<GameObject>& other);
 
 		void SavePreviousState();
 
@@ -99,10 +103,13 @@ namespace Hiwoong
 		std::shared_ptr<Scene> GetOnwer();
 		void SetOwner(std::weak_ptr<Scene> newOwner);
 
-		inline Vector2 GetPosition() const { return position; }
+		Vector2 GetPosition() const;
+		Vector2 GetWorldPosition() const;
+
 		void SetPosition(const Vector2& newPosition);
 
-		inline Vector2 GetPreviousPosition() const{ return previousPosition; }
+		//return previous Position
+		Vector2 GetPreviousPosition() const;
 		
 		inline int GetWidth() const { return width; }
 		inline std::shared_ptr<TransformComponent> GetWorldTransform() const { return transform; }
