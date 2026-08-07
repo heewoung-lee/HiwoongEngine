@@ -72,6 +72,8 @@ namespace Hiwoong
 		int sortingOrder = 0;
 
 		Vector2 position;
+
+		Vector2 previousPosition;
 	};
 
 }

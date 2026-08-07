@@ -12,7 +12,7 @@ TestGameObject::TestGameObject(): GameObject("P",Vector2(5,5),Color::Green)
 
 void TestGameObject::Update(double deltaTime)
 {
-	GameObject::Update(deltaTime);
+	super::Update(deltaTime);
 
 	if (Input::Get().GetKeyDown(VK_ESCAPE))
 	{
