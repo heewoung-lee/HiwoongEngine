@@ -1,5 +1,7 @@
 #include "SpriteRendererComponent.h"
-
+#include "TransformComponent.h"
+#include "Render/Renderer.h"
+#include "GameObject/GameObject.h"
 namespace Hiwoong
 {
 	SpriteRendererComponent::SpriteRendererComponent(
@@ -13,6 +15,16 @@ namespace Hiwoong
 	{
 		super::Draw();
 
-		//TODO: Access Transform Getter 
+		std::shared_ptr<GameObject> gameObject = GetOwner();
+
+		if (gameObject == nullptr || gameObject->IsActive() == false) return;
+
+		std::shared_ptr<TransformComponent> transform = gameObject->GetTransform();
+		if (transform == nullptr) return;
+
+		Renderer::Get().Submit(image, transform->GetWorldPosition(), color, sortingOrder);
+
+
+		//Renderer::Get().Submit()
 	}
 }

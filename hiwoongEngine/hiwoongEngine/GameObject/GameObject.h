@@ -128,7 +128,7 @@ namespace Hiwoong
 		inline std::shared_ptr<GameObject> GetParent() const { return parent.lock(); }
 
 		// return child GameObject
-		inline const std::vector<std::weak_ptr<GameObject>> GetChildren() const { return children; }
+		inline const std::vector<std::weak_ptr<GameObject>>& GetChildren() const { return children; }
 
 
 	protected:

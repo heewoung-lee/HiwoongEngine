@@ -60,7 +60,6 @@ namespace Hiwoong
 		{
 			return;
 		}
-		Renderer::Get().Submit(image, position, color, sortingOrder);
 
 		for (const std::shared_ptr<Component>& component : componentList)
 		{

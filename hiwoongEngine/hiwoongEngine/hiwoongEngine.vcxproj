@@ -109,6 +109,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClCompile Include="GameObject\GameObject.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Math\Vector2.cpp" />
+    <ClCompile Include="Physics\CollisionSystem.cpp" />
     <ClCompile Include="Render\Renderer.cpp" />
     <ClCompile Include="Render\ScreenBuffer.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
@@ -125,6 +126,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Math\Color.h" />
     <ClInclude Include="Math\Vector2.h" />
+    <ClInclude Include="Physics\CollisionSystem.h" />
     <ClInclude Include="Render\Renderer.h" />
     <ClInclude Include="Render\ScreenBuffer.h" />
     <ClInclude Include="Scene\Scene.h" />
