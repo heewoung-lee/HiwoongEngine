@@ -7,6 +7,8 @@ class TestGameObject : public Hiwoong::GameObject
 
 public:
 	TestGameObject();
-	virtual void Update(double deltaTime) override;
+	~TestGameObject() = default;
+	
+	virtual void Start();
 };
 

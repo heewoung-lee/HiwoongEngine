@@ -30,12 +30,6 @@ namespace Hiwoong
 	public:
 
 		GameObject(const Vector2& position = Vector2::Zero);
-
-		GameObject(
-			const std::string& image,
-			const Vector2& position = Vector2::Zero,
-			Color color = Color::White
-		);
 		virtual ~GameObject();
 
 		//Intialize Object
@@ -70,10 +64,10 @@ namespace Hiwoong
 			std::shared_ptr<T> AddComponent(Args&& ...args)
 		{
 			// Check Transform
-			assert(!std::is_same<T, TransformComponent>::value, "TransformComponent is created by an GameOjbect");
+			static_assert(!std::is_same<T, TransformComponent>::value, "TransformComponent is created by an GameOjbect");
 
 			//add new Component
-			std::shared_ptr<T> newComponent = std::make_shared<T>(std::forward<Args>...);
+			std::shared_ptr<T> newComponent = std::make_shared<T>(std::forward<Args>(args)...);
 
 			addRequestedComponentList.emplace_back(newComponent);
 

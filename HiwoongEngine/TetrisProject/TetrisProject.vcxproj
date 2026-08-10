@@ -90,11 +90,13 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameObject\Player\PlayerInputComponent.cpp" />
     <ClCompile Include="GameObject\TestGameObject.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Scene\TestScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameObject\Player\PlayerInputComponent.h" />
     <ClInclude Include="GameObject\TestGameObject.h" />
     <ClInclude Include="Scene\TestScene.h" />
   </ItemGroup>

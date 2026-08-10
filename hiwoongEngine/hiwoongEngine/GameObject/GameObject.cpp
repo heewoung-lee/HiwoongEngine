@@ -2,19 +2,10 @@
 #include "Engine/Engine.h"
 #include "Scene/Scene.h"
 #include "Render/Renderer.h"
-
 namespace Hiwoong
 {
-	GameObject::GameObject(const Vector2& position) : GameObject("",position,Color::White)
+	GameObject::GameObject(const Vector2& position)
 	{
-	}
-	GameObject::GameObject(
-		const std::string& image,
-		const Vector2& position,
-		Color color) : image(image), position(position), color(color), width(static_cast<int>(image.length()))
-	{
-		//AddComponent Transform
-
 		transform = std::make_shared<TransformComponent>(position);
 	}
 	GameObject::~GameObject()
