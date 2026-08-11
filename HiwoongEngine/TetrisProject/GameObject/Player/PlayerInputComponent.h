@@ -18,6 +18,7 @@ namespace Hiwoong
 
 	private:
 		GameObject* player = nullptr;
+		Scene* scene = nullptr;
 	};
 
 }

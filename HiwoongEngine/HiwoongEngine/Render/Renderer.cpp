@@ -9,6 +9,7 @@ namespace Hiwoong
 
 	Renderer::Frame::Frame(int bufferCount)
 	{
+
 		//Create 2d Character Object Array and sorting order objects 
 		charInfoArray = std::make_unique<CHAR_INFO[]>(bufferCount);
 		sortingOrderArray = std::make_unique<int[]>(bufferCount);
@@ -53,21 +54,10 @@ namespace Hiwoong
 		assert(instance == nullptr);
 		instance = this;
 
-		// Create two ScreenBuffer
-		screenBufferArray[0] = std::make_unique<ScreenBuffer>(screenSize);
-		screenBufferArray[0]->Clear();
-
-		screenBufferArray[1] = std::make_unique<ScreenBuffer>(screenSize);
-		screenBufferArray[1]->Clear();
-
-		// Setting 0 consoleBuffer to show
-		SetConsoleActiveScreenBuffer(screenBufferArray[0]->GetScreenBuffer());
-
-		//Create Frame
-		const int bufferCount = screenSize.x * screenSize.y;
-		frame = std::make_unique<Frame>(bufferCount);
-		frame->Clear(screenSize);
+		CreateSceenBuffer(screenSize);
 	}
+
+
 	Renderer::~Renderer()
 	{
 		instance = nullptr;
@@ -93,6 +83,10 @@ namespace Hiwoong
 		Clear();
 		DrawRenderQueue();
 		Present();
+	}
+	void Renderer::Resize(const Vector2& screenSize)
+	{
+		CreateSceenBuffer(screenSize);
 	}
 	Renderer& Renderer::Get()
 	{
@@ -184,5 +178,34 @@ namespace Hiwoong
 	const ScreenBuffer* const Renderer::GetCurrentBuffer() const
 	{
 		return screenBufferArray[currentBufferIndex].get();
+	}
+	void Renderer::CreateSceenBuffer(const Vector2& newScreenSize)
+	{
+		std::unique_ptr<ScreenBuffer> newBuffer0 = std::make_unique<ScreenBuffer>(newScreenSize);
+		std::unique_ptr<ScreenBuffer> newBuffer1 = std::make_unique<ScreenBuffer>(newScreenSize);
+
+		newBuffer0->Clear();
+		newBuffer1->Clear();
+
+		const int bufferCount = newScreenSize.x * newScreenSize.y;
+		std::unique_ptr<Frame> newframe = std::make_unique<Frame>(bufferCount);
+		newframe->Clear(newScreenSize);
+
+
+		SetConsoleActiveScreenBuffer(
+			newBuffer0->GetScreenBuffer()
+		);
+
+		// move owner
+		screenBufferArray[0] = std::move(newBuffer0);
+		screenBufferArray[1] = std::move(newBuffer1);
+
+		// Setting 0 consoleBuffer to show
+		SetConsoleActiveScreenBuffer(screenBufferArray[0]->GetScreenBuffer());
+
+		frame = std::move(newframe);
+
+		screenSize = newScreenSize;
+		currentBufferIndex = 0;
 	}
 }

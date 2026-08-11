@@ -1,9 +1,21 @@
 #include "TestScene.h"
 #include "GameObject/TestGameObject.h"
+#include "Math/Vector2.h"
 
-void TestScene::SceneInitialize()
+namespace Hiwoong
 {
-	Scene::SceneInitialize();
+	TestScene::TestScene() : Scene(Vector2(60,30))
+	{
+	}
+	TestScene::~TestScene()
+	{
+	}
+	void TestScene::SceneInitialize()
+	{
+		Scene::SceneInitialize();
 
-	Instantiate<TestGameObject>();
+		Instantiate<TestGameObject>();
+	}
+
 }
+

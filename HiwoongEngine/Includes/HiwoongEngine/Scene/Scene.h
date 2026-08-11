@@ -21,7 +21,7 @@ namespace Hiwoong
 
 
 	public:
-		Scene();
+		Scene(Vector2 Vector = Vector2::Zero);
 		virtual ~Scene();
 
 		// Initialize Level
@@ -31,6 +31,7 @@ namespace Hiwoong
 		virtual void Start();
 		virtual void Update(double deltaTime);
 		virtual void Draw();
+
 
 		// template of game object spawner
 		template<typename T, typename ...Args,
@@ -54,6 +55,9 @@ namespace Hiwoong
 		//Getter.
 		inline bool HasInitialized() const {return hasInitialzed;}
 
+		inline Vector2 GetScreenSize() const { return screenSize; }
+
+
 	protected:
 		void ProcessAddAndDestoryActors();
 
@@ -66,6 +70,9 @@ namespace Hiwoong
 
 		// requested adding actorList
 		std::vector<std::shared_ptr<GameObject>> addRequestedGameObjectList;
+
+	private:
+		Vector2 screenSize;
 	};
 
 

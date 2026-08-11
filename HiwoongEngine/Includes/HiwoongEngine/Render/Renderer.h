@@ -65,8 +65,14 @@ namespace Hiwoong
 		// Draw Event Method (it will be called by engine)
 		void Draw();
 
+		void Resize(const Vector2& screenSize);
+
+
 		// static access method
 		static Renderer& Get();
+
+
+		
 
 
 	private:
@@ -102,6 +108,9 @@ namespace Hiwoong
 		// Back bufferIdx(draw buffer)
 		int currentBufferIndex = 0;
 
+
+		//Create twice ScreenBuffer
+		void CreateSceenBuffer(const Vector2& newScreenSize);
 	};
 }
 

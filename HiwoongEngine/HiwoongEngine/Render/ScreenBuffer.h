@@ -20,6 +20,7 @@ namespace Hiwoong
 		// Getter.
 		inline HANDLE GetScreenBuffer() const { return screenBuffer; }
 
+
 	private:
 		// Screen Buffer Handle(console Buffer)
 		HANDLE screenBuffer = nullptr;

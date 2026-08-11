@@ -123,6 +123,9 @@ namespace Hiwoong
 
 		mainScene->SceneInitialize();
 
+		Vector2 screenSize = mainScene->GetScreenSize();
+
+		Renderer::Get().Resize(screenSize);
 	}
 	void Engine::Start()
 	{

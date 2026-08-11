@@ -1,5 +1,6 @@
 #include "Component.h"
-
+#include "Scene/Scene.h"
+#include "GameObject/GameObject.h"
 
 namespace Hiwoong
 {
@@ -28,5 +29,13 @@ namespace Hiwoong
 	void Component::OnCollision(const std::shared_ptr<GameObject>& other)
 	{
 
+	}
+	std::shared_ptr<Scene> Component::GetScene() const
+	{
+		std::shared_ptr<GameObject> ownerObject = owner.lock();
+
+		if (ownerObject == nullptr) return nullptr;
+		
+		return ownerObject->GetOnwer();
 	}
 }

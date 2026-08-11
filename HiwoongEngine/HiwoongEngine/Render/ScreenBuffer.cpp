@@ -24,13 +24,14 @@ namespace Hiwoong
 		// Check Created screenBuffer right
 		assert(screenBuffer != INVALID_HANDLE_VALUE);
 
-		// setting window size
-		SMALL_RECT rect = {};
-		rect.Top = 0;
-		rect.Left = 0;
-		rect.Right = static_cast<short>(screenSize.x - 1);
-		rect.Bottom = static_cast<short>(screenSize.y - 1);
-		BOOL result = SetConsoleWindowInfo(screenBuffer, TRUE, &rect);
+		// initialize window size
+		SMALL_RECT temprect = {};
+		temprect.Top = 0;
+		temprect.Left = 0;
+		temprect.Right = 0;
+		temprect.Bottom = 0;
+		
+		BOOL result = SetConsoleWindowInfo(screenBuffer, TRUE, &temprect);
 
 
 		//Check rectSize
@@ -40,8 +41,20 @@ namespace Hiwoong
 		COORD coord = {};
 		coord.X = static_cast<short>(screenSize.x);
 		coord.Y = static_cast<short>(screenSize.y);
+
 		result = SetConsoleScreenBufferSize(screenBuffer, coord);
 
+		assert(result == TRUE);
+
+		// initialize window size
+		SMALL_RECT windowRect = {};
+		windowRect.Top = 0;
+		windowRect.Left = 0;
+		windowRect.Right = static_cast<short>(screenSize.x - 1);
+		windowRect.Bottom = static_cast<short>(screenSize.y - 1);
+
+		result = SetConsoleWindowInfo(screenBuffer, TRUE, &windowRect);
+		
 		assert(result == TRUE);
 
 		//Setting Cursor disable

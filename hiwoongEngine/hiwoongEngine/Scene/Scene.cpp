@@ -1,11 +1,17 @@
 #include "Scene.h"
 #include "GameObject/GameObject.h"
+#include "Engine/Engine.h"
+#include "Math/Vector2.h"
+
 
 namespace Hiwoong
 {
-	Scene::Scene()
+	Scene::Scene(Vector2 screenSize) : screenSize(screenSize)
 	{
-
+		if (screenSize == Vector2::Zero)
+		{
+			screenSize = Vector2(Engine::Get().GetWidth(), Engine::Get().GetHeight());
+		}
 	}
 	Scene::~Scene()
 	{
@@ -14,7 +20,7 @@ namespace Hiwoong
 
 	// Initialize Level
 	void Scene::SceneInitialize()
-	{
+	{ 
 		//Setting Flag Initialize Level
 		hasInitialzed = true;
 	}

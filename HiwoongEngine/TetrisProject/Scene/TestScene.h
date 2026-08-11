@@ -1,11 +1,18 @@
 #pragma once
 
 #include "Scene/Scene.h"
+#include "Math/Vector2.h"
 
-
-class TestScene : public Hiwoong::Scene
+namespace Hiwoong
 {
-public:
-	virtual void SceneInitialize() override;
-};
+	class TestScene : public Hiwoong::Scene
+	{
+	public:
 
+		TestScene();
+		~TestScene();
+
+		virtual void SceneInitialize() override;
+
+	};
+}
