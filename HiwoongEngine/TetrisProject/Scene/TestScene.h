@@ -14,5 +14,7 @@ namespace Hiwoong
 
 		virtual void SceneInitialize() override;
 
+
+		void LoadMap(const std::string& mapPath);
 	};
 }
