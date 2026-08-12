@@ -8,24 +8,35 @@
 #include <cassert>
 
 #include <iostream>
+#include <algorithm>
+#include "GameObject/SpawnManager/SpawnManager.h"
 
 namespace Hiwoong
 {
-	TestScene::TestScene() : Scene(Vector2(60, 30))
+	TestScene::TestScene(int level) : Scene(), currentLevel(level)
 	{
 	}
 	TestScene::~TestScene()
 	{
 	}
-	void TestScene::SceneInitialize()
+	double TestScene::CalculateDropInterval() const
 	{
-		Scene::SceneInitialize();
-		Instantiate<TestGameObject>();
-		LoadMap("map.txt");
-
+		return (std::max)(
+			0.1,
+			1.0 - (currentLevel - 1) * 0.1
+		);
 	}
 
-	void TestScene::LoadMap(const std::string& filename)
+	void TestScene::SceneInitialize()
+	{
+		Instantiate<TestGameObject>();
+		Instantiate<SpawnManager>(Vector2(4,4));
+		Vector2 screenSize = LoadMap("map.txt");
+		Scene::SetScreenSize(screenSize);
+		Scene::SceneInitialize();
+	}
+
+	Vector2 TestScene::LoadMap(const std::string& filename)
 	{
 		// 최종 경로.
 		std::string path = std::string("../Assets/Stages/") + filename;
@@ -96,6 +107,8 @@ namespace Hiwoong
 		}
 		//파일닫기
 		file.close();
+		++position.y;
+		return position;
 	}
 
 }

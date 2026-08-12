@@ -56,6 +56,7 @@ namespace Hiwoong
 		inline bool HasInitialized() const {return hasInitialzed;}
 
 		inline Vector2 GetScreenSize() const { return screenSize; }
+		inline void SetScreenSize(const Vector2& newSize) { screenSize = newSize; }
 
 
 	protected:

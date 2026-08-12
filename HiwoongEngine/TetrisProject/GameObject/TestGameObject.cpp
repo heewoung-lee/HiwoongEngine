@@ -14,5 +14,4 @@ void TestGameObject::Start()
 {
 	super::Start();
 	AddComponent<PlayerInputComponent>();
-	AddComponent<SpriteRendererComponent>("P", Color::Green,5);
 }

@@ -57,7 +57,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\Includes\HiwoongEngine\;$(ProjectDir)\;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\HiwoongEngine\;$(ProjectDir)\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -77,7 +77,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\Includes\HiwoongEngine\;$(ProjectDir)\;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\HiwoongEngine\;$(ProjectDir)\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -93,7 +93,11 @@
     <ClCompile Include="GameObject\BackGround\BackGround.cpp" />
     <ClCompile Include="GameObject\BackGround\Wall.cpp" />
     <ClCompile Include="GameObject\Player\PlayerInputComponent.cpp" />
+    <ClCompile Include="GameObject\SpawnManager\SpawnManager.cpp" />
     <ClCompile Include="GameObject\TestGameObject.cpp" />
+    <ClCompile Include="GameObject\TetrisBlocks\Block.cpp" />
+    <ClCompile Include="GameObject\TetrisBlocks\IModule.cpp" />
+    <ClCompile Include="Interface\TetrisModule.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Scene\TestScene.cpp" />
   </ItemGroup>
@@ -101,7 +105,11 @@
     <ClInclude Include="GameObject\BackGround\BackGround.h" />
     <ClInclude Include="GameObject\BackGround\Wall.h" />
     <ClInclude Include="GameObject\Player\PlayerInputComponent.h" />
+    <ClInclude Include="GameObject\SpawnManager\SpawnManager.h" />
     <ClInclude Include="GameObject\TestGameObject.h" />
+    <ClInclude Include="GameObject\TetrisBlocks\Block.h" />
+    <ClInclude Include="GameObject\TetrisBlocks\IModule.h" />
+    <ClInclude Include="Interface\TetrisModule.h" />
     <ClInclude Include="Scene\TestScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -32,12 +32,16 @@ namespace Hiwoong
 
 
 		//request add Level
-		template<typename T,
-			typename = std::enable_if_t<std::is_base_of<Scene, T> :: value>>
-
-			void AddNewScene()
+		template<
+			typename T,
+			typename... Args,
+			typename = std::enable_if_t<
+			std::is_base_of<Scene, T>::value>>
+			void AddNewScene(Args&&... args)
 		{
-			nextScene = std::make_shared<T>();
+			nextScene = std::make_shared<T>(
+				std::forward<Args>(args)...
+			);
 		}
 
 
