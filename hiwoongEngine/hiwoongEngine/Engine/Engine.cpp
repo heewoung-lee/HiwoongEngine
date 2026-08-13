@@ -2,6 +2,7 @@
 #include "Scene/Scene.h"
 #include "Core/Input.h"
 #include "Render/Renderer.h"
+#include "Util/Util.h"
 #include <assert.h>
 #include <windows.h>
 #include <stdint.h>
@@ -26,6 +27,8 @@ namespace Hiwoong
 		input = std::make_unique<Input>();
 
 		renderer = std::make_unique<Renderer>(Vector2(setting.width,setting.height));
+		Util::SetRandomSeed();
+
 	}
 	Engine::~Engine()
 	{
@@ -126,6 +129,7 @@ namespace Hiwoong
 		Vector2 screenSize = mainScene->GetScreenSize();
 
 		Renderer::Get().Resize(screenSize);
+
 	}
 	void Engine::Start()
 	{

@@ -1,6 +1,9 @@
 #include "SpawnManager.h"
 #include "Scene/Scene.h"
-#include "GameObject/TetrisBlocks/IModule.h"
+#include "Util/Util.h"
+#include "GameObject/TetrisBlocks/TetrisModule.h"
+
+
 #include <cassert>
 
 namespace Hiwoong
@@ -25,8 +28,18 @@ namespace Hiwoong
 
 		const Vector2 spawnPosition = GetPosition();
 
-		//TODO:: RandomModule Spawn
-		scene->Instantiate<IModule>(spawnPosition);
+		int number = Util::RandomRange(0, 6);
+
+		switch (number)
+		{
+			case 0: scene->Instantiate<IModule>(spawnPosition); break;
+			case 1: scene->Instantiate<OModule>(spawnPosition); break;
+			case 2: scene->Instantiate<TModule>(spawnPosition); break;
+			case 3: scene->Instantiate<LModule>(spawnPosition); break;
+			case 4: scene->Instantiate<JModule>(spawnPosition); break;
+			case 5: scene->Instantiate<SModule>(spawnPosition); break;
+			case 6: scene->Instantiate<ZModule>(spawnPosition); break;
+		}
 	}
 
 }

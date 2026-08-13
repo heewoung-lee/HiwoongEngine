@@ -55,6 +55,23 @@ namespace Hiwoong
         Color color;
     };
 
+    class TModule : public TetrisModule
+    {
+        TYPE_DECALRATIONS(TModule, TetrisModule)
+
+    public:
+        TModule(const Vector2& position);
+
+        const std::array<Vector2, 4>&
+            GetBlockPosition() const override;
+
+        Color GetColor() override;
+
+    private:
+        std::array<Vector2, 4> blockPositions;
+        Color color;
+    };
+
     class JModule : public TetrisModule
     {
         TYPE_DECALRATIONS(JModule, TetrisModule)
