@@ -45,6 +45,9 @@
     <ClCompile Include="GameObject\TetrisBlocks\Block.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\TetrisBlocks\LModule.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\TestGameObject.h">
@@ -72,6 +75,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\TetrisBlocks\Block.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\TetrisBlocks\LModule.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

@@ -44,6 +44,10 @@ namespace Hiwoong
 		elapsedDropTime -= dropInterval;
 
 		Vector2 newPosition = GetPosition();
+
+		//TODO: if the block collision the other block or wall
+		//leave controll and spwn other block
+
 		newPosition.y += 1;
 
 		SetPosition(newPosition);

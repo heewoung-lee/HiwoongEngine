@@ -8,7 +8,7 @@ namespace Hiwoong
 {
 	Wall::Wall(const Vector2& position) : GameObject(position)
 	{
-		AddComponent<SpriteRendererComponent>("#", Color::BrightWhite,1);
+		AddComponent<SpriteRendererComponent>("#", Color::Gray,1);
 	}
 }
 
