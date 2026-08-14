@@ -15,18 +15,11 @@ namespace Hiwoong
 			Vector2(2,0),
 			Vector2(3,0)
 		};
-
+		rotationPivot = Vector2(1, 0);
 		color = Color::Cyan;
 
 	}
 
-
-
-	//스타트를 구현해서 Imodule의 블록들을 스폰할 것
-	const std::array<Vector2, 4>& IModule::GetBlockPosition() const
-	{
-		return blockPositions;
-	}
 
 	Color IModule::GetColor()
 	{

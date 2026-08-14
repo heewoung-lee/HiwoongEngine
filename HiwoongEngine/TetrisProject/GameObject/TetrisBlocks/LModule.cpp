@@ -15,14 +15,9 @@ namespace Hiwoong
 			Vector2(0, 2),
 			Vector2(1, 2)
 		};
-
+		rotationPivot = Vector2(1, 1);
 		color = Color::Orange;
 
-	}
-
-	const std::array<Vector2, 4>& LModule::GetBlockPosition() const
-	{
-		return blockPositions;
 	}
 
 	Color LModule::GetColor()

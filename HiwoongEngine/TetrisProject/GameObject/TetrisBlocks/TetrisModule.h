@@ -11,13 +11,9 @@ namespace Hiwoong
     public:
         IModule(const Vector2& position);
 
-        const std::array<Vector2, 4>&
-            GetBlockPosition() const override;
-
         Color GetColor() override;
 
     private:
-        std::array<Vector2, 4> blockPositions;
         Color color;
     };
 
@@ -28,13 +24,10 @@ namespace Hiwoong
     public:
         LModule(const Vector2& position);
 
-        const std::array<Vector2, 4>&
-            GetBlockPosition() const override;
 
         Color GetColor() override;
 
     private:
-        std::array<Vector2, 4> blockPositions;
         Color color;
     };
 
@@ -45,13 +38,10 @@ namespace Hiwoong
     public:
         OModule(const Vector2& position);
 
-        const std::array<Vector2, 4>&
-            GetBlockPosition() const override;
 
         Color GetColor() override;
 
     private:
-        std::array<Vector2, 4> blockPositions;
         Color color;
     };
 
@@ -62,13 +52,10 @@ namespace Hiwoong
     public:
         TModule(const Vector2& position);
 
-        const std::array<Vector2, 4>&
-            GetBlockPosition() const override;
 
         Color GetColor() override;
 
     private:
-        std::array<Vector2, 4> blockPositions;
         Color color;
     };
 
@@ -79,13 +66,9 @@ namespace Hiwoong
     public:
         JModule(const Vector2& position);
 
-        const std::array<Vector2, 4>&
-            GetBlockPosition() const override;
-
         Color GetColor() override;
 
     private:
-        std::array<Vector2, 4> blockPositions;
         Color color;
     };
 
@@ -96,13 +79,9 @@ namespace Hiwoong
     public:
         SModule(const Vector2& position);
 
-        const std::array<Vector2, 4>&
-            GetBlockPosition() const override;
-
         Color GetColor() override;
 
     private:
-        std::array<Vector2, 4> blockPositions;
         Color color;
     };
 
@@ -113,13 +92,9 @@ namespace Hiwoong
     public:
         ZModule(const Vector2& position);
 
-        const std::array<Vector2, 4>&
-            GetBlockPosition() const override;
-
         Color GetColor() override;
 
     private:
-        std::array<Vector2, 4> blockPositions;
         Color color;
     };
 }

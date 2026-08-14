@@ -57,6 +57,62 @@ namespace Hiwoong
 		return true;
 	}
 
+	bool TetrisModule::TryRotate()
+	{
+		if (isLocked || canRotate == false)
+		{
+			return false;
+		}
+
+		//rotation Position Array
+		std::array<Vector2, 4> rotatedPositions = blockPositions;
+
+		const Vector2 pivot = rotationPivot;
+
+		for (std::size_t index = 0; index < blockPositions.size();++index)
+		{
+			const Vector2 relativePosition = blockPositions[index] - pivot;
+
+			rotatedPositions[index] = Vector2(
+				pivot.x - relativePosition.y,
+				pivot.y + relativePosition.x
+			);
+		}
+
+		std::shared_ptr<TestScene> scene = std::dynamic_pointer_cast<TestScene>(GetOwner());
+
+		assert(scene != nullptr);
+
+		TetrisBoard* board = scene->GetBoard();
+
+		assert(board != nullptr);
+
+		const Vector2 moduleWorldPosition = GetWorldPosition();
+
+		for (const Vector2& rotatedPosition : rotatedPositions)
+		{
+			const Vector2 blockWoldPosition = moduleWorldPosition + rotatedPosition;
+			
+			//if the blockPosition overlaps board return false
+			if (board->IsOccupied(blockWoldPosition))
+			{
+				return false;
+			}
+		}
+
+		//if pass the rotation apply rotation
+		blockPositions = rotatedPositions;
+		for (std::size_t index = 0; index < blocks.size();++index)
+		{
+			auto block = blocks[index].lock();
+			assert(block != nullptr);
+
+			block->SetPosition(blockPositions[index]);
+		}
+
+		return true;
+	}
+
 
 	void TetrisModule::Start()
 	{
@@ -68,14 +124,17 @@ namespace Hiwoong
 
 		assert(currentScene != nullptr);
 
-		for (const Vector2& position : GetBlockPosition())
+		for(std::size_t index = 0; index < blockPositions.size(); ++index)
 		{
-			auto block = currentScene->Instantiate<Block>(
-				position,
+			std::shared_ptr<Block> block = currentScene->Instantiate<Block>
+			(
+				blockPositions[index],
 				currentColor
 			);
 
 			block->AttachTo(shared_from_this(), false);
+
+			blocks[index] = block;
 		}
 	}
 	void TetrisModule::Update(double deltaTime)

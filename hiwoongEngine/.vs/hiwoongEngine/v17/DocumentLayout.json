@@ -3,24 +3,68 @@
   "WorkspaceRootPath": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\SpawnManager\\SpawnManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\SpawnManager\\SpawnManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\hiwoongEngine\\TetrisProject\\Interface\\TetrisModule.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\Interface\\TetrisModule.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\SpawnManager\\SpawnManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\SpawnManager\\SpawnManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\Player\\PlayerInputComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\Player\\PlayerInputComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\hiwoongEngine\\TetrisProject\\Interface\\TetrisModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\Interface\\TetrisModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\hiwoongEngine\\TetrisProject\\Interface\\TetrisModule.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\Interface\\TetrisModule.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\ZModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\TetrisBlocks\\ZModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\TModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\TetrisBlocks\\TModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\SModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\TetrisBlocks\\SModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\OModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\TetrisBlocks\\OModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\LModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\TetrisBlocks\\LModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\JModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\TetrisBlocks\\JModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\IModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\TetrisBlocks\\IModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HIWOONGENGINE\\SCENE\\SCENE.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:HIWOONGENGINE\\SCENE\\SCENE.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\Block.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\TetrisBlocks\\Block.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\TetrisModule.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\TetrisBlocks\\TetrisModule.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\Block.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\TetrisBlocks\\Block.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\SpawnManager\\SpawnManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\SpawnManager\\SpawnManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\SpawnManager\\SpawnManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\SpawnManager\\SpawnManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\Scene\\TestScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -54,10 +98,6 @@
       "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\PROGRAM FILES\\MICROSOFT VISUAL STUDIO\\2022\\COMMUNITY\\VC\\TOOLS\\MSVC\\14.44.35207\\INCLUDE\\MEMORY||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HIWOONGENGINE\\SCENE\\SCENE.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:HIWOONGENGINE\\SCENE\\SCENE.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\BackGround\\TetrisBoard.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\BackGround\\TetrisBoard.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -66,16 +106,8 @@
       "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\BackGround\\BackGround.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\LModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\TetrisBlocks\\LModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Util\\Util.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Util\\Util.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\TetrisModule.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\TetrisBlocks\\TetrisModule.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Util\\Util.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -90,32 +122,8 @@
       "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Scene\\Scene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\ZModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\TetrisBlocks\\ZModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TestGameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\TestGameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\TModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\TetrisBlocks\\TModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\IModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\TetrisBlocks\\IModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\OModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\TetrisBlocks\\OModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\SModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\TetrisBlocks\\SModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\JModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\TetrisBlocks\\JModule.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\BackGround\\Wall.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -126,16 +134,8 @@
       "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:HIWOONGENGINE\\MATH\\COLOR.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\Block.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\TetrisBlocks\\Block.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Engine\\Engine.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Engine\\Engine.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\Block.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\GameObject\\TetrisBlocks\\Block.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Math\\Vector2.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -260,64 +260,89 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 220,
-          "SelectedChildIndex": 0,
+          "DockedWidth": 286,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "TetrisModule.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\Interface\\TetrisModule.h",
               "RelativeDocumentMoniker": "TetrisProject\\Interface\\TetrisModule.h",
               "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\Interface\\TetrisModule.h",
               "RelativeToolTip": "TetrisProject\\Interface\\TetrisModule.h",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADIAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-08-12T08:47:01.618Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "TestScene.h",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\Scene\\TestScene.h",
-              "RelativeDocumentMoniker": "TetrisProject\\Scene\\TestScene.h",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\Scene\\TestScene.h",
-              "RelativeToolTip": "TetrisProject\\Scene\\TestScene.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-08-05T10:46:42.922Z",
+              "DocumentIndex": 13,
+              "Title": "Block.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\Block.cpp",
+              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TetrisBlocks\\Block.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\Block.cpp",
+              "RelativeToolTip": "TetrisProject\\GameObject\\TetrisBlocks\\Block.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-08-12T09:34:39.915Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 11,
+              "Title": "Block.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\Block.h",
+              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TetrisBlocks\\Block.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\Block.h",
+              "RelativeToolTip": "TetrisProject\\GameObject\\TetrisBlocks\\Block.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-08-12T09:34:37.687Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "TetrisModule.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\TetrisModule.h",
+              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TetrisBlocks\\TetrisModule.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\TetrisModule.h",
+              "RelativeToolTip": "TetrisProject\\GameObject\\TetrisBlocks\\TetrisModule.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-08-13T10:01:39.872Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "PlayerInputComponent.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\Player\\PlayerInputComponent.cpp",
               "RelativeDocumentMoniker": "TetrisProject\\GameObject\\Player\\PlayerInputComponent.cpp",
               "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\Player\\PlayerInputComponent.cpp",
               "RelativeToolTip": "TetrisProject\\GameObject\\Player\\PlayerInputComponent.cpp",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAmwCwAAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAABEAAAAAAAAAAAAmwCcAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-08-10T10:50:02.765Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SpawnManager.h",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\SpawnManager\\SpawnManager.h",
-              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\SpawnManager\\SpawnManager.h",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\SpawnManager\\SpawnManager.h",
-              "RelativeToolTip": "TetrisProject\\GameObject\\SpawnManager\\SpawnManager.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAYAAAAAAAAAA==",
+              "DocumentIndex": 18,
+              "Title": "PlayerInputComponent.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\Player\\PlayerInputComponent.h",
+              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\Player\\PlayerInputComponent.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\Player\\PlayerInputComponent.h",
+              "RelativeToolTip": "TetrisProject\\GameObject\\Player\\PlayerInputComponent.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-08-12T08:27:02.792Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-10T10:49:59.442Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 17,
               "Title": "GameObject.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\GameObject\\GameObject.cpp",
               "RelativeDocumentMoniker": "HiwoongEngine\\GameObject\\GameObject.cpp",
@@ -330,19 +355,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "PlayerInputComponent.h",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\Player\\PlayerInputComponent.h",
-              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\Player\\PlayerInputComponent.h",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\Player\\PlayerInputComponent.h",
-              "RelativeToolTip": "TetrisProject\\GameObject\\Player\\PlayerInputComponent.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAfAAAAAAAAAA==",
+              "DocumentIndex": 15,
+              "Title": "SpawnManager.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\SpawnManager\\SpawnManager.h",
+              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\SpawnManager\\SpawnManager.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\SpawnManager\\SpawnManager.h",
+              "RelativeToolTip": "TetrisProject\\GameObject\\SpawnManager\\SpawnManager.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-08-10T10:49:59.442Z"
+              "WhenOpened": "2026-08-12T08:27:02.792Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 16,
+              "Title": "TestScene.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\Scene\\TestScene.h",
+              "RelativeDocumentMoniker": "TetrisProject\\Scene\\TestScene.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\Scene\\TestScene.h",
+              "RelativeToolTip": "TetrisProject\\Scene\\TestScene.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-08-05T10:46:42.922Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
               "Title": "TestScene.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\Scene\\TestScene.cpp",
               "RelativeDocumentMoniker": "TetrisProject\\Scene\\TestScene.cpp",
@@ -354,7 +393,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 25,
               "Title": "BackGround.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\BackGround\\BackGround.cpp",
               "RelativeDocumentMoniker": "TetrisProject\\GameObject\\BackGround\\BackGround.cpp",
@@ -366,7 +405,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 20,
               "Title": "TestGameObject.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TestGameObject.h",
               "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TestGameObject.h",
@@ -378,7 +417,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 21,
               "Title": "GameObject.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\GameObject\\GameObject.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\GameObject\\GameObject.h",
@@ -391,7 +430,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 23,
               "Title": "memory",
               "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\include\\memory",
               "RelativeDocumentMoniker": "..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\include\\memory",
@@ -403,19 +442,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "TetrisModule.h",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\TetrisModule.h",
-              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TetrisBlocks\\TetrisModule.h",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\TetrisModule.h",
-              "RelativeToolTip": "TetrisProject\\GameObject\\TetrisBlocks\\TetrisModule.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-08-13T10:01:39.872Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 30,
               "Title": "TestGameObject.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TestGameObject.cpp",
               "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TestGameObject.cpp",
@@ -427,7 +454,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 32,
               "Title": "Color.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Math\\Color.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\Math\\Color.h",
@@ -439,7 +466,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 31,
               "Title": "Wall.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\BackGround\\Wall.cpp",
               "RelativeDocumentMoniker": "TetrisProject\\GameObject\\BackGround\\Wall.cpp",
@@ -448,30 +475,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-08-11T11:49:17.974Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "Block.h",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\Block.h",
-              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TetrisBlocks\\Block.h",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\Block.h",
-              "RelativeToolTip": "TetrisProject\\GameObject\\TetrisBlocks\\Block.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-08-12T09:34:37.687Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "Block.cpp",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\Block.cpp",
-              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TetrisBlocks\\Block.cpp",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\Block.cpp",
-              "RelativeToolTip": "TetrisProject\\GameObject\\TetrisBlocks\\Block.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-08-12T09:34:39.915Z"
             },
             {
               "$type": "Document",
@@ -728,74 +731,142 @@
           ]
         },
         {
-          "DockedWidth": 238,
-          "SelectedChildIndex": 2,
+          "DockedWidth": 172,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SModule.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\SModule.cpp",
+              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TetrisBlocks\\SModule.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\SModule.cpp",
+              "RelativeToolTip": "TetrisProject\\GameObject\\TetrisBlocks\\SModule.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-08-13T10:21:27.634Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "TModule.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\TModule.cpp",
+              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TetrisBlocks\\TModule.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\TModule.cpp",
+              "RelativeToolTip": "TetrisProject\\GameObject\\TetrisBlocks\\TModule.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-08-13T10:11:24.75Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ZModule.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\ZModule.cpp",
+              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TetrisBlocks\\ZModule.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\ZModule.cpp",
+              "RelativeToolTip": "TetrisProject\\GameObject\\TetrisBlocks\\ZModule.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-08-13T10:22:33.108Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "TetrisModule.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\Interface\\TetrisModule.cpp",
               "RelativeDocumentMoniker": "TetrisProject\\Interface\\TetrisModule.cpp",
               "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\Interface\\TetrisModule.cpp",
               "RelativeToolTip": "TetrisProject\\Interface\\TetrisModule.cpp",
-              "ViewState": "AgIAAGMAAAAAAAAAAAAqwH4AAAATAAAAAAAAAA==",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAAAGYAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-08-12T10:00:56.62Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Util.cpp",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Util\\Util.cpp",
-              "RelativeDocumentMoniker": "HiwoongEngine\\Util\\Util.cpp",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Util\\Util.cpp",
-              "RelativeToolTip": "HiwoongEngine\\Util\\Util.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 6,
+              "Title": "OModule.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\OModule.cpp",
+              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TetrisBlocks\\OModule.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\OModule.cpp",
+              "RelativeToolTip": "TetrisProject\\GameObject\\TetrisBlocks\\OModule.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-08-13T10:52:12.243Z"
+              "WhenOpened": "2026-08-13T10:09:48.679Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 7,
+              "Title": "LModule.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\LModule.cpp",
+              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TetrisBlocks\\LModule.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\LModule.cpp",
+              "RelativeToolTip": "TetrisProject\\GameObject\\TetrisBlocks\\LModule.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-08-13T10:12:49.864Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "JModule.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\JModule.cpp",
+              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TetrisBlocks\\JModule.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\JModule.cpp",
+              "RelativeToolTip": "TetrisProject\\GameObject\\TetrisBlocks\\JModule.cpp",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAcwBEAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-08-13T10:15:00.362Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "IModule.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\IModule.cpp",
+              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TetrisBlocks\\IModule.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\IModule.cpp",
+              "RelativeToolTip": "TetrisProject\\GameObject\\TetrisBlocks\\IModule.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-08-12T09:05:14.226Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Scene.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Scene\\Scene.h",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Scene\\Scene.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Scene\\Scene.h",
+              "RelativeToolTip": "HiwoongEngine\\Scene\\Scene.h",
+              "ViewState": "AgIAABYAAAAAAAAAAAAtwCYAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-08-04T06:09:00.61Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "SpawnManager.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\SpawnManager\\SpawnManager.cpp",
               "RelativeDocumentMoniker": "TetrisProject\\GameObject\\SpawnManager\\SpawnManager.cpp",
               "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\SpawnManager\\SpawnManager.cpp",
               "RelativeToolTip": "TetrisProject\\GameObject\\SpawnManager\\SpawnManager.cpp",
-              "ViewState": "AgIAACIAAAAAAAAAAAAIwDYAAAACAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAADQAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-08-12T08:29:35.201Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "TetrisBoard.cpp",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\BackGround\\TetrisBoard.cpp",
-              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\BackGround\\TetrisBoard.cpp",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\BackGround\\TetrisBoard.cpp",
-              "RelativeToolTip": "TetrisProject\\GameObject\\BackGround\\TetrisBoard.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-08-13T11:43:03.209Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "Scene.h",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Scene\\Scene.h",
-              "RelativeDocumentMoniker": "HiwoongEngine\\Scene\\Scene.h",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Scene\\Scene.h",
-              "RelativeToolTip": "HiwoongEngine\\Scene\\Scene.h",
-              "ViewState": "AgIAACsAAAAAAAAAAAAMwDoAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-08-04T06:09:00.61Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 22,
               "Title": "TetrisBoard.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\BackGround\\TetrisBoard.h",
               "RelativeDocumentMoniker": "TetrisProject\\GameObject\\BackGround\\TetrisBoard.h",
@@ -807,7 +878,31 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 26,
+              "Title": "Util.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Util\\Util.cpp",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Util\\Util.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Util\\Util.cpp",
+              "RelativeToolTip": "HiwoongEngine\\Util\\Util.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-08-13T10:52:12.243Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "TetrisBoard.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\BackGround\\TetrisBoard.cpp",
+              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\BackGround\\TetrisBoard.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\BackGround\\TetrisBoard.cpp",
+              "RelativeToolTip": "TetrisProject\\GameObject\\BackGround\\TetrisBoard.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-08-13T11:43:03.209Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
               "Title": "Scene.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Scene\\Scene.cpp",
               "RelativeDocumentMoniker": "HiwoongEngine\\Scene\\Scene.cpp",
@@ -832,18 +927,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 28,
-              "Title": "JModule.cpp",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\JModule.cpp",
-              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TetrisBlocks\\JModule.cpp",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\JModule.cpp",
-              "RelativeToolTip": "TetrisProject\\GameObject\\TetrisBlocks\\JModule.cpp",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAcwBIAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-08-13T10:15:00.362Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
               "Title": "Engine.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Engine\\Engine.cpp",
               "RelativeDocumentMoniker": "HiwoongEngine\\Engine\\Engine.cpp",
@@ -855,19 +938,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "LModule.cpp",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\LModule.cpp",
-              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TetrisBlocks\\LModule.cpp",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\LModule.cpp",
-              "RelativeToolTip": "TetrisProject\\GameObject\\TetrisBlocks\\LModule.cpp",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAtwBIAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-08-13T10:12:49.864Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 27,
               "Title": "Util.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Util\\Util.h",
               "RelativeDocumentMoniker": "hiwoongEngine\\Util\\Util.h",
@@ -876,66 +947,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-08-13T10:26:42.205Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "SModule.cpp",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\SModule.cpp",
-              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TetrisBlocks\\SModule.cpp",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\SModule.cpp",
-              "RelativeToolTip": "TetrisProject\\GameObject\\TetrisBlocks\\SModule.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-08-13T10:21:27.634Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "OModule.cpp",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\OModule.cpp",
-              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TetrisBlocks\\OModule.cpp",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\OModule.cpp",
-              "RelativeToolTip": "TetrisProject\\GameObject\\TetrisBlocks\\OModule.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-08-13T10:09:48.679Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "IModule.cpp",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\IModule.cpp",
-              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TetrisBlocks\\IModule.cpp",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\IModule.cpp",
-              "RelativeToolTip": "TetrisProject\\GameObject\\TetrisBlocks\\IModule.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-08-12T09:05:14.226Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "ZModule.cpp",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\ZModule.cpp",
-              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TetrisBlocks\\ZModule.cpp",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\ZModule.cpp",
-              "RelativeToolTip": "TetrisProject\\GameObject\\TetrisBlocks\\ZModule.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-08-13T10:22:33.108Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "TModule.cpp",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\TModule.cpp",
-              "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TetrisBlocks\\TModule.cpp",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\TModule.cpp",
-              "RelativeToolTip": "TetrisProject\\GameObject\\TetrisBlocks\\TModule.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-08-13T10:11:24.75Z"
             },
             {
               "$type": "Document",
@@ -965,7 +976,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 33,
               "Title": "Engine.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Engine\\Engine.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\Engine\\Engine.h",

@@ -17,12 +17,7 @@ namespace Hiwoong
 		};
 
 		color = Color::Yellow;
-
-	}
-
-	const std::array<Vector2, 4>& OModule::GetBlockPosition() const
-	{
-		return blockPositions;
+		canRotate = false;
 	}
 
 	Color OModule::GetColor()

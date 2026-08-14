@@ -34,7 +34,10 @@ namespace Hiwoong
         super::Update(deltaTime);
 
         assert(module != nullptr);
-
+        if (Input::Get().GetKeyDown(VK_UP))
+        {
+            module->TryRotate();
+        }
         if (Input::Get().GetKeyDown(VK_ESCAPE))
         {
             module->QuitGame();

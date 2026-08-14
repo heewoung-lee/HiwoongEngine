@@ -10,19 +10,14 @@ namespace Hiwoong
 		: TetrisModule(position)
 	{
 		blockPositions = {
-			Vector2(0,0),
-			Vector2(1,0),
-			Vector2(2,0),
-			Vector2(3,0)
+			Vector2(0, 0),
+			Vector2(0, 1),
+			Vector2(1, 1),
+			Vector2(2, 1)
 		};
-
+		rotationPivot = Vector2(1, 1);
 		color = Color::Blue;
 
-	}
-
-	const std::array<Vector2, 4>& JModule::GetBlockPosition() const
-	{
-		return blockPositions;
 	}
 
 	Color JModule::GetColor()
