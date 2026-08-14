@@ -20,6 +20,8 @@ namespace Hiwoong
 		TetrisModule(const Vector2& position) : GameObject(position) {}
 		virtual ~TetrisModule() = default;
 		
+		void Drop();
+
 		const std::array<Vector2, 4>& GetBlockPosition() const
 		{
 			return blockPositions;

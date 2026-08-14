@@ -46,7 +46,21 @@ namespace Hiwoong
 		}
 		return true;
 	}
+	void TetrisModule::Drop()
+	{
+		if (isLocked)
+		{
+			return;
+		}
 
+		const Vector2 down(0, 1);
+
+		while (TryMove(down))
+		{
+		}
+
+		Lock();
+	}
 	bool TetrisModule::TryMove(const Vector2& direction)
 	{
 		if (CanMove(direction) == false)

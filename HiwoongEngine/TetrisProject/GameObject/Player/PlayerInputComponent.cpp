@@ -34,6 +34,12 @@ namespace Hiwoong
         super::Update(deltaTime);
 
         assert(module != nullptr);
+
+        if (Input::Get().GetKeyDown(VK_SPACE))
+        {
+            module->Drop();
+        }
+
         if (Input::Get().GetKeyDown(VK_UP))
         {
             module->TryRotate();
