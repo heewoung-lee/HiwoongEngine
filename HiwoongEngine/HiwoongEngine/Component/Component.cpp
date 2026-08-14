@@ -36,6 +36,6 @@ namespace Hiwoong
 
 		if (ownerObject == nullptr) return nullptr;
 		
-		return ownerObject->GetOnwer();
+		return ownerObject->GetOwner();
 	}
 }

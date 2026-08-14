@@ -19,6 +19,9 @@ namespace Hiwoong
 
 		void Start() override;
 
+
+	private:
+		void SpawnNextModule();
 	};
 
 

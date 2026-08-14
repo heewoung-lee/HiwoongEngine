@@ -15,6 +15,7 @@ namespace Hiwoong
 {
 	TestScene::TestScene(int level) : Scene(), currentLevel(level)
 	{
+			
 	}
 	TestScene::~TestScene()
 	{
@@ -29,53 +30,55 @@ namespace Hiwoong
 
 	void TestScene::SceneInitialize()
 	{
-		Instantiate<TestGameObject>();
-		Instantiate<SpawnManager>(Vector2(4,4));
 		Vector2 screenSize = LoadMap("map.txt");
+		Instantiate<SpawnManager>(Vector2(4,4));
 		Scene::SetScreenSize(screenSize);
 		Scene::SceneInitialize();
+		
 	}
 
 	Vector2 TestScene::LoadMap(const std::string& filename)
 	{
-		// 최종 경로.
+		std::vector<Vector2> wallPositions;
+
+		// Path
 		std::string path = std::string("../Assets/Stages/") + filename;
 
-		// 파일 열기 및 확인.
+		// File Open and Check
 		std::ifstream file(path, std::ios_base::binary);
 		assert(file.is_open());
 
-		// 파일 전체 크기 확인.
+		// Check file's whole length.
 		file.seekg(0, std::ios_base::end);
 		const std::streampos fileSize = file.tellg();
 
-		//파일 위치를 첫 위치로 되돌리기.
+		//revert file location to first
 		file.seekg(0, std::ios_base::beg);
 
-		// 파일 내용 전체를 읽기 위한 변수.
+		// variable to read whole file's contends 
 		std::string buffer;
 		buffer.resize(static_cast<size_t>(fileSize));
 
-		//파일 내용 전체 읽기
+		//To Read File's contends
 		file.read(&buffer[0], fileSize);
 
-		// 문자열 buffer를 한문자씩 읽으면서 처리.
+		// read a string buffer step by step
 		int index = 0;
 		Vector2 position;
 
 
 		while (true)
 		{
-			// 종료조건
+			//quit
 			if (index >= fileSize)
 			{
 				break;
 			}
 
-			// 현재 순번의 문자 값 읽기.
+			//read current char
 			char mapCharacter = buffer[index];
 
-			// 다음 글자를 읽기 위한 준비.
+			//for reading next char
 			++index;
 
 			// Windows의 개행 문자는 '\n' 이 아니라 '\r\n' 이기 때문에
@@ -96,18 +99,35 @@ namespace Hiwoong
 			{
 			case '#':
 				Instantiate<Wall>(position);
+				wallPositions.emplace_back(position);
 				break;
 			case '.':
 				Instantiate<BackGround>(position);
 				break;
 			}
-
+			
 			//문자 처리후 x 위치 업데이트.
 			++position.x;
 		}
 		//파일닫기
+
+
 		file.close();
 		++position.y;
+		const Vector2 screenSize = position;
+
+		board = std::make_unique<TetrisBoard>(
+			screenSize.x,
+			screenSize.y
+		);
+
+		for (const Vector2& wallPosition : wallPositions)
+		{
+			board->SetOccupied(wallPosition, true);
+		}
+
+
+
 		return position;
 	}
 

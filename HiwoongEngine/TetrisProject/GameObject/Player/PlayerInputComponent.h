@@ -4,6 +4,9 @@
 
 namespace Hiwoong
 {
+
+	class TetrisModule;
+
 	class  PlayerInputComponent : public Hiwoong::Component
 	{
 		TYPE_DECALRATIONS(PlayerInputComponent, Component)
@@ -19,6 +22,7 @@ namespace Hiwoong
 	private:
 		GameObject* player = nullptr;
 		Scene* scene = nullptr;
+		TetrisModule* module = nullptr;
 	};
 
 }

@@ -2,6 +2,8 @@
 
 #include "Scene/Scene.h"
 #include "Math/Vector2.h"
+#include "GameObject/BackGround/TetrisBoard.h"
+
 namespace Hiwoong
 {
 	class TestScene : public Hiwoong::Scene
@@ -20,10 +22,15 @@ namespace Hiwoong
 			return CalculateDropInterval();
 		}
 
+		TetrisBoard* GetBoard() const
+		{
+			return board.get();
+		}
+
 	private:
 		double CalculateDropInterval() const;
 		
 		int currentLevel = 1;
-
+		std::unique_ptr<TetrisBoard> board;
 	};
 }

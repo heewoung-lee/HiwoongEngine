@@ -160,7 +160,7 @@ namespace Hiwoong
 		}
 	}
 
-	std::shared_ptr<Scene> GameObject::GetOnwer()
+	std::shared_ptr<Scene> GameObject::GetOwner() const
 	{
 		return owner.lock();
 	}

@@ -2,6 +2,7 @@
 #include "Core/Input.h"
 #include "GameObject/GameObject.h"
 #include "Scene/Scene.h"
+#include "Interface/TetrisModule.h"
 
 #include <windows.h>
 #include <cassert>
@@ -20,43 +21,38 @@ namespace Hiwoong
 		assert(owner != nullptr);
 
 		player = owner.get();
+		std::shared_ptr<TetrisModule> ownerModule =
+			std::dynamic_pointer_cast<TetrisModule>(owner);
 
+		assert(ownerModule != nullptr);
+
+		module = ownerModule.get();
 	}
 
-	void PlayerInputComponent::Update(double deltaTime)
-	{
-		super::Update(deltaTime);
+    void PlayerInputComponent::Update(double deltaTime)
+    {
+        super::Update(deltaTime);
 
-		Vector2 newPosition = player->GetPosition();
+        assert(module != nullptr);
 
-		if (Input::Get().GetKeyDown(VK_ESCAPE))
-		{
-			player->QuitGame();
-		}
+        if (Input::Get().GetKeyDown(VK_ESCAPE))
+        {
+            module->QuitGame();
+        }
 
-		if (Input::Get().GetKeyDown(VK_LEFT) && newPosition.x > 1)
-		{
-			newPosition.x -= 1;
+        if (Input::Get().GetKeyDown(VK_LEFT))
+        {
+            module->TryMove(Vector2(-1, 0));
+        }
 
-		}
+        if (Input::Get().GetKeyDown(VK_RIGHT))
+        {
+            module->TryMove(Vector2(1, 0));
+        }
 
-		if (Input::Get().GetKeyDown(VK_RIGHT) && newPosition.x < GetScene()->GetScreenSize().x-2)
-		{
-			newPosition.x += 1;
-		}
-
-		if (Input::Get().GetKeyDown(VK_UP) && newPosition.y > 1)
-		{
-			newPosition.y -= 1;
-		}
-
-
-		if (Input::Get().GetKeyDown(VK_DOWN) && newPosition.y < GetScene()->GetScreenSize().y - 2)
-		{
-			newPosition.y += 1;
-		}
-
-		player->SetPosition(newPosition);
-
-	}
+        if (Input::Get().GetKeyDown(VK_DOWN))
+        {
+            module->TryMove(Vector2(0, 1));
+        }
+    }
 }

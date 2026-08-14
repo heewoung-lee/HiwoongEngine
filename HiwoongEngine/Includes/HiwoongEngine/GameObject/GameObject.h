@@ -103,7 +103,7 @@ namespace Hiwoong
 		inline bool IsActive() const { return isActive && !hasExpired; }
 		inline bool HasExpired() const { return hasExpired; }
 
-		std::shared_ptr<Scene> GetOnwer();
+		std::shared_ptr<Scene> GetOwner() const;
 		void SetOwner(std::weak_ptr<Scene> newOwner);
 
 		Vector2 GetPosition() const;

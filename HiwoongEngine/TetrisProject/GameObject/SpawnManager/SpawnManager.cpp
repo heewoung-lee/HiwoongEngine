@@ -21,8 +21,13 @@ namespace Hiwoong
 		//Spawn Block
 		//if Scene is not GameOver And there is not block which I controled
 		//spawn
-		
-		std::shared_ptr<Scene> scene = GetOnwer();
+		SpawnNextModule();
+		std::shared_ptr<Scene> scene = GetOwner();
+	}
+
+	void SpawnManager::SpawnNextModule()
+	{
+		std::shared_ptr<Scene> scene = GetOwner();
 
 		assert(scene != nullptr);
 
@@ -30,16 +35,23 @@ namespace Hiwoong
 
 		int number = Util::RandomRange(0, 6);
 
+		std::shared_ptr<TetrisModule> newModule;
+
 		switch (number)
 		{
-			case 0: scene->Instantiate<IModule>(spawnPosition); break;
-			case 1: scene->Instantiate<OModule>(spawnPosition); break;
-			case 2: scene->Instantiate<TModule>(spawnPosition); break;
-			case 3: scene->Instantiate<LModule>(spawnPosition); break;
-			case 4: scene->Instantiate<JModule>(spawnPosition); break;
-			case 5: scene->Instantiate<SModule>(spawnPosition); break;
-			case 6: scene->Instantiate<ZModule>(spawnPosition); break;
+		case 0: newModule = scene->Instantiate<IModule>(spawnPosition); break;
+		case 1: newModule = scene->Instantiate<OModule>(spawnPosition); break;
+		case 2: newModule = scene->Instantiate<TModule>(spawnPosition); break;
+		case 3: newModule = scene->Instantiate<LModule>(spawnPosition); break;
+		case 4: newModule = scene->Instantiate<JModule>(spawnPosition); break;
+		case 5: newModule = scene->Instantiate<SModule>(spawnPosition); break;
+		case 6: newModule = scene->Instantiate<ZModule>(spawnPosition); break;
 		}
+		assert(newModule != nullptr);
+		newModule->AddOnLocked([this]()
+			{
+				SpawnNextModule();
+			});
 	}
 
 }

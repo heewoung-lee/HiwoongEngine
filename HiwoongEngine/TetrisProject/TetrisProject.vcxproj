@@ -91,6 +91,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameObject\BackGround\BackGround.cpp" />
+    <ClCompile Include="GameObject\BackGround\TetrisBoard.cpp" />
     <ClCompile Include="GameObject\BackGround\Wall.cpp" />
     <ClCompile Include="GameObject\Player\PlayerInputComponent.cpp" />
     <ClCompile Include="GameObject\SpawnManager\SpawnManager.cpp" />
@@ -109,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\BackGround\BackGround.h" />
+    <ClInclude Include="GameObject\BackGround\TetrisBoard.h" />
     <ClInclude Include="GameObject\BackGround\Wall.h" />
     <ClInclude Include="GameObject\Player\PlayerInputComponent.h" />
     <ClInclude Include="GameObject\SpawnManager\SpawnManager.h" />
