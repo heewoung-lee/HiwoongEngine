@@ -4,15 +4,21 @@
 #include "Scene/Scene.h"
 #include "GameObject/BackGround/Wall.h"
 #include "GameObject/BackGround/BackGround.h"
+#include "GameObject/SpawnManager/SpawnManager.h"
+#include "Scene/GameOver.h"
+#include "Engine/Engine.h"
+#include "Util/FileUtil.h"
+
 #include <fstream>
 #include <cassert>
+#include <memory>
 
 #include <iostream>
 #include <algorithm>
-#include "GameObject/SpawnManager/SpawnManager.h"
 
 namespace Hiwoong
 {
+
 	TestScene::TestScene(int level) : Scene(), currentLevel(level)
 	{
 			
@@ -31,105 +37,71 @@ namespace Hiwoong
 	void TestScene::SceneInitialize()
 	{
 		Vector2 screenSize = LoadMap("map.txt");
-		Instantiate<SpawnManager>(Vector2(4,4));
+
+		const int playWidth = screenSize.x - 2;
+		const int spwanX = 1 + (playWidth - 4) / 2;
+
+		spawnManager = Instantiate<SpawnManager>(Vector2(spwanX,1));
 		Scene::SetScreenSize(screenSize);
 		Scene::SceneInitialize();
 		
 	}
 
-	Vector2 TestScene::LoadMap(const std::string& filename)
+	void TestScene::Update(double deltaTime)
 	{
-		std::vector<Vector2> wallPositions;
+		Scene::Update(deltaTime);
 
-		// Path
-		std::string path = std::string("../Assets/Stages/") + filename;
+		std::shared_ptr<SpawnManager> manager = spawnManager.lock();
 
-		// File Open and Check
-		std::ifstream file(path, std::ios_base::binary);
-		assert(file.is_open());
+		assert(manager != nullptr);
 
-		// Check file's whole length.
-		file.seekg(0, std::ios_base::end);
-		const std::streampos fileSize = file.tellg();
-
-		//revert file location to first
-		file.seekg(0, std::ios_base::beg);
-
-		// variable to read whole file's contends 
-		std::string buffer;
-		buffer.resize(static_cast<size_t>(fileSize));
-
-		//To Read File's contends
-		file.read(&buffer[0], fileSize);
-
-		// read a string buffer step by step
-		int index = 0;
-		Vector2 position;
-
-
-		while (true)
+		if (manager->IsGameOver() && hasStartedGameOver == false)
 		{
-			//quit
-			if (index >= fileSize)
-			{
-				break;
-			}
-
-			//read current char
-			char mapCharacter = buffer[index];
-
-			//for reading next char
-			++index;
-
-			// Windows의 개행 문자는 '\n' 이 아니라 '\r\n' 이기 때문에
-			// \r를 건너뛰기 해야함
-			if (mapCharacter == '\r') continue;
-
-			// 개행 문자 처리 - 좌표값 업데이트
-			if (mapCharacter == '\n')
-			{
-				++position.y;
-				position.x = 0;
-				continue;
-			}
-
-			// 읽은 문자 별로 처리.
-
-			switch (mapCharacter)
-			{
-			case '#':
-				Instantiate<Wall>(position);
-				wallPositions.emplace_back(position);
-				break;
-			case '.':
-				Instantiate<BackGround>(position);
-				break;
-			}
-			
-			//문자 처리후 x 위치 업데이트.
-			++position.x;
+			hasStartedGameOver = true;
+			Engine::Get().AddNewScene<GameOver>();
 		}
-		//파일닫기
-
-
-		file.close();
-		++position.y;
-		const Vector2 screenSize = position;
-
-		board = std::make_unique<TetrisBoard>(
-			screenSize.x,
-			screenSize.y
-		);
-
-		for (const Vector2& wallPosition : wallPositions)
-		{
-			board->SetWall(wallPosition);
-		}
-
-
-
-		return position;
 	}
 
+
+	Vector2 TestScene::LoadMap(const std::string& filename)
+	{
+		const std::vector<std::string> lines = FileUtil::LoadTextLines("../Assets/Stages/" + filename);
+		
+		std::vector<Vector2> wallPositions;
+
+		int mapWidth = 0;
+		const int mapHeight = static_cast<int>(lines.size());
+
+		for (int y = 0; y < mapHeight;++y)
+		{
+			const std::string& line = lines[y];
+
+			//Find maxLength
+			mapWidth = (std::max)(mapWidth, static_cast<int>(line.size()));
+			for (int x = 0; x < line.size(); ++x)
+			{
+				const Vector2 position(x, y);
+
+				switch (line[x])
+				{
+				case '#':
+					Instantiate<Wall>(position);
+					wallPositions.push_back(position);
+					break;
+
+				case '.':
+					Instantiate<BackGround>(position);
+					break;
+				}
+			}
+		}
+		board = std::make_unique<TetrisBoard>(mapWidth, mapHeight);
+		 for (const Vector2& wallPosition : wallPositions)
+    {
+        board->SetWall(wallPosition);
+    }
+
+    return Vector2(mapWidth, mapHeight);
+	}
 }
 

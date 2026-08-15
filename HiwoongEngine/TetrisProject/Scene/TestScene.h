@@ -6,6 +6,9 @@
 
 namespace Hiwoong
 {
+	class SpawnManager;
+
+
 	class TestScene : public Hiwoong::Scene
 	{
 	public:
@@ -14,7 +17,8 @@ namespace Hiwoong
 		~TestScene();
 
 		virtual void SceneInitialize() override;
-		
+		virtual void Update(double deltatime) override;
+
 
 		Vector2 LoadMap(const std::string& mapPath);
 		double GetDropInterval() const
@@ -29,8 +33,13 @@ namespace Hiwoong
 
 	private:
 		double CalculateDropInterval() const;
-		
+
 		int currentLevel = 1;
 		std::unique_ptr<TetrisBoard> board;
+		std::weak_ptr<SpawnManager> spawnManager;
+
+		bool hasStartedGameOver = false;
+
+
 	};
 }

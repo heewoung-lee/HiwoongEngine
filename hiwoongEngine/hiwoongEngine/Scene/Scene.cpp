@@ -8,9 +8,12 @@ namespace Hiwoong
 {
 	Scene::Scene(Vector2 screenSize) : screenSize(screenSize)
 	{
-		if (screenSize == Vector2::Zero)
+		if (this->screenSize == Vector2::Zero)
 		{
-			screenSize = Vector2(Engine::Get().GetWidth(), Engine::Get().GetHeight());
+			this->screenSize = Vector2(
+				Engine::Get().GetWidth(),
+				Engine::Get().GetHeight()
+			);
 		}
 	}
 	Scene::~Scene()

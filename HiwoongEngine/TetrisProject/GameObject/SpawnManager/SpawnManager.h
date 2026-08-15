@@ -11,17 +11,16 @@ namespace Hiwoong
 	public:
 		SpawnManager(const Vector2& position);
 		~SpawnManager() override = default;
-		
-
 
 		inline Vector2 SpawnPosition()const { return position; }
-
+		inline bool IsGameOver() const { return gameOver; }
 
 		void Start() override;
 
 
 	private:
 		void SpawnNextModule();
+		bool gameOver = false;
 	};
 
 

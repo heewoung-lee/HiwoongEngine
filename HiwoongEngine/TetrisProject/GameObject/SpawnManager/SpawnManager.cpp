@@ -50,6 +50,28 @@ namespace Hiwoong
 		case 6: newModule = scene->Instantiate<ZModule>(spawnPosition); break;
 		}
 		assert(newModule != nullptr);
+
+
+		std::shared_ptr<TestScene> testScene =
+			std::dynamic_pointer_cast<TestScene>(scene);
+
+		assert(testScene != nullptr);
+
+		TetrisBoard* board = testScene->GetBoard();
+
+		assert(board != nullptr);
+
+		//Setting GameOver
+		for (const Vector2& position : newModule->GetBlockPosition())
+		{
+			if (board->IsOccupied(position + newModule->GetWorldPosition()) == true)
+			{
+				gameOver = true;
+				newModule->Destroy();
+				return;
+			}
+		}
+
 		newModule->AddOnLocked([this]()
 			{
 
@@ -66,6 +88,10 @@ namespace Hiwoong
 
 				SpawnNextModule();
 			});
+
+
+
+
 	}
 
 }

@@ -104,9 +104,12 @@
     <ClCompile Include="GameObject\TetrisBlocks\SModule.cpp" />
     <ClCompile Include="GameObject\TetrisBlocks\TModule.cpp" />
     <ClCompile Include="GameObject\TetrisBlocks\ZModule.cpp" />
+    <ClCompile Include="GameObject\TextObject.cpp" />
     <ClCompile Include="Interface\TetrisModule.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Scene\GameOver.cpp" />
     <ClCompile Include="Scene\TestScene.cpp" />
+    <ClCompile Include="Util\FileUtil.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\BackGround\BackGround.h" />
@@ -117,8 +120,11 @@
     <ClInclude Include="GameObject\TestGameObject.h" />
     <ClInclude Include="GameObject\TetrisBlocks\Block.h" />
     <ClInclude Include="GameObject\TetrisBlocks\TetrisModule.h" />
+    <ClInclude Include="GameObject\TextObject.h" />
     <ClInclude Include="Interface\TetrisModule.h" />
+    <ClInclude Include="Scene\GameOver.h" />
     <ClInclude Include="Scene\TestScene.h" />
+    <ClInclude Include="Util\FileUtil.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
