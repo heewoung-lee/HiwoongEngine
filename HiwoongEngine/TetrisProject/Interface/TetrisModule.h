@@ -36,6 +36,8 @@ namespace Hiwoong
 		void Start() override;
 		void Update(double deltaTime) override;
 
+	
+
 	protected:
 		double dropInterval = 1.0;
 		double elapsedDropTime = 0.0;

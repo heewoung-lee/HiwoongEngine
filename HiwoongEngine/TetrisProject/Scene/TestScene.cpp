@@ -123,7 +123,7 @@ namespace Hiwoong
 
 		for (const Vector2& wallPosition : wallPositions)
 		{
-			board->SetOccupied(wallPosition, true);
+			board->SetWall(wallPosition);
 		}
 
 

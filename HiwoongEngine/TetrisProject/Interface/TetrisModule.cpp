@@ -173,6 +173,7 @@ namespace Hiwoong
 
 	}
 
+
 	void TetrisModule::Lock()
 	{
 		if (isLocked)
@@ -191,14 +192,17 @@ namespace Hiwoong
 		//Find Block's worldPositon and blocks position in local + world
 		const Vector2 moduleWorldPosition = GetWorldPosition();
 		
-		for (const Vector2& localPosition : GetBlockPosition())
+		for (std::size_t idx = 0; idx < blocks.size();++idx)
 		{
-			const Vector2 blockWorldPosition = moduleWorldPosition + localPosition;
+			std::shared_ptr<Block> block = blocks[idx].lock();
+			assert(block != nullptr);
 
-			board->SetOccupied(blockWorldPosition, true);
+			board->SetBlock(block->GetWorldPosition(), block);
 		}
-		BroadcastOnLocked();
+
+		board->CheckFillRow();
 		isLocked = true;
+		BroadcastOnLocked();
 	}
 
 	void TetrisModule::BroadcastOnLocked()

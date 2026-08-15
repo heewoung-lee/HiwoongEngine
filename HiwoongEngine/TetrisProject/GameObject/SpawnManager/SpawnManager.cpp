@@ -2,6 +2,8 @@
 #include "Scene/Scene.h"
 #include "Util/Util.h"
 #include "GameObject/TetrisBlocks/TetrisModule.h"
+#include "GameObject/BackGround/TetrisBoard.h"
+#include "SCene/TestScene.h"
 
 
 #include <cassert>
@@ -50,6 +52,18 @@ namespace Hiwoong
 		assert(newModule != nullptr);
 		newModule->AddOnLocked([this]()
 			{
+
+				//TodO: Check board fill horizontal
+				std::shared_ptr<TestScene> scene =
+					std::dynamic_pointer_cast<TestScene>(GetOwner());
+
+				assert(scene != nullptr);
+
+				TetrisBoard* board = scene->GetBoard();
+				assert(board != nullptr);
+
+				//TODO: Check horizental.
+
 				SpawnNextModule();
 			});
 	}
