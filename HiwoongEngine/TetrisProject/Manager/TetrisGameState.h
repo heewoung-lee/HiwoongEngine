@@ -22,7 +22,7 @@ namespace Hiwoong
 		TetrisGameState() = default;
 		int currentScore = 0;
 		int requireNextLevel = 100;
-		int currentLevel = 100;
+		int currentLevel = 1;
 		int nextModuleNumber = -1;
 	};
 
