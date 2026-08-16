@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="560" viewBox="0 0 1400 560" role="img" aria-labelledby="title desc">
+  <title id="title">테트리스 블록 생명주기</title>
+  <desc id="desc">다음 블록 선택, 생성, 이동과 회전, 고정, 줄 삭제, 점수와 다음 블록 생성의 흐름</desc>
+  <defs><linearGradient id="bg4" x1="0" x2="1"><stop stop-color="#081018"/><stop offset="1" stop-color="#131827"/></linearGradient><marker id="a4" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L0 6L9 3z" fill="#64748b"/></marker><style>.t{font:700 30px 'Segoe UI','Noto Sans KR',sans-serif;fill:#f8fafc}.s{font:400 16px 'Segoe UI','Noto Sans KR',sans-serif;fill:#94a3b8}.h{font:700 18px 'Segoe UI','Noto Sans KR',sans-serif;fill:#f8fafc}.b{font:400 14px 'Segoe UI','Noto Sans KR',sans-serif;fill:#cbd5e1}.a{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#a4)}</style></defs>
+  <rect width="1400" height="560" rx="24" fill="url(#bg4)"/>
+  <text x="56" y="60" class="t">엔진 기능을 조합해 테트리스 규칙을 만들었습니다</text>
+  <text x="56" y="91" class="s">블록 하나가 태어나서 보드에 고정되고 다음 블록으로 이어지는 과정입니다.</text>
+  <g transform="translate(55 155)">
+    <rect width="180" height="105" rx="18" fill="#172554" stroke="#60a5fa" stroke-width="2"/><text x="90" y="43" text-anchor="middle" class="h">다음 블록 예약</text><text x="90" y="72" text-anchor="middle" class="b">0~6 무작위 번호</text>
+    <path d="M185 52 H225" class="a"/>
+    <g transform="translate(235)"><rect width="180" height="105" rx="18" fill="#083344" stroke="#22d3ee" stroke-width="2"/><text x="90" y="43" text-anchor="middle" class="h">블록 생성</text><text x="90" y="72" text-anchor="middle" class="b">7가지 모양 · 색상</text></g>
+    <path d="M420 52 H460" class="a"/>
+    <g transform="translate(470)"><rect width="180" height="105" rx="18" fill="#3b0764" stroke="#c084fc" stroke-width="2"/><text x="90" y="43" text-anchor="middle" class="h">이동 · 회전</text><text x="90" y="72" text-anchor="middle" class="b">입력 + 충돌 검사</text></g>
+    <path d="M655 52 H695" class="a"/>
+    <g transform="translate(705)"><rect width="180" height="105" rx="18" fill="#422006" stroke="#fbbf24" stroke-width="2"/><text x="90" y="43" text-anchor="middle" class="h">Lock</text><text x="90" y="72" text-anchor="middle" class="b">Board 셀에 고정</text></g>
+    <path d="M890 52 H930" class="a"/>
+    <g transform="translate(940)"><rect width="180" height="105" rx="18" fill="#052e16" stroke="#4ade80" stroke-width="2"/><text x="90" y="43" text-anchor="middle" class="h">줄 검사</text><text x="90" y="72" text-anchor="middle" class="b">삭제 + 아래로 이동</text></g>
+    <path d="M1125 52 H1165" class="a"/>
+    <g transform="translate(1175)"><rect width="170" height="105" rx="18" fill="#500724" stroke="#f472b6" stroke-width="2"/><text x="85" y="43" text-anchor="middle" class="h">점수 · 레벨</text><text x="85" y="72" text-anchor="middle" class="b">UI 즉시 갱신</text></g>
+  </g>
+  <path d="M1315 270 C1315 370 155 370 155 270" stroke="#475569" stroke-width="2" stroke-dasharray="8 8" fill="none" marker-end="url(#a4)"/>
+  <text x="735" y="405" text-anchor="middle" class="s">공간이 있으면 다음 블록 생성</text>
+  <path d="M290 430 H1110" stroke="#334155" stroke-width="2"/>
+  <rect x="460" y="455" width="480" height="62" rx="16" fill="#450a0a" stroke="#ef4444"/>
+  <text x="700" y="482" text-anchor="middle" class="h">새 블록을 놓을 공간이 없다면</text><text x="700" y="505" text-anchor="middle" class="b">GameOver Scene으로 전환 · R 재시도 · ESC 종료</text>
+</svg>

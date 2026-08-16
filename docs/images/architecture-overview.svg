@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">HiwoongEngine 전체 구조</title>
+  <desc id="desc">Engine이 Scene을 관리하고 Scene이 GameObject를, GameObject가 Component를 관리하는 구조</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#081018"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748b"/></marker>
+    <style>
+      .title{font:700 30px 'Segoe UI','Noto Sans KR',sans-serif;fill:#f8fafc}.sub{font:400 16px 'Segoe UI','Noto Sans KR',sans-serif;fill:#94a3b8}.boxTitle{font:700 21px 'Segoe UI','Noto Sans KR',sans-serif;fill:#f8fafc}.body{font:400 15px 'Segoe UI','Noto Sans KR',sans-serif;fill:#cbd5e1}.small{font:600 13px 'Segoe UI','Noto Sans KR',sans-serif;fill:#94a3b8}.line{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="680" rx="24" fill="url(#bg)"/>
+  <text x="60" y="58" class="title">HiwoongEngine은 누가 무엇을 관리할까?</text>
+  <text x="60" y="88" class="sub">위에서 아래로 수명을 책임지고, 아래에서는 필요한 기능만 조립합니다.</text>
+
+  <rect x="440" y="125" width="320" height="95" rx="18" fill="#0e7490" opacity=".9" stroke="#67e8f9" stroke-width="2" filter="url(#glow)"/>
+  <text x="600" y="163" text-anchor="middle" class="boxTitle">Engine</text>
+  <text x="600" y="190" text-anchor="middle" class="body">게임 루프와 현재 Scene 관리</text>
+
+  <rect x="70" y="135" width="240" height="76" rx="16" fill="#172554" stroke="#60a5fa" stroke-width="2"/>
+  <text x="190" y="166" text-anchor="middle" class="boxTitle">Input</text>
+  <text x="190" y="191" text-anchor="middle" class="body">키보드 상태 읽기</text>
+  <path d="M310 173 H430" class="line"/>
+
+  <rect x="890" y="135" width="240" height="76" rx="16" fill="#3b0764" stroke="#c084fc" stroke-width="2"/>
+  <text x="1010" y="166" text-anchor="middle" class="boxTitle">Renderer</text>
+  <text x="1010" y="191" text-anchor="middle" class="body">문자와 색을 화면에 출력</text>
+  <path d="M770 173 H880" class="line"/>
+
+  <path d="M600 220 V265" class="line"/>
+  <rect x="390" y="275" width="420" height="90" rx="18" fill="#14532d" stroke="#4ade80" stroke-width="2"/>
+  <text x="600" y="311" text-anchor="middle" class="boxTitle">Scene</text>
+  <text x="600" y="339" text-anchor="middle" class="body">한 화면에 존재하는 GameObject 목록과 생명주기</text>
+
+  <path d="M600 365 V408" class="line"/>
+  <rect x="140" y="420" width="280" height="92" rx="18" fill="#422006" stroke="#fbbf24" stroke-width="2"/>
+  <rect x="460" y="420" width="280" height="92" rx="18" fill="#422006" stroke="#fbbf24" stroke-width="2"/>
+  <rect x="780" y="420" width="280" height="92" rx="18" fill="#422006" stroke="#fbbf24" stroke-width="2"/>
+  <text x="280" y="456" text-anchor="middle" class="boxTitle">GameObject</text><text x="280" y="484" text-anchor="middle" class="body">벽 · 블록 · UI</text>
+  <text x="600" y="456" text-anchor="middle" class="boxTitle">GameObject</text><text x="600" y="484" text-anchor="middle" class="body">테트리스 모듈</text>
+  <text x="920" y="456" text-anchor="middle" class="boxTitle">GameObject</text><text x="920" y="484" text-anchor="middle" class="body">스폰 매니저</text>
+  <path d="M600 408 L280 418" class="line"/><path d="M600 408 V418" class="line"/><path d="M600 408 L920 418" class="line"/>
+
+  <rect x="105" y="570" width="210" height="60" rx="14" fill="#0f172a" stroke="#38bdf8"/><text x="210" y="607" text-anchor="middle" class="body">Transform</text>
+  <rect x="345" y="570" width="210" height="60" rx="14" fill="#0f172a" stroke="#38bdf8"/><text x="450" y="607" text-anchor="middle" class="body">SpriteRenderer</text>
+  <rect x="585" y="570" width="210" height="60" rx="14" fill="#0f172a" stroke="#38bdf8"/><text x="690" y="607" text-anchor="middle" class="body">PlayerInput</text>
+  <rect x="825" y="570" width="210" height="60" rx="14" fill="#0f172a" stroke="#38bdf8"/><text x="930" y="607" text-anchor="middle" class="body">BoxCollider</text>
+  <text x="60" y="657" class="small">Component = GameObject에 꽂아서 기능을 추가하는 작은 부품</text>
+</svg>
