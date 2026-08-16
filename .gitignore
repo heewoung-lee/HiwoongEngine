@@ -40,3 +40,7 @@
 # Build output
 [Bb]in/
 Intermediate/
+
+# Markdown documents
+*.md
+!/README.md

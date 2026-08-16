@@ -150,6 +150,14 @@ namespace Hiwoong
 
 			blocks[index] = block;
 		}
+		//Set drop Speed
+		std::shared_ptr<TestScene> testScene =
+			std::dynamic_pointer_cast<TestScene>(GetOwner());
+
+		assert(testScene != nullptr);
+
+		dropInterval = testScene->GetDropInterval();
+
 	}
 	void TetrisModule::Update(double deltaTime)
 	{

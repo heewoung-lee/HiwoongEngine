@@ -8,6 +8,8 @@
 #include "Scene/GameOver.h"
 #include "Engine/Engine.h"
 #include "Util/FileUtil.h"
+#include "Manager/TetrisGameState.h"
+#include "Scene/GameStatesUI.h"
 
 #include <fstream>
 #include <cassert>
@@ -19,30 +21,48 @@
 namespace Hiwoong
 {
 
-	TestScene::TestScene(int level) : Scene(), currentLevel(level)
+	TestScene::TestScene() : Scene()
 	{
-			
+		const int currentLevel =
+			TetrisGameState::Get().GetCurrentLevel();
 	}
 	TestScene::~TestScene()
 	{
 	}
 	double TestScene::CalculateDropInterval() const
 	{
+		const int currentLevel =
+			TetrisGameState::Get().GetCurrentLevel();
+
 		return (std::max)(
 			0.1,
 			1.0 - (currentLevel - 1) * 0.1
-		);
+			);
 	}
 
 	void TestScene::SceneInitialize()
 	{
+
+		//Load Map
 		Vector2 screenSize = LoadMap("map.txt");
 
 		const int playWidth = screenSize.x - 2;
 		const int spwanX = 1 + (playWidth - 4) / 2;
 
 		spawnManager = Instantiate<SpawnManager>(Vector2(spwanX,1));
-		Scene::SetScreenSize(screenSize);
+		
+		const int uiGap = 2;
+
+		//expend ScreenSize
+		const Vector2 totalScreenSize(
+			screenSize.x + GameStatesUI::Width + uiGap,
+			screenSize.y
+		);
+
+		Instantiate<GameStatesUI>(Vector2(screenSize.x + uiGap, 2));
+
+
+		Scene::SetScreenSize(totalScreenSize);
 		Scene::SceneInitialize();
 		
 	}
@@ -59,7 +79,18 @@ namespace Hiwoong
 		{
 			hasStartedGameOver = true;
 			Engine::Get().AddNewScene<GameOver>();
+			return;
 		}
+
+		//Check Player Score
+		TetrisGameState& state = TetrisGameState::Get();
+
+		if (state.GetScore() >= state.GetRequireNextLevelScore())
+		{
+			state.LevelUp();
+			Engine::Get().AddNewScene<TestScene>();
+		}
+
 	}
 
 

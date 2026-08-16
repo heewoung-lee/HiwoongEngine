@@ -39,6 +39,7 @@ namespace Hiwoong
 
 		if (Input::Get().GetKeyDown(VK_ESCAPE))
 		{
+			//TODO: Initialze Singleton
 			Engine::Get().Quit();
 		}
 

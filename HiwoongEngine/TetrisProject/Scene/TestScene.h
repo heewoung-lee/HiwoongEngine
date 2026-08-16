@@ -13,7 +13,7 @@ namespace Hiwoong
 	{
 	public:
 
-		TestScene(int level = 1);
+		TestScene();
 		~TestScene();
 
 		virtual void SceneInitialize() override;
@@ -33,13 +33,9 @@ namespace Hiwoong
 
 	private:
 		double CalculateDropInterval() const;
-
-		int currentLevel = 1;
 		std::unique_ptr<TetrisBoard> board;
 		std::weak_ptr<SpawnManager> spawnManager;
-
 		bool hasStartedGameOver = false;
-
 
 	};
 }

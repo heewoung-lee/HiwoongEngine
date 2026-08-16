@@ -4,6 +4,7 @@
 #include "GameObject/TetrisBlocks/TetrisModule.h"
 #include "GameObject/BackGround/TetrisBoard.h"
 #include "SCene/TestScene.h"
+#include "Manager/TetrisGameState.h"
 
 
 #include <cassert>
@@ -23,8 +24,16 @@ namespace Hiwoong
 		//Spawn Block
 		//if Scene is not GameOver And there is not block which I controled
 		//spawn
+
+		TetrisGameState& state = TetrisGameState::Get();
+		//it is first spawn Block
+		if (state.GetNextModuleNumber() < 0)
+		{
+			state.SetNextModuleNumber(
+				Util::RandomRange(0, 6)
+			);
+		}
 		SpawnNextModule();
-		std::shared_ptr<Scene> scene = GetOwner();
 	}
 
 	void SpawnManager::SpawnNextModule()
@@ -35,7 +44,9 @@ namespace Hiwoong
 
 		const Vector2 spawnPosition = GetPosition();
 
-		int number = Util::RandomRange(0, 6);
+		TetrisGameState& state = TetrisGameState::Get();
+
+		const int number = state.GetNextModuleNumber();
 
 		std::shared_ptr<TetrisModule> newModule;
 
@@ -89,7 +100,10 @@ namespace Hiwoong
 				SpawnNextModule();
 			});
 
-
+		//Next ModuleNumber
+		state.SetNextModuleNumber(
+			Util::RandomRange(0, 6)
+		);
 
 
 	}

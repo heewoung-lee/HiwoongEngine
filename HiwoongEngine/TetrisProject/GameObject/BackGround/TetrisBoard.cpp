@@ -1,5 +1,7 @@
 #include "TetrisBoard.h"
+#include "Manager/TetrisGameState.h"
 #include <cassert>
+
 
 namespace Hiwoong
 {
@@ -56,6 +58,7 @@ namespace Hiwoong
 			if (isbingo == true)
 			{
 				ClearRowAndCollapse(r);
+				TetrisGameState::Get().AddScore(10);
 			}
 
 		}

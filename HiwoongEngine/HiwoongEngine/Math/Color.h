@@ -19,9 +19,8 @@ namespace Hiwoong
 
         Orange = FOREGROUND_RED | FOREGROUND_GREEN,
 
-        Gray = FOREGROUND_RED | FOREGROUND_GREEN |
-        FOREGROUND_BLUE,
-
-        White = Gray | FOREGROUND_INTENSITY
+        Gray = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE,
+        White = Gray | FOREGROUND_INTENSITY,
+        BrightWhite = FOREGROUND_INTENSITY | White
 	};
 }
