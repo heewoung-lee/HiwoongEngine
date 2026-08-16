@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="570" viewBox="0 0 1400 570" role="img" aria-labelledby="title desc">
+  <title id="title">HiwoongEngine 콘솔 렌더링 파이프라인</title>
+  <desc id="desc">SpriteRenderer가 렌더 명령을 제출하고 Frame과 두 ScreenBuffer를 거쳐 Windows 콘솔에 표시되는 과정</desc>
+  <defs>
+    <linearGradient id="rbg" x1="0" x2="1"><stop stop-color="#081018"/><stop offset="1" stop-color="#131827"/></linearGradient>
+    <marker id="ra" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L0 6L9 3z" fill="#64748b"/></marker>
+    <style>.t{font:700 30px 'Segoe UI','Noto Sans KR',sans-serif;fill:#f8fafc}.s{font:400 16px 'Segoe UI','Noto Sans KR',sans-serif;fill:#94a3b8}.h{font:700 18px 'Segoe UI','Noto Sans KR',sans-serif;fill:#f8fafc}.b{font:400 14px 'Segoe UI','Noto Sans KR',sans-serif;fill:#cbd5e1}.a{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#ra)}</style>
+  </defs>
+  <rect width="1400" height="570" rx="24" fill="url(#rbg)"/>
+  <text x="55" y="59" class="t">문자 하나도 렌더링 파이프라인을 거쳐 화면에 도착합니다</text>
+  <text x="55" y="90" class="s">OpenGL·DirectX 없이 Windows 콘솔 API와 두 개의 화면 버퍼를 사용합니다.</text>
+  <g transform="translate(50 155)">
+    <rect width="210" height="120" rx="18" fill="#3b0764" stroke="#c084fc" stroke-width="2"/>
+    <text x="105" y="43" text-anchor="middle" class="h">SpriteRenderer</text><text x="105" y="73" text-anchor="middle" class="b">문자 · 위치 · 색상</text><text x="105" y="97" text-anchor="middle" class="b">Sorting Order 제출</text>
+    <path d="M215 60 H255" class="a"/>
+    <g transform="translate(265)"><rect width="210" height="120" rx="18" fill="#172554" stroke="#60a5fa" stroke-width="2"/><text x="105" y="43" text-anchor="middle" class="h">Render Queue</text><text x="105" y="73" text-anchor="middle" class="b">한 프레임의 명령 수집</text><text x="105" y="97" text-anchor="middle" class="b">셀마다 겹침 순서 비교</text></g>
+    <path d="M480 60 H520" class="a"/>
+    <g transform="translate(530)"><rect width="210" height="120" rx="18" fill="#083344" stroke="#22d3ee" stroke-width="2"/><text x="105" y="43" text-anchor="middle" class="h">Frame</text><text x="105" y="73" text-anchor="middle" class="b">2D 좌표 → 1D 인덱스</text><text x="105" y="97" text-anchor="middle" class="b">CHAR_INFO 배열 작성</text></g>
+    <path d="M745 60 H785" class="a"/>
+    <g transform="translate(795)"><rect width="210" height="120" rx="18" fill="#052e16" stroke="#4ade80" stroke-width="2"/><text x="105" y="43" text-anchor="middle" class="h">ScreenBuffer</text><text x="105" y="73" text-anchor="middle" class="b">Buffer A / Buffer B</text><text x="105" y="97" text-anchor="middle" class="b">번갈아 쓰고 표시</text></g>
+    <path d="M1010 60 H1050" class="a"/>
+    <g transform="translate(1060)"><rect width="210" height="120" rx="18" fill="#422006" stroke="#fbbf24" stroke-width="2"/><text x="105" y="43" text-anchor="middle" class="h">Windows Console</text><text x="105" y="73" text-anchor="middle" class="b">WriteConsoleOutputA</text><text x="105" y="97" text-anchor="middle" class="b">완성된 프레임 표시</text></g>
+  </g>
+  <rect x="185" y="350" width="1030" height="150" rx="20" fill="#0f172a" stroke="#334155"/>
+  <text x="700" y="389" text-anchor="middle" class="h">왜 화면 버퍼가 두 개인가?</text>
+  <rect x="285" y="420" width="270" height="52" rx="12" fill="#172554" stroke="#60a5fa"/><text x="420" y="452" text-anchor="middle" class="b">A를 화면에 보여 주는 동안</text>
+  <path d="M565 446 H625" class="a"/>
+  <rect x="635" y="420" width="270" height="52" rx="12" fill="#052e16" stroke="#4ade80"/><text x="770" y="452" text-anchor="middle" class="b">B에 다음 프레임을 작성</text>
+  <path d="M915 446 H975" class="a"/>
+  <rect x="985" y="420" width="130" height="52" rx="12" fill="#3b0764" stroke="#c084fc"/><text x="1050" y="452" text-anchor="middle" class="b">서로 교체</text>
+  <text x="700" y="536" text-anchor="middle" class="s">완성되지 않은 화면이 노출되는 시간을 줄여 콘솔 깜빡임을 완화합니다.</text>
+</svg>

@@ -2,202 +2,220 @@
 
 # HiwoongEngine
 
-### 작은 콘솔 게임 엔진을 직접 만들고, 그 위에서 테트리스를 완성해 가는 프로젝트
+### C++로 직접 구현한 Windows 콘솔 게임 엔진
 
 ![C++](https://img.shields.io/badge/C%2B%2B-MSVC-00599C?logo=cplusplus&logoColor=white)
 ![Windows](https://img.shields.io/badge/Platform-Windows-0078D6?logo=windows&logoColor=white)
-![Visual Studio](https://img.shields.io/badge/IDE-Visual%20Studio-5C2D91?logo=visualstudio&logoColor=white)
-![Project](https://img.shields.io/badge/Type-Learning%20Project-22c55e)
+![Visual Studio](https://img.shields.io/badge/Build-Visual%20Studio-5C2D91?logo=visualstudio&logoColor=white)
+![Rendering](https://img.shields.io/badge/Rendering-Win32%20Console-0e7490)
 
-![HiwoongEngine과 콘솔 테트리스](docs/images/hiwoong-engine-hero.png)
+**게임을 먼저 만든 프로젝트가 아니라, 게임을 실행할 수 있는 구조를 직접 구현한 프로젝트입니다.**
 
-<sub>엔진 구조와 테트리스를 함께 표현한 콘셉트 이미지입니다.</sub>
-
-</div>
-
-## 이 프로젝트는 무엇인가요?
-
-HiwoongEngine은 **게임을 바로 만드는 대신, 게임을 만들 수 있는 작은 엔진부터 직접 구현해 본 프로젝트**입니다.
-
-먼저 화면 출력, 키보드 입력, 장면 전환, 게임 오브젝트의 생명주기 같은 기반 기능을 만들었습니다. 그다음 `GameObject`에 필요한 기능을 부품처럼 붙이는 **컴포넌트 시스템**을 추가했습니다. 마지막으로 이 기능들을 실제로 사용할 수 있는지 확인하기 위해 콘솔 테트리스를 만들었습니다.
-
-```text
-1. 작은 게임 엔진 제작
-          ↓
-2. 컴포넌트 시스템 추가
-          ↓
-3. 엔진의 기능을 조합해 테트리스 제작
-```
-
-게임 개발을 전공하지 않은 사람도 구조를 따라갈 수 있도록, 어려운 용어보다 “누가 무엇을 관리하는가”를 중심으로 설명합니다.
-
----
-
-## 현재 실행 화면
-
-<div align="center">
-
-![HiwoongEngine에서 실행 중인 콘솔 테트리스](docs/images/tetris-gameplay-cropped.png)
+테트리스는 이 엔진의 입력, 생명주기, 컴포넌트, 렌더링, Scene 전환이 실제 게임에서도 작동하는지 검증하기 위해 만든 응용 예제입니다.
 
 </div>
-
-왼쪽은 실제 플레이 영역입니다. 오른쪽 UI에는 현재 점수, 레벨, 다음 레벨에 필요한 점수, 다음에 등장할 블록을 표시합니다.
-
-## 조작 방법
-
-| 키 | 동작 |
-|---|---|
-| `←` / `→` | 블록을 좌우로 이동 |
-| `↓` | 블록을 한 칸 빠르게 내리기 |
-| `↑` | 블록을 시계 방향으로 회전 |
-| `Space` | 블록을 바닥까지 즉시 내리고 고정 |
-| `Esc` | 게임 종료 |
-| 게임오버 화면에서 `R` | 게임 화면으로 다시 진입 *(점수·레벨 초기화는 작업 예정)* |
-
----
-
-## 게임 엔진을 쉽게 이해하기
-
-게임 엔진을 하나의 **공연장**으로 생각하면 구조가 쉬워집니다.
-
-| 엔진 개념 | 공연장에 비유하면 | 이 프로젝트에서 하는 일 |
-|---|---|---|
-| `Engine` | 공연장 전체를 운영하는 관리자 | 게임 루프, 입력, 화면, Scene 전환 관리 |
-| `Scene` | 하나의 무대 | 현재 화면에 존재하는 GameObject 관리 |
-| `GameObject` | 무대 위 배우 | 벽, 블록, UI처럼 게임에 존재하는 대상 |
-| `Component` | 배우에게 주는 역할과 장비 | 위치, 그림, 입력 같은 기능을 조립 |
-| `Renderer` | 관객에게 무대를 보여주는 조명·화면 | 문자, 위치, 색상을 콘솔에 출력 |
 
 ![HiwoongEngine 전체 구조](docs/images/architecture-overview.svg)
 
-### 누가 누구를 소유하나요?
+## 무엇을 직접 만들었나요?
 
-위쪽 객체가 아래쪽 객체의 수명을 책임집니다.
+HiwoongEngine은 OpenGL, DirectX 같은 그래픽 API나 외부 게임 프레임워크 없이 C++ 표준 라이브러리와 Windows 콘솔 API로 동작합니다.
+
+| 영역 | 직접 구현한 내용 |
+|---|---|
+| 게임 루프 | 입력 → 초기화 → 시작 → 업데이트 → 그리기의 프레임 순서 |
+| Scene | 현재 Scene과 다음 Scene의 안전한 교체, GameObject 관리 |
+| GameObject | 생명주기, 부모·자식 관계, Component 보관 |
+| Component | `AddComponent<T>()`, `GetComponent<T>()`, 주인 객체 조회 |
+| Transform | 로컬 좌표와 부모 기준 월드 좌표 계산 |
+| Input | 현재·이전 키 상태를 비교한 `GetKey`, `GetKeyDown`, `GetKeyUP` |
+| Renderer | 문자·색상·좌표·겹침 순서 처리, 콘솔 더블 버퍼링 |
+| Type System | Component 검색에 사용하는 간단한 자체 RTTI와 상속 타입 확인 |
+
+---
+
+## 1. 엔진의 소유 구조
+
+비전공자도 쉽게 보면, `Engine`은 전체 프로그램을 운영하고 `Scene`은 현재 무대, `GameObject`는 무대 위 대상, `Component`는 대상에 붙이는 기능 부품입니다.
 
 ```text
 Engine
+  ├─ Input
+  ├─ Renderer
   └─ Scene
       └─ GameObject
           └─ Component
 ```
 
-- 소유하는 방향에는 주로 `shared_ptr` 또는 `unique_ptr`를 사용합니다.
-- 아래 객체가 자신의 주인을 조회할 때는 `weak_ptr`를 사용합니다.
-- 이 방식은 서로가 서로를 계속 소유해 메모리가 해제되지 않는 **순환 참조**를 막아 줍니다.
+- `Engine`은 `Input`과 `Renderer`를 하나씩 소유합니다.
+- `Scene`은 자신에게 존재하는 여러 `GameObject`를 소유합니다.
+- `GameObject`는 기본 `TransformComponent`와 추가 Component들을 소유합니다.
+- 자식이 부모를 조회할 때는 `weak_ptr`를 사용해 순환 소유를 막습니다.
+
+즉, **위에서 아래로 수명을 책임지고 아래에서는 필요한 부모를 약하게 조회하는 구조**입니다.
 
 ---
 
-## 한 프레임은 어떻게 움직이나요?
+## 2. 한 프레임의 동작
 
-게임은 정지 화면을 매우 빠르게 반복해서 보여 줍니다. 그 한 번의 반복을 **프레임**이라고 합니다.
+게임은 아래 순서를 빠르게 반복합니다.
 
 ![HiwoongEngine 한 프레임의 흐름](docs/images/frame-lifecycle.svg)
 
-1. 키보드 상태를 읽습니다.
-2. 새 Scene이 있다면 초기화합니다.
-3. 새 GameObject와 Component의 `Start()`를 한 번 호출합니다.
-4. `Update()`에서 이동과 게임 규칙을 계산합니다.
-5. `Draw()`에서 화면에 그릴 명령을 모읍니다.
-6. 요청된 Scene이 있다면 안전한 시점에 교체합니다.
-7. 프레임 도중 예약된 생성과 삭제를 마지막에 처리합니다.
+1. 키보드의 현재 상태를 읽습니다.
+2. 새 Scene이라면 `SceneInitialize()`를 실행합니다.
+3. 새 GameObject와 Component의 `Start()`를 한 번 실행합니다.
+4. `Update()`에서 위치와 게임 규칙을 계산합니다.
+5. `Draw()`에서 이번 프레임의 그리기 명령을 수집하고 출력합니다.
+6. 요청된 다음 Scene이 있다면 현재 Scene과 교체합니다.
+7. 예약된 GameObject·Component의 추가와 삭제를 반영합니다.
 
-생성과 삭제를 즉시 처리하지 않고 예약하는 이유는, 목록을 순회하는 도중 목록 자체가 바뀌어 발생할 수 있는 오류를 피하기 위해서입니다.
+생성과 삭제를 즉시 처리하지 않고 프레임 끝에 반영하는 이유는, 목록을 순회하는 도중 컨테이너가 바뀌어 반복자가 무효화되는 문제를 피하기 위해서입니다.
 
 ---
 
-## 컴포넌트 시스템
+## 3. 컴포넌트 기반 구조
 
-`GameObject`가 몸체라면 `Component`는 몸체에 꽂는 기능 부품입니다.
+하나의 거대한 상속 계층에 모든 기능을 넣지 않고, 필요한 기능을 Component로 붙입니다.
 
 ![HiwoongEngine 컴포넌트 시스템](docs/images/component-system.svg)
 
-테트리스 조각 하나는 부모 `TetrisModule`과 자식 `Block` 네 개로 구성됩니다.
+모든 `GameObject`에는 `TransformComponent`가 기본으로 만들어집니다. 화면에 보여야 한다면 `SpriteRendererComponent`, 입력을 받아야 한다면 사용자 입력 Component를 추가하는 식입니다.
 
-- 모든 `GameObject`에는 위치를 담당하는 `TransformComponent`가 기본으로 만들어집니다.
-- 부모 `TetrisModule`에는 `PlayerInputComponent`를 붙여 이동·회전·즉시 낙하 입력을 처리합니다.
-- 자식 `Block` 네 개에는 각각 `SpriteRendererComponent`를 붙여 `@` 문자와 색상을 출력합니다.
+```cpp
+auto renderer = AddComponent<SpriteRendererComponent>();
+auto input = AddComponent<PlayerInputComponent>();
+```
 
-`GameObject`는 자신에게 붙은 컴포넌트에 `Start()`, `Update()`, `Draw()`를 전달합니다. 덕분에 입력과 화면 출력의 책임을 분리하면서도, 부모가 움직이면 네 자식 블록이 함께 움직이게 만들 수 있습니다.
+`GameObject`는 `Start()`, `Update()`, `Draw()`를 자신에게 붙은 Component에 전달합니다. 그래서 기능은 분리되어 있지만 하나의 객체처럼 같은 생명주기로 움직입니다.
+
+### 부모·자식 Transform
+
+GameObject끼리 부모·자식 관계를 맺으면 자식은 자신의 로컬 좌표에 부모의 월드 좌표를 더합니다.
+
+```text
+자식 월드 좌표 = 부모 월드 좌표 + 자식 로컬 좌표
+```
+
+부모 하나를 움직였을 때 여러 자식이 함께 이동하는 복합 객체를 만들 수 있습니다.
 
 <details>
-<summary><strong>직접 만든 런타임 타입 확인 기능</strong></summary>
+<summary><strong>GetComponent&lt;T&gt;는 타입을 어떻게 찾나요?</strong></summary>
 
-컴포넌트를 `GetComponent<T>()`로 찾기 위해 간단한 RTTI(Runtime Type Information, 실행 중 타입 확인) 시스템을 구현했습니다. 각 타입이 가진 고유 ID를 비교하고, 부모 타입까지 이어서 확인합니다.
+`HiwoongObject`에 간단한 런타임 타입 확인 기능을 구현했습니다. 타입마다 프로세스 안에서 구분되는 ID를 만들고 부모 타입을 연결해, 정확히 같은 타입뿐 아니라 상속 관계도 확인합니다. 이 ID는 저장 파일용 영구 ID가 아니라 실행 중 타입 비교용입니다.
 
-관련 파일: `HiwoongEngine/HiwoongEngine/Core/HiwoongObject.h`
+관련 코드: `HiwoongEngine/HiwoongEngine/Core/HiwoongObject.h`
 
 </details>
 
 ---
 
-## 문자 기반 렌더링
+## 4. 문자가 화면에 그려지는 과정
 
-이 프로젝트는 OpenGL이나 DirectX 대신 Windows 콘솔 API로 화면을 그립니다.
+`SpriteRendererComponent`가 바로 콘솔을 수정하지는 않습니다. Renderer에 명령을 제출하고, 하나의 완성된 Frame을 만든 뒤 화면 버퍼에 기록합니다.
 
-```text
-SpriteRendererComponent
-        ↓
-Renderer에 문자 · 위치 · 색상 제출
-        ↓
-RenderQueue에서 그리기 순서 정리
-        ↓
-2차원 화면 데이터를 CHAR_INFO 배열에 기록
-        ↓
-두 개의 콘솔 버퍼를 번갈아 화면에 표시
-```
+![HiwoongEngine 콘솔 렌더링 파이프라인](docs/images/renderer-pipeline.svg)
 
-두 개의 화면 버퍼를 번갈아 사용하는 방식을 **더블 버퍼링**이라고 합니다. 한 화면을 보여 주는 동안 다음 화면을 준비하기 때문에 깜빡임을 줄일 수 있습니다.
+1. `SpriteRendererComponent`가 문자열, 월드 좌표, 색상, `sortingOrder`를 제출합니다.
+2. `Renderer`가 한 프레임의 `RenderCommand`를 모읍니다.
+3. 각 화면 셀에서 기존 값과 `sortingOrder`를 비교해 앞에 보일 문자를 정합니다.
+4. 2차원 좌표를 1차원 인덱스로 바꾸어 `CHAR_INFO` Frame을 작성합니다.
+5. 두 개의 Win32 `ScreenBuffer`를 번갈아 활성화합니다.
 
-현재 렌더러가 지원하는 기능:
-
-- 문자열과 ASCII 문자 출력
-- Windows 콘솔 색상
-- 좌표 기반 배치
-- Sorting Order를 이용한 겹침 순서
-- Scene 크기에 맞춘 콘솔 화면 크기 변경
-- 두 개의 `ScreenBuffer`를 이용한 더블 버퍼링
+한 버퍼를 화면에 보여 주는 동안 다른 버퍼에 다음 프레임을 준비하기 때문에 콘솔의 깜빡임을 줄일 수 있습니다. Scene 크기가 바뀌면 Renderer와 두 ScreenBuffer, Frame도 새 크기에 맞게 다시 구성됩니다.
 
 ---
 
-## 엔진으로 만든 테트리스
+## 5. 입력과 Scene 전환
 
-![테트리스 블록의 생명주기](docs/images/tetris-flow.svg)
+### 입력
 
-### 구현된 기능
+`Input`은 256개 가상 키의 현재 프레임과 이전 프레임 상태를 함께 저장합니다.
 
-- I, O, T, L, J, S, Z 일곱 종류의 블록
-- 블록별 색상과 피벗 기준 90도 회전
-- 좌우 이동, 한 칸 하강, 즉시 낙하
-- 벽과 이미 고정된 블록의 충돌 검사
-- 블록 고정과 다음 블록 자동 생성
-- 완성된 줄 삭제와 위쪽 블록 내리기
-- 한 줄을 지울 때마다 10점 추가
-- 점수 조건에 따른 레벨 상승과 낙하 속도 증가
-- 다음 블록 예약과 UI 미리보기
-- 새 블록을 놓을 공간이 없을 때 GameOver Scene 전환
-- 텍스트 파일로 불러오는 맵과 GAME OVER ASCII 아트
+| 함수 | 의미 |
+|---|---|
+| `GetKey(key)` | 지금 키가 눌려 있는가? |
+| `GetKeyDown(key)` | 이번 프레임에 처음 눌렸는가? |
+| `GetKeyUP(key)` | 이번 프레임에 놓였는가? |
 
-### 테트리스 보드는 어떻게 충돌을 확인하나요?
+### Scene 전환
 
-테트리스 보드는 화면의 `(x, y)` 좌표를 하나의 배열 번호로 바꿉니다.
+게임 도중 새 Scene을 요청하면 즉시 현재 Scene을 파괴하지 않습니다. `nextScene`에 보관했다가 프레임의 정해진 전환 지점에서 교체합니다. 덕분에 `Update()` 도중 객체와 Scene의 수명이 갑자기 끝나는 상황을 피합니다.
 
-```cpp
-index = y * width + x;
-```
+---
 
-각 칸이 비었는지 확인해 블록이 이동할 수 있는지 판단합니다. 블록이 고정되면 해당 칸에 블록의 약한 참조(`weak_ptr`)도 함께 저장합니다. 그래서 줄을 지울 때 어떤 블록을 삭제하고 아래로 옮겨야 하는지 찾을 수 있습니다.
+## 6. 현재 엔진의 범위
 
-### 레벨과 UI 데이터는 왜 Scene 밖에 있나요?
+| 상태 | 기능 |
+|---|---|
+| 구현됨 | 게임 루프, Scene 전환, 예약 생성·삭제, 컴포넌트, Transform 계층, 키 입력 |
+| 구현됨 | RenderCommand, 셀별 겹침 순서, CHAR_INFO Frame, 콘솔 더블 버퍼, 화면 크기 변경 |
+| 실험 단계 | `BoxColliderComponent`, `CollisionSystem` — 아직 엔진 루프에 완전히 연결하지 않음 |
+| 앞으로 구현 | 3D 수학, Camera, Mesh, 투영, 깊이 버퍼, 범용 물리·충돌 |
 
-Scene은 레벨이 바뀌면 파괴됩니다. 하지만 점수와 현재 레벨은 다음 Scene에서도 유지되어야 합니다. 그래서 `TetrisGameState`라는 별도 상태 객체가 데이터를 보관하고, 새 UI는 그 값을 다시 읽어 표시합니다.
+테트리스의 충돌은 실험 중인 `CollisionSystem`이 아니라, 게임 규칙에 맞춘 별도의 보드 셀 검사로 구현했습니다.
 
-```text
-기존 TestScene과 UI 파괴
-          ↓
-TetrisGameState의 점수와 레벨은 유지
-          ↓
-새 TestScene과 UI가 같은 데이터를 읽음
-```
+---
+
+## 엔진 적용 사례: 콘솔 테트리스
+
+테트리스 자체보다 **엔진의 구조가 실제 게임을 지탱할 수 있는지 검증하는 것**이 목적입니다.
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/images/tetris-play.gif" width="270" alt="HiwoongEngine 테트리스 플레이"><br><sub>이동 · 회전 · 다음 블록 UI</sub></td>
+    <td align="center"><img src="docs/images/tetris-game-over.gif" width="270" alt="HiwoongEngine 테트리스 게임오버"><br><sub>보드 점유 검사와 GameOver 전환</sub></td>
+    <td align="center"><img src="docs/images/tetris-level-up.gif" width="270" alt="HiwoongEngine 테트리스 레벨업"><br><sub>상태 유지와 레벨별 낙하 속도</sub></td>
+  </tr>
+</table>
+
+![테트리스 블록의 논리 흐름](docs/images/tetris-flow.svg)
+
+### 테트리스는 어떤 논리로 만들었나요?
+
+1. `SpawnManager`가 다음 조각 종류를 예약하고 7가지 `TetrisModule` 중 하나를 생성합니다.
+2. 하나의 `TetrisModule`은 자식 `Block` 네 개를 소유하며, 각 Block은 자신의 로컬 좌표에 그려집니다.
+3. 이동과 회전 전에 네 Block의 다음 월드 좌표가 비어 있는지 `TetrisBoard`에 확인합니다.
+4. 더 내려갈 수 없으면 Block을 보드 셀에 고정하고 완성된 줄을 찾습니다.
+5. 줄을 지운 뒤 위쪽 Block을 아래로 이동하고 점수와 레벨 상태를 갱신합니다.
+6. 공간이 있으면 다음 조각을 만들고, 스폰 위치가 막혀 있으면 GameOver Scene으로 전환합니다.
+
+보드는 `(x, y)`를 `y * width + x`로 바꾼 1차원 배열을 사용합니다. `TetrisGameState`는 Scene이 교체되어도 유지해야 하는 점수, 레벨, 다음 조각 정보를 보관합니다.
+
+<details>
+<summary><strong>조작 방법</strong></summary>
+
+| 키 | 동작 |
+|---|---|
+| `←` / `→` | 좌우 이동 |
+| `↓` | 한 칸 빠르게 내리기 |
+| `↑` | 시계 방향 회전 |
+| `Space` | 즉시 낙하하고 고정 |
+| `Esc` | 종료 |
+| GameOver에서 `R` | 게임 Scene으로 다시 진입 |
+
+</details>
+
+---
+
+## 다음 목표: 3D ASCII 렌더링
+
+> 아래 내용은 **현재 구현된 기능이 아니라 향후 개발 계획**입니다.
+
+테트리스로 2D 생명주기와 컴포넌트 구조를 검증한 다음, 같은 구조 위에 3D 좌표를 ASCII 문자로 투영하는 렌더링 파이프라인을 만들 계획입니다.
+
+![HiwoongEngine 3D ASCII 렌더링 로드맵](docs/images/roadmap-3d.svg)
+
+개발 순서는 다음과 같습니다.
+
+1. `Vector3`, `Vector4`, `Matrix4x4`와 3D 벡터 연산
+2. 위치·회전·크기를 가진 `Transform3D`, `Camera`, `Vertex`, `Triangle`, `Mesh`
+3. Model → View → Projection 변환과 3D 좌표의 화면 투영
+4. 콘솔 문자 셀 비율을 보정한 회전 와이어프레임 큐브
+5. 삼각형 래스터화와 셀별 깊이 버퍼
+6. 면의 밝기를 ` .:-=+*#%@` 같은 ASCII 농도와 색상으로 변환
+
+첫 번째 3D 완료 기준은 **원근감, 가림, 밝기 차이를 가진 회전 큐브가 콘솔에 안정적으로 표시되는 것**입니다. 3D 충돌, 텍스처, 애니메이션은 이 기반을 검증한 뒤의 별도 단계로 둡니다.
 
 ---
 
@@ -206,21 +224,17 @@ TetrisGameState의 점수와 레벨은 유지
 ```text
 HiwoongEngine/
 ├─ HiwoongEngine/          # DLL로 빌드되는 엔진 소스
-│  ├─ Component/           # Transform, SpriteRenderer, BoxCollider
-│  ├─ Core/                # 입력, 기본 객체, 타입 시스템
-│  ├─ Engine/              # 게임 루프
-│  ├─ GameObject/          # GameObject 생명주기와 부모·자식 구조
-│  ├─ Render/              # RenderQueue, Frame, ScreenBuffer
-│  └─ Scene/               # Scene과 GameObject 관리
-├─ TetrisProject/          # 엔진을 사용하는 콘솔 테트리스
-│  ├─ GameObject/          # 블록, 보드, 입력, 스폰 매니저
-│  ├─ Interface/           # 공통 테트리스 모듈 규칙
-│  ├─ Manager/             # 점수·레벨·다음 블록 상태
-│  └─ Scene/               # 게임, UI, 게임오버 Scene
-├─ Assets/Stages/          # 맵과 GAME OVER 텍스트 파일
+│  ├─ Component/           # Component, Transform, SpriteRenderer
+│  ├─ Core/                # 입력, 기본 객체, 자체 타입 시스템
+│  ├─ Engine/              # 게임 루프와 Scene 전환
+│  ├─ GameObject/          # 객체 생명주기와 부모·자식 구조
+│  ├─ Render/              # RenderCommand, Frame, ScreenBuffer
+│  └─ Scene/               # Scene과 예약 생성·삭제
+├─ TetrisProject/          # 엔진을 사용하는 검증용 게임
+├─ Assets/Stages/          # 맵과 GAME OVER ASCII 아트
 ├─ Config/Setting.txt      # 목표 FPS와 기본 콘솔 크기
-├─ Includes/               # 엔진 빌드 시 복사되는 공개 헤더
-└─ Library/                # 엔진 빌드 결과인 LIB/DLL
+├─ Includes/               # 엔진 공개 헤더 출력 위치
+└─ Library/                # 빌드된 LIB/DLL 출력 위치
 ```
 
 ---
@@ -230,14 +244,14 @@ HiwoongEngine/
 ### 필요한 환경
 
 - Windows 10 또는 Windows 11
-- Visual Studio 2022
-- Visual Studio Installer의 **Desktop development with C++** 워크로드
-- Windows 10 SDK와 MSVC v143 도구 모음
-- x64 환경
+- Visual Studio 2022 이상
+- **Desktop development with C++** 워크로드
+- Windows SDK와 MSVC v143 도구 모음
+- x64 빌드 구성
 
-별도의 외부 라이브러리는 사용하지 않습니다. C++ 표준 라이브러리와 Windows API만 사용합니다.
+별도의 외부 라이브러리는 필요하지 않습니다.
 
-### Visual Studio에서 실행
+### Visual Studio
 
 1. 저장소를 내려받습니다.
 
@@ -246,17 +260,17 @@ HiwoongEngine/
    cd HiwoongEngine
    ```
 
-2. `HiwoongEngine/HiwoongEngine.sln`을 Visual Studio로 엽니다.
-3. 상단 구성을 `Debug`와 `x64`로 선택합니다.
-4. 솔루션 탐색기에서 **HiwoongEngine 프로젝트를 먼저 빌드**합니다.
+2. `HiwoongEngine/HiwoongEngine.sln`을 엽니다.
+3. 구성을 `Debug / x64`로 선택합니다.
+4. **HiwoongEngine 프로젝트를 먼저 빌드**합니다.
 5. `TetrisProject`를 시작 프로젝트로 설정합니다.
-6. `Ctrl + F5`를 눌러 실행합니다.
+6. `Ctrl + F5`로 실행합니다.
 
-엔진 프로젝트를 먼저 빌드하면 필요한 헤더, DLL, LIB 파일이 `Includes`와 `Library`로 복사됩니다. 이후 TetrisProject가 그 결과물을 링크합니다.
+엔진을 먼저 빌드하면 TetrisProject가 링크할 LIB와 실행에 필요한 DLL이 준비됩니다.
 
-### 명령줄에서 실행할 때
+### 명령줄에서 실행
 
-빌드된 실행 파일은 에셋을 상대경로로 읽습니다. 따라서 프로젝트 폴더를 작업 디렉터리로 사용해야 합니다.
+에셋을 상대경로로 읽으므로 `TetrisProject` 폴더를 작업 디렉터리로 사용합니다.
 
 ```powershell
 cd HiwoongEngine\TetrisProject
@@ -265,53 +279,13 @@ cd HiwoongEngine\TetrisProject
 
 ---
 
-## 자주 만나는 문제
+## 현재 제약
 
-### `HiwoongEngine.lib`를 찾을 수 없습니다
-
-엔진 프로젝트가 아직 빌드되지 않았거나 TetrisProject와 다른 구성으로 빌드된 경우입니다. 두 프로젝트를 모두 `Debug / x64` 또는 모두 `Release / x64`로 맞추고 HiwoongEngine을 먼저 빌드하세요.
-
-### `file.is_open()`에서 프로그램이 멈춥니다
-
-실행 위치가 달라 `Config` 또는 `Assets` 파일을 찾지 못한 경우입니다. Visual Studio에서 실행하거나, 위의 명령처럼 `HiwoongEngine/TetrisProject`에서 실행하세요.
-
-### `ScreenBuffer`의 assert에서 멈춥니다
-
-현재 콘솔 창과 글꼴이 요청한 화면 크기를 지원하지 못할 수 있습니다. 콘솔 창을 넓히거나 `HiwoongEngine/Config/Setting.txt`의 기본 크기를 줄여 보세요.
-
----
-
-## 현재 범위와 다음 목표
-
-이 프로젝트는 학습을 위해 직접 만든 Windows 콘솔 엔진입니다. 상용 게임 엔진이나 표준 테트리스 규칙 전체를 목표로 하지는 않습니다.
-
-- 렌더러는 Windows 콘솔 API에 의존하므로 현재는 Windows 전용입니다.
-- 회전은 단순 피벗 회전이며 SRS와 Wall Kick은 아직 없습니다.
-- 물리·AABB 충돌 코드는 실험 단계이며, 테트리스는 별도의 Board 셀 충돌을 사용합니다.
-- 레벨이 오르면 같은 맵에서 낙하 속도가 증가합니다. 서로 다른 맵의 여러 스테이지는 아직 없습니다.
-- 게임오버 후 재시도 시 게임 상태를 완전히 초기화하는 작업이 남아 있습니다.
-- 자동화된 테스트 프로젝트는 아직 추가하지 않았습니다.
-
-앞으로 충돌 시스템 정리, 테스트 코드, 스테이지 확장, 콘솔 렌더러 개선을 이어갈 계획입니다.
-
----
-
-## 이 프로젝트에서 공부한 것
-
-- C++ 객체의 값, 참조, 포인터 차이
-- `unique_ptr`, `shared_ptr`, `weak_ptr`를 이용한 소유권 설계
-- Scene과 GameObject의 생명주기
-- 컴포넌트 기반 설계
-- 부모·자식 Transform과 로컬·월드 좌표
-- 2차원 좌표를 1차원 배열로 관리하는 방법
-- 콜백을 이용한 블록 Lock 이벤트
-- 콘솔 더블 버퍼링과 렌더 큐
-- 엔진과 실제 게임 프로젝트를 DLL로 분리하는 방법
-
-이 저장소의 핵심 목표는 “기능을 많이 넣는 것”보다 **게임 엔진의 구조를 직접 만들고, 실제 게임으로 검증하며 이해하는 것**입니다.
-
----
+- Windows 콘솔 API에 의존하므로 Windows 전용입니다.
+- 그래픽 카드가 아니라 CPU에서 문자 Frame을 만듭니다.
+- 범용 충돌 시스템과 자동화된 테스트는 아직 완성 단계가 아닙니다.
+- 테트리스 회전은 기본 피벗 회전이며 SRS와 Wall Kick은 없습니다.
 
 ## 라이선스
 
-현재 별도의 라이선스를 지정하지 않았습니다. 저장소가 공개되어 있더라도 코드의 복제·수정·배포 권한이 자동으로 부여되는 것은 아닙니다. 공개적인 재사용을 허용하려면 추후 라이선스 파일을 추가할 예정입니다.
+현재 별도의 라이선스를 지정하지 않았습니다. 저장소가 공개되어 있어도 코드의 복제·수정·배포 권한이 자동으로 부여되지는 않습니다.

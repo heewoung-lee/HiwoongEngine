@@ -39,14 +39,14 @@
   <rect x="140" y="420" width="280" height="92" rx="18" fill="#422006" stroke="#fbbf24" stroke-width="2"/>
   <rect x="460" y="420" width="280" height="92" rx="18" fill="#422006" stroke="#fbbf24" stroke-width="2"/>
   <rect x="780" y="420" width="280" height="92" rx="18" fill="#422006" stroke="#fbbf24" stroke-width="2"/>
-  <text x="280" y="456" text-anchor="middle" class="boxTitle">GameObject</text><text x="280" y="484" text-anchor="middle" class="body">벽 · 블록 · UI</text>
-  <text x="600" y="456" text-anchor="middle" class="boxTitle">GameObject</text><text x="600" y="484" text-anchor="middle" class="body">테트리스 모듈</text>
-  <text x="920" y="456" text-anchor="middle" class="boxTitle">GameObject</text><text x="920" y="484" text-anchor="middle" class="body">스폰 매니저</text>
+  <text x="280" y="456" text-anchor="middle" class="boxTitle">World Object</text><text x="280" y="484" text-anchor="middle" class="body">게임 세계에 놓이는 대상</text>
+  <text x="600" y="456" text-anchor="middle" class="boxTitle">UI Object</text><text x="600" y="484" text-anchor="middle" class="body">화면에 정보를 표시하는 대상</text>
+  <text x="920" y="456" text-anchor="middle" class="boxTitle">Manager Object</text><text x="920" y="484" text-anchor="middle" class="body">게임 규칙과 흐름을 관리</text>
   <path d="M600 408 L280 418" class="line"/><path d="M600 408 V418" class="line"/><path d="M600 408 L920 418" class="line"/>
 
   <rect x="105" y="570" width="210" height="60" rx="14" fill="#0f172a" stroke="#38bdf8"/><text x="210" y="607" text-anchor="middle" class="body">Transform</text>
   <rect x="345" y="570" width="210" height="60" rx="14" fill="#0f172a" stroke="#38bdf8"/><text x="450" y="607" text-anchor="middle" class="body">SpriteRenderer</text>
-  <rect x="585" y="570" width="210" height="60" rx="14" fill="#0f172a" stroke="#38bdf8"/><text x="690" y="607" text-anchor="middle" class="body">PlayerInput</text>
-  <rect x="825" y="570" width="210" height="60" rx="14" fill="#0f172a" stroke="#38bdf8"/><text x="930" y="607" text-anchor="middle" class="body">BoxCollider</text>
+  <rect x="585" y="570" width="210" height="60" rx="14" fill="#0f172a" stroke="#38bdf8"/><text x="690" y="607" text-anchor="middle" class="body">Input Component</text>
+  <rect x="825" y="570" width="210" height="60" rx="14" fill="#0f172a" stroke="#38bdf8"/><text x="930" y="607" text-anchor="middle" class="body">Custom Component</text>
   <text x="60" y="657" class="small">Component = GameObject에 꽂아서 기능을 추가하는 작은 부품</text>
 </svg>
