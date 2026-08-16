@@ -9,15 +9,12 @@
 ![Visual Studio](https://img.shields.io/badge/Build-Visual%20Studio-5C2D91?logo=visualstudio&logoColor=white)
 ![Rendering](https://img.shields.io/badge/Rendering-Win32%20Console-0e7490)
 
-**게임을 먼저 만든 프로젝트가 아니라, 게임을 실행할 수 있는 구조를 직접 구현한 프로젝트입니다.**
-
-테트리스는 이 엔진의 입력, 생명주기, 컴포넌트, 렌더링, Scene 전환이 실제 게임에서도 작동하는지 검증하기 위해 만든 응용 예제입니다.
 
 </div>
 
 ![HiwoongEngine 전체 구조](docs/images/architecture-overview.svg)
 
-## 무엇을 직접 만들었나요?
+## 무엇을 만들었나요?
 
 HiwoongEngine은 OpenGL, DirectX 같은 그래픽 API나 외부 게임 프레임워크 없이 C++ 표준 라이브러리와 Windows 콘솔 API로 동작합니다.
 
@@ -278,14 +275,3 @@ cd HiwoongEngine\TetrisProject
 ```
 
 ---
-
-## 현재 제약
-
-- Windows 콘솔 API에 의존하므로 Windows 전용입니다.
-- 그래픽 카드가 아니라 CPU에서 문자 Frame을 만듭니다.
-- 범용 충돌 시스템과 자동화된 테스트는 아직 완성 단계가 아닙니다.
-- 테트리스 회전은 기본 피벗 회전이며 SRS와 Wall Kick은 없습니다.
-
-## 라이선스
-
-현재 별도의 라이선스를 지정하지 않았습니다. 저장소가 공개되어 있어도 코드의 복제·수정·배포 권한이 자동으로 부여되지는 않습니다.
