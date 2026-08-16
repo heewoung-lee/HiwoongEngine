@@ -66,7 +66,9 @@
       <AdditionalLibraryDirectories>..\Library\HiwoongEngine\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy ..\Library\HiwoongEngine\$(Configuration)\HiwoongEngine.dll $(OutDir) /e /y /i</Command>
+      <Command>xcopy ..\Library\HiwoongEngine\$(Configuration)\HiwoongEngine.dll $(OutDir) /e /y /i
+
+xcopy $(SolutionDir)Assets $(OutDir)..\Assets\ /e /y /i</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -86,7 +88,9 @@
       <AdditionalLibraryDirectories>..\Library\HiwoongEngine\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy ..\Library\HiwoongEngine\$(Configuration)\HiwoongEngine.dll $(OutDir) /e /y /i</Command>
+      <Command>xcopy ..\Library\HiwoongEngine\$(Configuration)\HiwoongEngine.dll $(OutDir) /e /y /i
+
+xcopy $(SolutionDir)Assets $(OutDir)..\Assets\ /e /y /i</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -129,6 +133,11 @@
     <ClInclude Include="Scene\GameStatesUI.h" />
     <ClInclude Include="Scene\TestScene.h" />
     <ClInclude Include="Util\FileUtil.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\hiwoongEngine\hiwoongEngine.vcxproj">
+      <Project>{24249147-7b15-40ae-81ef-13f84ce22dde}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

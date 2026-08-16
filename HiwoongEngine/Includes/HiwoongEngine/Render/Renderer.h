@@ -82,7 +82,7 @@ namespace Hiwoong
 		//DrawRenderQueue
 		void DrawRenderQueue();
 
-		//TODO: when we use the Twice Buffer Backfuffer draws next frame;
+		//when we use the Twice Buffer Backfuffer draws next frame;
 		void Present();
 
 		// Buffer can draw this frame

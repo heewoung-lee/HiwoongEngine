@@ -86,7 +86,7 @@ namespace Hiwoong
 		newModule->AddOnLocked([this]()
 			{
 
-				//TodO: Check board fill horizontal
+				// Check board fill horizontal
 				std::shared_ptr<TestScene> scene =
 					std::dynamic_pointer_cast<TestScene>(GetOwner());
 
@@ -94,8 +94,6 @@ namespace Hiwoong
 
 				TetrisBoard* board = scene->GetBoard();
 				assert(board != nullptr);
-
-				//TODO: Check horizental.
 
 				SpawnNextModule();
 			});
