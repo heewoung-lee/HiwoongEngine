@@ -1,23 +1,6 @@
-<div align="center">
+
 
 # HiwoongEngine
-
-### C++로 직접 구현한 Windows 콘솔 게임 엔진
-
-![C++](https://img.shields.io/badge/C%2B%2B-MSVC-00599C?logo=cplusplus&logoColor=white)
-![Windows](https://img.shields.io/badge/Platform-Windows-0078D6?logo=windows&logoColor=white)
-![Visual Studio](https://img.shields.io/badge/Build-Visual%20Studio-5C2D91?logo=visualstudio&logoColor=white)
-![Rendering](https://img.shields.io/badge/Rendering-Win32%20Console-0e7490)
-
-**게임을 먼저 만든 프로젝트가 아니라, 게임을 실행할 수 있는 구조를 직접 구현한 프로젝트입니다.**
-
-테트리스는 이 엔진의 입력, 생명주기, 컴포넌트, 렌더링, Scene 전환이 실제 게임에서도 작동하는지 검증하기 위해 만든 응용 예제입니다.
-
-</div>
-
-![HiwoongEngine 전체 구조](docs/images/architecture-overview.svg)
-
-## 무엇을 직접 만들었나요?
 
 HiwoongEngine은 OpenGL, DirectX 같은 그래픽 API나 외부 게임 프레임워크 없이 C++ 표준 라이브러리와 Windows 콘솔 API로 동작합니다.
 
@@ -36,7 +19,7 @@ HiwoongEngine은 OpenGL, DirectX 같은 그래픽 API나 외부 게임 프레임
 
 ## 1. 엔진의 소유 구조
 
-비전공자도 쉽게 보면, `Engine`은 전체 프로그램을 운영하고 `Scene`은 현재 무대, `GameObject`는 무대 위 대상, `Component`는 대상에 붙이는 기능 부품입니다.
+`Engine`은 전체 프로그램을 운영하고 `Scene`은 현재 무대, `GameObject`는 무대 위 대상, `Component`는 대상에 붙이는 기능 부품입니다.
 
 ```text
 Engine
@@ -150,16 +133,11 @@ GameObject끼리 부모·자식 관계를 맺으면 자식은 자신의 로컬 �
 |---|---|
 | 구현됨 | 게임 루프, Scene 전환, 예약 생성·삭제, 컴포넌트, Transform 계층, 키 입력 |
 | 구현됨 | RenderCommand, 셀별 겹침 순서, CHAR_INFO Frame, 콘솔 더블 버퍼, 화면 크기 변경 |
-| 실험 단계 | `BoxColliderComponent`, `CollisionSystem` — 아직 엔진 루프에 완전히 연결하지 않음 |
 | 앞으로 구현 | 3D 수학, Camera, Mesh, 투영, 깊이 버퍼, 범용 물리·충돌 |
-
-테트리스의 충돌은 실험 중인 `CollisionSystem`이 아니라, 게임 규칙에 맞춘 별도의 보드 셀 검사로 구현했습니다.
 
 ---
 
 ## 엔진 적용 사례: 콘솔 테트리스
-
-테트리스 자체보다 **엔진의 구조가 실제 게임을 지탱할 수 있는지 검증하는 것**이 목적입니다.
 
 <table>
   <tr>
@@ -198,94 +176,3 @@ GameObject끼리 부모·자식 관계를 맺으면 자식은 자신의 로컬 �
 
 ---
 
-## 다음 목표: 3D ASCII 렌더링
-
-> 아래 내용은 **현재 구현된 기능이 아니라 향후 개발 계획**입니다.
-
-테트리스로 2D 생명주기와 컴포넌트 구조를 검증한 다음, 같은 구조 위에 3D 좌표를 ASCII 문자로 투영하는 렌더링 파이프라인을 만들 계획입니다.
-
-![HiwoongEngine 3D ASCII 렌더링 로드맵](docs/images/roadmap-3d.svg)
-
-개발 순서는 다음과 같습니다.
-
-1. `Vector3`, `Vector4`, `Matrix4x4`와 3D 벡터 연산
-2. 위치·회전·크기를 가진 `Transform3D`, `Camera`, `Vertex`, `Triangle`, `Mesh`
-3. Model → View → Projection 변환과 3D 좌표의 화면 투영
-4. 콘솔 문자 셀 비율을 보정한 회전 와이어프레임 큐브
-5. 삼각형 래스터화와 셀별 깊이 버퍼
-6. 면의 밝기를 ` .:-=+*#%@` 같은 ASCII 농도와 색상으로 변환
-
-첫 번째 3D 완료 기준은 **원근감, 가림, 밝기 차이를 가진 회전 큐브가 콘솔에 안정적으로 표시되는 것**입니다. 3D 충돌, 텍스처, 애니메이션은 이 기반을 검증한 뒤의 별도 단계로 둡니다.
-
----
-
-## 프로젝트 구조
-
-```text
-HiwoongEngine/
-├─ HiwoongEngine/          # DLL로 빌드되는 엔진 소스
-│  ├─ Component/           # Component, Transform, SpriteRenderer
-│  ├─ Core/                # 입력, 기본 객체, 자체 타입 시스템
-│  ├─ Engine/              # 게임 루프와 Scene 전환
-│  ├─ GameObject/          # 객체 생명주기와 부모·자식 구조
-│  ├─ Render/              # RenderCommand, Frame, ScreenBuffer
-│  └─ Scene/               # Scene과 예약 생성·삭제
-├─ TetrisProject/          # 엔진을 사용하는 검증용 게임
-├─ Assets/Stages/          # 맵과 GAME OVER ASCII 아트
-├─ Config/Setting.txt      # 목표 FPS와 기본 콘솔 크기
-├─ Includes/               # 엔진 공개 헤더 출력 위치
-└─ Library/                # 빌드된 LIB/DLL 출력 위치
-```
-
----
-
-## 빌드하고 실행하기
-
-### 필요한 환경
-
-- Windows 10 또는 Windows 11
-- Visual Studio 2022 이상
-- **Desktop development with C++** 워크로드
-- Windows SDK와 MSVC v143 도구 모음
-- x64 빌드 구성
-
-별도의 외부 라이브러리는 필요하지 않습니다.
-
-### Visual Studio
-
-1. 저장소를 내려받습니다.
-
-   ```powershell
-   git clone https://github.com/heewoung-lee/HiwoongEngine.git
-   cd HiwoongEngine
-   ```
-
-2. `HiwoongEngine/HiwoongEngine.sln`을 엽니다.
-3. 구성을 `Debug / x64`로 선택합니다.
-4. **HiwoongEngine 프로젝트를 먼저 빌드**합니다.
-5. `TetrisProject`를 시작 프로젝트로 설정합니다.
-6. `Ctrl + F5`로 실행합니다.
-
-엔진을 먼저 빌드하면 TetrisProject가 링크할 LIB와 실행에 필요한 DLL이 준비됩니다.
-
-### 명령줄에서 실행
-
-에셋을 상대경로로 읽으므로 `TetrisProject` 폴더를 작업 디렉터리로 사용합니다.
-
-```powershell
-cd HiwoongEngine\TetrisProject
-& ..\Bin\Debug\TetrisProject\TetrisProject.exe
-```
-
----
-
-## 현재 제약
-
-- Windows 콘솔 API에 의존하므로 Windows 전용입니다.
-- 그래픽 카드가 아니라 CPU에서 문자 Frame을 만듭니다.
-- 범용 충돌 시스템과 자동화된 테스트는 아직 완성 단계가 아닙니다.
-- 테트리스 회전은 기본 피벗 회전이며 SRS와 Wall Kick은 없습니다.
-
-## 라이선스
-
-현재 별도의 라이선스를 지정하지 않았습니다. 저장소가 공개되어 있어도 코드의 복제·수정·배포 권한이 자동으로 부여되지는 않습니다.
