@@ -1,0 +1,8 @@
+# target frame rate
+framerate = 120
+
+# screen width
+width = 60
+
+# screen height
+height = 25

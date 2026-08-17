@@ -1,0 +1,14 @@
+  GGG    A    M   M  EEEEE
+ G      A A   MM MM  E
+ G GG  AAAAA  M M M  EEEE
+ G  G  A   A  M   M  E
+  GGG  A   A  M   M  EEEEE
+
+  OOO   V   V  EEEEE  RRRR
+ O   O  V   V  E      R   R
+ O   O  V   V  EEEE   RRRR
+ O   O   V V   E      R R
+  OOO     V    EEEEE  R  RR
+
+       PRESS R TO RETRY
+        ESC TO QUIT
