@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HiwoongEngine", "hiwoongEng
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TetrisProject", "TetrisProject\TetrisProject.vcxproj", "{00F21BC7-B823-40FA-A836-90912C75ECAF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HiwoongEngineTests", "HiwoongEngineTests\HiwoongEngineTests.vcxproj", "{06623C9B-6A52-4DB7-A37E-91A24ED4E074}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -27,6 +29,14 @@ Global
 		{00F21BC7-B823-40FA-A836-90912C75ECAF}.Release|x64.ActiveCfg = Release|x64
 		{00F21BC7-B823-40FA-A836-90912C75ECAF}.Release|x64.Build.0 = Release|x64
 		{00F21BC7-B823-40FA-A836-90912C75ECAF}.Release|x86.ActiveCfg = Release|x64
+		{06623C9B-6A52-4DB7-A37E-91A24ED4E074}.Debug|x64.ActiveCfg = Debug|x64
+		{06623C9B-6A52-4DB7-A37E-91A24ED4E074}.Debug|x64.Build.0 = Debug|x64
+		{06623C9B-6A52-4DB7-A37E-91A24ED4E074}.Debug|x86.ActiveCfg = Debug|Win32
+		{06623C9B-6A52-4DB7-A37E-91A24ED4E074}.Debug|x86.Build.0 = Debug|Win32
+		{06623C9B-6A52-4DB7-A37E-91A24ED4E074}.Release|x64.ActiveCfg = Release|x64
+		{06623C9B-6A52-4DB7-A37E-91A24ED4E074}.Release|x64.Build.0 = Release|x64
+		{06623C9B-6A52-4DB7-A37E-91A24ED4E074}.Release|x86.ActiveCfg = Release|Win32
+		{06623C9B-6A52-4DB7-A37E-91A24ED4E074}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
