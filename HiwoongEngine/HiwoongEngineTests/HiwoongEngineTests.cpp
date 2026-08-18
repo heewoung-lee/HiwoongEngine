@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Math/Vector3.h"
 #include "Math/Vector4.h"
+#include "Math/Matrix4x4.h"
 #include <cmath>
 
 namespace
@@ -56,13 +57,114 @@ namespace
         return Hiwoong::Vector3::Cross(forward, left) == expectedUp;
     }
 
+    bool TestIdentityMatrix()
+    {
+        Hiwoong::Matrix4x4 identity =
+            Hiwoong::Matrix4x4::Identity();
+
+        Hiwoong::Vector4 input(1, 2, 3, 1);
+
+        Hiwoong::Vector4 result = identity * input;
+
+        return result.x == input.x &&
+            result.y == input.y &&
+            result.z == input.z &&
+            result.w == input.w;
+    }
+
+    bool TestTranslationDoesNotMoveDirection()
+    {
+        Hiwoong::Matrix4x4 matrix =
+            Hiwoong::Matrix4x4::Translation(
+                Hiwoong::Vector3(5, 6, 7)
+            );
+
+        Hiwoong::Vector4 direction(1, 2, 3, 0);
+
+        Hiwoong::Vector4 result = matrix * direction;
+
+        return result.x == 1 &&
+            result.y == 2 &&
+            result.z == 3 &&
+            result.w == 0;
+    }
+
+    bool TestScaleMatrix()
+    {
+        Hiwoong::Matrix4x4 matrix =
+            Hiwoong::Matrix4x4::Scale(
+                Hiwoong::Vector3(2, 3, 4)
+            );
+
+        Hiwoong::Vector4 position(1, 2, 3, 1);
+
+        Hiwoong::Vector4 result = matrix * position;
+
+        return result.x == 2 &&
+            result.y == 6 &&
+            result.z == 12 &&
+            result.w == 1;
+    }
+
+    bool TestRotationZ()
+    {
+        constexpr float Pi = 3.14159265f;
+        constexpr float HalfPi = Pi / 2.0f;
+
+        Hiwoong::Matrix4x4 matrix =
+            Hiwoong::Matrix4x4::RotationZ(HalfPi);
+
+        Hiwoong::Vector4 right(1, 0, 0, 0);
+        Hiwoong::Vector4 result = matrix * right;
+
+        constexpr float Epsilon = 0.0001f;
+
+        return std::abs(result.x - 0.0f) < Epsilon &&
+            std::abs(result.y - 1.0f) < Epsilon &&
+            std::abs(result.z - 0.0f) < Epsilon &&
+            std::abs(result.w - 0.0f) < Epsilon;
+    }
+
+    bool TestRotationX()
+    {
+        constexpr float Pi = 3.14159265f;
+        constexpr float HalfPi = Pi / 2.0f;
+        constexpr float Epsilon = 0.0001f;
+
+        Hiwoong::Matrix4x4 matrix =
+            Hiwoong::Matrix4x4::RotationX(HalfPi);
+
+        Hiwoong::Vector4 down(0, 1, 0, 0);
+        Hiwoong::Vector4 result = matrix * down;
+
+        return std::abs(result.x - 0.0f) < Epsilon &&
+            std::abs(result.y - 0.0f) < Epsilon &&
+            std::abs(result.z - 1.0f) < Epsilon &&
+            std::abs(result.w - 0.0f) < Epsilon;
+    }
+
+    bool TestRotationY()
+    {
+        constexpr float Pi = 3.14159265f;
+        constexpr float HalfPi = Pi / 2.0f;
+        constexpr float Epsilon = 0.0001f;
+
+        Hiwoong::Matrix4x4 matrix =
+            Hiwoong::Matrix4x4::RotationY(HalfPi);
+
+        Hiwoong::Vector4 forward(0, 0, 1, 0);
+        Hiwoong::Vector4 result = matrix * forward;
+
+        return std::abs(result.x - 1.0f) < Epsilon &&
+            std::abs(result.y - 0.0f) < Epsilon &&
+            std::abs(result.z - 0.0f) < Epsilon &&
+            std::abs(result.w - 0.0f) < Epsilon;
+    }
+
+
     int main()
     {
-        Hiwoong::Vector4 vector(1,2,3,4);
-
-        std::cout << vector.x<< vector.y<< vector.z<< vector.w << std::endl;
-
-        if (TestCross() == true)
+        if (TestRotationY() == true)
         {
             std::cout << "Success" << std::endl;
         }

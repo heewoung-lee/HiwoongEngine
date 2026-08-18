@@ -110,6 +110,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClCompile Include="Core\Input.cpp" />
     <ClCompile Include="GameObject\GameObject.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
+    <ClCompile Include="Math\Matrix4x4.cpp" />
     <ClCompile Include="Math\Vector2.cpp" />
     <ClCompile Include="Math\Vector3.cpp" />
     <ClCompile Include="Math\Vector4.cpp" />
@@ -130,6 +131,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClInclude Include="GameObject\GameObject.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Math\Color.h" />
+    <ClInclude Include="Math\Matrix4x4.h" />
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Math\Vector3.h" />
     <ClInclude Include="Math\Vector4.h" />

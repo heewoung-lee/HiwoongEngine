@@ -11,6 +11,7 @@ namespace Hiwoong
 		Vector4(float newX, float newY, float newZ, float newW);
 		~Vector4() = default;
 
+
 		float x;
 		float y;
 		float z;
