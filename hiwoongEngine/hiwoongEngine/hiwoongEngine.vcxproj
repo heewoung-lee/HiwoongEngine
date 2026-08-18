@@ -112,6 +112,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Math\Vector2.cpp" />
     <ClCompile Include="Math\Vector3.cpp" />
+    <ClCompile Include="Math\Vector4.cpp" />
     <ClCompile Include="Physics\CollisionSystem.cpp" />
     <ClCompile Include="Render\Renderer.cpp" />
     <ClCompile Include="Render\ScreenBuffer.cpp" />
@@ -131,6 +132,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClInclude Include="Math\Color.h" />
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Math\Vector3.h" />
+    <ClInclude Include="Math\Vector4.h" />
     <ClInclude Include="Physics\CollisionSystem.h" />
     <ClInclude Include="Render\Renderer.h" />
     <ClInclude Include="Render\ScreenBuffer.h" />

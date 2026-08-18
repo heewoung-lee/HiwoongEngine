@@ -1,6 +1,7 @@
 ﻿
 #include <iostream>
 #include "Math/Vector3.h"
+#include "Math/Vector4.h"
 #include <cmath>
 
 namespace
@@ -57,7 +58,10 @@ namespace
 
     int main()
     {
-        
+        Hiwoong::Vector4 vector(1,2,3,4);
+
+        std::cout << vector.x<< vector.y<< vector.z<< vector.w << std::endl;
+
         if (TestCross() == true)
         {
             std::cout << "Success" << std::endl;
