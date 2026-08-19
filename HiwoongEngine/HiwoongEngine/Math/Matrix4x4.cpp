@@ -43,6 +43,21 @@ namespace Hiwoong
         );
     }
 
+    Matrix4x4 Matrix4x4::operator*(const Matrix4x4& other) const
+    {
+        Matrix4x4 result;
+        for (size_t row = 0; row < 4; ++row)
+        {
+            for (size_t col = 0; col < 4; ++col)
+            {
+                for (size_t idx = 0; idx < 4; ++idx)
+                {
+                    result.values[row][col] += values[row][idx] * other.values[idx][col];
+                }
+            }
+        }
+        return result;
+    }
    
 
 
@@ -116,6 +131,44 @@ namespace Hiwoong
 
         return result;
     }
+
+
+    //Convert  WorldPosition To CameraPosition
+    //Create Camera's View Matrix
+    /// @param cameraPosition CameraPosition
+    /// @param target Look At the Target
+    /// @param up The camera's up direction.
+    /// @return calculated View Matrix
+    Matrix4x4 Matrix4x4::LookAt(const Vector3& cameraPosition, const Vector3& target, const Vector3& up)
+    {
+        const Vector3 forward = (target - cameraPosition).Normalized();
+        const Vector3 right = Vector3::Cross(forward, up).Normalized();
+        const Vector3 down = Vector3::Cross(forward, right).Normalized();
+
+        Matrix4x4 result = Identity();
+
+        result.values[0][0] = right.x;
+        result.values[0][1] = right.y;
+        result.values[0][2] = right.z;
+        result.values[0][3] =
+            -Vector3::Dot(right, cameraPosition);
+
+        result.values[1][0] = down.x;
+        result.values[1][1] = down.y;
+        result.values[1][2] = down.z;
+        result.values[1][3] =
+            -Vector3::Dot(down, cameraPosition);
+
+        result.values[2][0] = forward.x;
+        result.values[2][1] = forward.y;
+        result.values[2][2] = forward.z;
+        result.values[2][3] =
+            -Vector3::Dot(forward, cameraPosition);
+
+        return result;
+
+    }
+
 }
 
 

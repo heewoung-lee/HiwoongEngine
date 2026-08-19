@@ -161,10 +161,99 @@ namespace
             std::abs(result.w - 0.0f) < Epsilon;
     }
 
+    bool RunAllTests()
+    {
+        bool constructorPassed = TestVector3Constructor();
+        bool lengthPassed = TestGetLength();
+        bool normalizedPassed = GetNormalized();
+        bool dotPassed = GetDot();
+        bool crossPassed = TestCross();
+        bool identityPassed = TestIdentityMatrix();
+        bool scalePassed = TestScaleMatrix();
+        bool rotationXPassed = TestRotationX();
+        bool rotationYPassed = TestRotationY();
+        bool rotationZPassed = TestRotationZ();
+        bool translationDirectionPassed =
+            TestTranslationDoesNotMoveDirection();
 
+        return constructorPassed &&
+            lengthPassed &&
+            normalizedPassed &&
+            dotPassed &&
+            crossPassed &&
+            identityPassed &&
+            scalePassed &&
+            rotationXPassed &&
+            rotationYPassed &&
+            rotationZPassed && 
+            translationDirectionPassed;
+    }
+
+    bool TestMatrixMultiplication()
+    {
+        Hiwoong::Matrix4x4 translation =
+            Hiwoong::Matrix4x4::Translation(
+                Hiwoong::Vector3(10, 20, 30)
+            );
+
+        Hiwoong::Matrix4x4 scale =
+            Hiwoong::Matrix4x4::Scale(
+                Hiwoong::Vector3(2, 3, 4)
+            );
+
+        Hiwoong::Matrix4x4 combined = translation * scale;
+
+        Hiwoong::Vector4 position(1, 2, 3, 1);
+        Hiwoong::Vector4 result = combined * position;
+
+        return result.x == 12 &&
+            result.y == 26 &&
+            result.z == 42 &&
+            result.w == 1;
+    }
+    bool TestModelMatrixOrder()
+    {
+        constexpr float Pi = 3.14159265f;
+        constexpr float HalfPi = Pi / 2.0f;
+        constexpr float Epsilon = 0.0001f;
+
+        Hiwoong::Matrix4x4 model =
+            Hiwoong::Matrix4x4::Translation(
+                Hiwoong::Vector3(10, 20, 30)
+            )
+            * Hiwoong::Matrix4x4::RotationZ(HalfPi)
+            * Hiwoong::Matrix4x4::Scale(
+                Hiwoong::Vector3(2, 1, 1)
+            );
+
+        Hiwoong::Vector4 localPosition(1, 0, 0, 1);
+        Hiwoong::Vector4 result = model * localPosition;
+
+        return std::abs(result.x - 10.0f) < Epsilon &&
+            std::abs(result.y - 22.0f) < Epsilon &&
+            std::abs(result.z - 30.0f) < Epsilon &&
+            std::abs(result.w - 1.0f) < Epsilon;
+    }
+    bool TestViewMatrix()
+    {
+        Hiwoong::Matrix4x4 view =
+            Hiwoong::Matrix4x4::LookAt(
+                Hiwoong::Vector3(0, 0, 5),  // 카메라 위치
+                Hiwoong::Vector3(0, 0, 6),  // 바라보는 위치
+                Hiwoong::Vector3(0, -1, 0)  // 위쪽 방향
+            );
+
+        Hiwoong::Vector4 worldPosition(0, 0, 10, 1);
+        Hiwoong::Vector4 result = view * worldPosition;
+
+        return result.x == 0 &&
+            result.y == 0 &&
+            result.z == 5 &&
+            result.w == 1;
+    }
     int main()
     {
-        if (TestRotationY() == true)
+        if (TestViewMatrix() == true)
         {
             std::cout << "Success" << std::endl;
         }

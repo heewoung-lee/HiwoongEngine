@@ -23,6 +23,9 @@ namespace Hiwoong
 
 		Vector4 operator*(const Vector4& vector) const;
 
+		Matrix4x4 operator*(const Matrix4x4& other) const;
+
+
 		/*
 			1 0 0  MoveX
 			0 1 0  MoveY
@@ -59,7 +62,6 @@ namespace Hiwoong
 		static Matrix4x4 RotationZ(float radians);
 
 
-
 		/*
 		 scale.x   0        0      0
 		   0    scale.y     0      0
@@ -67,6 +69,13 @@ namespace Hiwoong
 		   0       0        0      1
 	   */
 		static Matrix4x4 Scale(const Vector3& scale);
+
+
+		static Matrix4x4 LookAt(
+			const Vector3& cameraPosition,
+			const Vector3& target,
+			const Vector3& up
+		);
 
 	private:
 		float values[4][4];
