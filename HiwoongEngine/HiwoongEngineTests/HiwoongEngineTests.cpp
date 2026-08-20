@@ -161,33 +161,7 @@ namespace
             std::abs(result.w - 0.0f) < Epsilon;
     }
 
-    bool RunAllTests()
-    {
-        bool constructorPassed = TestVector3Constructor();
-        bool lengthPassed = TestGetLength();
-        bool normalizedPassed = GetNormalized();
-        bool dotPassed = GetDot();
-        bool crossPassed = TestCross();
-        bool identityPassed = TestIdentityMatrix();
-        bool scalePassed = TestScaleMatrix();
-        bool rotationXPassed = TestRotationX();
-        bool rotationYPassed = TestRotationY();
-        bool rotationZPassed = TestRotationZ();
-        bool translationDirectionPassed =
-            TestTranslationDoesNotMoveDirection();
 
-        return constructorPassed &&
-            lengthPassed &&
-            normalizedPassed &&
-            dotPassed &&
-            crossPassed &&
-            identityPassed &&
-            scalePassed &&
-            rotationXPassed &&
-            rotationYPassed &&
-            rotationZPassed && 
-            translationDirectionPassed;
-    }
 
     bool TestMatrixMultiplication()
     {
@@ -251,9 +225,59 @@ namespace
             result.z == 5 &&
             result.w == 1;
     }
+    bool TestViewMatrixX()
+    {
+        Hiwoong::Matrix4x4 view =
+            Hiwoong::Matrix4x4::LookAt(
+                Hiwoong::Vector3(0, 0, 0),   // 카메라
+                Hiwoong::Vector3(1, 0, 0),   // +X 방향
+                Hiwoong::Vector3(0, -1, 0)   // 위쪽
+            );
+
+        Hiwoong::Vector4 worldPosition(5, 0, 0, 1);
+        Hiwoong::Vector4 result = view * worldPosition;
+
+        return result.x == 0 &&
+            result.y == 0 &&
+            result.z == 5 &&
+            result.w == 1;
+    }
+
+
+    bool RunAllTests()
+    {
+        bool constructorPassed = TestVector3Constructor();
+        bool lengthPassed = TestGetLength();
+        bool normalizedPassed = GetNormalized();
+        bool dotPassed = GetDot();
+        bool crossPassed = TestCross();
+        bool identityPassed = TestIdentityMatrix();
+        bool scalePassed = TestScaleMatrix();
+        bool rotationXPassed = TestRotationX();
+        bool rotationYPassed = TestRotationY();
+        bool rotationZPassed = TestRotationZ();
+        bool translationDirectionPassed =
+            TestTranslationDoesNotMoveDirection();
+
+        bool testViewMatrix =  TestViewMatrix();
+
+        return constructorPassed &&
+            lengthPassed &&
+            normalizedPassed &&
+            dotPassed &&
+            crossPassed &&
+            identityPassed &&
+            scalePassed &&
+            rotationXPassed &&
+            rotationYPassed &&
+            rotationZPassed &&
+            translationDirectionPassed &&
+            testViewMatrix;
+    }
+
     int main()
     {
-        if (TestViewMatrix() == true)
+        if (TestViewMatrixX() == true)
         {
             std::cout << "Success" << std::endl;
         }
