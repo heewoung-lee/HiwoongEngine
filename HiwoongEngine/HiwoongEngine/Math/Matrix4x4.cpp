@@ -1,6 +1,7 @@
 #include "Matrix4x4.h"
 #include <cstddef>
 #include <cmath>
+#include <cassert>
 namespace Hiwoong 
 {
     Hiwoong::Matrix4x4::Matrix4x4() : values{}
@@ -167,6 +168,34 @@ namespace Hiwoong
 
         return result;
 
+    }
+
+    Matrix4x4 Matrix4x4::Perspective(float fieldOfView, float aspectRatio, float nearPlane, float farPlane)
+    {
+        assert(aspectRatio > 0.0f);
+        assert(nearPlane > 0.0f);
+        assert(farPlane > nearPlane);
+
+        Matrix4x4 result;
+
+        //Convert the vertical field of view into a projection scale.
+        const float yScale = 1.0f / std::tan(fieldOfView * 0.5f);
+        // Correct the horizontal scale using the sceen's aspect ratio.
+        const float xScale = yScale / aspectRatio;
+        // Calculate the visible depth range between the near and far planes.
+        const float depthRange = farPlane - nearPlane;
+
+        //Apply ratio to horizon
+        result.values[0][0] = xScale;
+        //Apply ratio to vertical
+        result.values[1][1] = yScale;
+        //make value for indicator which how to far
+        result.values[2][2] = farPlane / depthRange;
+        result.values[2][3] = -(nearPlane * farPlane) / depthRange;
+        //current object distance
+        result.values[3][2] = 1.0f;
+
+        return result;
     }
 
 }

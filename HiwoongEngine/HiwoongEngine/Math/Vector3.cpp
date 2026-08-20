@@ -65,7 +65,7 @@ namespace Hiwoong
     {
         float length = Length();
 
-        assert(legnth != 0.0f);
+        assert(length != 0.0f);
 
         return Vector3(x / length, y / length, z / length);
     }

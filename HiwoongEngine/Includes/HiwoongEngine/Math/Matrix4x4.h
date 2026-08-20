@@ -77,6 +77,19 @@ namespace Hiwoong
 			const Vector3& up
 		);
 
+		//FieldOfView :: The camera's vertical field of view in radian.
+		//aspectRatio :: Ratio of width / height
+		//nearPlane :: the neariest distance when the camera see.
+		//farPlane :: the farest distance when the camera see.
+
+		static Matrix4x4 Perspective(
+			float fieldOfView,
+			float aspectRatio,
+			float nearPlane,
+			float farPlane
+		);
+
+
 	private:
 		float values[4][4];
 	};

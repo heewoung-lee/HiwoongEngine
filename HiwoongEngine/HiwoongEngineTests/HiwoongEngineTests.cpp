@@ -242,6 +242,54 @@ namespace
             result.z == 5 &&
             result.w == 1;
     }
+    bool TestPerspectiveMakesFarObjectsSmaller()
+    {
+        constexpr float HalfPi = 3.14159265f / 2.0f;
+
+        Hiwoong::Matrix4x4 projection =
+            Hiwoong::Matrix4x4::Perspective(
+                HalfPi,
+                1.0f,
+                0.1f,
+                100.0f
+            );
+
+        Hiwoong::Vector4 closePoint(1, 0, 2, 1);
+        Hiwoong::Vector4 farPoint(1, 0, 4, 1);
+
+        Hiwoong::Vector4 closeClip = projection * closePoint;
+        Hiwoong::Vector4 farClip = projection * farPoint;
+
+        float closeX = closeClip.x / closeClip.w;
+        float farX = farClip.x / farClip.w;
+
+        return std::abs(closeX) > std::abs(farX);
+    }
+    bool TestPerspectiveDepthRange()
+    {
+        constexpr float HalfPi = 3.14159265f / 2.0f;
+        constexpr float Epsilon = 0.0001f;
+
+        Hiwoong::Matrix4x4 projection =
+            Hiwoong::Matrix4x4::Perspective(
+                HalfPi,
+                1.0f,
+                1.0f,
+                10.0f
+            );
+
+        Hiwoong::Vector4 nearClip =
+            projection * Hiwoong::Vector4(0, 0, 1, 1);
+
+        Hiwoong::Vector4 farClip =
+            projection * Hiwoong::Vector4(0, 0, 10, 1);
+
+        const float nearDepth = nearClip.z / nearClip.w;
+        const float farDepth = farClip.z / farClip.w;
+
+        return std::abs(nearDepth - 0.0f) < Epsilon &&
+            std::abs(farDepth - 1.0f) < Epsilon;
+    }
 
 
     bool RunAllTests()
@@ -275,9 +323,57 @@ namespace
             testViewMatrix;
     }
 
+    bool TestPerspectiveDivide()
+    {
+        Hiwoong::Vector4 clipPosition(4, 2, 8, 2);
+
+        Hiwoong::Vector3 result =
+            clipPosition.PerspectiveDivide();
+
+        constexpr float Epsilon = 0.0001f;
+
+        return std::abs(result.x - 2.0f) < Epsilon &&
+            std::abs(result.y - 1.0f) < Epsilon &&
+            std::abs(result.z - 4.0f) < Epsilon;
+    }
+    bool TestModelViewProjection()
+    {
+        constexpr float HalfPi = 3.14159265f / 2.0f;
+        constexpr float Epsilon = 0.0001f;
+
+        Hiwoong::Matrix4x4 model =
+            Hiwoong::Matrix4x4::Translation(
+                Hiwoong::Vector3(1, 0, 10)
+            );
+
+        Hiwoong::Matrix4x4 view =
+            Hiwoong::Matrix4x4::LookAt(
+                Hiwoong::Vector3(0, 0, 5),
+                Hiwoong::Vector3(0, 0, 6),
+                Hiwoong::Vector3(0, -1, 0)
+            );
+
+        Hiwoong::Matrix4x4 projection =
+            Hiwoong::Matrix4x4::Perspective(
+                HalfPi, 1.0f, 1.0f, 100.0f
+            );
+
+        Hiwoong::Matrix4x4 mvp =
+            projection * view * model;
+
+        Hiwoong::Vector4 localPosition(0, 0, 0, 1);
+
+        Hiwoong::Vector3 screenPosition =
+            (mvp * localPosition).PerspectiveDivide();
+
+        return std::abs(screenPosition.x - 0.2f) < Epsilon &&
+            std::abs(screenPosition.y) < Epsilon &&
+            screenPosition.z >= 0.0f &&
+            screenPosition.z <= 1.0f;
+    }
     int main()
     {
-        if (TestViewMatrixX() == true)
+        if (TestModelViewProjection() == true)
         {
             std::cout << "Success" << std::endl;
         }
