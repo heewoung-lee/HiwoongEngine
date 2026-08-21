@@ -3,14 +3,19 @@
 #include <cassert>
 #include <Windows.h>
 #include <iostream>
+#include "SoftwareRasterizer.h"
+
 
 namespace Hiwoong
 {
 
-	Renderer::Frame::Frame(int bufferCount)
+	Renderer::Frame::Frame(const Vector2& screenSize) : screenSize(screenSize)
 	{
 
 		//Create 2d Character Object Array and sorting order objects 
+		
+		const int bufferCount = screenSize.x * screenSize.y;
+
 		charInfoArray = std::make_unique<CHAR_INFO[]>(bufferCount);
 		sortingOrderArray = std::make_unique<int[]>(bufferCount);
 	}
@@ -19,7 +24,7 @@ namespace Hiwoong
 	{
 	}
 
-	void Renderer::Frame::Clear(const Vector2& screenSize)
+	void Renderer::Frame::Clear()
 	{
 		// Organizing Value 
 		const int width = screenSize.x;
@@ -43,7 +48,40 @@ namespace Hiwoong
 		}
 
 	}
+	void Renderer::Frame::SetCharacter(const Vector2& position, char character, Color color, int sortingOrder)
+	{
+		
 
+
+		if (position.x < 0 || position.x >= screenSize.x ||
+			position.y < 0 || position.y >= screenSize.y)
+		{
+			return;
+		}
+
+		//Check the positions range in the screen
+		const int index =
+			position.y * screenSize.x + position.x;
+
+
+		//if the object which top other object
+		//below objects do not draw  
+		if (sortingOrderArray[index] > sortingOrder)
+		{
+			return;
+		}
+
+		//Save data
+		CHAR_INFO& info = charInfoArray[index];
+
+		info.Char.AsciiChar = character;
+		info.Attributes = static_cast<WORD>(color);
+
+		sortingOrderArray[index] = sortingOrder;
+
+	}
+
+	
 	// ----------------------FRMAE-------------------------//
 
 	// static valuable initlize
@@ -88,6 +126,24 @@ namespace Hiwoong
 	{
 		CreateSceenBuffer(screenSize);
 	}
+	//Save lineRenderer to draw 
+	void Renderer::SubmitLine(
+		const Vector2& start,
+		const Vector2& end,
+		char character,
+		Color color,
+		int sortingOrder)
+	{
+		LineRenderCommand command;
+
+		command.start = start;
+		command.end = end;
+		command.character = character;
+		command.color = color;
+		command.sortingOrder = sortingOrder;
+
+		lineRenderQueue.emplace_back(command);
+	}
 	Renderer& Renderer::Get()
 	{
 		assert(instance);
@@ -97,7 +153,7 @@ namespace Hiwoong
 	void Renderer::Clear()
 	{
 		// frame init
-		frame->Clear(screenSize);
+		frame->Clear();
 
 		// console buffer init
 		GetCurrentBuffer()->Clear();
@@ -136,29 +192,42 @@ namespace Hiwoong
 				//letter idx
 				const int sourceIndex = x - startX;
 
-				// 2d index to recode
-				const int index = (command.position.y * screenSize.x) + x;
-
-				// sorting order
-				if (frame->sortingOrderArray[index] > command.sortingorder)
-				{
-					continue;
-				}
-
-				// recode 2d Array
-				frame->charInfoArray[index].Char.AsciiChar = command.image[sourceIndex];
-				frame->charInfoArray[index].Attributes = static_cast<WORD>(command.color);
-
-				// recode sortingOrder
-				frame->sortingOrderArray[index] = command.sortingorder;
+				frame->SetCharacter(
+					Vector2(x, command.position.y),
+					command.image[sourceIndex],
+					command.color,
+					command.sortingorder
+				);
 			}
 		}
+
+		for (const LineRenderCommand& command : lineRenderQueue)
+		{
+			const std::vector<Vector2> points =
+				SoftwareRasterizer::RasterizeLine(
+					command.start,
+					command.end
+				);
+
+			for (const Vector2& point : points)
+			{
+				frame->SetCharacter(
+					point,
+					command.character,
+					command.color,
+					command.sortingOrder
+				);
+			}
+
+		}
+
 
 		//send current Backbuffer
 		GetCurrentBuffer()->Draw(frame->charInfoArray.get());
 
 		//Clear RenderQueue
 		renderQueue.clear();
+		lineRenderQueue.clear();
 
 		SetConsoleTextAttribute(
 			GetCurrentBuffer()->GetScreenBuffer(),
@@ -187,9 +256,8 @@ namespace Hiwoong
 		newBuffer0->Clear();
 		newBuffer1->Clear();
 
-		const int bufferCount = newScreenSize.x * newScreenSize.y;
-		std::unique_ptr<Frame> newframe = std::make_unique<Frame>(bufferCount);
-		newframe->Clear(newScreenSize);
+		std::unique_ptr<Frame> newframe = std::make_unique<Frame>(newScreenSize);
+		newframe->Clear();
 
 
 		SetConsoleActiveScreenBuffer(

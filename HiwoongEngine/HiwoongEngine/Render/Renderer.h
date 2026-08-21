@@ -35,11 +35,11 @@ namespace Hiwoong
 		struct Frame
 		{
 			// Create Size width X horizontal
-			Frame(int bufferCount);
+			Frame(const Vector2& screenSize);
 			~Frame();
 
 			//Initialize Frame
-			void Clear(const Vector2& screenSize);
+			void Clear();
 
 			//2d charater Array
 			std::unique_ptr<CHAR_INFO[]> charInfoArray;
@@ -47,8 +47,29 @@ namespace Hiwoong
 			// 2d Array to sort to draw
 			std::unique_ptr<int[]> sortingOrderArray;
 
+
+			void SetCharacter(
+				const Vector2& position,
+				char character,
+				Color color,
+				int sortingOrder
+			);
+
+
+		private:
+			Vector2 screenSize;
 		};
 
+		//Do not draw immediately it can save line info until they rendered in screen
+		struct LineRenderCommand
+		{
+			Vector2 start;
+			Vector2 end;
+
+			char character = '@';
+			Color color = Color::White;
+			int sortingOrder = 0;
+		};
 
 	public:
 		Renderer(const Vector2& screenSize);
@@ -67,6 +88,14 @@ namespace Hiwoong
 
 		void Resize(const Vector2& screenSize);
 
+		//Requrie the draw the line then softwareRasterizer mathod calculated the line
+		void SubmitLine(
+			const Vector2& start,
+			const Vector2& end,
+			char character,
+			Color color,
+			int sortingOrder
+		);
 
 		// static access method
 		static Renderer& Get();
@@ -108,6 +137,8 @@ namespace Hiwoong
 		// Back bufferIdx(draw buffer)
 		int currentBufferIndex = 0;
 
+		//LineRenderer List
+		std::vector<LineRenderCommand> lineRenderQueue;
 
 		//Create twice ScreenBuffer
 		void CreateSceenBuffer(const Vector2& newScreenSize);

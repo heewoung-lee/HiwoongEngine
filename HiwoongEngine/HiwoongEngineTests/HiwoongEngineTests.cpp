@@ -3,6 +3,7 @@
 #include "Math/Vector3.h"
 #include "Math/Vector4.h"
 #include "Math/Matrix4x4.h"
+#include "Render/Vertex.h"
 #include <cmath>
 
 namespace
@@ -371,9 +372,19 @@ namespace
             screenPosition.z >= 0.0f &&
             screenPosition.z <= 1.0f;
     }
+    bool TestVertexPosition()
+    {
+        Hiwoong::Vertex vertex{
+            Hiwoong::Vector3(1, 2, 3)
+        };
+
+        return vertex.position ==
+            Hiwoong::Vector3(1, 2, 3);
+    }
+
     int main()
     {
-        if (TestModelViewProjection() == true)
+        if (TestVertexPosition() == true)
         {
             std::cout << "Success" << std::endl;
         }

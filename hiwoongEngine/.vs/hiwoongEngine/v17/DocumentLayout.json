@@ -3,19 +3,103 @@
   "WorkspaceRootPath": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{06623C9B-6A52-4DB7-A37E-91A24ED4E074}|HiwoongEngineTests\\HiwoongEngineTests.vcxproj|C:\\WorkSpace\\HiwoongEngine\\hiwoongEngine\\HiwoongEngineTests\\HiwoongEngineTests.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{A0436469-8B80-418D-8B5E-084D0688A495}|CubeProject\\CubeProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\hiwoongEngine\\CubeProject\\Test\\CubeScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A0436469-8B80-418D-8B5E-084D0688A495}|CubeProject\\CubeProject.vcxproj|solutionrelative:CubeProject\\Test\\CubeScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0436469-8B80-418D-8B5E-084D0688A495}|CubeProject\\CubeProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\hiwoongEngine\\CubeProject\\Test\\CubeScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A0436469-8B80-418D-8B5E-084D0688A495}|CubeProject\\CubeProject.vcxproj|solutionrelative:CubeProject\\Test\\CubeScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0436469-8B80-418D-8B5E-084D0688A495}|CubeProject\\CubeProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\hiwoongEngine\\CubeProject\\Test\\LineTestObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A0436469-8B80-418D-8B5E-084D0688A495}|CubeProject\\CubeProject.vcxproj|solutionrelative:CubeProject\\Test\\LineTestObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0436469-8B80-418D-8B5E-084D0688A495}|CubeProject\\CubeProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\Test\\LineTestObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A0436469-8B80-418D-8B5E-084D0688A495}|CubeProject\\CubeProject.vcxproj|solutionrelative:CubeProject\\Test\\LineTestObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0436469-8B80-418D-8B5E-084D0688A495}|CubeProject\\CubeProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\CubeProject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A0436469-8B80-418D-8B5E-084D0688A495}|CubeProject\\CubeProject.vcxproj|solutionrelative:CubeProject\\CubeProject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0436469-8B80-418D-8B5E-084D0688A495}|CubeProject\\CubeProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\hiwoongEngine\\CubeProject\\Cube\\CubeObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A0436469-8B80-418D-8B5E-084D0688A495}|CubeProject\\CubeProject.vcxproj|solutionrelative:CubeProject\\Cube\\CubeObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0436469-8B80-418D-8B5E-084D0688A495}|CubeProject\\CubeProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\hiwoongEngine\\CubeProject\\Cube\\CubeObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A0436469-8B80-418D-8B5E-084D0688A495}|CubeProject\\CubeProject.vcxproj|solutionrelative:CubeProject\\Cube\\CubeObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\hiwoongEngine\\hiwoongEngine\\Render\\Renderer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Render\\Renderer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0436469-8B80-418D-8B5E-084D0688A495}|CubeProject\\CubeProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\INCLUDES\\HIWOONGENGINE\\RENDER\\RENDERER.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A0436469-8B80-418D-8B5E-084D0688A495}|CubeProject\\CubeProject.vcxproj|solutionrelative:INCLUDES\\HIWOONGENGINE\\RENDER\\RENDERER.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Render\\Renderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Render\\Renderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Render\\ScreenBuffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Render\\ScreenBuffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Render\\MeshFactory.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Render\\MeshFactory.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Render\\SoftwareRasterizer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Render\\SoftwareRasterizer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Render\\Edge.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Render\\Edge.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Render\\SoftwareRasterizer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Render\\SoftwareRasterizer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Render\\MeshFactory.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Render\\MeshFactory.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Render\\Edge.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Render\\Edge.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Render\\Mesh.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Render\\Mesh.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Render\\Vertex.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Render\\Vertex.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Render\\Mesh.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Render\\Mesh.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06623C9B-6A52-4DB7-A37E-91A24ED4E074}|HiwoongEngineTests\\HiwoongEngineTests.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngineTests\\HiwoongEngineTests.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{06623C9B-6A52-4DB7-A37E-91A24ED4E074}|HiwoongEngineTests\\HiwoongEngineTests.vcxproj|solutionrelative:HiwoongEngineTests\\HiwoongEngineTests.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\hiwoongEngine\\hiwoongEngine\\Math\\Vector4.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Math\\Vector4.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Render\\Vertex.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Render\\Vertex.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\hiwoongEngine\\hiwoongEngine\\Math\\Vector3.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Math\\Vector3.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Math\\Vector3.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\hiwoongEngine\\TetrisProject\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Math\\Vector4.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Math\\Vector4.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{00F21BC7-B823-40FA-A836-90912C75ECAF}|TetrisProject\\TetrisProject.vcxproj|solutionrelative:TetrisProject\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
@@ -25,12 +109,49 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 179,
+          "DockedWidth": 225,
           "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
+              "Title": "Renderer.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Renderer.h",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Render\\Renderer.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Renderer.h",
+              "RelativeToolTip": "HiwoongEngine\\Render\\Renderer.h",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAAAFsAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-08-21T06:18:12.051Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Edge.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Edge.h",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Render\\Edge.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Edge.h",
+              "RelativeToolTip": "HiwoongEngine\\Render\\Edge.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-08-20T11:13:20.2Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "MeshFactory.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\MeshFactory.cpp",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Render\\MeshFactory.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\MeshFactory.cpp",
+              "RelativeToolTip": "HiwoongEngine\\Render\\MeshFactory.cpp",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAABsAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-08-20T11:03:16.801Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
               "Title": "Main.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\Main.cpp",
               "RelativeDocumentMoniker": "TetrisProject\\Main.cpp",
@@ -38,31 +159,252 @@
               "RelativeToolTip": "TetrisProject\\Main.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-08-20T10:42:40.363Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-20T10:42:40.363Z"
             }
           ]
         },
         {
-          "DockedWidth": 276,
+          "DockedWidth": 230,
           "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Vector4.cpp",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Math\\Vector4.cpp",
-              "RelativeDocumentMoniker": "HiwoongEngine\\Math\\Vector4.cpp",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Math\\Vector4.cpp",
-              "RelativeToolTip": "HiwoongEngine\\Math\\Vector4.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 6,
+              "Title": "CubeObject.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\Cube\\CubeObject.cpp",
+              "RelativeDocumentMoniker": "CubeProject\\Cube\\CubeObject.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\Cube\\CubeObject.cpp",
+              "RelativeToolTip": "CubeProject\\Cube\\CubeObject.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-08-20T10:45:00.004Z",
+              "WhenOpened": "2026-08-21T07:13:52.688Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CubeObject.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\Cube\\CubeObject.h",
+              "RelativeDocumentMoniker": "CubeProject\\Cube\\CubeObject.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\Cube\\CubeObject.h",
+              "RelativeToolTip": "CubeProject\\Cube\\CubeObject.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-08-21T07:12:03.12Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CubeScene.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\Test\\CubeScene.cpp",
+              "RelativeDocumentMoniker": "CubeProject\\Test\\CubeScene.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\Test\\CubeScene.cpp",
+              "RelativeToolTip": "CubeProject\\Test\\CubeScene.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-08-21T07:05:33.551Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CubeProject.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\CubeProject.cpp",
+              "RelativeDocumentMoniker": "CubeProject\\CubeProject.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\CubeProject.cpp",
+              "RelativeToolTip": "CubeProject\\CubeProject.cpp",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAAAHUAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-08-20T11:04:25.421Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LineTestObject.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\Test\\LineTestObject.h",
+              "RelativeDocumentMoniker": "CubeProject\\Test\\LineTestObject.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\Test\\LineTestObject.h",
+              "RelativeToolTip": "CubeProject\\Test\\LineTestObject.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-08-21T07:00:57.015Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "LineTestObject.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\Test\\LineTestObject.cpp",
+              "RelativeDocumentMoniker": "CubeProject\\Test\\LineTestObject.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\Test\\LineTestObject.cpp",
+              "RelativeToolTip": "CubeProject\\Test\\LineTestObject.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-08-21T07:02:52.293Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CubeScene.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\Test\\CubeScene.h",
+              "RelativeDocumentMoniker": "CubeProject\\Test\\CubeScene.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\Test\\CubeScene.h",
+              "RelativeToolTip": "CubeProject\\Test\\CubeScene.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-08-21T07:05:19.857Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Edge.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Edge.cpp",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Render\\Edge.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Edge.cpp",
+              "RelativeToolTip": "HiwoongEngine\\Render\\Edge.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-08-20T11:15:54.296Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ScreenBuffer.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\ScreenBuffer.h",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Render\\ScreenBuffer.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\ScreenBuffer.h",
+              "RelativeToolTip": "HiwoongEngine\\Render\\ScreenBuffer.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-08-21T06:16:35.817Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Mesh.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Mesh.cpp",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Render\\Mesh.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Mesh.cpp",
+              "RelativeToolTip": "HiwoongEngine\\Render\\Mesh.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-08-20T11:15:53.074Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Renderer.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Renderer.cpp",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Render\\Renderer.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Renderer.cpp",
+              "RelativeToolTip": "HiwoongEngine\\Render\\Renderer.cpp",
+              "ViewState": "AgIAAA8BAAAAAAAAAAAtwFcAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-08-21T06:23:38.163Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Renderer.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\Includes\\HiwoongEngine\\Render\\Renderer.h",
+              "RelativeDocumentMoniker": "Includes\\HiwoongEngine\\Render\\Renderer.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\Includes\\HiwoongEngine\\Render\\Renderer.h",
+              "RelativeToolTip": "Includes\\HiwoongEngine\\Render\\Renderer.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-08-21T07:03:32.611Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "SoftwareRasterizer.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\SoftwareRasterizer.h",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Render\\SoftwareRasterizer.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\SoftwareRasterizer.h",
+              "RelativeToolTip": "HiwoongEngine\\Render\\SoftwareRasterizer.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-08-20T11:44:02.985Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "SoftwareRasterizer.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\SoftwareRasterizer.cpp",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Render\\SoftwareRasterizer.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\SoftwareRasterizer.cpp",
+              "RelativeToolTip": "HiwoongEngine\\Render\\SoftwareRasterizer.cpp",
+              "ViewState": "AgIAADkAAAAAAAAAAAAmwFAAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-08-20T11:45:13.221Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "MeshFactory.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\MeshFactory.h",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Render\\MeshFactory.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\MeshFactory.h",
+              "RelativeToolTip": "HiwoongEngine\\Render\\MeshFactory.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-08-20T11:00:37.106Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Mesh.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Mesh.h",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Render\\Mesh.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Mesh.h",
+              "RelativeToolTip": "HiwoongEngine\\Render\\Mesh.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-08-20T10:57:08.311Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Vertex.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Vertex.cpp",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Render\\Vertex.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Vertex.cpp",
+              "RelativeToolTip": "HiwoongEngine\\Render\\Vertex.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-08-20T10:56:42.508Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Vertex.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Vertex.h",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Render\\Vertex.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Vertex.h",
+              "RelativeToolTip": "HiwoongEngine\\Render\\Vertex.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-08-20T10:50:59.838Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "HiwoongEngineTests.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngineTests\\HiwoongEngineTests.cpp",
+              "RelativeDocumentMoniker": "HiwoongEngineTests\\HiwoongEngineTests.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngineTests\\HiwoongEngineTests.cpp",
+              "RelativeToolTip": "HiwoongEngineTests\\HiwoongEngineTests.cpp",
+              "ViewState": "AgIAAGwBAAAAAAAAAAAmwIwBAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-08-20T10:42:54.575Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
               "Title": "Vector3.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Math\\Vector3.cpp",
               "RelativeDocumentMoniker": "HiwoongEngine\\Math\\Vector3.cpp",
@@ -70,21 +412,19 @@
               "RelativeToolTip": "HiwoongEngine\\Math\\Vector3.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAE0AAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-08-20T10:44:13.938Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-20T10:44:13.938Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "HiwoongEngineTests.cpp",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngineTests\\HiwoongEngineTests.cpp",
-              "RelativeDocumentMoniker": "HiwoongEngineTests\\HiwoongEngineTests.cpp",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngineTests\\HiwoongEngineTests.cpp",
-              "RelativeToolTip": "HiwoongEngineTests\\HiwoongEngineTests.cpp",
-              "ViewState": "AgIAAG0BAAAAAAAAAAAmwHcBAAAjAAAAAAAAAA==",
+              "DocumentIndex": 23,
+              "Title": "Vector4.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Math\\Vector4.cpp",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Math\\Vector4.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Math\\Vector4.cpp",
+              "RelativeToolTip": "HiwoongEngine\\Math\\Vector4.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-08-20T10:42:54.575Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-20T10:45:00.004Z"
             }
           ]
         }

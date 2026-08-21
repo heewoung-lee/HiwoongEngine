@@ -115,8 +115,13 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClCompile Include="Math\Vector3.cpp" />
     <ClCompile Include="Math\Vector4.cpp" />
     <ClCompile Include="Physics\CollisionSystem.cpp" />
+    <ClCompile Include="Render\Edge.cpp" />
+    <ClCompile Include="Render\Mesh.cpp" />
+    <ClCompile Include="Render\MeshFactory.cpp" />
     <ClCompile Include="Render\Renderer.cpp" />
     <ClCompile Include="Render\ScreenBuffer.cpp" />
+    <ClCompile Include="Render\SoftwareRasterizer.cpp" />
+    <ClCompile Include="Render\Vertex.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Util\Util.cpp" />
   </ItemGroup>
@@ -136,8 +141,13 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClInclude Include="Math\Vector3.h" />
     <ClInclude Include="Math\Vector4.h" />
     <ClInclude Include="Physics\CollisionSystem.h" />
+    <ClInclude Include="Render\Edge.h" />
+    <ClInclude Include="Render\Mesh.h" />
+    <ClInclude Include="Render\MeshFactory.h" />
     <ClInclude Include="Render\Renderer.h" />
     <ClInclude Include="Render\ScreenBuffer.h" />
+    <ClInclude Include="Render\SoftwareRasterizer.h" />
+    <ClInclude Include="Render\Vertex.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Util\Util.h" />
   </ItemGroup>
