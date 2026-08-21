@@ -47,6 +47,8 @@ namespace Hiwoong
 			// 2d Array to sort to draw
 			std::unique_ptr<int[]> sortingOrderArray;
 
+			//Z-Buffer 
+			std::unique_ptr<float[]> depthBufferArray;
 
 			void SetCharacter(
 				const Vector2& position,
@@ -55,11 +57,29 @@ namespace Hiwoong
 				int sortingOrder
 			);
 
+			void SetCharacter3D(
+				const Vector2& position,
+				char character,
+				Color color,
+				float depth,
+				int sortingOrder
+			);
+
+
 
 		private:
 			Vector2 screenSize;
 		};
+		//the chractor express depth and draw position.
+		struct PointRenderCommand
+		{
+			Vector2 position;
+			float depth = 0.0f;
 
+			char character = '@';
+			Color color = Color::White;
+			int sortingOrder = 0;
+		};
 		//Do not draw immediately it can save line info until they rendered in screen
 		struct LineRenderCommand
 		{
@@ -82,6 +102,16 @@ namespace Hiwoong
 			const Vector2& position,
 			Color color,
 			int sortingorder);
+
+		// Sumit to Renderer Calculated position and depth
+		void SubmitPoint3D(
+			const Vector2& position,
+			float depth,
+			char character,
+			Color color,
+			int sortingOrder
+		);
+
 
 		// Draw Event Method (it will be called by engine)
 		void Draw();
@@ -139,6 +169,9 @@ namespace Hiwoong
 
 		//LineRenderer List
 		std::vector<LineRenderCommand> lineRenderQueue;
+
+		//save all of surface dots 
+		std::vector<PointRenderCommand> pointRenderQueue;
 
 		//Create twice ScreenBuffer
 		void CreateSceenBuffer(const Vector2& newScreenSize);

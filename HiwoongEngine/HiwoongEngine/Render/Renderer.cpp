@@ -3,6 +3,7 @@
 #include <cassert>
 #include <Windows.h>
 #include <iostream>
+#include <limits>
 #include "SoftwareRasterizer.h"
 
 
@@ -18,6 +19,7 @@ namespace Hiwoong
 
 		charInfoArray = std::make_unique<CHAR_INFO[]>(bufferCount);
 		sortingOrderArray = std::make_unique<int[]>(bufferCount);
+		depthBufferArray = std::make_unique<float[]>(bufferCount);
 	}
 
 	Renderer::Frame::~Frame()
@@ -44,14 +46,15 @@ namespace Hiwoong
 
 				// initialize draw soringorder
 				sortingOrderArray[index] = -1;
+
+				// Find Minimum so initized infinite or largeNumber
+				depthBufferArray[index] = std::numeric_limits<float>::infinity();
 			}
 		}
 
 	}
 	void Renderer::Frame::SetCharacter(const Vector2& position, char character, Color color, int sortingOrder)
 	{
-		
-
 
 		if (position.x < 0 || position.x >= screenSize.x ||
 			position.y < 0 || position.y >= screenSize.y)
@@ -78,6 +81,42 @@ namespace Hiwoong
 		info.Attributes = static_cast<WORD>(color);
 
 		sortingOrderArray[index] = sortingOrder;
+
+	}
+
+	void Renderer::Frame::SetCharacter3D(const Vector2& position, char character, Color color, float depth, int sortingOrder)
+	{
+		if (position.x < 0 || position.x >= screenSize.x ||
+			position.y < 0 || position.y >= screenSize.y)
+		{
+			return;
+		}
+
+		//Check the positions range in the screen
+		const int index =
+			position.y * screenSize.x + position.x;
+
+
+		if (sortingOrderArray[index] > sortingOrder)
+		{
+			return;
+		}
+
+		//if the equal layer each other comparer who is the deeper
+		if (sortingOrderArray[index] == sortingOrder &&
+			depthBufferArray[index] <= depth)
+		{
+			return;
+		}
+
+		//Save data
+		CHAR_INFO& info = charInfoArray[index];
+
+		info.Char.AsciiChar = character;
+		info.Attributes = static_cast<WORD>(color);
+
+		sortingOrderArray[index] = sortingOrder;
+		depthBufferArray[index] = depth;
 
 	}
 
@@ -114,6 +153,19 @@ namespace Hiwoong
 		command.sortingorder = sortingOrder;
 
 		renderQueue.emplace_back(command);
+	}
+
+	void Renderer::SubmitPoint3D(const Vector2& position, float depth, char character, Color color, int sortingOrder)
+	{
+		PointRenderCommand command;
+
+		command.position = position;
+		command.depth = depth;
+		command.character = character;
+		command.color = color;
+		command.sortingOrder = sortingOrder;
+
+		pointRenderQueue.emplace_back(command);
 	}
 
 	void Renderer::Draw()
@@ -201,6 +253,7 @@ namespace Hiwoong
 			}
 		}
 
+		//Processing LineRenderer
 		for (const LineRenderCommand& command : lineRenderQueue)
 		{
 			const std::vector<Vector2> points =
@@ -218,9 +271,19 @@ namespace Hiwoong
 					command.sortingOrder
 				);
 			}
-
 		}
 
+		//Processing PointRenderer
+		for (const PointRenderCommand& command : pointRenderQueue)
+		{
+			frame->SetCharacter3D(
+				command.position,
+				command.character,
+				command.color,
+				command.depth,
+				command.sortingOrder
+			);
+		}
 
 		//send current Backbuffer
 		GetCurrentBuffer()->Draw(frame->charInfoArray.get());
@@ -228,6 +291,7 @@ namespace Hiwoong
 		//Clear RenderQueue
 		renderQueue.clear();
 		lineRenderQueue.clear();
+		pointRenderQueue.clear();
 
 		SetConsoleTextAttribute(
 			GetCurrentBuffer()->GetScreenBuffer(),

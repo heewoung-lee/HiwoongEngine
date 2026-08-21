@@ -53,14 +53,24 @@ namespace Hiwoong
             const Vector3 ndcPosition =
                 clipPosition.PerspectiveDivide();
 
-            screenPositions.emplace_back(
+            const Vector2 screenPosition =
                 SoftwareRasterizer::NdcToScreen(
                     ndcPosition,
                     40,
                     20
-                )
+                );
+
+            screenPositions.emplace_back(screenPosition);
+
+            Renderer::Get().SubmitPoint3D(
+                screenPosition,
+                ndcPosition.z,
+                '*',
+                Color::Yellow,
+                1
             );
         }
+
 
         for (const Edge& edge : mesh.edges)
         {
