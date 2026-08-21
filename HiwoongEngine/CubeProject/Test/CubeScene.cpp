@@ -4,7 +4,8 @@ namespace Hiwoong
 {
 	void CubeScene::SceneInitialize()
 	{
-		SetScreenSize(Vector2(40, 20));
+		// CubeScene
+		SetScreenSize(Vector2(180, 110));
 
 		Instantiate<CubeObject>();
 

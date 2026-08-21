@@ -19,7 +19,7 @@ namespace Hiwoong
 		{
 			//drawing value of screen
 			std::string image;
-			
+
 			//RenderPosition
 			Vector2 position;
 
@@ -29,7 +29,7 @@ namespace Hiwoong
 			//SortingOrder
 			int sortingorder = -1;
 		};
-		
+
 
 		//Screen Frame(2 dimention Array)
 		struct Frame
@@ -112,7 +112,6 @@ namespace Hiwoong
 			int sortingOrder
 		);
 
-
 		// Draw Event Method (it will be called by engine)
 		void Draw();
 
@@ -131,7 +130,7 @@ namespace Hiwoong
 		static Renderer& Get();
 
 
-		
+
 
 
 	private:

@@ -58,6 +58,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)Includes\HiwoongEngine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -76,6 +77,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)Includes\HiwoongEngine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -88,6 +90,7 @@
   <ItemGroup>
     <ClCompile Include="CubeProject.cpp" />
     <ClCompile Include="Cube\CubeObject.cpp" />
+    <ClCompile Include="Cube\CubeRotationComponent.cpp" />
     <ClCompile Include="Test\CubeScene.cpp" />
     <ClCompile Include="Test\LineTestObject.cpp" />
   </ItemGroup>
@@ -98,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cube\CubeObject.h" />
+    <ClInclude Include="Cube\CubeRotationComponent.h" />
     <ClInclude Include="Test\CubeScene.h" />
     <ClInclude Include="Test\LineTestObject.h" />
   </ItemGroup>

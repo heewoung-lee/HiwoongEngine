@@ -27,6 +27,9 @@
     <ClCompile Include="Cube\CubeObject.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Cube\CubeRotationComponent.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Test\LineTestObject.h">
@@ -36,6 +39,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Cube\CubeObject.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube\CubeRotationComponent.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
