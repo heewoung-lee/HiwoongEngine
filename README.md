@@ -111,7 +111,66 @@ GameObject끼리 부모·자식 관계를 맺으면 자식은 자신의 로컬 �
 
 ---
 
-## 5. 2D 엔진을 3D ASCII 렌더러로 확장
+## 5. 입력과 Scene 전환
+
+### 입력
+
+`Input`은 256개 가상 키의 현재 프레임과 이전 프레임 상태를 함께 저장합니다.
+
+| 함수 | 의미 |
+|---|---|
+| `GetKey(key)` | 지금 키가 눌려 있는가? |
+| `GetKeyDown(key)` | 이번 프레임에 처음 눌렸는가? |
+| `GetKeyUP(key)` | 이번 프레임에 놓였는가? |
+
+### Scene 전환
+
+게임 도중 새 Scene을 요청하면 즉시 현재 Scene을 파괴하지 않습니다. `nextScene`에 보관했다가 프레임의 정해진 전환 지점에서 교체합니다. 덕분에 `Update()` 도중 객체와 Scene의 수명이 갑자기 끝나는 상황을 피합니다.
+
+---
+
+## 6. 2D 엔진 적용 사례: 콘솔 테트리스
+
+위의 2D 엔진 구조가 실제 게임을 운영할 수 있는지 확인하기 위해 콘솔 테트리스를 만들었습니다.
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/images/tetris-play.gif" width="270" alt="HiwoongEngine 테트리스 플레이"><br><sub>이동 · 회전 · 다음 블록 UI</sub></td>
+    <td align="center"><img src="docs/images/tetris-game-over.gif" width="270" alt="HiwoongEngine 테트리스 게임오버"><br><sub>보드 점유 검사와 GameOver 전환</sub></td>
+    <td align="center"><img src="docs/images/tetris-level-up.gif" width="270" alt="HiwoongEngine 테트리스 레벨업"><br><sub>상태 유지와 레벨별 낙하 속도</sub></td>
+  </tr>
+</table>
+
+![테트리스 블록의 논리 흐름](docs/images/tetris-flow.svg)
+
+### 테트리스는 어떤 논리로 만들었나요?
+
+1. `SpawnManager`가 다음 조각 종류를 예약하고 7가지 `TetrisModule` 중 하나를 생성합니다.
+2. 하나의 `TetrisModule`은 자식 `Block` 네 개를 소유하며, 각 Block은 자신의 로컬 좌표에 그려집니다.
+3. 이동과 회전 전에 네 Block의 다음 월드 좌표가 비어 있는지 `TetrisBoard`에 확인합니다.
+4. 더 내려갈 수 없으면 Block을 보드 셀에 고정하고 완성된 줄을 찾습니다.
+5. 줄을 지운 뒤 위쪽 Block을 아래로 이동하고 점수와 레벨 상태를 갱신합니다.
+6. 공간이 있으면 다음 조각을 만들고, 스폰 위치가 막혀 있으면 GameOver Scene으로 전환합니다.
+
+보드는 `(x, y)`를 `y * width + x`로 바꾼 1차원 배열을 사용합니다. `TetrisGameState`는 Scene이 교체되어도 유지해야 하는 점수, 레벨, 다음 조각 정보를 보관합니다.
+
+<details>
+<summary><strong>조작 방법</strong></summary>
+
+| 키 | 동작 |
+|---|---|
+| `←` / `→` | 좌우 이동 |
+| `↓` | 한 칸 빠르게 내리기 |
+| `↑` | 시계 방향 회전 |
+| `Space` | 즉시 낙하하고 고정 |
+| `Esc` | 종료 |
+| GameOver에서 `R` | 게임 Scene으로 다시 진입 |
+
+</details>
+
+---
+
+## 7. 2D 엔진을 3D ASCII 렌더러로 확장
 
 테트리스로 Scene, Component, 입력, 2D 문자 렌더링을 검증한 뒤, 같은 엔진 위에 3D 수학과 소프트웨어 래스터라이저를 추가했습니다. OpenGL·DirectX에 정점 계산을 넘기지 않고, CPU가 3D 좌표를 콘솔의 문자 셀로 바꾸는 전 과정을 직접 처리합니다.
 
@@ -162,25 +221,7 @@ Instantiate<CubeObject>(
 
 ---
 
-## 6. 입력과 Scene 전환
-
-### 입력
-
-`Input`은 256개 가상 키의 현재 프레임과 이전 프레임 상태를 함께 저장합니다.
-
-| 함수 | 의미 |
-|---|---|
-| `GetKey(key)` | 지금 키가 눌려 있는가? |
-| `GetKeyDown(key)` | 이번 프레임에 처음 눌렸는가? |
-| `GetKeyUP(key)` | 이번 프레임에 놓였는가? |
-
-### Scene 전환
-
-게임 도중 새 Scene을 요청하면 즉시 현재 Scene을 파괴하지 않습니다. `nextScene`에 보관했다가 프레임의 정해진 전환 지점에서 교체합니다. 덕분에 `Update()` 도중 객체와 Scene의 수명이 갑자기 끝나는 상황을 피합니다.
-
----
-
-## 7. 현재 엔진의 범위
+## 8. 현재 엔진의 범위
 
 | 상태 | 기능 |
 |---|---|
@@ -189,45 +230,6 @@ Instantiate<CubeObject>(
 | 구현됨 | Vector3·4, Matrix4x4, Transform3D, Mesh, 원근 투영, 삼각형 래스터화 |
 | 구현됨 | Back-face Culling, 바리센트릭 깊이 보간, Depth Buffer, ASCII 조명 |
 | 앞으로 구현 | Camera Component, 범용 MeshRenderer, 클리핑, 3D 충돌·월드, ASCII Doom |
-
----
-
-## 엔진 적용 사례: 콘솔 테트리스
-
-<table>
-  <tr>
-    <td align="center"><img src="docs/images/tetris-play.gif" width="270" alt="HiwoongEngine 테트리스 플레이"><br><sub>이동 · 회전 · 다음 블록 UI</sub></td>
-    <td align="center"><img src="docs/images/tetris-game-over.gif" width="270" alt="HiwoongEngine 테트리스 게임오버"><br><sub>보드 점유 검사와 GameOver 전환</sub></td>
-    <td align="center"><img src="docs/images/tetris-level-up.gif" width="270" alt="HiwoongEngine 테트리스 레벨업"><br><sub>상태 유지와 레벨별 낙하 속도</sub></td>
-  </tr>
-</table>
-
-![테트리스 블록의 논리 흐름](docs/images/tetris-flow.svg)
-
-### 테트리스는 어떤 논리로 만들었나요?
-
-1. `SpawnManager`가 다음 조각 종류를 예약하고 7가지 `TetrisModule` 중 하나를 생성합니다.
-2. 하나의 `TetrisModule`은 자식 `Block` 네 개를 소유하며, 각 Block은 자신의 로컬 좌표에 그려집니다.
-3. 이동과 회전 전에 네 Block의 다음 월드 좌표가 비어 있는지 `TetrisBoard`에 확인합니다.
-4. 더 내려갈 수 없으면 Block을 보드 셀에 고정하고 완성된 줄을 찾습니다.
-5. 줄을 지운 뒤 위쪽 Block을 아래로 이동하고 점수와 레벨 상태를 갱신합니다.
-6. 공간이 있으면 다음 조각을 만들고, 스폰 위치가 막혀 있으면 GameOver Scene으로 전환합니다.
-
-보드는 `(x, y)`를 `y * width + x`로 바꾼 1차원 배열을 사용합니다. `TetrisGameState`는 Scene이 교체되어도 유지해야 하는 점수, 레벨, 다음 조각 정보를 보관합니다.
-
-<details>
-<summary><strong>조작 방법</strong></summary>
-
-| 키 | 동작 |
-|---|---|
-| `←` / `→` | 좌우 이동 |
-| `↓` | 한 칸 빠르게 내리기 |
-| `↑` | 시계 방향 회전 |
-| `Space` | 즉시 낙하하고 고정 |
-| `Esc` | 종료 |
-| GameOver에서 `R` | 게임 Scene으로 다시 진입 |
-
-</details>
 
 ---
 
