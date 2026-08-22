@@ -217,23 +217,7 @@ Instantiate<CubeObject>(
 </p>
 <p align="center"><sub>Model·View·Projection, 삼각형 래스터화, Depth Buffer, 법선 기반 ASCII 조명을 적용한 결과</sub></p>
 
-큐브는 단순한 문자 애니메이션이 아닙니다. 매 프레임 8개의 정점과 12개의 삼각형을 변환하고, 화면에 보이는 픽셀을 다시 채우며 회전합니다. 이 결과로 기존 콘솔 엔진이 **3D Mesh를 그릴 수 있는 소프트웨어 렌더러로 확장되었음**을 검증했습니다.
+매 프레임 8개의 정점과 12개의 삼각형을 변환하고, 화면에 보이는 픽셀을 다시 채우며 회전합니다.
 
 ---
-
-## 8. 현재 엔진의 범위
-
-| 상태 | 기능 |
-|---|---|
-| 구현됨 | 게임 루프, Scene 전환, 예약 생성·삭제, 컴포넌트, Transform 계층, 키 입력 |
-| 구현됨 | RenderCommand, 셀별 겹침 순서, CHAR_INFO Frame, 콘솔 더블 버퍼, 화면 크기 변경 |
-| 구현됨 | Vector3·4, Matrix4x4, Transform3D, Mesh, 원근 투영, 삼각형 래스터화 |
-| 구현됨 | Back-face Culling, 바리센트릭 깊이 보간, Depth Buffer, ASCII 조명 |
-| 앞으로 구현 | Camera Component, 범용 MeshRenderer, 클리핑, 3D 충돌·월드, ASCII Doom |
-
----
-
-## 다음 목표: ASCII Doom
-
-회전 큐브로 3D 좌표 변환·투영·가림·조명 파이프라인을 검증했습니다. 다음 단계에서는 이 기반에 Camera Component, 복수 Mesh, 맵 로딩, 클리핑, 충돌과 이동을 추가해 콘솔 안을 직접 돌아다닐 수 있는 ASCII 3D 월드로 확장할 계획입니다.
 
