@@ -10,6 +10,10 @@ namespace Hiwoong
 		Vector3(float newX, float newY, float newZ);
 		~Vector3() = default;
 
+
+		static Vector3 Zero;
+		
+
 		Vector3 operator+(const Vector3& other) const;
 		Vector3 operator-(const Vector3& other) const;
 		Vector3 operator*(const Vector3& other) const;

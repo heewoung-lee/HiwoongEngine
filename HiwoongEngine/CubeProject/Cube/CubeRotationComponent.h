@@ -5,20 +5,18 @@
 
 namespace Hiwoong
 {
+    class Transform3DComponent;
+
     class CubeRotationComponent : public Component
     {
         TYPE_DECALRATIONS(CubeRotationComponent, Component)
 
     public:
+        void Start() override;
         void Update(double deltaTime) override;
 
-        const Vector3& GetRotation() const
-        {
-            return rotation;
-        }
-
     private:
-        Vector3 rotation{ 0.4f, 0.6f, 0.0f };
+        std::weak_ptr<Transform3DComponent> transform3DComponent;
         Vector3 rotationSpeed{ 0.5f, 0.8f, 0.0f };
     };
 }

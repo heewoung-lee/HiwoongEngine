@@ -6,33 +6,42 @@
 #include "Scene/Scene.h"
 #include "Component/Component.h"
 #include "Cube/CubeRotationComponent.h"
+#include "Component/Transform3DComponent.h"
 #include <algorithm>
 #include <cassert>
 
 namespace Hiwoong
 {
-	CubeObject::CubeObject() : mesh(MeshFactory::CreateCube(2.0f))
-	{
-
-	}
+    CubeObject::CubeObject(
+        const Vector3& position,
+        const Vector3& rotation,
+        const Vector3& scale)
+        : mesh(MeshFactory::CreateCube(2.0f))
+    {
+        transform3DComponent =
+            AddComponent<Transform3DComponent>(
+                position,
+                rotation,
+                scale
+            );
+    }
 
 	void CubeObject::Draw()
 	{
 		super::Draw();
+        
+        auto transform3D = transform3DComponent.lock();
+        assert(transform3D != nullptr);
 
-        auto rotationComp = rotationComponent.lock();
-        assert(rotationComp != nullptr);
-
-        const Vector3& rotation = rotationComp->GetRotation();
-
+        const Vector3& rotation = transform3D->GetRotation();
 
         const Matrix4x4 rotationMatrix =
+            Matrix4x4::RotationZ(rotation.z) *
             Matrix4x4::RotationY(rotation.y) *
             Matrix4x4::RotationX(rotation.x);
-        
+
         const Matrix4x4 model =
-            Matrix4x4::Translation(Vector3(0, 0, 5)) *
-            rotationMatrix;
+            transform3D->GetModelMatrix();
 
         const Vector3 lightDirection =
             Vector3(-1, -1, -1).Normalized();
@@ -229,7 +238,7 @@ namespace Hiwoong
     void CubeObject::Start()
     {
         super::Start();
-        rotationComponent = AddComponent<CubeRotationComponent>();
+        AddComponent<CubeRotationComponent>();
     }
 
     char CubeObject::GetFaceCharacter(
@@ -260,52 +269,6 @@ namespace Hiwoong
         return GetShadeCharacter(
             0.2f + diffuse * 0.8f
         );
-    }
-
-    void CubeObject::SubmitSurfacePoint(
-        const Vector3& localPosition,
-        const Matrix4x4& mvp,
-        char character)
-    {
-        const Vector4 position(
-            localPosition.x,
-            localPosition.y,
-            localPosition.z,
-            1.0f
-        );
-
-        const Vector4 clipPosition = mvp * position;
-
-        // 카메라 뒤쪽의 점은 그리지 않는다.
-        if (clipPosition.w <= 0.0f)
-        {
-            return;
-        }
-
-        const Vector3 ndcPosition =
-            clipPosition.PerspectiveDivide();
-
-        std::shared_ptr<Scene> scene = GetOwner();
-        assert(scene != nullptr);
-
-        const Vector2 screenSize = scene->GetScreenSize();
-
-        Vector2 screenPosition =
-            SoftwareRasterizer::NdcToScreen(
-                ndcPosition,
-                screenSize.x,
-                screenSize.y
-            );
-        screenPosition.y -= 15;
-
-        Renderer::Get().SubmitPoint3D(
-            screenPosition,
-            ndcPosition.z,
-            character,
-            Color::White,
-            0
-        );
-
     }
 
     char CubeObject::GetShadeCharacter(float brightness) const

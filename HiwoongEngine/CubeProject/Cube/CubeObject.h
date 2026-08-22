@@ -4,10 +4,9 @@
 #include "Render/Mesh.h"
 #include "Math/Vector3.h"
 #include "Math/Matrix4x4.h"
-
 namespace Hiwoong
 {
-	class CubeRotationComponent;
+	class Transform3DComponent;
 
 	class CubeObject : public GameObject
 	{
@@ -15,7 +14,10 @@ namespace Hiwoong
 
 
 	public:
-		CubeObject();
+		CubeObject(
+			const Vector3& position,
+			const Vector3& rotation,
+			const Vector3& scale);
 		void Draw() override;
 		void Start() override;
 
@@ -27,13 +29,9 @@ namespace Hiwoong
 		
 	private:
 		Mesh mesh;
-		void SubmitSurfacePoint(
-			const Vector3& localPosition,
-			const Matrix4x4& mvp,
-			char character
-		);
-		std::weak_ptr<CubeRotationComponent> rotationComponent;
+		std::weak_ptr<Transform3DComponent> transform3DComponent;
 		char GetShadeCharacter(float brightness) const;
+
 	};
 }
 

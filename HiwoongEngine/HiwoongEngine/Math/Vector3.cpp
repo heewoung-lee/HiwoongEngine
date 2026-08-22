@@ -10,6 +10,9 @@ namespace Hiwoong
     {
     }
 
+
+    Vector3 Vector3::Zero(0, 0, 0);
+
     Vector3 Vector3::operator+(const Vector3& other) const
     {
         return Vector3(x + other.x, y + other.y, z + other.z);

@@ -4,6 +4,8 @@
 #include "Math/Color.h"
 #include "Engine/Engine.h"
 #include "Test/CubeScene.h"
+#include "Component/Transform3DComponent.h"
+#include "Math/Vector4.h"
 
 bool TestCreateCubeHasEightVertices()
 {
@@ -157,6 +159,48 @@ bool TestBackFaceCulling()
 		backFace == true;
 }
 
+bool TestTransform3DDefaultValues()
+{
+	Hiwoong::Transform3DComponent transform;
+
+	return transform.GetPosition() == Hiwoong::Vector3(0, 0, 0) &&
+		transform.GetRotation() == Hiwoong::Vector3(0, 0, 0) &&
+		transform.GetScale() == Hiwoong::Vector3(1, 1, 1);
+}
+
+bool TestTransform3DCustomValues()
+{
+	Hiwoong::Transform3DComponent transform(
+		Hiwoong::Vector3(1, 2, 3),
+		Hiwoong::Vector3(0.1f, 0.2f, 0.3f),
+		Hiwoong::Vector3(2, 3, 4)
+	);
+
+	return transform.GetPosition() == Hiwoong::Vector3(1, 2, 3) &&
+		transform.GetRotation() == Hiwoong::Vector3(0.1f, 0.2f, 0.3f) &&
+		transform.GetScale() == Hiwoong::Vector3(2, 3, 4);
+}
+
+bool TestTransform3DModelMatrix()
+{
+	Hiwoong::Transform3DComponent transform(
+		Hiwoong::Vector3(5, 6, 7),
+		Hiwoong::Vector3(0, 0, 0),
+		Hiwoong::Vector3(2, 3, 4)
+	);
+
+	const Hiwoong::Vector4 result =
+		transform.GetModelMatrix() *
+		Hiwoong::Vector4(1, 1, 1, 1);
+
+	constexpr float epsilon = 0.0001f;
+
+	return std::abs(result.x - 7.0f) < epsilon &&
+		std::abs(result.y - 9.0f) < epsilon &&
+		std::abs(result.z - 11.0f) < epsilon &&
+		std::abs(result.w - 1.0f) < epsilon;
+}
+
 bool RunAllTests()
 {
 	return TestCreateCubeHasEightVertices() &&
@@ -169,25 +213,28 @@ bool RunAllTests()
 		TestCreateCubeHasTwelveTriangles() && 
 		TestRasterizeTriangle()&&
 		TestCalculateBarycentricAtTriangleCenter()&&
-		TestBackFaceCulling();
+		TestBackFaceCulling()&&
+		TestTransform3DDefaultValues()&&
+		TestTransform3DCustomValues()&&
+		TestTransform3DModelMatrix();
 }
 
 
 
 int main()
 {
-	if (RunAllTests() == true)
-	{
-		std::cout << "Success" << std::endl;
-	}
-	else
-	{
-		std::cout << "failure" << std::endl;
-	}
+	//if (RunAllTests() == true)
+	//{
+	//	std::cout << "Success" << std::endl;
+	//}
+	//else
+	//{
+	//	std::cout << "failure" << std::endl;
+	//}
 	
-	/*Hiwoong::Engine engine;
+	Hiwoong::Engine engine;
 	engine.AddNewScene<Hiwoong::CubeScene>();
-	engine.Run();*/
+	engine.Run();
 
 	return 0;
 }
