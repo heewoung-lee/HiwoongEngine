@@ -3,6 +3,7 @@
 #include "Core/Core.h"
 #include "Render/Vertex.h"
 #include "Render/Edge.h"
+#include "Render/Triangle.h"
 #include <vector>
 namespace Hiwoong
 {
@@ -10,6 +11,7 @@ namespace Hiwoong
 	{
 		std::vector<Vertex> vertices;
 		std::vector<Edge> edges;
+		std::vector<Triangle> triangles;
 	};
 }
 

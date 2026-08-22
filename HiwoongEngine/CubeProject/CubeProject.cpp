@@ -99,6 +99,63 @@ bool TestRasterizeDiagonalLine()
 		points[3] == Hiwoong::Vector2(5, 5) &&
 		points[4] == Hiwoong::Vector2(6, 6);
 }
+bool TestCreateCubeHasTwelveTriangles()
+{
+	Hiwoong::Mesh cube =
+		Hiwoong::MeshFactory::CreateCube(2.0f);
+
+	return cube.triangles.size() == 12;
+}
+
+bool TestRasterizeTriangle()
+{
+	const std::vector<Hiwoong::Vector2> points =
+		Hiwoong::SoftwareRasterizer::RasterizeTriangle(
+			Hiwoong::Vector2(1, 1),
+			Hiwoong::Vector2(3, 1),
+			Hiwoong::Vector2(1, 3)
+		);
+
+	return points.size() == 6;
+}
+bool TestCalculateBarycentricAtTriangleCenter()
+{
+	const Hiwoong::Vector3 weights =
+		Hiwoong::SoftwareRasterizer::CalculateBarycentric(
+			Hiwoong::Vector2(1, 1),
+			Hiwoong::Vector2(0, 0),
+			Hiwoong::Vector2(3, 0),
+			Hiwoong::Vector2(0, 3)
+		);
+
+	constexpr float expected = 1.0f / 3.0f;
+	constexpr float epsilon = 0.0001f;
+
+	return
+		std::abs(weights.x - expected) < epsilon &&
+		std::abs(weights.y - expected) < epsilon &&
+		std::abs(weights.z - expected) < epsilon;
+}
+
+bool TestBackFaceCulling()
+{
+	const bool frontFace =
+		Hiwoong::SoftwareRasterizer::IsBackFace(
+			Hiwoong::Vector2(0, 0),
+			Hiwoong::Vector2(2, 2),
+			Hiwoong::Vector2(2, 0)
+		);
+
+	const bool backFace =
+		Hiwoong::SoftwareRasterizer::IsBackFace(
+			Hiwoong::Vector2(0, 0),
+			Hiwoong::Vector2(2, 0),
+			Hiwoong::Vector2(2, 2)
+		);
+
+	return frontFace == false &&
+		backFace == true;
+}
 
 bool RunAllTests()
 {
@@ -108,13 +165,29 @@ bool RunAllTests()
 		TestNdcCornersMapToScreenCorners() &&
 		TestRasterizeHorizontalLine() &&
 		TestRasterizeVerticalLine() &&
-		TestRasterizeDiagonalLine();
+		TestRasterizeDiagonalLine() &&
+		TestCreateCubeHasTwelveTriangles() && 
+		TestRasterizeTriangle()&&
+		TestCalculateBarycentricAtTriangleCenter()&&
+		TestBackFaceCulling();
 }
+
+
 
 int main()
 {
-	Hiwoong::Engine engine;
-
+	if (RunAllTests() == true)
+	{
+		std::cout << "Success" << std::endl;
+	}
+	else
+	{
+		std::cout << "failure" << std::endl;
+	}
+	
+	/*Hiwoong::Engine engine;
 	engine.AddNewScene<Hiwoong::CubeScene>();
-	engine.Run();
+	engine.Run();*/
+
+	return 0;
 }

@@ -56,101 +56,120 @@ namespace Hiwoong
         const Matrix4x4 mvp =
             projection * view * model;
 
-        constexpr float halfSize = 1.0f;
-        constexpr float sampleStep = 0.03f;
+        std::vector<Vector2> screenPositions;
+        std::vector<float> depths;
 
-        const char frontCharacter =
-            GetFaceCharacter(Vector3(0, 0, -1), rotationMatrix, lightDirection);
+        screenPositions.reserve(mesh.vertices.size());
+        depths.reserve(mesh.vertices.size());
 
-        const char rightCharacter =
-            GetFaceCharacter(Vector3(1, 0, 0), rotationMatrix, lightDirection);
 
-        const char topCharacter =
-            GetFaceCharacter(Vector3(0, -1, 0), rotationMatrix, lightDirection);
+        std::shared_ptr<Scene> scene = GetOwner();
+        assert(scene != nullptr);
 
-        const char backCharacter =
-            GetFaceCharacter(Vector3(0, 0, 1), rotationMatrix, lightDirection);
+        const Vector2 screenSize = scene->GetScreenSize();
 
-        const char leftCharacter =
-            GetFaceCharacter(Vector3(-1, 0, 0), rotationMatrix, lightDirection);
-
-        const char bottomCharacter =
-            GetFaceCharacter(Vector3(0, 1, 0), rotationMatrix, lightDirection);
-
-        // 카메라와 가까운 큐브의 앞면
-        for (float y = -halfSize; y <= halfSize; y += sampleStep)
+        for (const Vertex& vertex : mesh.vertices)
         {
-            for (float x = -halfSize; x <= halfSize; x += sampleStep)
+            const Vector4 clipPosition =
+                mvp * Vector4(
+                    vertex.position.x,
+                    vertex.position.y,
+                    vertex.position.z,
+                    1.0f
+                );
+
+            assert(clipPosition.w > 0.0f);
+
+            const Vector3 ndcPosition =
+                clipPosition.PerspectiveDivide();
+
+            Vector2 screenPosition =
+                SoftwareRasterizer::NdcToScreen(
+                    ndcPosition,
+                    screenSize.x,
+                    screenSize.y
+                );
+
+            screenPosition.y -= 15;
+
+            screenPositions.emplace_back(screenPosition);
+            depths.emplace_back(ndcPosition.z);
+        }
+
+
+
+        for (const Triangle& triangle : mesh.triangles)
+        {
+            const Vector2& point0 = screenPositions[triangle.index0];
+            const Vector2& point1 = screenPositions[triangle.index1];
+            const Vector2& point2 = screenPositions[triangle.index2];
+
+
+            const Vector3& local0 =
+                mesh.vertices[triangle.index0].position;
+
+            const Vector3& local1 =
+                mesh.vertices[triangle.index1].position;
+
+            const Vector3& local2 =
+                mesh.vertices[triangle.index2].position;
+
+            const Vector3 localNormal =
+                Vector3::Cross(
+                    local1 - local0,
+                    local2 - local0
+                ).Normalized();
+
+            const char triangleCharacter =
+                GetFaceCharacter(
+                    localNormal,
+                    rotationMatrix,
+                    lightDirection
+                );
+
+            if (SoftwareRasterizer::IsBackFace(
+                point0,
+                point1,
+                point2))
             {
-                SubmitSurfacePoint(
-                    Vector3(x, y, -halfSize),
-                    mvp,
-                    frontCharacter
+                continue;
+            }
+
+            const std::vector<Vector2> pixels =
+                SoftwareRasterizer::RasterizeTriangle(
+                    point0,
+                    point1,
+                    point2
+                );
+
+           
+
+            for (const Vector2& pixel : pixels)
+            {
+
+                const Vector3 weights =
+                    SoftwareRasterizer::CalculateBarycentric(
+                        pixel,
+                        point0,
+                        point1,
+                        point2
+                    );
+
+                const float depth =
+                    weights.x * depths[triangle.index0] +
+                    weights.y * depths[triangle.index1] +
+                    weights.z * depths[triangle.index2];
+
+                Renderer::Get().SubmitPoint3D(
+                    pixel,
+                    depth,
+                    triangleCharacter,
+                    Color::White,
+                    0
                 );
             }
         }
-        // 큐브의 오른쪽 면
-        for (float y = -halfSize; y <= halfSize; y += sampleStep)
-        {
-            for (float z = -halfSize; z <= halfSize; z += sampleStep)
-            {
-                SubmitSurfacePoint(
-                    Vector3(halfSize, y, z),
-                    mvp,
-                    rightCharacter
-                );
-            }
-        }
-        // 큐브의 윗면
-        for (float z = -halfSize; z <= halfSize; z += sampleStep)
-        {
-            for (float x = -halfSize; x <= halfSize; x += sampleStep)
-            {
-                SubmitSurfacePoint(
-                    Vector3(x, -halfSize, z),
-                    mvp,
-                    topCharacter
-                );
-            }
-        }
 
-        // 큐브의 뒷면
-        for (float y = -halfSize; y <= halfSize; y += sampleStep)
-        {
-            for (float x = -halfSize; x <= halfSize; x += sampleStep)
-            {
-                SubmitSurfacePoint(
-                    Vector3(x, y, halfSize),
-                    mvp,
-                    backCharacter
-                );
-            }
-        }
-        // 큐브의 왼쪽 면
-        for (float y = -halfSize; y <= halfSize; y += sampleStep)
-        {
-            for (float z = -halfSize; z <= halfSize; z += sampleStep)
-            {
-                SubmitSurfacePoint(
-                    Vector3(-halfSize, y, z),
-                    mvp,
-                    leftCharacter
-                );
-            }
-        }
-
-        // 큐브의 아랫면
-        for (float z = -halfSize; z <= halfSize; z += sampleStep)
-        {
-            for (float x = -halfSize; x <= halfSize; x += sampleStep)
-            {
-                SubmitSurfacePoint(
-                    Vector3(x, halfSize, z),
-                    mvp,
-                    bottomCharacter
-                );
-            }
-        }
  //       std::vector<Vector2> screenPositions;
  //       screenPositions.reserve(mesh.vertices.size());
 

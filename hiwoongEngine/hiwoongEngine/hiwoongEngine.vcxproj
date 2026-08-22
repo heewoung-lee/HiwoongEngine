@@ -121,6 +121,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClCompile Include="Render\Renderer.cpp" />
     <ClCompile Include="Render\ScreenBuffer.cpp" />
     <ClCompile Include="Render\SoftwareRasterizer.cpp" />
+    <ClCompile Include="Render\Triangle.cpp" />
     <ClCompile Include="Render\Vertex.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Util\Util.cpp" />
@@ -147,6 +148,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClInclude Include="Render\Renderer.h" />
     <ClInclude Include="Render\ScreenBuffer.h" />
     <ClInclude Include="Render\SoftwareRasterizer.h" />
+    <ClInclude Include="Render\Triangle.h" />
     <ClInclude Include="Render\Vertex.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Util\Util.h" />

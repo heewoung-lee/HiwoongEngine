@@ -3,6 +3,7 @@
 #include "Core/Core.h"
 #include "Math/Vector2.h"
 #include "Math/Color.h"
+#include "Render/Triangle.h"
 #include <iostream>
 #include <vector>
 #include <memory>
@@ -171,6 +172,9 @@ namespace Hiwoong
 
 		//save all of surface dots 
 		std::vector<PointRenderCommand> pointRenderQueue;
+
+		//Vertex
+		std::vector<Triangle> triangles;
 
 		//Create twice ScreenBuffer
 		void CreateSceenBuffer(const Vector2& newScreenSize);

@@ -46,6 +46,34 @@ namespace Hiwoong
             Edge{ 3, 7 }
         };
 
+        result.triangles =
+        {
+            // Front
+            Triangle{ 0, 2, 1 },
+            Triangle{ 0, 3, 2 },
+
+            // Back
+            Triangle{ 4, 5, 6 },
+            Triangle{ 4, 6, 7 },
+
+            // Left
+            Triangle{ 0, 4, 7 },
+            Triangle{ 0, 7, 3 },
+
+            // Right
+            Triangle{ 1, 2, 6 },
+            Triangle{ 1, 6, 5 },
+
+            // Top
+            Triangle{ 0, 1, 5 },
+            Triangle{ 0, 5, 4 },
+
+            // Bottom
+            Triangle{ 3, 7, 6 },
+            Triangle{ 3, 6, 2 }
+        };
+
+
         return result;
     }
 }
