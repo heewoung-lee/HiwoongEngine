@@ -174,7 +174,7 @@ GameObject끼리 부모·자식 관계를 맺으면 자식은 자신의 로컬 �
 
 테트리스로 Scene, Component, 입력, 2D 문자 렌더링을 검증한 뒤, 같은 엔진 위에 3D 수학과 소프트웨어 래스터라이저를 추가했습니다. OpenGL·DirectX에 정점 계산을 넘기지 않고, CPU가 3D 좌표를 콘솔의 문자 셀로 바꾸는 전 과정을 직접 처리합니다.
 
-![HiwoongEngine 3D ASCII 렌더러 확장 과정](docs/images/roadmap-3d.svg)
+![HiwoongEngine 2D와 3D 렌더링 파이프라인 비교](docs/images/rendering-2d-to-3d.svg)
 
 ### 기존 구조에서 무엇을 재사용했나요?
 

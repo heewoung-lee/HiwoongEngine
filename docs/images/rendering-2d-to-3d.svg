@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="740" viewBox="0 0 1400 740" role="img" aria-labelledby="title desc">
+  <title id="title">HiwoongEngine 2D와 3D 렌더링 비교</title>
+  <desc id="desc">2D 문자 렌더링에서 3D ASCII 렌더링으로 확장되며 입력, 좌표 변환, 래스터화, 가림 판단이 어떻게 바뀌었는지 비교한 그림</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07111f"/><stop offset="1" stop-color="#151827"/></linearGradient>
+    <linearGradient id="lane2d" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#0b2447"/><stop offset="1" stop-color="#0d1d33"/></linearGradient>
+    <linearGradient id="lane3d" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#28134b"/><stop offset="1" stop-color="#171b34"/></linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L0 6L9 3z" fill="#94a3b8"/></marker>
+    <style>
+      .title{font:700 38px 'Segoe UI','Noto Sans KR',sans-serif;fill:#f8fafc}.subtitle{font:400 21px 'Segoe UI','Noto Sans KR',sans-serif;fill:#b8c5d6}
+      .lane-title{font:700 28px 'Segoe UI','Noto Sans KR',sans-serif;fill:#f8fafc}.lane-note{font:500 19px 'Segoe UI','Noto Sans KR',sans-serif;fill:#b9c6d8}
+      .card-title{font:700 21px 'Segoe UI','Noto Sans KR',sans-serif;fill:#f8fafc}.card-body{font:500 18px 'Segoe UI','Noto Sans KR',sans-serif;fill:#d8e1ed}
+      .common-title{font:700 25px 'Segoe UI','Noto Sans KR',sans-serif;fill:#f8fafc}.common-body{font:600 19px 'Segoe UI','Noto Sans KR',sans-serif;fill:#e2e8f0}
+      .foot{font:600 20px 'Segoe UI','Noto Sans KR',sans-serif;fill:#cbd5e1}.arrow{stroke:#94a3b8;stroke-width:3;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <rect width="1400" height="740" rx="26" fill="url(#bg)"/>
+  <text x="50" y="61" class="title">2D → 3D: 최종 출력은 같고, 그리기 전 계산이 확장됩니다</text>
+  <text x="50" y="99" class="subtitle">같은 콘솔 Frame을 사용하면서 3D 좌표 변환, 면 채우기, 깊이와 조명 판단을 앞단에 추가했습니다.</text>
+
+  <rect x="40" y="133" width="1320" height="180" rx="24" fill="url(#lane2d)" stroke="#3b82f6" stroke-width="2"/>
+  <text x="64" y="173" class="lane-title">2D 문자 렌더링</text><text x="275" y="172" class="lane-note">2D 위치의 문자를 화면 셀에 바로 기록</text>
+  <g transform="translate(60 197)">
+    <rect width="285" height="88" rx="16" fill="#17366f" stroke="#60a5fa" stroke-width="2"/><text x="142" y="34" text-anchor="middle" class="card-title">1. 입력</text><text x="142" y="65" text-anchor="middle" class="card-body">Vector2 · 문자/문자열</text>
+    <path d="M292 44 H316" class="arrow"/>
+    <g transform="translate(325)"><rect width="285" height="88" rx="16" fill="#0b4a60" stroke="#22d3ee" stroke-width="2"/><text x="142" y="34" text-anchor="middle" class="card-title">2. 좌표 계산</text><text x="142" y="65" text-anchor="middle" class="card-body">2D World → Screen Cell</text></g>
+    <path d="M617 44 H641" class="arrow"/>
+    <g transform="translate(650)"><rect width="285" height="88" rx="16" fill="#3e1766" stroke="#c084fc" stroke-width="2"/><text x="142" y="34" text-anchor="middle" class="card-title">3. 셀에 그리기</text><text x="142" y="65" text-anchor="middle" class="card-body">문자 · Sprite 문자열 배치</text></g>
+    <path d="M942 44 H966" class="arrow"/>
+    <g transform="translate(975)"><rect width="305" height="88" rx="16" fill="#563008" stroke="#fbbf24" stroke-width="2"/><text x="152" y="34" text-anchor="middle" class="card-title">4. 보이는 결과 선택</text><text x="152" y="65" text-anchor="middle" class="card-body">Sorting Order 비교</text></g>
+  </g>
+
+  <text x="700" y="344" text-anchor="middle" class="foot">▼ 3D에서는 같은 네 단계 안에 공간과 면을 계산하는 기능이 추가됩니다</text>
+
+  <rect x="40" y="370" width="1320" height="200" rx="24" fill="url(#lane3d)" stroke="#a855f7" stroke-width="2"/>
+  <text x="64" y="411" class="lane-title">3D ASCII 렌더링</text><text x="300" y="410" class="lane-note">3D 면을 2D 셀로 바꾸고, 가장 앞에 보이는 문자를 기록</text>
+  <g transform="translate(60 435)">
+    <rect width="285" height="104" rx="16" fill="#17366f" stroke="#60a5fa" stroke-width="2"/><text x="142" y="34" text-anchor="middle" class="card-title">1. 입력</text><text x="142" y="65" text-anchor="middle" class="card-body">Mesh · Triangle</text><text x="142" y="89" text-anchor="middle" class="card-body">Transform3D</text>
+    <path d="M292 52 H316" class="arrow"/>
+    <g transform="translate(325)"><rect width="285" height="104" rx="16" fill="#0b4a60" stroke="#22d3ee" stroke-width="2"/><text x="142" y="32" text-anchor="middle" class="card-title">2. 좌표 변환</text><text x="142" y="62" text-anchor="middle" class="card-body">Model · View · Projection</text><text x="142" y="87" text-anchor="middle" class="card-body">3D → 2D Screen</text></g>
+    <path d="M617 52 H641" class="arrow"/>
+    <g transform="translate(650)"><rect width="285" height="104" rx="16" fill="#3e1766" stroke="#c084fc" stroke-width="2"/><text x="142" y="32" text-anchor="middle" class="card-title">3. 면을 셀로 변환</text><text x="142" y="62" text-anchor="middle" class="card-body">Triangle Rasterization</text><text x="142" y="87" text-anchor="middle" class="card-body">삼각형 내부 문자 셀 채우기</text></g>
+    <path d="M942 52 H966" class="arrow"/>
+    <g transform="translate(975)"><rect width="305" height="104" rx="16" fill="#563008" stroke="#fbbf24" stroke-width="2"/><text x="152" y="29" text-anchor="middle" class="card-title">4. 보이는 결과 선택</text><text x="152" y="57" text-anchor="middle" class="card-body">Back-face · Depth Buffer</text><text x="152" y="82" text-anchor="middle" class="card-body">밝기 → ASCII 문자</text></g>
+  </g>
+
+  <rect x="105" y="598" width="1190" height="92" rx="22" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+  <text x="700" y="630" text-anchor="middle" class="common-title">두 방식이 공유하는 최종 출력</text>
+  <g transform="translate(203 646)">
+    <rect width="215" height="34" rx="10" fill="#17366f" stroke="#60a5fa"/><text x="107" y="24" text-anchor="middle" class="common-body">Render Queue</text><path d="M224 17 H256" class="arrow"/>
+    <g transform="translate(265)"><rect width="215" height="34" rx="10" fill="#3e1766" stroke="#c084fc"/><text x="107" y="24" text-anchor="middle" class="common-body">CHAR_INFO Frame</text></g><path d="M489 17 H521" class="arrow"/>
+    <g transform="translate(530)"><rect width="215" height="34" rx="10" fill="#0b4a60" stroke="#22d3ee"/><text x="107" y="24" text-anchor="middle" class="common-body">ScreenBuffer A/B</text></g><path d="M754 17 H786" class="arrow"/>
+    <g transform="translate(795)"><rect width="215" height="34" rx="10" fill="#075134" stroke="#4ade80"/><text x="107" y="24" text-anchor="middle" class="common-body">Windows Console</text></g>
+  </g>
+  <text x="700" y="720" text-anchor="middle" class="foot">핵심: 출력기를 새로 만든 것이 아니라, Frame에 문자를 쓰기 전 계산을 2D에서 3D로 확장했습니다.</text>
+</svg>
