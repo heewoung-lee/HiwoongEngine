@@ -10,9 +10,11 @@ HiwoongEngine은 OpenGL, DirectX 같은 그래픽 API나 외부 게임 프레임
 | Scene | 현재 Scene과 다음 Scene의 안전한 교체, GameObject 관리 |
 | GameObject | 생명주기, 부모·자식 관계, Component 보관 |
 | Component | `AddComponent<T>()`, `GetComponent<T>()`, 주인 객체 조회 |
-| Transform | 로컬 좌표와 부모 기준 월드 좌표 계산 |
+| Transform | 2D 부모·자식 좌표와 3D 위치·회전·크기(`T * R * S`) 계산 |
 | Input | 현재·이전 키 상태를 비교한 `GetKey`, `GetKeyDown`, `GetKeyUP` |
 | Renderer | 문자·색상·좌표·겹침 순서 처리, 콘솔 더블 버퍼링 |
+| 3D 수학 | `Vector3`, `Vector4`, `Matrix4x4`, 내적·외적, Model·View·Projection |
+| Software Rasterizer | Mesh·Triangle, 뒷면 제거, 삼각형 채우기, 깊이 버퍼, ASCII 조명 |
 | Type System | Component 검색에 사용하는 간단한 자체 RTTI와 상속 타입 확인 |
 
 ---
@@ -109,7 +111,58 @@ GameObject끼리 부모·자식 관계를 맺으면 자식은 자신의 로컬 �
 
 ---
 
-## 5. 입력과 Scene 전환
+## 5. 2D 엔진을 3D ASCII 렌더러로 확장
+
+테트리스로 Scene, Component, 입력, 2D 문자 렌더링을 검증한 뒤, 같은 엔진 위에 3D 수학과 소프트웨어 래스터라이저를 추가했습니다. OpenGL·DirectX에 정점 계산을 넘기지 않고, CPU가 3D 좌표를 콘솔의 문자 셀로 바꾸는 전 과정을 직접 처리합니다.
+
+![HiwoongEngine 3D ASCII 렌더러 확장 과정](docs/images/roadmap-3d.svg)
+
+### 기존 구조에서 무엇을 재사용했나요?
+
+| 그대로 사용한 기반 | 3D를 위해 추가한 기능 |
+|---|---|
+| Scene → GameObject → Component 생명주기 | `Transform3DComponent`의 위치·회전·크기 |
+| 한 프레임의 그리기 명령을 모으는 Renderer | `Vector3`, `Vector4`, `Matrix4x4` 연산 |
+| 2D 좌표를 문자 셀에 쓰는 Frame | Vertex·Edge·Triangle로 구성한 Mesh |
+| 깔끔한 출력을 위한 두 개의 ScreenBuffer | 원근 투영, 뒷면 제거, 삼각형 래스터화 |
+| 문자 겹침을 해결하는 셀 단위 판정 | 셀마다 가까운 면을 고르는 Depth Buffer |
+
+즉, 엔진의 소유 구조와 프레임 흐름은 바꾸지 않고 **Renderer가 받아들일 수 있는 좌표와 가림 판정을 3D까지 확장**했습니다.
+
+### 3D 점 하나가 ASCII 문자가 되는 순서
+
+1. Mesh의 로컬 정점에 `Transform3DComponent`의 Model 행렬을 적용합니다.
+2. `LookAt` View 행렬로 카메라를 기준으로 좌표를 바꿉니다.
+3. Perspective 행렬과 원근 나누기로 멀리 있는 물체를 작게 만듭니다.
+4. 3D 좌표를 콘솔의 2D 셀 좌표로 변환합니다.
+5. 화면에서 뒤를 보는 삼각형은 Back-face Culling으로 건너뜁니다.
+6. 남은 삼각형 내부를 채우고, 바리센트릭 가중치로 각 셀의 깊이를 계산합니다.
+7. Depth Buffer로 가까운 면만 남기고, 법선과 빛 방향에 따라 ` .:-=+*#%@`를 선택합니다.
+
+### 3D Transform도 Component로 분리
+
+`Transform3DComponent` 하나가 Model 행렬을 만들기 때문에, Cube는 어떻게 이동·회전·확대해야 하는지 알 필요가 없습니다.
+
+```cpp
+Instantiate<CubeObject>(
+    Vector3(0, 0, 5),          // Position
+    Vector3(0.4f, 0.6f, 0),   // Rotation
+    Vector3(1, 1, 1)           // Scale
+);
+```
+
+### 결과: CPU로 그린 회전하는 ASCII 큐브
+
+<p align="center">
+  <img src="docs/images/ascii-cube.gif" width="900" alt="HiwoongEngine ASCII 3D 큐브 렌더링">
+</p>
+<p align="center"><sub>Model·View·Projection, 삼각형 래스터화, Depth Buffer, 법선 기반 ASCII 조명을 적용한 결과</sub></p>
+
+큐브는 단순한 문자 애니메이션이 아닙니다. 매 프레임 8개의 정점과 12개의 삼각형을 변환하고, 화면에 보이는 픽셀을 다시 채우며 회전합니다. 이 결과로 기존 콘솔 엔진이 **3D Mesh를 그릴 수 있는 소프트웨어 렌더러로 확장되었음**을 검증했습니다.
+
+---
+
+## 6. 입력과 Scene 전환
 
 ### 입력
 
@@ -127,13 +180,15 @@ GameObject끼리 부모·자식 관계를 맺으면 자식은 자신의 로컬 �
 
 ---
 
-## 6. 현재 엔진의 범위
+## 7. 현재 엔진의 범위
 
 | 상태 | 기능 |
 |---|---|
 | 구현됨 | 게임 루프, Scene 전환, 예약 생성·삭제, 컴포넌트, Transform 계층, 키 입력 |
 | 구현됨 | RenderCommand, 셀별 겹침 순서, CHAR_INFO Frame, 콘솔 더블 버퍼, 화면 크기 변경 |
-| 앞으로 구현 | 3D 수학, Camera, Mesh, 투영, 깊이 버퍼, 범용 물리·충돌 |
+| 구현됨 | Vector3·4, Matrix4x4, Transform3D, Mesh, 원근 투영, 삼각형 래스터화 |
+| 구현됨 | Back-face Culling, 바리센트릭 깊이 보간, Depth Buffer, ASCII 조명 |
+| 앞으로 구현 | Camera Component, 범용 MeshRenderer, 클리핑, 3D 충돌·월드, ASCII Doom |
 
 ---
 
@@ -175,4 +230,8 @@ GameObject끼리 부모·자식 관계를 맺으면 자식은 자신의 로컬 �
 </details>
 
 ---
+
+## 다음 목표: ASCII Doom
+
+회전 큐브로 3D 좌표 변환·투영·가림·조명 파이프라인을 검증했습니다. 다음 단계에서는 이 기반에 Camera Component, 복수 Mesh, 맵 로딩, 클리핑, 충돌과 이동을 추가해 콘솔 안을 직접 돌아다닐 수 있는 ASCII 3D 월드로 확장할 계획입니다.
 

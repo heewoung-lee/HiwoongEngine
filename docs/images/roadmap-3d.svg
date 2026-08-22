@@ -1,15 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="650" viewBox="0 0 1400 650" role="img" aria-labelledby="title desc">
-  <title id="title">HiwoongEngine 3D ASCII 렌더링 로드맵</title>
-  <desc id="desc">현재 2D 콘솔 엔진에서 3D 수학, 카메라, 투영, 래스터화, 깊이 버퍼와 ASCII 조명으로 확장하는 향후 계획</desc>
+  <title id="title">HiwoongEngine 3D ASCII 렌더러 확장 과정</title>
+  <desc id="desc">2D 콘솔 엔진에 3D 수학, Mesh, 투영, 래스터화, 깊이 버퍼와 ASCII 조명을 추가해 회전 큐브를 완성한 과정</desc>
   <defs>
     <linearGradient id="dbg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#081018"/><stop offset="1" stop-color="#151827"/></linearGradient>
     <marker id="da" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L0 6L9 3z" fill="#64748b"/></marker>
     <style>.t{font:700 30px 'Segoe UI','Noto Sans KR',sans-serif;fill:#f8fafc}.s{font:400 16px 'Segoe UI','Noto Sans KR',sans-serif;fill:#94a3b8}.h{font:700 18px 'Segoe UI','Noto Sans KR',sans-serif;fill:#f8fafc}.b{font:400 14px 'Segoe UI','Noto Sans KR',sans-serif;fill:#cbd5e1}.tag{font:700 13px 'Segoe UI','Noto Sans KR',sans-serif;fill:#081018}.a{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#da)}</style>
   </defs>
   <rect width="1400" height="650" rx="24" fill="url(#dbg)"/>
-  <text x="55" y="60" class="t">다음 목표: 3D 좌표를 ASCII 문자로 투영하기</text>
-  <text x="55" y="91" class="s">아래 단계는 현재 구현이 아니라, 기존 생명주기와 콘솔 렌더러를 확장하는 개발 계획입니다.</text>
-  <rect x="1135" y="38" width="205" height="42" rx="21" fill="#fde68a"/><text x="1237" y="65" text-anchor="middle" class="tag">FUTURE ROADMAP</text>
+  <text x="55" y="60" class="t">2D 문자 렌더러에서 3D ASCII 소프트웨어 렌더러로</text>
+  <text x="55" y="91" class="s">기존 Scene·Component·Frame·ScreenBuffer를 유지하고 3D 변환과 삼각형 처리를 단계적으로 추가했습니다.</text>
+  <rect x="1135" y="38" width="205" height="42" rx="21" fill="#86efac"/><text x="1237" y="65" text-anchor="middle" class="tag">IMPLEMENTED</text>
   <g transform="translate(55 155)">
     <rect width="190" height="120" rx="18" fill="#172554" stroke="#60a5fa" stroke-width="2"/><text x="95" y="40" text-anchor="middle" class="h">1. 3D 수학</text><text x="95" y="70" text-anchor="middle" class="b">Vector3 · Matrix4x4</text><text x="95" y="94" text-anchor="middle" class="b">내적 · 외적 · 정규화</text>
     <path d="M195 60 H225" class="a"/>
@@ -29,6 +29,6 @@
   <rect x="445" y="425" width="220" height="70" rx="14" fill="#083344" stroke="#22d3ee"/><text x="555" y="454" text-anchor="middle" class="h">입력</text><text x="555" y="480" text-anchor="middle" class="b">현재 · 이전 키 상태</text>
   <rect x="700" y="425" width="220" height="70" rx="14" fill="#3b0764" stroke="#c084fc"/><text x="810" y="454" text-anchor="middle" class="h">렌더 큐</text><text x="810" y="480" text-anchor="middle" class="b">그리기 명령 수집</text>
   <rect x="955" y="425" width="285" height="70" rx="14" fill="#052e16" stroke="#4ade80"/><text x="1097" y="454" text-anchor="middle" class="h">콘솔 더블 버퍼</text><text x="1097" y="480" text-anchor="middle" class="b">최종 ASCII Frame 표시</text>
-  <text x="700" y="545" text-anchor="middle" class="s">첫 번째 완료 기준: 원근감 · 가림 · 밝기 차이를 가진 회전 큐브가 콘솔에 안정적으로 보이는 것</text>
-  <text x="700" y="612" text-anchor="middle" class="s">3D 충돌 · 텍스처 · 애니메이션은 이 렌더링 기반을 검증한 뒤의 별도 단계입니다.</text>
+  <text x="700" y="545" text-anchor="middle" class="s">완료 결과: 원근감 · 가림 · 깊이 · 밝기 차이를 가진 회전 큐브를 콘솔에 표시</text>
+  <text x="700" y="612" text-anchor="middle" class="s">다음 확장: Camera Component · 범용 MeshRenderer · 3D 충돌 · ASCII Doom 월드</text>
 </svg>
