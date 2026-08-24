@@ -382,9 +382,22 @@ namespace
             Hiwoong::Vector3(1, 2, 3);
     }
 
+
+    bool TestVector3Subtraction()
+    {
+        Hiwoong::Vector3 current(4, 1, -2);
+        Hiwoong::Vector3 previous(1, 1, 3);
+
+        Hiwoong::Vector3 expected(3,0,-5);
+        Hiwoong::Vector3 result = current - previous;
+
+        return
+            expected == result;
+    }
+
     int main()
     {
-        if (TestVertexPosition() == true)
+        if (TestVector3Subtraction() == true)
         {
             std::cout << "Success" << std::endl;
         }
