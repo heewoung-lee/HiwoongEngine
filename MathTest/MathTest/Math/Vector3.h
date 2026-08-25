@@ -13,7 +13,13 @@ public:
 	float GetLength() const;
 	Vector3 Normalized() const;
 	float Dot(const Vector3& other) const;
+	Vector3 Cross(const Vector3& other) const;
+	static Vector3 FromYaw(float yawRadians);
 
+	bool NearlyEquals(const Vector3& other, float epsilon) const;
+
+	bool operator == (const Vector3& other) const;
+		
 private:
 
 	float x;

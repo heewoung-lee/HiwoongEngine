@@ -1,6 +1,7 @@
 ﻿
 #include <iostream>
 #include "Math/Vector3.h"
+#include <cmath>
 
 bool IsNormalized()
 {
@@ -34,8 +35,35 @@ bool IsAllTest()
         IsGetDot();
 }
 
+bool CheckCross()
+{
+    Vector3 a(1,0,0);
+    Vector3 b(0, 0, 1);
+
+    Vector3 expect(0, -1, 0);
+
+    return a.Cross(b) == expect;
+}
+
+bool CheckFromYaw()
+{
+    Vector3 expect(1,0,0);
+    constexpr float Pi = 3.14159265f;
+    Vector3 test = Vector3::FromYaw(Pi/2);
+
+    return expect.NearlyEquals(test,0.0001f);
+}
+
+bool CheckNearlyEquels()
+{
+    Vector3 a(1, 1, 1);
+    Vector3 b(1.0000000001f, 1.0000000001f, 1.0000000001f);
+
+    return a.NearlyEquals(b,0.0001f);
+}
+
 int main()
 {
     
-    std::cout << IsAllTest() << std::endl;
+    std::cout << CheckFromYaw() << std::endl;
 }
