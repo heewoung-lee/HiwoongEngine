@@ -19,7 +19,8 @@ public:
 	bool NearlyEquals(const Vector3& other, float epsilon) const;
 
 	bool operator == (const Vector3& other) const;
-		
+	static Vector3 GetProjection(const Vector3& cameraPosition);
+
 private:
 
 	float x;

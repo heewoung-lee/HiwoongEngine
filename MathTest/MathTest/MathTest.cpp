@@ -62,8 +62,17 @@ bool CheckNearlyEquels()
     return a.NearlyEquals(b,0.0001f);
 }
 
+bool CheckPeojection()
+{
+    Vector3 projection = Vector3::GetProjection(Vector3(4,2,2));
+
+    Vector3 expected(2, 1, 2);
+
+    return projection == expected;
+}
+
 int main()
 {
     
-    std::cout << CheckFromYaw() << std::endl;
+    std::cout << CheckPeojection() << std::endl;
 }

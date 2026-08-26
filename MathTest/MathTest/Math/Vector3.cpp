@@ -61,3 +61,14 @@ bool Vector3::operator==(const Vector3& other) const
 {
 	return x == other.x && y == other.y && z == other.z;
 }
+
+Vector3 Vector3::GetProjection(const Vector3& cameraPosition)
+{
+	Vector3 result;
+
+	result.x = cameraPosition.x / cameraPosition.z;
+	result.y = cameraPosition.y / cameraPosition.z;
+	result.z = cameraPosition.z;
+
+	return result;
+}
