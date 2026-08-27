@@ -9,6 +9,8 @@ public:
 
 
 	inline  Vector3 GetPosition() const { return Vector3(x, y, z); }
+	inline  float GetZ() const { return z; }
+
 
 	float GetLength() const;
 	Vector3 Normalized() const;
@@ -20,6 +22,10 @@ public:
 
 	bool operator == (const Vector3& other) const;
 	static Vector3 GetProjection(const Vector3& cameraPosition);
+	static Vector3 IntersectNearPlane(
+		const Vector3& a,
+		const Vector3& b,
+		float nearPlane);
 
 private:
 

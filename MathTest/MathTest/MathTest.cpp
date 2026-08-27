@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Math/Vector3.h"
 #include <cmath>
+#include<vector>
 
 bool IsNormalized()
 {
@@ -70,9 +71,90 @@ bool CheckPeojection()
 
     return projection == expected;
 }
+bool CanProject(
+    const Vector3& cameraPosition,
+    float nearPlane)
+{
+    return cameraPosition.GetZ() >= nearPlane;
+}
+bool CheckCannotProjectBehindCamera()
+{
+    Vector3 cameraPosition(4, 2, 0.0001f);
+    float nearPlane = 0.1f;
+
+    return CanProject(cameraPosition, nearPlane) == false;
+}
+
+bool CheckIntersectNearPlane()
+{
+    Vector3 a(0, 0, -1);
+    Vector3 b(4, 0, 3);
+    float nearPlane = 1;
+
+    Vector3 expect(2, 0,1);
+    return Vector3::IntersectNearPlane(a,b,nearPlane) == expect;
+}
+
+std::vector<Vector3> ClipTriangleNearPlane(
+    const Vector3& p,
+    const Vector3& q,
+    const Vector3& r,
+    float nearPlane)
+{
+    Vector3 vertices[3] = { p, q, r };
+    std::vector<Vector3> positions;
+
+    int insideCount = 0;
+
+    for (int i = 0; i < vertices->GetLength(); ++i)
+    {
+        if (vertices[i].GetZ() >= nearPlane)
+        {
+            insideCount++;
+        }
+    }
+
+    
+
+
+
+
+    
+    switch (insideCount)
+    {
+    case 0: return {};
+    case 3: return {p,q,r};
+    
+    case 2: 
+        
+
+
+    default:
+        break;
+    }
+
+    Vector3 j1 = Vector3::IntersectNearPlane(p, q, nearPlane);
+    Vector3 j2 = Vector3::IntersectNearPlane(p, r, nearPlane);
+
+    return {j1,q,r,j2};
+}
+bool CheckClipTriangleTwoInside()
+{
+    Vector3 p(0, 0, 0);
+    Vector3 q(2, 0, 2);
+    Vector3 r(0, 2, 2);
+
+    std::vector<Vector3> result =  ClipTriangleNearPlane(p, q, r, 1.0f);
+
+
+
+
+    return result.size() == 4 &&  
+}
+
 
 int main()
 {
     
-    std::cout << CheckPeojection() << std::endl;
+    std::cout << CheckClipTriangleTwoInside() << std::endl;
 }

@@ -62,6 +62,9 @@ bool Vector3::operator==(const Vector3& other) const
 	return x == other.x && y == other.y && z == other.z;
 }
 
+//Z축 이 기본 축이라 모든 축들을 기본축으로 나눠 노멀로 만듦
+//즉 카메라가 z로 부터 멀어지면 x,y축도 같은 비율로 줄어들어야함.
+
 Vector3 Vector3::GetProjection(const Vector3& cameraPosition)
 {
 	Vector3 result;
@@ -71,4 +74,20 @@ Vector3 Vector3::GetProjection(const Vector3& cameraPosition)
 	result.z = cameraPosition.z;
 
 	return result;
+}
+
+//카메라에서 벗어낸 정점을 제거 한 뒤.
+//안쪽으로 들어오는 선분을 하나 그어,
+//새로운 버택스를 만들어 내어, 버택스가 전부 날라가는걸 방지.
+Vector3 Vector3::IntersectNearPlane(const Vector3& a, const Vector3& b, float nearPlane)
+{
+	//t는 A에서 B까지 0~1 중 어디까지 이동하면 Near Plane에 닿는지 나타내는 비율.
+	float t = (nearPlane - a.z) / (b.z - a.z);
+
+	// 기존 선분 AB가 Near Plane과 만나는 점 I
+	float resultX = a.x + t*(b.x - a.x);
+	float resultY = a.y + t * (b.y - a.y);
+	float resultZ = a.z + t * (b.z - a.z);
+
+	return Vector3(resultX, resultY, resultZ);
 }
