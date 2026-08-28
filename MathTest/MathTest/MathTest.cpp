@@ -102,27 +102,29 @@ std::vector<Vector3> ClipTriangleNearPlane(
     float nearPlane)
 {
     Vector3 vertices[3] = { p, q, r };
+    std::vector<bool> insides(3, false);
+
     std::vector<Vector3> positions;
 
     int insideCount = 0;
 
-    for (int i = 0; i < vertices->GetLength(); ++i)
+    //어떤 정점이 밖에 있나 확인.
+    for (int i = 0; i < 3; ++i)
     {
         if (vertices[i].GetZ() >= nearPlane)
         {
             insideCount++;
+            insides[i] = true;
         }
     }
-
-    
-
-
-
 
     
     switch (insideCount)
     {
     case 0: return {};
+    case 1:
+
+
     case 3: return {p,q,r};
     
     case 2: 
