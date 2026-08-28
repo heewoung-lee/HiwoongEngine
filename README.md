@@ -1,5 +1,3 @@
-
-
 # HiwoongEngine
 
 ### 콘솔 테트리스
@@ -14,9 +12,8 @@
 
 ### 3D ASCII 큐브
 
-<p align="center">
-  <img src="docs/images/ascii-cube.gif" width="900" alt="HiwoongEngine ASCII 3D 큐브 렌더링">
-</p>
+
+https://github.com/user-attachments/assets/639897e7-3dc8-43dd-8a19-020b15c6207a
 <p align="center"><sub>Model·View·Projection, 삼각형 래스터화, Depth Buffer, 법선 기반 ASCII 조명을 적용한 결과</sub></p>
 
 ---
@@ -231,9 +228,7 @@ Instantiate<CubeObject>(
 
 ### 결과: CPU로 그린 회전하는 ASCII 큐브
 
-<p align="center">
-  <img src="docs/images/ascii-cube.gif" width="900" alt="HiwoongEngine ASCII 3D 큐브 렌더링">
-</p>
+https://github.com/user-attachments/assets/639897e7-3dc8-43dd-8a19-020b15c6207a
 <p align="center"><sub>Model·View·Projection, 삼각형 래스터화, Depth Buffer, 법선 기반 ASCII 조명을 적용한 결과</sub></p>
 
 매 프레임 8개의 정점과 12개의 삼각형을 변환하고, 화면에 보이는 픽셀을 다시 채우며 회전합니다.
