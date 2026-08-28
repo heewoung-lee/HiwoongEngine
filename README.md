@@ -2,8 +2,6 @@
 
 # HiwoongEngine
 
-## 결과물
-
 ### 콘솔 테트리스
 
 <table>
