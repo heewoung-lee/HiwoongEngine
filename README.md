@@ -154,6 +154,14 @@ GameObject끼리 부모·자식 관계를 맺으면 자식은 자신의 로컬 �
 
 위의 2D 엔진 구조가 실제 게임을 운영할 수 있는지 확인하기 위해 콘솔 테트리스를 만들었습니다.
 
+<table>
+  <tr>
+    <td align="center"><img src="docs/images/tetris-play.gif" width="270" alt="HiwoongEngine 테트리스 플레이"><br><sub>이동 · 회전 · 다음 블록 UI</sub></td>
+    <td align="center"><img src="docs/images/tetris-game-over.gif" width="270" alt="HiwoongEngine 테트리스 게임오버"><br><sub>보드 점유 검사와 GameOver 전환</sub></td>
+    <td align="center"><img src="docs/images/tetris-level-up.gif" width="270" alt="HiwoongEngine 테트리스 레벨업"><br><sub>상태 유지와 레벨별 낙하 속도</sub></td>
+  </tr>
+</table>
+
 ![테트리스 블록의 논리 흐름](docs/images/tetris-flow.svg)
 
 ### 테트리스는 어떤 논리로 만들었나요?
@@ -222,6 +230,13 @@ Instantiate<CubeObject>(
     Vector3(1, 1, 1)           // Scale
 );
 ```
+
+### 결과: CPU로 그린 회전하는 ASCII 큐브
+
+<p align="center">
+  <img src="docs/images/ascii-cube.gif" width="900" alt="HiwoongEngine ASCII 3D 큐브 렌더링">
+</p>
+<p align="center"><sub>Model·View·Projection, 삼각형 래스터화, Depth Buffer, 법선 기반 ASCII 조명을 적용한 결과</sub></p>
 
 매 프레임 8개의 정점과 12개의 삼각형을 변환하고, 화면에 보이는 픽셀을 다시 채우며 회전합니다.
 
