@@ -79,15 +79,15 @@ Vector3 Vector3::GetProjection(const Vector3& cameraPosition)
 //카메라에서 벗어낸 정점을 제거 한 뒤.
 //안쪽으로 들어오는 선분을 하나 그어,
 //새로운 버택스를 만들어 내어, 버택스가 전부 날라가는걸 방지.
-Vector3 Vector3::IntersectNearPlane(const Vector3& a, const Vector3& b, float nearPlane)
+Vector3 Vector3::IntersectNearPlane(const Vector3& inside, const Vector3& outside, float nearPlane)
 {
 	//t는 A에서 B까지 0~1 중 어디까지 이동하면 Near Plane에 닿는지 나타내는 비율.
-	float t = (nearPlane - a.z) / (b.z - a.z);
+	float t = (nearPlane - inside.z) / (outside.z - inside.z);
 
 	// 기존 선분 AB가 Near Plane과 만나는 점 I
-	float resultX = a.x + t*(b.x - a.x);
-	float resultY = a.y + t * (b.y - a.y);
-	float resultZ = a.z + t * (b.z - a.z);
+	float resultX = inside.x + t * (outside.x - inside.x);
+	float resultY = inside.y + t * (outside.y - inside.y);
+	float resultZ = inside.z + t * (outside.z - inside.z);
 
 	return Vector3(resultX, resultY, resultZ);
 }

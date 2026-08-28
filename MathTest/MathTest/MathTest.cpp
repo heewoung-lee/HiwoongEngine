@@ -3,7 +3,7 @@
 #include "Math/Vector3.h"
 #include <cmath>
 #include<vector>
-
+#include<cassert>
 bool IsNormalized()
 {
     Vector3 normalized = Vector3(6, 8, 0).Normalized();
@@ -101,7 +101,7 @@ std::vector<Vector3> ClipTriangleNearPlane(
     const Vector3& r,
     float nearPlane)
 {
-    Vector3 vertices[3] = { p, q, r };
+    std::vector<Vector3> vertices = { p, q, r };
     std::vector<bool> insides(3, false);
 
     std::vector<Vector3> positions;
@@ -109,7 +109,7 @@ std::vector<Vector3> ClipTriangleNearPlane(
     int insideCount = 0;
 
     //어떤 정점이 밖에 있나 확인.
-    for (int i = 0; i < 3; ++i)
+    for (int i = 0; i < vertices.size(); ++i)
     {
         if (vertices[i].GetZ() >= nearPlane)
         {
@@ -123,22 +123,48 @@ std::vector<Vector3> ClipTriangleNearPlane(
     {
     case 0: return {};
     case 1:
-
-
+    {
+        int findidx = -1;
+        for (int i = 0; i < insides.size(); ++i)
+        {
+            if (insides[i] == true)
+            {
+                findidx = i;
+                break;
+            }
+        }
+        //찾은 정점에서 이전과 이후의 정점을 찾은 다음.
+        int nextIdx = (findidx + 1) % 3;
+        int preIdx = (findidx + 2) % 3;
+        //찾은 정점과 바깥쪽 정점 사이의 정점 두개를 구한다.
+        Vector3 j1 = Vector3::IntersectNearPlane(vertices[findidx], vertices[nextIdx], nearPlane);
+        Vector3 j2 = Vector3::IntersectNearPlane(vertices[findidx], vertices[preIdx], nearPlane);
+        return{vertices[findidx],j1,j2};
+    }
+    case 2:
+    {
+        int outidx = -1;//나간정점
+        for (int i = 0; i < insides.size(); ++i)
+        {
+            if (insides[i] == false)
+            {
+                outidx = i;
+                break;
+            }
+        }
+        //나간 정점에서 이전과 이후의 정점을 찾은 다음.
+        int nextIdx = (outidx + 1) % 3;
+        int preIdx = (outidx + 2) % 3;
+        //나간과 안쪽 정점 사이의 정점 두개를 구한다.
+        Vector3 j1 = Vector3::IntersectNearPlane(vertices[outidx], vertices[nextIdx], nearPlane);
+        Vector3 j2 = Vector3::IntersectNearPlane(vertices[outidx], vertices[preIdx], nearPlane);
+        return{vertices[nextIdx],vertices[preIdx],j2,j1};
+    }
     case 3: return {p,q,r};
-    
-    case 2: 
-        
-
-
-    default:
-        break;
+    default: break;
     }
 
-    Vector3 j1 = Vector3::IntersectNearPlane(p, q, nearPlane);
-    Vector3 j2 = Vector3::IntersectNearPlane(p, r, nearPlane);
-
-    return {j1,q,r,j2};
+    return {};
 }
 bool CheckClipTriangleTwoInside()
 {
@@ -149,9 +175,7 @@ bool CheckClipTriangleTwoInside()
     std::vector<Vector3> result =  ClipTriangleNearPlane(p, q, r, 1.0f);
 
 
-
-
-    return result.size() == 4 &&  
+    return false;
 }
 
 
