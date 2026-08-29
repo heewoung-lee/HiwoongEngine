@@ -160,6 +160,7 @@ std::vector<Vector3> ClipTriangleNearPlane(
         Vector3 j2 = Vector3::IntersectNearPlane(vertices[outidx], vertices[preIdx], nearPlane);
         return{vertices[nextIdx],vertices[preIdx],j2,j1};
     }
+
     case 3: return {p,q,r};
     default: break;
     }
@@ -174,13 +175,70 @@ bool CheckClipTriangleTwoInside()
 
     std::vector<Vector3> result =  ClipTriangleNearPlane(p, q, r, 1.0f);
 
+    Vector3 expectJ2(0, 1, 1);
+    Vector3 expectJ1(1, 0, 1);
 
-    return false;
+    if (result.size() != 4)
+    {
+        return false;
+    }
+    return q == result[0]&& r == result[1] && expectJ2 == result[2] && expectJ1 == result[3];
+}
+bool CheckClipTriangleOneInside()
+{
+    Vector3 p(0, 0, 2);
+    Vector3 q(2, 0, 0);
+    Vector3 r(0, 2, 0);
+
+    std::vector<Vector3> result = ClipTriangleNearPlane(p, q, r, 1.0f);
+
+    Vector3 expectJ1(1, 0, 1);
+    Vector3 expectJ2(0, 1, 1);
+
+    if (result.size() != 3)
+    {
+        return false;
+    }
+    return p == result[0] && expectJ1 == result[1] && expectJ2 == result[2];
+}
+bool CheckClipTriangleAllOutside()
+{
+    Vector3 p(0, 0, 0);
+    Vector3 q(2, 0, 0.5f);
+    Vector3 r(0, 2, -1);
+
+    std::vector<Vector3> result = ClipTriangleNearPlane(p, q, r, 1.0f);
+
+    if (result.size() != 0)
+    {
+        return false;
+    }
+    return true;
 }
 
+bool CheckClipTriangleAllInside()
+{
+    Vector3 p(0, 0, 1);
+    Vector3 q(2, 0, 1);
+    Vector3 r(0, 2, 1);
+
+    std::vector<Vector3> result = ClipTriangleNearPlane(p, q, r, 1.0f);
+
+    if (result.size() != 3) return false;
+
+    return result[0] == p && result[1] == q && result[2] == r;
+}
+
+bool CheckAllcaseOfTriale()
+{
+    return CheckClipTriangleTwoInside() &&
+        CheckClipTriangleOneInside() &&
+        CheckClipTriangleAllOutside() &&
+        CheckClipTriangleAllInside();
+}
 
 int main()
 {
     
-    std::cout << CheckClipTriangleTwoInside() << std::endl;
+    std::cout << CheckAllcaseOfTriale() << std::endl;
 }
