@@ -55,6 +55,7 @@ bool Vector3::NearlyEquals(const Vector3& other, float epsilon) const
 		diffenceY < epsilon &&
 		diffenceZ < epsilon 
 		;
+
 }
 
 bool Vector3::operator==(const Vector3& other) const
