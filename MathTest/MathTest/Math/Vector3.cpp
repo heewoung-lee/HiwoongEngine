@@ -91,3 +91,9 @@ Vector3 Vector3::IntersectNearPlane(const Vector3& inside, const Vector3& outsid
 
 	return Vector3(resultX, resultY, resultZ);
 }
+
+//
+float Vector3::RayPlaneIntersectionT(const Vector3& origin, const Vector3& direction, const Vector3& planePoint, const Vector3& planeNormal)
+{
+	return 0.0f;
+}
