@@ -9,6 +9,8 @@ public:
 
 
 	inline  Vector3 GetPosition() const { return Vector3(x, y, z); }
+	inline  float GetX() const { return x; }
+	inline  float GetY() const { return y; }
 	inline  float GetZ() const { return z; }
 
 	static Vector3 FromYaw(float yawRadians);
@@ -35,7 +37,14 @@ public:
 
 
 	bool operator == (const Vector3& other) const;
-	
+	Vector3 operator -(const Vector3& other) const;
+	Vector3 operator *(float value) const;
+	Vector3 operator +(const Vector3& other) const;
+
+	static Vector3 GetPointOnRay(
+		const Vector3& origin,
+		const Vector3& direction,
+		float t);
 
 
 

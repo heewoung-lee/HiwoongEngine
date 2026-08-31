@@ -1,6 +1,7 @@
 ﻿
 #include <iostream>
 #include "Math/Vector3.h"
+#include "Math/AABBCollider.h"
 #include <cmath>
 #include<vector>
 #include<cassert>
@@ -237,8 +238,164 @@ bool CheckAllcaseOfTriale()
         CheckClipTriangleAllInside();
 }
 
+bool CheckRayPlaneIntersection()
+{
+    Vector3 origin(1, 0, 2);
+    Vector3 direction(1, 0, 0);
+
+    Vector3 planePoint(5, 0, 0);
+    Vector3 planeNormal(1, 0, 0);
+
+    float result = Vector3::RayPlaneIntersectionT(
+        origin,
+        direction,
+        planePoint,
+        planeNormal);
+
+    std::cout << result << std::endl;
+
+    return std::abs(result - 4.0f) < 0.0001f;
+}
+//Ray와 벽이 평행할 때 교점이 없다고 판단하는지 확인하는 테스트.
+bool CheckRayPlaneParallel()
+{
+    Vector3 origin(0, 0, 0);
+    Vector3 direction(0, 0, 1);
+
+    Vector3 planePoint(5, 0, 0);
+    Vector3 planeNormal(1, 0, 0);
+
+    float result = Vector3::RayPlaneIntersectionT(
+        origin,
+        direction,
+        planePoint,
+        planeNormal);
+    
+    std::cout << result << std::endl;
+
+    return std::abs(result - (-1.0f)) < 0.0001f;
+}
+
+bool CheckRayPlaneBehind()
+{
+    Vector3 origin(5, 0, 0);
+    Vector3 direction(1, 0, 0);
+
+    Vector3 planePoint(1, 0, 0);
+    Vector3 planeNormal(1, 0, 0);
+
+    float result = Vector3::RayPlaneIntersectionT(
+        origin,
+        direction,
+        planePoint,
+        planeNormal);
+
+    std::cout << result << std::endl;
+
+    return std::abs(result - (-1.0f)) < 0.0001f;
+}
+
+bool CheckGetRayPoint()
+{
+    Vector3 start(1, 0, 2);
+    Vector3 direction(1,0,0);
+    float t = 4;
+
+    Vector3 expect(5, 0, 2);
+
+    return Vector3::GetPointOnRay(start, direction,t) == expect;
+}
+
+bool CheckOverlapATOB()
+{
+    AABBCollider player(2.5f, 3.5f, 4.5f, 5.5f);
+    AABBCollider wall(3.2f,4.2f,5.2f,6.2f);
+
+    bool expect = true;
+
+    return expect == player.IsOverlapping(wall);
+}
+
+bool CheckAABBSeparatedOnZ()
+{
+    AABBCollider player(2.5f, 3.5f, 4.5f, 5.5f);
+    AABBCollider wall(3.2f, 4.2f, 7.0f, 8.0f);
+
+    bool expect = false;
+
+    return expect == player.IsOverlapping(wall);
+}
+
+bool CheckCollisionTest()
+{
+    AABBCollider small(2, 3, 2, 3);
+    AABBCollider big(0, 10, 0, 10);
+    
+    bool expect = true;
+
+    return expect == small.IsOverlapping(big);
+}
+
+bool CheckWallSlide()
+{
+        Vector3 currentPos(3,0,5);
+        Vector3 movement(1,0,2);
+        float halfX = 0.5f;
+        float halfZ = 1;
+        AABBCollider wall(4,5,0,10);
+
+        Vector3 expect(3,0,7);
+
+        return AABBCollider::MoveWithWallSlide(
+            currentPos, 
+            movement,
+            halfX,
+            halfZ,
+            wall) == expect;
+}
+
+bool CheckWallSlideNoCollision()
+{
+    Vector3 currentPos(0, 0, 0);
+    Vector3 movement(1, 0, 2);
+    float halfX = 0.5f;
+    float halfZ = 1;
+    AABBCollider wall(10, 11, 10, 11);
+
+    Vector3 expect(1, 0, 2);
+
+    return  expect == AABBCollider::MoveWithWallSlide(currentPos, movement, halfX, halfZ, wall);
+}
+bool CheckWallSlideZBlocked()
+{
+    Vector3 currentPos(3, 0, 3);
+    Vector3 movement(2, 0, 1);
+    float halfX = 0.5f;
+    float halfZ = 0.5;
+    AABBCollider wall(0, 10, 4, 5);
+
+    Vector3 expect(5, 0, 3);
+
+    return  expect == AABBCollider::MoveWithWallSlide(currentPos, movement, halfX, halfZ, wall);
+
+}
+
+bool CheckWallSlideBothBlocked()
+{
+    Vector3 currentPos(3, 0, 3);
+    Vector3 movement(1, 0, 1);
+    float halfX = 0.5f;
+    float halfZ = 0.5;
+    AABBCollider wall(3.5,4.5, 3.5, 4.5);
+
+    Vector3 expect(3, 0, 3);
+
+    return  expect == AABBCollider::MoveWithWallSlide(currentPos, movement, halfX, halfZ, wall);
+
+}
+
 int main()
 {
     
-    std::cout << CheckAllcaseOfTriale() << std::endl;
+    std::cout << CheckWallSlideBothBlocked() << std::endl;
 }

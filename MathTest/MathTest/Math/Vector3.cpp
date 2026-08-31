@@ -63,6 +63,28 @@ bool Vector3::operator==(const Vector3& other) const
 	return x == other.x && y == other.y && z == other.z;
 }
 
+Vector3 Vector3::operator-(const Vector3& other) const
+{
+	return Vector3(x-other.x, y-other.y, z-other.z);
+}
+
+Vector3 Vector3::operator*(float value) const
+{
+	return Vector3(x*value,y*value,z*value);
+}
+
+Vector3 Vector3::operator+(const Vector3& other) const
+{
+	return Vector3(x+other.x,y+other.y,z + other.z);
+}
+
+Vector3 Vector3::GetPointOnRay(const Vector3& origin, const Vector3& direction, float t)
+{
+	return origin + (direction*t);
+}
+
+
+
 //Z축 이 기본 축이라 모든 축들을 기본축으로 나눠 노멀로 만듦
 //즉 카메라가 z로 부터 멀어지면 x,y축도 같은 비율로 줄어들어야함.
 
@@ -93,8 +115,32 @@ Vector3 Vector3::IntersectNearPlane(const Vector3& inside, const Vector3& outsid
 	return Vector3(resultX, resultY, resultZ);
 }
 
-//
+//Ray가 현재 위치에서 방향을 따라 얼마나 진행해야 벽의 평면에 닿는가?
+// Ray가 평면에 닿기까지 direction을 따라 진행할 값 t를 계산한다.
+// direction이 정규화되어 있다면 t는 실제 거리다.
 float Vector3::RayPlaneIntersectionT(const Vector3& origin, const Vector3& direction, const Vector3& planePoint, const Vector3& planeNormal)
 {
-	return 0.0f;
+	// Ray 시작점에서 평면 위의 점으로 향하는 벡터
+	Vector3 toPlane = planePoint - origin;
+	
+	// 평면까지 법선 방향으로 남아 있는 양
+	float numerator = toPlane.Dot(planeNormal);
+
+	// Ray가 한 번 진행할 때 법선 방향으로 가까워지는 양
+	float denominator = direction.Dot(planeNormal);
+
+	if (std::abs(denominator) < 0.0001f)
+	{
+		return -1.0f;
+	}
+
+	// 남은 양을 한 번에 가까워지는 양으로 나누어 진행량 t 계산
+	float t = numerator / denominator;
+
+	if (t < 0.0f)
+	{
+		return -1.0f;
+	}
+
+	return t;
 }
