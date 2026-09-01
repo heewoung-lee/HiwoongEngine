@@ -4,6 +4,8 @@
 #include "Math/Vector4.h"
 #include "Math/Matrix4x4.h"
 #include "Render/Vertex.h"
+#include "Camera/Camera3D.h"
+#include "Component/Transform3DComponent.h"
 #include <cmath>
 
 namespace
@@ -291,52 +293,30 @@ namespace
         return std::abs(nearDepth - 0.0f) < Epsilon &&
             std::abs(farDepth - 1.0f) < Epsilon;
     }
-
-
-    bool RunAllTests()
+    bool TestVertexPosition()
     {
-        bool constructorPassed = TestVector3Constructor();
-        bool lengthPassed = TestGetLength();
-        bool normalizedPassed = GetNormalized();
-        bool dotPassed = GetDot();
-        bool crossPassed = TestCross();
-        bool identityPassed = TestIdentityMatrix();
-        bool scalePassed = TestScaleMatrix();
-        bool rotationXPassed = TestRotationX();
-        bool rotationYPassed = TestRotationY();
-        bool rotationZPassed = TestRotationZ();
-        bool translationDirectionPassed =
-            TestTranslationDoesNotMoveDirection();
+        Hiwoong::Vertex vertex{
+            Hiwoong::Vector3(1, 2, 3)
+        };
 
-        bool testViewMatrix =  TestViewMatrix();
-
-        return constructorPassed &&
-            lengthPassed &&
-            normalizedPassed &&
-            dotPassed &&
-            crossPassed &&
-            identityPassed &&
-            scalePassed &&
-            rotationXPassed &&
-            rotationYPassed &&
-            rotationZPassed &&
-            translationDirectionPassed &&
-            testViewMatrix;
+        return vertex.position ==
+            Hiwoong::Vector3(1, 2, 3);
     }
 
-    bool TestPerspectiveDivide()
+
+    bool TestVector3Subtraction()
     {
-        Hiwoong::Vector4 clipPosition(4, 2, 8, 2);
+        Hiwoong::Vector3 current(4, 1, -2);
+        Hiwoong::Vector3 previous(1, 1, 3);
 
-        Hiwoong::Vector3 result =
-            clipPosition.PerspectiveDivide();
+        Hiwoong::Vector3 expected(3, 0, -5);
+        Hiwoong::Vector3 result = current - previous;
 
-        constexpr float Epsilon = 0.0001f;
-
-        return std::abs(result.x - 2.0f) < Epsilon &&
-            std::abs(result.y - 1.0f) < Epsilon &&
-            std::abs(result.z - 4.0f) < Epsilon;
+        return
+            expected == result;
     }
+
+
     bool TestModelViewProjection()
     {
         constexpr float HalfPi = 3.14159265f / 2.0f;
@@ -372,40 +352,107 @@ namespace
             screenPosition.z >= 0.0f &&
             screenPosition.z <= 1.0f;
     }
-    bool TestVertexPosition()
-    {
-        Hiwoong::Vertex vertex{
-            Hiwoong::Vector3(1, 2, 3)
-        };
 
-        return vertex.position ==
-            Hiwoong::Vector3(1, 2, 3);
+    bool TestPerspectiveDivide()
+    {
+        Hiwoong::Vector4 clipPosition(4, 2, 8, 2);
+
+        Hiwoong::Vector3 result =
+            clipPosition.PerspectiveDivide();
+
+        constexpr float Epsilon = 0.0001f;
+
+        return std::abs(result.x - 2.0f) < Epsilon &&
+            std::abs(result.y - 1.0f) < Epsilon &&
+            std::abs(result.z - 4.0f) < Epsilon;
+    }
+
+    bool TestGetCameraForward()
+    {
+        const float PI = 3.141592f;
+
+        Hiwoong::Vector3 curpos(0, 0, 0);
+        Hiwoong::Transform3DComponent trasform;
+
+        trasform.SetRotation(Hiwoong::Vector3(0,PI/2,0));
+
+        Hiwoong::Camera3D camera(trasform);
+
+        Hiwoong::Vector3 forward = camera.GetForward();
+        Hiwoong::Vector3 expect(1, 0, 0);
+
+        return Hiwoong::Vector3::NearyEquals(forward, expect);
+    }
+
+    bool TestGetCameraRight()
+    {
+        const float PI = 3.141592f;
+
+        Hiwoong::Vector3 curpos(0, 0, 0);
+        Hiwoong::Transform3DComponent trasform;
+
+        trasform.SetRotation(Hiwoong::Vector3(0, PI / 2, 0));
+
+        Hiwoong::Camera3D camera(trasform);
+
+        Hiwoong::Vector3 right = camera.GetRight();
+        Hiwoong::Vector3 expect(0, 0, -1);
+
+        return Hiwoong::Vector3::NearyEquals(right, expect);
     }
 
 
-    bool TestVector3Subtraction()
+    bool RunAllTests()
     {
-        Hiwoong::Vector3 current(4, 1, -2);
-        Hiwoong::Vector3 previous(1, 1, 3);
+        bool constructorPassed = TestVector3Constructor();
+        bool lengthPassed = TestGetLength();
+        bool normalizedPassed = GetNormalized();
+        bool dotPassed = GetDot();
+        bool crossPassed = TestCross();
+        bool identityPassed = TestIdentityMatrix();
+        bool scalePassed = TestScaleMatrix();
+        bool rotationXPassed = TestRotationX();
+        bool rotationYPassed = TestRotationY();
+        bool rotationZPassed = TestRotationZ();
+        bool translationDirectionPassed =
+            TestTranslationDoesNotMoveDirection();
 
-        Hiwoong::Vector3 expected(3,0,-5);
-        Hiwoong::Vector3 result = current - previous;
+        bool testModelMatrix = TestModelMatrixOrder();
 
-        return
-            expected == result;
+        bool testViewMatrix =  TestViewMatrix();
+
+        return constructorPassed &&
+            lengthPassed &&
+            normalizedPassed &&
+            dotPassed &&
+            crossPassed &&
+            identityPassed &&
+            scalePassed &&
+            rotationXPassed &&
+            rotationYPassed &&
+            rotationZPassed &&
+            translationDirectionPassed &&
+            testViewMatrix &&
+            testModelMatrix &&
+            TestViewMatrixX() &&
+            TestPerspectiveMakesFarObjectsSmaller() &&
+            TestPerspectiveDepthRange() &&
+            TestPerspectiveDivide() && 
+            TestModelViewProjection();
     }
 
     int main()
     {
-        if (TestVector3Subtraction() == true)
+        if (TestGetCameraRight() == true)
         {
             std::cout << "Success" << std::endl;
         }
         else
         {
             std::cout << "failure" << std::endl;
+            return 1;
         }
-
         return 0;
     }
+
 

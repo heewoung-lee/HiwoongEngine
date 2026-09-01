@@ -4,6 +4,8 @@
 
 namespace Hiwoong
 {
+	constexpr float Epsilon = 0.0001f;
+
 	class Hiwoong_API Vector3
 	{
 	public:
@@ -32,7 +34,10 @@ namespace Hiwoong
 		//I use right-handed coordinate system
 		static Vector3 Cross(const Vector3& a, const Vector3& b);
 
+		static bool NearyEquals(const Vector3& a, const Vector3& b);
 		Vector3 Normalized() const;
+
+		
 
 		bool operator == (const Vector3& other) const;
 		bool operator != (const Vector3& other) const;

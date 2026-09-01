@@ -5,6 +5,7 @@
 
 namespace Hiwoong
 {
+
     Vector3::Vector3(float newX, float newY, float newZ)
         : x(newX), y(newY), z(newZ)
     {
@@ -63,6 +64,12 @@ namespace Hiwoong
             a.z * b.x - a.x * b.z,
             a.x * b.y - a.y * b.x
         );
+    }
+    bool Vector3::NearyEquals(const Vector3& a, const Vector3& b)
+    {
+        return std::abs(a.x - b.x) < Epsilon &&
+            std::abs(a.y - b.y) < Epsilon &&
+            std::abs(a.z - b.z) < Epsilon;
     }
     Vector3 Vector3::Normalized() const
     {

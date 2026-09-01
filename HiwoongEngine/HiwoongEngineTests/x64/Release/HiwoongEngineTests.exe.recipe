@@ -2,10 +2,10 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\WorkSpace\HiwoongEngine\hiwoongEngine\Bin\Release\HiwoongEngine\HiwoongEngine.dll</FullPath>
+      <FullPath>C:\WorkSpace\HiwoongEngine\HiwoongEngine\Bin\Release\HiwoongEngine\HiwoongEngine.dll</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>C:\WorkSpace\HiwoongEngine\hiwoongEngine\x64\Release\HiwoongEngineTests.exe</FullPath>
+      <FullPath>C:\WorkSpace\HiwoongEngine\HiwoongEngine\x64\Release\HiwoongEngineTests.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

@@ -103,6 +103,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera\Camera3D.cpp" />
     <ClCompile Include="Component\BoxColliderComponent.cpp" />
     <ClCompile Include="Component\Component.cpp" />
     <ClCompile Include="Component\SpriteRendererComponent.cpp" />
@@ -128,6 +129,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClCompile Include="Util\Util.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera\Camera3D.h" />
     <ClInclude Include="Component\BoxColliderComponent.h" />
     <ClInclude Include="Component\Component.h" />
     <ClInclude Include="Component\SpriteRendererComponent.h" />
