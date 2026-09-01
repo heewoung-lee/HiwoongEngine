@@ -16,6 +16,11 @@
 https://github.com/user-attachments/assets/639897e7-3dc8-43dd-8a19-020b15c6207a
 <p align="center"><sub>Model·View·Projection, 삼각형 래스터화, Depth Buffer, 법선 기반 ASCII 조명을 적용한 결과</sub></p>
 
+
+### ASCII DOOM(~진행중)
+<img width="1672" height="941" alt="image" src="https://github.com/user-attachments/assets/6aa996cd-3888-4ba7-840a-eed2e2bc6dde" />
+
+
 ---
 
 HiwoongEngine은 OpenGL, DirectX 같은 그래픽 API나 외부 게임 프레임워크 없이 C++ 표준 라이브러리와 Windows 콘솔 API로 동작합니다.
