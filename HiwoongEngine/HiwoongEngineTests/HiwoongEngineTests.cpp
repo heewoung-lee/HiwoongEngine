@@ -8,11 +8,8 @@
 #include "Component/Transform3DComponent.h"
 #include <cmath>
 
-namespace
-{
-    Hiwoong::Vector3 testVector(3.0f, 4.0f, 0.0f);
-}
-
+using namespace Hiwoong;
+using namespace std;
 
 
     bool TestVector3Constructor()
@@ -36,7 +33,7 @@ namespace
 
     bool GetNormalized()
     {
-        Hiwoong::Vector3 normal = testVector.Normalized();
+        Hiwoong::Vector3 normal = Vector3(0,0,0).Normalized();
         
         Hiwoong::Vector3 testNormal(0.6f, 0.8f, 0);
         return testNormal == normal;
@@ -400,6 +397,48 @@ namespace
 
         return Hiwoong::Vector3::NearyEquals(right, expect);
     }
+    bool TestCemeraGetView()
+    {
+        Vector3 cameraPos(0,0,5);
+        Vector3 rotation(0, 0, 0);
+        Vector4 worldPos(0,0,12,1);
+        
+        Transform3DComponent trsnform(cameraPos, rotation, Vector3(1, 1, 1));
+        Camera3D camera(trsnform);
+
+        Vector4 expect(0,0,7,1);
+
+
+        Vector4 result = (camera.GetViewMatrix() * worldPos);
+
+        cout << result.x << " " << result.y <<  " "  << result.z << " " << result.w << endl;
+        
+
+        return (camera.GetViewMatrix() * worldPos) == expect;
+    }
+
+    bool TestCemeraGetViewRotation()
+    {
+        const float PI = 3.141592f;
+
+        Vector3 cameraPos(0, 0, 0);
+        Vector3 rotation(0, PI/2, 0);
+        Vector4 worldPos(6, 0, 2, 1);
+
+        Transform3DComponent trsnform(cameraPos, rotation, Vector3(1, 1, 1));
+        Camera3D camera(trsnform);
+
+
+        Vector4 expect(-2, 0, 6, 1);
+
+
+        Vector4 result = (camera.GetViewMatrix() * worldPos);
+
+        cout << result.x << " " << result.y << " " << result.z << " " << result.w << endl;
+
+
+        return Vector4::NearyEquals(result,expect);
+    }
 
 
     bool RunAllTests()
@@ -443,7 +482,7 @@ namespace
 
     int main()
     {
-        if (TestGetCameraRight() == true)
+        if (TestCemeraGetViewRotation() == true)
         {
             std::cout << "Success" << std::endl;
         }

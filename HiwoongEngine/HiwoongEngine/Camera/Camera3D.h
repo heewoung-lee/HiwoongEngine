@@ -25,7 +25,7 @@ namespace Hiwoong
 		Vector3 GetRight();
 		Vector3 GetDown();
 
-		Matrix4x4 GetView();
+		Matrix4x4 GetViewMatrix();
 
 
 	private:
