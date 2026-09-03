@@ -120,6 +120,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClCompile Include="Render\Edge.cpp" />
     <ClCompile Include="Render\Mesh.cpp" />
     <ClCompile Include="Render\MeshFactory.cpp" />
+    <ClCompile Include="Render\MeshRenderer.cpp" />
     <ClCompile Include="Render\Renderer.cpp" />
     <ClCompile Include="Render\ScreenBuffer.cpp" />
     <ClCompile Include="Render\SoftwareRasterizer.cpp" />
@@ -141,6 +142,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClInclude Include="GameObject\GameObject.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Math\Color.h" />
+    <ClInclude Include="Math\MathConstants.h" />
     <ClInclude Include="Math\Matrix4x4.h" />
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Math\Vector3.h" />
@@ -149,7 +151,9 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClInclude Include="Render\Edge.h" />
     <ClInclude Include="Render\Mesh.h" />
     <ClInclude Include="Render\MeshFactory.h" />
+    <ClInclude Include="Render\MeshRenderer.h" />
     <ClInclude Include="Render\Renderer.h" />
+    <ClInclude Include="Render\RenderView.h" />
     <ClInclude Include="Render\ScreenBuffer.h" />
     <ClInclude Include="Render\SoftwareRasterizer.h" />
     <ClInclude Include="Render\Triangle.h" />

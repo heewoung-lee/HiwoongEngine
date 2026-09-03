@@ -1,8 +1,12 @@
-#include "Math/Vector3.h"
+#include "Engine/Engine.h"
+#include "Scene/DoomScene.h"
+using namespace Hiwoong;
 
 int main()
 {
-	Hiwoong::Vector3 test(0, 0, 1);
+	Engine engine;
+	engine.AddNewScene<DoomScene>();
+	engine.Run();
 
-	return (test.Length() == 1) ? 0 : 1;
+	return 0;
 }
