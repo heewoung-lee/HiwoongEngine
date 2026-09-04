@@ -8,7 +8,7 @@
 
 namespace Hiwoong
 {
-	GameStatesUI::GameStatesUI(const Vector2& position) :GameObject(position)
+	GameStatesUI::GameStatesUI(const Vector2& position) :GameObject(Vector3(position.x,position.y,0))
 	{
 	}
 	void GameStatesUI::Start()
@@ -18,7 +18,9 @@ namespace Hiwoong
 		std::shared_ptr<Scene> scene = GetOwner();
 		assert(scene != nullptr);
 
-		const Vector2 origin = GetWorldPosition();
+		auto position = GetWorldPosition();
+
+		const Vector2 origin(position.x, position.y);
 
 		//Fill horizontal to '-' not boarder
 		const std::string horizontal(Width - 2, '-');
@@ -192,7 +194,9 @@ namespace Hiwoong
 		}
 
 		//Show POsition
-		const Vector2 previewOrigin = GetWorldPosition() + Vector2(4, 10);
+
+		Vector3 worldPos = GetWorldPosition();
+		const Vector2 previewOrigin =Vector2(worldPos.x, worldPos.y) + Vector2(4, 10);
 
 
 		for (std::size_t index = 0; index < nextBlockTexts.size();++index)
@@ -204,7 +208,9 @@ namespace Hiwoong
 				continue;
 			}
 
-			blockText->SetPosition(previewOrigin + positions[index]);
+			Vector2 setPos = previewOrigin + positions[index];
+
+			blockText->SetPosition(Vector3(setPos.x, setPos.y,0));
 
 			blockText->SetColor(color);
 		}

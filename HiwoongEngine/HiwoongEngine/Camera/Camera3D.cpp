@@ -1,10 +1,11 @@
 #include "Camera3D.h"
 #include "Math/Matrix4x4.h"
+#include "Component/TransformComponent.h"
 #include <cmath>
 
 namespace Hiwoong
 {
-	Camera3D::Camera3D(Transform3DComponent& transform): transform(transform)
+	Camera3D::Camera3D(TransformComponent& transform): transform(transform)
 	{
 	}
 

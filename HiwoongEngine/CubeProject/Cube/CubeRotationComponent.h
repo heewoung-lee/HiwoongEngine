@@ -2,10 +2,11 @@
 
 #include "Component/Component.h"
 #include "Math/Vector3.h"
+#include "Component/TransformComponent.h"
 
 namespace Hiwoong
 {
-    class Transform3DComponent;
+    class TransformComponent;
 
     class CubeRotationComponent : public Component
     {
@@ -16,7 +17,7 @@ namespace Hiwoong
         void Update(double deltaTime) override;
 
     private:
-        std::weak_ptr<Transform3DComponent> transform3DComponent;
+        std::weak_ptr<TransformComponent> transform3DComponent;
         Vector3 rotationSpeed{ 0.5f, 0.8f, 0.0f };
     };
 }

@@ -2,6 +2,7 @@
 
 #include "GameObject/GameObject.h"
 #include "Component/SpriteRendererComponent.h"
+#include "Math/Vector2.h"
 #include <memory>
 #include <cassert>
 
@@ -14,7 +15,7 @@ namespace Hiwoong
             const Vector2& position,
             const std::string& text,
             const Color& color)
-            : GameObject(position)
+            : GameObject(Vector3(position.x,position.y,0))
         {
             spriteRenderer = AddComponent<SpriteRendererComponent>(
                 text,

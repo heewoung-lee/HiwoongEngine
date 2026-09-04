@@ -4,8 +4,8 @@
 #include "Math/Color.h"
 #include "Engine/Engine.h"
 #include "Test/CubeScene.h"
-#include "Component/Transform3DComponent.h"
 #include "Math/Vector4.h"
+#include "Component/TransformComponent.h"
 
 bool TestCreateCubeHasEightVertices()
 {
@@ -161,29 +161,29 @@ bool TestBackFaceCulling()
 
 bool TestTransform3DDefaultValues()
 {
-	Hiwoong::Transform3DComponent transform;
+	Hiwoong::TransformComponent transform;
 
-	return transform.GetPosition() == Hiwoong::Vector3(0, 0, 0) &&
+	return transform.GetLocalPosition() == Hiwoong::Vector3(0, 0, 0) &&
 		transform.GetRotation() == Hiwoong::Vector3(0, 0, 0) &&
 		transform.GetScale() == Hiwoong::Vector3(1, 1, 1);
 }
 
 bool TestTransform3DCustomValues()
 {
-	Hiwoong::Transform3DComponent transform(
+	Hiwoong::TransformComponent transform(
 		Hiwoong::Vector3(1, 2, 3),
 		Hiwoong::Vector3(0.1f, 0.2f, 0.3f),
 		Hiwoong::Vector3(2, 3, 4)
 	);
 
-	return transform.GetPosition() == Hiwoong::Vector3(1, 2, 3) &&
+	return transform.GetLocalPosition() == Hiwoong::Vector3(1, 2, 3) &&
 		transform.GetRotation() == Hiwoong::Vector3(0.1f, 0.2f, 0.3f) &&
 		transform.GetScale() == Hiwoong::Vector3(2, 3, 4);
 }
 
 bool TestTransform3DModelMatrix()
 {
-	Hiwoong::Transform3DComponent transform(
+	Hiwoong::TransformComponent transform(
 		Hiwoong::Vector3(5, 6, 7),
 		Hiwoong::Vector3(0, 0, 0),
 		Hiwoong::Vector3(2, 3, 4)

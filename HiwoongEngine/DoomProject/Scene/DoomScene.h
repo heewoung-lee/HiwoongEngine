@@ -1,10 +1,10 @@
 #pragma once
 
 #include "Scene/Scene.h"
-#include "Component/Transform3DComponent.h"
 #include "Camera/Camera3D.h"
 #include "Render/MeshRenderer.h"
-
+#include "Player/Player.h"
+#include <memory>
 
 namespace Hiwoong
 {
@@ -24,11 +24,11 @@ namespace Hiwoong
 
 
 	private :
-		Transform3DComponent transform;
+		std::shared_ptr<Player> player;
+		TransformComponent transform;
 		Camera3D camera;
 		MeshRenderer meshRenderer;
 		Mesh wallMesh;
-
 
 		//테스트용
 		Matrix4x4 wallModel;

@@ -17,7 +17,7 @@ namespace Hiwoong
 		using LockedCallback = std::function<void()>;
 		void AddOnLocked(LockedCallback callback);
 
-		TetrisModule(const Vector2& position) : GameObject(position) {}
+		TetrisModule(const Vector2& position) : GameObject(Vector3(position.x,position.y,0)) {}
 		virtual ~TetrisModule() = default;
 		
 		void Drop();

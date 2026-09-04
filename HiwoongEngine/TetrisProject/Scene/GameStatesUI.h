@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameObject/GameObject.h"
+#include "Math/Vector2.h"
 #include <memory>
 #include <array>
 namespace Hiwoong

@@ -74,7 +74,9 @@ namespace Hiwoong
 		cells[idx] = true;
 		blockCells[idx] = block;
 
-		SetOccupied(block->GetWorldPosition(),true);
+		Vector3 blockPos = block->GetWorldPosition();
+
+		SetOccupied(Vector2(blockPos.x,blockPos.y), true);
 
 	}
 
@@ -113,7 +115,7 @@ namespace Hiwoong
 					cells[idx + width] = true;
 					blockCells[idx + width] = block;
 					block->SetPosition(
-						block->GetPosition() + Vector2(0, 1)
+						block->GetPosition() + Vector3(0, 1,0)
 					);
 
 					cells[idx] = false;

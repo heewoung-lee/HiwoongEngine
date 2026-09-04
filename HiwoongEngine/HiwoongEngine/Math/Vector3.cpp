@@ -10,8 +10,6 @@ namespace Hiwoong
         : x(newX), y(newY), z(newZ)
     {
     }
-
-
     Vector3 Vector3::Zero(0, 0, 0);
 
     Vector3 Vector3::operator+(const Vector3& other) const

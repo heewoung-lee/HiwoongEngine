@@ -4,9 +4,11 @@
 #include "Render/Mesh.h"
 #include "Math/Vector3.h"
 #include "Math/Matrix4x4.h"
+#include "Component/TransformComponent.h"
+
 namespace Hiwoong
 {
-	class Transform3DComponent;
+	class TransformComponent;
 
 	class CubeObject : public GameObject
 	{
@@ -29,7 +31,7 @@ namespace Hiwoong
 		
 	private:
 		Mesh mesh;
-		std::weak_ptr<Transform3DComponent> transform3DComponent;
+		std::weak_ptr<TransformComponent> transform3DComponent;
 		char GetShadeCharacter(float brightness) const;
 
 	};

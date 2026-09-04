@@ -9,7 +9,7 @@ namespace Hiwoong
 	class Hiwoong_API Vector3
 	{
 	public:
-		Vector3(float newX, float newY, float newZ);
+		Vector3(float newX = 0, float newY = 0, float newZ = 0);
 		~Vector3() = default;
 
 

@@ -107,7 +107,6 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClCompile Include="Component\BoxColliderComponent.cpp" />
     <ClCompile Include="Component\Component.cpp" />
     <ClCompile Include="Component\SpriteRendererComponent.cpp" />
-    <ClCompile Include="Component\Transform3DComponent.cpp" />
     <ClCompile Include="Component\TransformComponent.cpp" />
     <ClCompile Include="Core\Input.cpp" />
     <ClCompile Include="GameObject\GameObject.cpp" />
@@ -134,7 +133,6 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClInclude Include="Component\BoxColliderComponent.h" />
     <ClInclude Include="Component\Component.h" />
     <ClInclude Include="Component\SpriteRendererComponent.h" />
-    <ClInclude Include="Component\Transform3DComponent.h" />
     <ClInclude Include="Component\TransformComponent.h" />
     <ClInclude Include="Core\Core.h" />
     <ClInclude Include="Core\HiwoongObject.h" />

@@ -12,7 +12,14 @@ namespace Hiwoong
 		SpawnManager(const Vector2& position);
 		~SpawnManager() override = default;
 
-		inline Vector2 SpawnPosition()const { return position; }
+		inline Vector2 SpawnPosition()const {
+			Vector3 position = GetPosition();
+
+			return Vector2(
+				static_cast<int>(position.x),
+				static_cast<int>(position.y)
+			);
+		}
 		inline bool IsGameOver() const { return gameOver; }
 
 		void Start() override;

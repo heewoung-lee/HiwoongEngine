@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include "ScreenBuffer.h"
+#include "Math/Vector2.h"
 #include <cassert>
 #include <Windows.h>
 #include <iostream>

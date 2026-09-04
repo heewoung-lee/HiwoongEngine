@@ -34,7 +34,7 @@ namespace Hiwoong
 
 	void DoomScene::SpawnPlayer()
 	{
-		Instantiate<Player>();
+		player = Instantiate<Player>();
 	}
 
 

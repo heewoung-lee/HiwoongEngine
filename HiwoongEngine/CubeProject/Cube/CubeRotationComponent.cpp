@@ -1,7 +1,7 @@
 #include "CubeRotationComponent.h"
 #include <cassert>
-#include "Component/Transform3DComponent.h"
 #include "GameObject/GameObject.h"
+#include "Component/TransformComponent.h"
 
 
 namespace Hiwoong
@@ -12,7 +12,7 @@ namespace Hiwoong
 		std::shared_ptr<GameObject> owner = GetOwner();
 		assert(owner != nullptr);
 
-		transform3DComponent = owner->GetComponent<Transform3DComponent>();
+		transform3DComponent = owner->GetComponent<TransformComponent>();
 
 		assert(transform3DComponent.expired() == false);
 	}
@@ -20,7 +20,7 @@ namespace Hiwoong
 	{
 		Component::Update(deltaTime);
 
-		std::shared_ptr<Transform3DComponent> transform =
+		std::shared_ptr<TransformComponent> transform =
 			transform3DComponent.lock();
 
 		assert(transform != nullptr);

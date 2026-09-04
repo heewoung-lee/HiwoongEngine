@@ -5,7 +5,7 @@
 #include "Math/Matrix4x4.h"
 #include "Render/Vertex.h"
 #include "Camera/Camera3D.h"
-#include "Component/Transform3DComponent.h"
+#include "Component/TransformComponent.h"
 #include <cmath>
 
 using namespace Hiwoong;
@@ -369,7 +369,7 @@ using namespace std;
         const float PI = 3.141592f;
 
         Hiwoong::Vector3 curpos(0, 0, 0);
-        Hiwoong::Transform3DComponent trasform;
+        Hiwoong::TransformComponent trasform;
 
         trasform.SetRotation(Hiwoong::Vector3(0,PI/2,0));
 
@@ -386,7 +386,7 @@ using namespace std;
         const float PI = 3.141592f;
 
         Hiwoong::Vector3 curpos(0, 0, 0);
-        Hiwoong::Transform3DComponent trasform;
+        Hiwoong::TransformComponent trasform;
 
         trasform.SetRotation(Hiwoong::Vector3(0, PI / 2, 0));
 
@@ -403,7 +403,7 @@ using namespace std;
         Vector3 rotation(0, 0, 0);
         Vector4 worldPos(0,0,12,1);
         
-        Transform3DComponent trsnform(cameraPos, rotation, Vector3(1, 1, 1));
+        TransformComponent trsnform(cameraPos, rotation, Vector3(1, 1, 1));
         Camera3D camera(trsnform);
 
         Vector4 expect(0,0,7,1);
@@ -425,7 +425,7 @@ using namespace std;
         Vector3 rotation(0, PI/2, 0);
         Vector4 worldPos(6, 0, 2, 1);
 
-        Transform3DComponent trsnform(cameraPos, rotation, Vector3(1, 1, 1));
+        TransformComponent trsnform(cameraPos, rotation, Vector3(1, 1, 1));
         Camera3D camera(trsnform);
 
 

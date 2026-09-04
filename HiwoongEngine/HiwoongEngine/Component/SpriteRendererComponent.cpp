@@ -19,10 +19,17 @@ namespace Hiwoong
 
 		if (gameObject == nullptr || gameObject->IsActive() == false) return;
 
-		std::shared_ptr<TransformComponent> transform = gameObject->GetTransform();
+		std::shared_ptr<TransformComponent> transform = gameObject->GetComponent<TransformComponent>();
 		if (transform == nullptr) return;
 
-		Renderer::Get().Submit(image, transform->GetWorldPosition(), color, sortingOrder);
+		Vector3 position = transform->GetWorldPosition();
+
+
+		Renderer::Get().Submit(
+			image, 
+			Vector2(position.x, position.y),
+			color, 
+			sortingOrder);
 
 
 		//Renderer::Get().Submit()

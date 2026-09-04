@@ -59,22 +59,22 @@ namespace Hiwoong
 		if (leftCollision == nullptr || rightCollision == nullptr) return false;
 
 
-		const Vector2 leftCurrent = left->GetWorldPosition();
-		const Vector2 leftPrevious = left->GetPreviousPosition();
+		const Vector3 leftCurrent = left->GetWorldPosition();
+		const Vector3 leftPrevious = left->GetPreviousPosition();
 
-		const Vector2 rightCurrent = right->GetWorldPosition();
-		const Vector2 rightPrevious = right->GetPreviousPosition();
+		const Vector3 rightCurrent = right->GetWorldPosition();
+		const Vector3 rightPrevious = right->GetPreviousPosition();
 
 
-		const int leftXMin = (leftCurrent.x < leftPrevious.x) ? leftCurrent.x : leftPrevious.x;
-		const int leftXMaxCurrent = leftCurrent.x + leftCollision->GetWidth() - 1;
-		const int leftXMaxPrevious = leftPrevious.x + leftCollision->GetWidth() - 1;
-		const int leftXMax = (leftXMaxCurrent > leftXMaxPrevious) ? leftXMaxCurrent : leftXMaxPrevious;
-
-		const int rightXMin = (rightCurrent.x < rightPrevious.x) ? rightCurrent.x : rightPrevious.x;
-		const int rightXMaxCurrent = rightCurrent.x + rightCollision->GetWidth() - 1;
-		const int rightXMaxPrevious = rightPrevious.x + rightCollision->GetWidth() - 1;
-		const int rightXMax = (rightXMaxCurrent > rightXMaxPrevious) ? rightXMaxCurrent : rightXMaxPrevious;
+		const float  leftXMin = (leftCurrent.x < leftPrevious.x) ? leftCurrent.x : leftPrevious.x;
+		const float  leftXMaxCurrent = leftCurrent.x + leftCollision->GetWidth() - 1;
+		const float  leftXMaxPrevious = leftPrevious.x + leftCollision->GetWidth() - 1;
+		const float  leftXMax = (leftXMaxCurrent > leftXMaxPrevious) ? leftXMaxCurrent : leftXMaxPrevious;
+		
+		const float  rightXMin = (rightCurrent.x < rightPrevious.x) ? rightCurrent.x : rightPrevious.x;
+		const float  rightXMaxCurrent = rightCurrent.x + rightCollision->GetWidth() - 1;
+		const float  rightXMaxPrevious = rightPrevious.x + rightCollision->GetWidth() - 1;
+		const float  rightXMax = (rightXMaxCurrent > rightXMaxPrevious) ? rightXMaxCurrent : rightXMaxPrevious;
 
 		if (rightXMin > leftXMax)
 		{
@@ -86,5 +86,6 @@ namespace Hiwoong
 			return false;
 		}
 
+		return true;
 	}
 }

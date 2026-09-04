@@ -2,6 +2,7 @@
 
 #include "GameObject/GameObject.h"
 #include "Core/Core.h"
+#include "Math/Vector2.h"
 #include <type_traits>
 #include <utility>
 #include <vector>

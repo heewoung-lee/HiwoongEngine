@@ -4,9 +4,11 @@
 #include "Render/Renderer.h"
 namespace Hiwoong
 {
-	GameObject::GameObject(const Vector2& position)
+	GameObject::GameObject(const Vector3& position)
 	{
 		transform = std::make_shared<TransformComponent>(position);
+
+		//TransformComponent - > Transform3DComponent
 	}
 	GameObject::~GameObject()
 	{
@@ -114,11 +116,11 @@ namespace Hiwoong
 		parent = newParent;
 		newParent->children.emplace_back(weak_from_this());
 
-		if (transform && newParent->GetTransform())
+		if (transform && newParent->GetComponent<TransformComponent>())
 		{
-			Vector2 worldPosition = transform->GetWorldPosition();
+			Vector3 worldPosition = transform->GetWorldPosition();
 
-			transform->SetParent(newParent->GetTransform());
+			transform->SetParent(newParent->GetComponent<TransformComponent>());
 
 			if (keepWorldPosition)
 			{
@@ -154,7 +156,7 @@ namespace Hiwoong
 
 		if (transform)
 		{
-			Vector2 worldPosition = transform->GetWorldPosition();
+			Vector3 worldPosition = transform->GetWorldPosition();
 			transform->SetParent(std::weak_ptr<TransformComponent>());
 			transform->SetWorldPosition(worldPosition);
 		}
@@ -173,17 +175,17 @@ namespace Hiwoong
 		BindComponentOwners();
 	}
 
-	Vector2 GameObject::GetPosition() const
+	Vector3 GameObject::GetPosition() const
 	{
 		// return transform position
-		return transform ? transform->GetLocalPosition() : Vector2::Zero;
+		return transform ? transform->GetLocalPosition() : Vector3::Zero;
 	}
-	Vector2 GameObject::GetWorldPosition() const
+	Vector3 GameObject::GetWorldPosition() const
 	{
-		return transform ? transform->GetWorldPosition() : Vector2::Zero;
+		return transform ? transform->GetWorldPosition() : Vector3::Zero;
 	}
 
-	void GameObject::SetPosition(const Vector2& newPosition)
+	void GameObject::SetPosition(const Vector3& newPosition)
 	{
 		if (GetPosition() == newPosition) return;
 
@@ -196,10 +198,10 @@ namespace Hiwoong
 	}
 
 
-	Vector2 GameObject::GetPreviousPosition() const
+	Vector3 GameObject::GetPreviousPosition() const
 	{
 		// return previous frame position which manged by transform.
-		return transform ? transform->GetPreviousWorldPosition() : Vector2::Zero;
+		return transform ? transform->GetPreviousWorldPosition() : Vector3::Zero;
 	}
 
 	void GameObject::ProcessAddComponents()

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Math/Vector3.h"
-#include "Component/Transform3DComponent.h"
+#include "Component/TransformComponent.h"
 #include "Math/Matrix4x4.h"
 
 namespace Hiwoong
@@ -10,10 +10,10 @@ namespace Hiwoong
 	{
 	public:
 
-		Camera3D(Transform3DComponent& transform);
+		Camera3D(TransformComponent& transform);
 
-		inline Vector3 GetPosition() const { return transform.GetPosition(); }
-		inline void SetTransform(Transform3DComponent& value) { transform = value; }
+		inline Vector3 GetPosition() const { return transform.GetLocalPosition(); }
+		inline void SetTransform(TransformComponent& value) { transform = value; }
 
 		inline void SetYaw(float value)
 		{
@@ -29,6 +29,6 @@ namespace Hiwoong
 
 
 	private:
-		Transform3DComponent& transform;
+		TransformComponent& transform;
 	};
 }

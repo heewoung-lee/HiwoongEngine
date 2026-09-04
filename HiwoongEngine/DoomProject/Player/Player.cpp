@@ -1,6 +1,5 @@
 #include "Player.h"
-#include "Component/Transform3DComponent.h"
-
+#include "Component/TransformComponent.h"
 #include <iostream>
 
 
@@ -13,8 +12,8 @@ namespace Hiwoong
 	{
 		super::Start();
 
-		bool checkGetComponent = GetComponent<Transform3DComponent>() != nullptr;
-		bool checkGetTr = GetTransform() == nullptr;
+		bool checkGetComponent = GetComponent<TransformComponent>() != nullptr;
+		bool checkGetTr = GetComponent<TransformComponent>() == nullptr;
 
 
 		std::cout << (checkGetComponent && checkGetTr) << std::endl;

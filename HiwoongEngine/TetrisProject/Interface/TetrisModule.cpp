@@ -37,7 +37,10 @@ namespace Hiwoong
 
 		for (const auto& localposition : GetBlockPosition())
 		{
-			Vector2 nextPosition = GetWorldPosition() + localposition + direction;
+			Vector3 worldPos = GetWorldPosition();
+
+
+			Vector2 nextPosition = Vector2(worldPos.x, worldPos.y) + localposition + direction;
 
 			if (board->IsOccupied(nextPosition))
 			{
@@ -67,7 +70,8 @@ namespace Hiwoong
 		{
 			return false;
 		}
-		SetPosition(GetPosition() + direction);
+
+		SetPosition(GetPosition() + Vector3(direction.x,direction.y,0));
 		return true;
 	}
 
@@ -101,7 +105,9 @@ namespace Hiwoong
 
 		assert(board != nullptr);
 
-		const Vector2 moduleWorldPosition = GetWorldPosition();
+		const Vector3 position = GetWorldPosition();
+
+		const Vector2 moduleWorldPosition(position.x, position.y);
 
 		for (const Vector2& rotatedPosition : rotatedPositions)
 		{
@@ -121,7 +127,9 @@ namespace Hiwoong
 			auto block = blocks[index].lock();
 			assert(block != nullptr);
 
-			block->SetPosition(blockPositions[index]);
+			Vector2 blockPos = blockPositions[index];
+
+			block->SetPosition(Vector3(blockPos.x,blockPos.y,0));
 		}
 
 		return true;
@@ -198,14 +206,21 @@ namespace Hiwoong
 		assert(board != nullptr);
 
 		//Find Block's worldPositon and blocks position in local + world
-		const Vector2 moduleWorldPosition = GetWorldPosition();
+
+		Vector3 curPos = GetWorldPosition();
+		const Vector2 moduleWorldPosition(curPos.x, curPos.y);
 		
 		for (std::size_t idx = 0; idx < blocks.size();++idx)
 		{
 			std::shared_ptr<Block> block = blocks[idx].lock();
 			assert(block != nullptr);
 
-			board->SetBlock(block->GetWorldPosition(), block);
+			Vector3 blockPos = block->GetWorldPosition();
+
+			board->SetBlock(Vector2(
+				static_cast<int>(blockPos.x),
+				static_cast<int>(blockPos.y)
+			), block);
 		}
 
 		board->CheckFillRow();

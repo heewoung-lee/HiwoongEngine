@@ -4,7 +4,7 @@
 #include "Core/HiwoongObject.h"
 #include "Component/Component.h"
 #include "Component/TransformComponent.h"
-#include "Math/Vector2.h"
+#include "Math/Vector3.h"
 #include "Math/Color.h"
 #include <memory>
 #include <string>
@@ -29,7 +29,7 @@ namespace Hiwoong
 
 	public:
 
-		GameObject(const Vector2& position = Vector2::Zero);
+		GameObject(const Vector3& position = Vector3::Zero);
 		virtual ~GameObject();
 
 		//Intialize Object
@@ -64,7 +64,8 @@ namespace Hiwoong
 			std::shared_ptr<T> AddComponent(Args&& ...args)
 		{
 			// Check Transform
-			static_assert(!std::is_same<T, TransformComponent>::value, "TransformComponent is created by an GameOjbect");
+			static_assert(!std::is_same<T, TransformComponent>::value, 
+				"Do not call AddComponent<TransformComponent>().Use GetTransform() instead.");
 
 			//add new Component
 			std::shared_ptr<T> newComponent = std::make_shared<T>(std::forward<Args>(args)...);
@@ -79,6 +80,12 @@ namespace Hiwoong
 			typename = std::enable_if_t<std::is_base_of<Component, T>::value>>
 			std::shared_ptr<T> GetComponent() const
 		{
+			//트랜스폼은 트랜스폼 전용자리가 있기에 찾는게 트랜스폼이라면 Transform반환
+			if constexpr (std::is_same_v<T, TransformComponent>)
+			{
+				return transform;
+			}
+
 			for (const std::shared_ptr<Component>& component : componentList)
 			{
 				if (component && component->IsTypeOf<T>())
@@ -106,18 +113,16 @@ namespace Hiwoong
 		std::shared_ptr<Scene> GetOwner() const;
 		void SetOwner(std::weak_ptr<Scene> newOwner);
 
-		Vector2 GetPosition() const;
-		Vector2 GetWorldPosition() const;
+		Vector3 GetPosition() const;
+		Vector3 GetWorldPosition() const;
 
-		void SetPosition(const Vector2& newPosition);
+		void SetPosition(const Vector3& newPosition);
 
 		//return previous Position
-		Vector2 GetPreviousPosition() const;
+		Vector3 GetPreviousPosition() const;
 		
 		inline int GetWidth() const { return width; }
 		
-		inline std::shared_ptr<TransformComponent> GetTransform() const { return transform; }
-
 		// return Parent GameObject 
 		inline std::shared_ptr<GameObject> GetParent() const { return parent.lock(); }
 
@@ -167,10 +172,6 @@ namespace Hiwoong
 		int width = 0;
 
 		int sortingOrder = 0;
-
-		Vector2 position;
-
-		Vector2 previousPosition;
 	};
 
 }

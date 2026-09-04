@@ -12,7 +12,7 @@
 namespace Hiwoong
 {
 
-	SpawnManager::SpawnManager(const Vector2& position) : GameObject(position)
+	SpawnManager::SpawnManager(const Vector2& position) : GameObject(Vector3(position.x,position.y))
 	{
 
 	}
@@ -42,7 +42,8 @@ namespace Hiwoong
 
 		assert(scene != nullptr);
 
-		const Vector2 spawnPosition = GetPosition();
+		const Vector3 positions = GetPosition();
+		const Vector2 spawnPosition(positions.x, positions.y);
 
 		TetrisGameState& state = TetrisGameState::Get();
 
@@ -75,7 +76,10 @@ namespace Hiwoong
 		//Setting GameOver
 		for (const Vector2& position : newModule->GetBlockPosition())
 		{
-			if (board->IsOccupied(position + newModule->GetWorldPosition()) == true)
+			Vector3 worldPosition = newModule->GetWorldPosition();
+
+
+			if (board->IsOccupied(position + Vector2(worldPosition.x, worldPosition.y)) == true)
 			{
 				gameOver = true;
 				newModule->Destroy();

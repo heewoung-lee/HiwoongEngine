@@ -6,7 +6,7 @@
 #include "Scene/Scene.h"
 #include "Component/Component.h"
 #include "Cube/CubeRotationComponent.h"
-#include "Component/Transform3DComponent.h"
+#include "Component/TransformComponent.h"
 #include <algorithm>
 #include <cassert>
 
@@ -16,14 +16,14 @@ namespace Hiwoong
         const Vector3& position,
         const Vector3& rotation,
         const Vector3& scale)
-        : mesh(MeshFactory::CreateCube(2.0f))
+        : GameObject(position), mesh(MeshFactory::CreateCube(2.0f))
     {
-        transform3DComponent =
-            AddComponent<Transform3DComponent>(
-                position,
-                rotation,
-                scale
-            );
+        transform3DComponent = GetComponent<TransformComponent>();
+
+        auto Transform = transform3DComponent.lock();
+
+        Transform->SetRotation(rotation);
+        Transform->SetScale(scale);
     }
 
 	void CubeObject::Draw()
