@@ -1,6 +1,9 @@
 #include "DoomScene.h"
 #include "Scene/Scene.h"
 #include "Math/MathConstants.h"
+#include "GameObject/GameObject.h"
+#include "Player/Player.h"
+
 namespace Hiwoong
 {
 	DoomScene::DoomScene()
@@ -28,6 +31,13 @@ namespace Hiwoong
 		)
 	{
 	}
+
+	void DoomScene::SpawnPlayer()
+	{
+		Instantiate<Player>();
+	}
+
+
 	void DoomScene::SceneInitialize()
 	{
 		Scene::SceneInitialize();
@@ -46,6 +56,9 @@ namespace Hiwoong
 
 		wallMesh.triangles.emplace_back(tri1);
 		wallMesh.triangles.emplace_back(tri2);
+
+
+		SpawnPlayer();
 
 	}
 

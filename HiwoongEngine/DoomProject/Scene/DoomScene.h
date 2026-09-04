@@ -19,6 +19,10 @@ namespace Hiwoong
 		void Update(double deltatime) override;
 		
 
+	private:
+		void SpawnPlayer();
+
+
 	private :
 		Transform3DComponent transform;
 		Camera3D camera;
