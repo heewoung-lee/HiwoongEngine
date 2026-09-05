@@ -122,4 +122,33 @@ namespace Hiwoong
 		);
 		assert(result == TRUE);
 	}
+	// 화면 비율 보정에 사용할 문자 한 칸의 픽셀 크기를 조회한다.
+// 성공하면 outSize에 (너비, 높이)를 저장하고 true를 반환한다.
+// 실패하면 outSize는 (0, 0)이며 false를 반환한다.
+	bool ScreenBuffer::TryGetCharacterSize(Vector2& outSize) const
+	{
+		// 조회에 실패했을 때 이전 크기가 남아 사용되지 않도록 초기화한다.
+		outSize = Vector2(0, 0);
+
+		CONSOLE_FONT_INFOEX info{};
+		// Windows API에 전달하는 구조체의 크기를 지정한다.
+		info.cbSize = sizeof(info);
+		// 이 화면 버퍼의 현재 글꼴 정보를 조회한다.
+		if (!GetCurrentConsoleFontEx(screenBuffer, FALSE, &info))
+		{
+			return false;
+		}
+		// 조회가 성공해도 콘솔 환경에 따라 너비가 0일 수 있다.
+		// 비율 계산에 사용할 수 없는 크기이므로 실패로 처리한다.
+		if (info.dwFontSize.X <= 0 || info.dwFontSize.Y <= 0)
+		{
+			return false;
+		}
+		// 문자 개수가 아니라, 문자 한 칸의 픽셀 너비와 높이를 전달한다.
+		outSize = Vector2(info.dwFontSize.X, info.dwFontSize.Y);
+		return true;
+	}
+
+	
+	
 }

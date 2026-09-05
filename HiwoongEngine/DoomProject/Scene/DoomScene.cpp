@@ -3,6 +3,7 @@
 #include "Math/MathConstants.h"
 #include "GameObject/GameObject.h"
 #include "Player/Player.h"
+#include "Engine/Engine.h"
 
 namespace Hiwoong
 {
@@ -71,7 +72,7 @@ namespace Hiwoong
 		const Matrix4x4 view = camera->GetViewMatrix();
 
 		const Vector2 screenSize = GetScreenSize();
-		const float aspectRatio =static_cast<float>(screenSize.x) / screenSize.y;
+		const float aspectRatio = Engine::Get().GetScreenAspectRatio();
 
 		const float fieldOfView = 60.0f * MathConstants::Pi / 180.0f;
 

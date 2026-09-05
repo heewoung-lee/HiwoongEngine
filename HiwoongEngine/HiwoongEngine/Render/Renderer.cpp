@@ -340,5 +340,12 @@ namespace Hiwoong
 
 		screenSize = newScreenSize;
 		currentBufferIndex = 0;
+
+		if (!GetCurrentBuffer()->TryGetCharacterSize(characterSize))
+		{
+			OutputDebugStringA("[ConsoleFont] Character size unavailable.\n");
+		}
+
 	}
+	
 }

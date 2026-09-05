@@ -7,6 +7,7 @@
 #include "Component/Component.h"
 #include "Cube/CubeRotationComponent.h"
 #include "Component/TransformComponent.h"
+#include "Engine/Engine.h"
 #include <algorithm>
 #include <cassert>
 
@@ -57,7 +58,7 @@ namespace Hiwoong
         const Matrix4x4 projection =
             Matrix4x4::Perspective(
                 3.14159265f / 3.0f,
-                180.0f / 110.0f,
+                Engine::Get().GetScreenAspectRatio(),
                 0.1f,
                 100.0f
             );
@@ -148,7 +149,9 @@ namespace Hiwoong
                 SoftwareRasterizer::RasterizeTriangle(
                     point0,
                     point1,
-                    point2
+                    point2,
+                    screenSize.x,
+                    screenSize.y
                 );
 
            

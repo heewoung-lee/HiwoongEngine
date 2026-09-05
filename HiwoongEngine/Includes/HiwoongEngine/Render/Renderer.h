@@ -118,6 +118,16 @@ namespace Hiwoong
 
 		void Resize(const Vector2& screenSize);
 
+		Vector2 GetScreenSize() const
+		{
+			return screenSize;
+		}
+
+		Vector2 GetCharacterSize() const
+		{
+			return characterSize;
+		}
+
 		//Requrie the draw the line then softwareRasterizer mathod calculated the line
 		void SubmitLine(
 			const Vector2& start,
@@ -129,7 +139,6 @@ namespace Hiwoong
 
 		// static access method
 		static Renderer& Get();
-
 
 
 
@@ -158,6 +167,9 @@ namespace Hiwoong
 		//Screen Size
 		Vector2 screenSize;
 
+		Vector2 characterSize = Vector2(0, 0);
+
+
 		// organizing 2 dimention Array of drawing the characters 
 		std::unique_ptr<Frame> frame;
 
@@ -178,6 +190,7 @@ namespace Hiwoong
 
 		//Create twice ScreenBuffer
 		void CreateSceenBuffer(const Vector2& newScreenSize);
+
 	};
 }
 

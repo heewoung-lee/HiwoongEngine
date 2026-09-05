@@ -6,6 +6,7 @@
 #include "Test/CubeScene.h"
 #include "Math/Vector4.h"
 #include "Component/TransformComponent.h"
+#include "Engine/Engine.h"
 
 bool TestCreateCubeHasEightVertices()
 {
@@ -115,7 +116,8 @@ bool TestRasterizeTriangle()
 		Hiwoong::SoftwareRasterizer::RasterizeTriangle(
 			Hiwoong::Vector2(1, 1),
 			Hiwoong::Vector2(3, 1),
-			Hiwoong::Vector2(1, 3)
+			Hiwoong::Vector2(1, 3),
+			4,4
 		);
 
 	return points.size() == 6;

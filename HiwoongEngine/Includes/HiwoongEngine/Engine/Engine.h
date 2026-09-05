@@ -20,6 +20,9 @@ namespace Hiwoong
 
 			//Screen height
 			int height = 0;
+
+			//콘솔마다 문자들의 높이와 너비가 다르므로 그 비율을 맞추기위한 비율
+			float characterAspectRatio = 0.54f;
 		};
 
 	public:
@@ -51,6 +54,8 @@ namespace Hiwoong
 		inline int GetWidth() const { return setting.width; }
 		inline int GetHeight() const { return setting.height; }
 
+		//문자에 따른 콘솔화면 비율
+		float GetScreenAspectRatio() const;
 	protected:
 		// Process input
 		void ProcessInput();

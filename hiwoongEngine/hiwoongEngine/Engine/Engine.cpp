@@ -117,6 +117,22 @@ namespace Hiwoong
 	{
 		isQuit = true;
 	}
+	float Engine::GetScreenAspectRatio() const
+	{
+		const Vector2 screenSize = Renderer::Get().GetScreenSize();
+		const Vector2 characterSize = Renderer::Get().GetCharacterSize();
+
+		float characterRatio = setting.characterAspectRatio;
+
+		if (characterSize.x > 0 && characterSize.y > 0)
+		{
+			characterRatio =
+				static_cast<float>(characterSize.x) / characterSize.y;
+		}
+
+		return static_cast<float>(screenSize.x) / screenSize.y
+			* characterRatio;
+	}
 	void Engine::ProcessInput()
 	{
 		assert(input != nullptr);
@@ -256,6 +272,16 @@ namespace Hiwoong
 			{
 				setting.height = static_cast<int>(atoi(value.c_str()));
 				assert(setting.height > 0);
+			}
+
+			//ÀÓ½Ã °ª 
+			if (key == "characterAspectRatio")
+			{
+				setting.characterAspectRatio =
+					static_cast<float>(atof(value.c_str()));
+
+				assert(setting.characterAspectRatio > 0.0f);
+				continue;
 			}
 
 		}

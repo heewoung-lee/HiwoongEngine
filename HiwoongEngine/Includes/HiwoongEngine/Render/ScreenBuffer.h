@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Math/Vector2.h"
 #include <Windows.h>
 
@@ -19,6 +18,8 @@ namespace Hiwoong
 
 		// Getter.
 		inline HANDLE GetScreenBuffer() const { return screenBuffer; }
+
+		bool TryGetCharacterSize(Vector2& outSize) const;
 
 
 	private:

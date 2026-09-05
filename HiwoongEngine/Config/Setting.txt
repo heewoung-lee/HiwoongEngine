@@ -1,8 +1,11 @@
 # target frame rate
-framerate = 120
+framerate = 60
 
 # screen width
-width = 60
+width = 240
 
 # screen height
-height = 25
+height = 67
+
+#characteRatio 
+characterAspectRatio = 0.5
