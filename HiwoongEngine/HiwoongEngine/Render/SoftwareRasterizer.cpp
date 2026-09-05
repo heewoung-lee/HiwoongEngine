@@ -3,7 +3,6 @@
 #include <cstdlib>
 #include <cassert>
 #include <cmath>
-
 namespace Hiwoong
 {
     
@@ -99,24 +98,26 @@ namespace Hiwoong
     std::vector<Vector2> SoftwareRasterizer::RasterizeTriangle(
         const Vector2& point0,
         const Vector2& point1,
-        const Vector2& point2)
+        const Vector2& point2,
+        int screenWidth, 
+        int screenHeight)
     {
         if (EdgeFunction(point0, point1, point2) == 0)
         {
             return {};
         }
 
-        const int minX = (std::min)({ point0.x, point1.x, point2.x });
-        const int maxX = (std::max)({ point0.x, point1.x, point2.x });
-
-        const int minY = (std::min)({ point0.y, point1.y, point2.y });
-        const int maxY = (std::max)({ point0.y, point1.y, point2.y });
+        //화면 밖은 렌더링하지 않음.
+        const RasterBounds bounds = CalculateRasterBounds(
+            point0, point1, point2,
+            screenWidth, screenHeight
+        );
 
         std::vector<Vector2> points;
 
-        for (int y = minY; y <= maxY; ++y)
+        for (int y = bounds.minY; y <= bounds.maxY; ++y)
         {
-            for (int x = minX; x <= maxX; ++x)
+            for (int x = bounds.minX; x <= bounds.maxX; ++x)
             {
                 const Vector2 point(x, y);
 
@@ -172,5 +173,17 @@ namespace Hiwoong
             EdgeFunction(point0, point1, point2);
 
         return signedArea <= 0;
+    }
+    RasterBounds SoftwareRasterizer::CalculateRasterBounds(const Vector2& point0, const Vector2& point1, const Vector2& point2, int screenWidth, int screenHeight)
+    {
+        RasterBounds bounds;
+
+        bounds.minX = (std::max)(0, (std::min)({ point0.x ,point1.x ,point2.x }));
+        bounds.maxX = (std::min)(screenWidth - 1, (std::max)({ point0.x ,point1.x ,point2.x }));
+
+        bounds.minY = (std::max)(0, (std::min)({ point0.y ,point1.y ,point2.y }));
+        bounds.maxY = (std::min)(screenHeight - 1, (std::max)({ point0.y ,point1.y ,point2.y }));
+
+        return bounds;
     }
 }

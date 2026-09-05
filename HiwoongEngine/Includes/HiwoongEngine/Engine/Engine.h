@@ -70,6 +70,8 @@ namespace Hiwoong
 		//ShotDown
 		void ShutDown();
 
+		
+
 		//Load EngineSetting Method
 		void LoadEngineSetting();
 
@@ -93,5 +95,10 @@ namespace Hiwoong
 		std::unique_ptr<Input> input;
 
 		std::unique_ptr<Renderer> renderer;
+
+	
+	private:
+		void ShowCurrentFPS(double deltaTime, double& fpsElapsed, int& fpsFrameCount);
+
 	};
 }

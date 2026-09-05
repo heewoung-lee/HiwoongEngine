@@ -22,11 +22,10 @@ namespace Hiwoong
 	private:
 		void SpawnPlayer();
 
-
 	private :
 		std::shared_ptr<Player> player;
-		TransformComponent transform;
-		Camera3D camera;
+		std::unique_ptr<Camera3D> camera;
+
 		MeshRenderer meshRenderer;
 		Mesh wallMesh;
 

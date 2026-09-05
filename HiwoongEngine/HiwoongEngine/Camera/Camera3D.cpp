@@ -36,10 +36,11 @@ namespace Hiwoong
 	//GetView()는 현재 카메라의 위치와 방향을 View 행렬로 만들어 반환하는 함수.
 	Matrix4x4 Camera3D::GetViewMatrix()
 	{
-		Vector3 target = GetPosition() + GetForward();
-		Vector3 up = GetDown() * -1;
+		Vector3 cameraPosition = transform.GetWorldPosition();
+		Vector3 lookAtPoint = cameraPosition + GetForward();
+		Vector3 up(0, -1, 0);
 
-		return Matrix4x4::LookAt(GetPosition(), target, up);
+		return Matrix4x4::LookAt(cameraPosition, lookAtPoint, up);
 	}
 
 }

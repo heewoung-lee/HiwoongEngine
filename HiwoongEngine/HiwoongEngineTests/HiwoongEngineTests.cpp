@@ -339,6 +339,7 @@ using namespace std;
         Hiwoong::Matrix4x4 mvp =
             projection * view * model;
 
+
         Hiwoong::Vector4 localPosition(0, 0, 0, 1);
 
         Hiwoong::Vector3 screenPosition =

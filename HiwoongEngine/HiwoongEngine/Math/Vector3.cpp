@@ -47,6 +47,25 @@ namespace Hiwoong
 
         return *this;
     }
+    Vector3& Vector3::operator+=(const Vector3& other)
+    {
+        x += other.x;
+        y += other.y;
+        z += other.z;
+
+        return *this;
+    }
+
+    Vector3& Vector3::operator-=(const Vector3& other)
+    {
+        x -= other.x;
+        y -= other.y;
+        z -= other.z;
+
+        return *this;
+    }
+
+
     float Vector3::Length() const
     {
         return sqrt(x*x + y*y + z*z);
@@ -76,6 +95,16 @@ namespace Hiwoong
         assert(length != 0.0f);
 
         return Vector3(x / length, y / length, z / length);
+    }
+    Vector3 Vector3::IntersectNearPlane(const Vector3& inside, const Vector3& outside, float nearPlane)
+    {
+        float t = (nearPlane - inside.z) / (outside.z - inside.z);
+
+        return Vector3(
+            inside.x + t * (outside.x - inside.x),
+            inside.y + t * (outside.y - inside.y),
+            inside.z + t * (outside.z - inside.z)
+        );
     }
     bool Vector3::operator==(const Vector3& other) const
     {

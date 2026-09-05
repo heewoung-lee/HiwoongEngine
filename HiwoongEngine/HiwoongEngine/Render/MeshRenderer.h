@@ -17,5 +17,13 @@ namespace Hiwoong
 			const Matrix4x4& model,
 			const RenderView& renderView
 		) const;
+
+
+		//삼각형 자르기
+		static std::vector<Vector3> ClipTriangleNearPlane(
+			const Vector3& p,
+			const Vector3& q,
+			const Vector3& r,
+			float nearPlane);
 	};
 }

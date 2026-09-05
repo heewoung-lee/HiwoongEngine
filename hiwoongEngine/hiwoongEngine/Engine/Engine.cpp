@@ -50,8 +50,13 @@ namespace Hiwoong
 
 		float oneFrameTime = 1.0f / setting.frameRate;
 
+		double fpsElapsed = 0.0; //프레임 사이에 흐른 시간 누적
+		int fpsFrameCount = 0; //그동안 처리한 프레임 수 
+
+
 		while (isQuit == false)
 		{
+
 			//Precess Input
 			ProcessInput();
 
@@ -65,6 +70,9 @@ namespace Hiwoong
 			double deltaTime = static_cast<double>(currentTime - previousTime) / static_cast<double>(frequency.QuadPart);
 			if (deltaTime < oneFrameTime) continue;
 			
+			
+			ShowCurrentFPS(deltaTime, fpsElapsed, fpsFrameCount);
+
 			//level initialize if you request add Obejct the lastframe adds requested a object and nextframe it will be spawned in Level.
 			SceneInitialize();
 
@@ -254,6 +262,27 @@ namespace Hiwoong
 
 		//close the file
 		file.close();
+	}
+
+	void Engine::ShowCurrentFPS(double deltaTime, double& fpsElapsed, int& fpsFrameCount)
+	{
+		fpsElapsed += deltaTime;
+		++fpsFrameCount;
+
+		if (fpsElapsed >= 1.0)
+		{
+			double averageFps = fpsFrameCount / fpsElapsed; //초당 프레임수
+			double averageFrameMs = fpsElapsed * 1000.0 / fpsFrameCount; //프레임 사이의 평균시간.
+
+			std::ostringstream message;
+			message << "FPS: " << averageFps
+				<< " | Frame: " << averageFrameMs << " ms\n";
+
+			OutputDebugStringA(message.str().c_str()); // 비주얼 스튜디오로 찍는다. 콘솔은 렌더링이라 못찍ㅇ,ㅁ
+
+			fpsElapsed = 0.0;
+			fpsFrameCount = 0;
+		}
 	}
 
 

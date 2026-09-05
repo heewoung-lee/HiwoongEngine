@@ -18,13 +18,15 @@ namespace Hiwoong
 		RenderView(
 			const Matrix4x4& view,
 			const Matrix4x4& projection,
-			const Vector2& screenSize)
-			: view(view), projection(projection), screenSize(screenSize)
+			const Vector2& screenSize,
+			const float nearPlane)
+			: view(view), projection(projection), screenSize(screenSize), nearPlane(nearPlane)
 		{
 		}
 		Matrix4x4 view; // 카메라 위치,회전으로 만든 행렬
 		Matrix4x4 projection; //FOV 화면 비율 Near or Far 옵션으로 만든 행렬
 		Vector2 screenSize;// 화면 크기.
+		float nearPlane; // 거리
 	};
 }
 

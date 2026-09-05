@@ -6,10 +6,7 @@
 
 namespace Hiwoong
 {
-	DoomScene::DoomScene()
-		: transform(),
-		camera(transform),
-
+	DoomScene::DoomScene(): 
 		wallModel(Matrix4x4::Translation(Vector3(0, 0, 5))),
 
 		rightWallModel(Matrix4x4::Translation(Vector3(2, 0, 3))*
@@ -35,7 +32,13 @@ namespace Hiwoong
 	void DoomScene::SpawnPlayer()
 	{
 		player = Instantiate<Player>();
+
+		std::shared_ptr<TransformComponent> playerTr = player->GetComponent<TransformComponent>();
+
+		camera = std::make_unique<Camera3D>(*playerTr);
 	}
+
+
 
 
 	void DoomScene::SceneInitialize()
@@ -65,7 +68,7 @@ namespace Hiwoong
 	void DoomScene::Update(double deltatime)
 	{
 		Scene::Update(deltatime);
-		const Matrix4x4 view = camera.GetViewMatrix();
+		const Matrix4x4 view = camera->GetViewMatrix();
 
 		const Vector2 screenSize = GetScreenSize();
 		const float aspectRatio =static_cast<float>(screenSize.x) / screenSize.y;
@@ -86,7 +89,8 @@ namespace Hiwoong
 		const RenderView renderView(
 			view,
 			projection,
-			screenSize
+			screenSize,
+			nearPlane
 		);
 
 		meshRenderer.Render(wallMesh, wallModel, renderView);

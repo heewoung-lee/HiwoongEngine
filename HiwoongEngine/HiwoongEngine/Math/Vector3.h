@@ -23,7 +23,8 @@ namespace Hiwoong
 		Vector3 operator/(const Vector3& other) const;
 
 		Vector3& operator= (const Vector3& other);
-
+		Vector3& operator+=(const Vector3& other);
+		Vector3& operator-=(const Vector3& other);
 		float Length() const;
 		
 
@@ -37,7 +38,13 @@ namespace Hiwoong
 		static bool NearyEquals(const Vector3& a, const Vector3& b);
 		Vector3 Normalized() const;
 
-		
+		//교점 계산 함수
+		//이걸 통해 어떤 정점이 nearPlane에 가까운지 계산하고 자를것인가 둘것인가 결정
+		static Vector3 IntersectNearPlane(
+			const Vector3& inside,
+			const Vector3& outside,
+			float nearPlane
+		);
 
 		bool operator == (const Vector3& other) const;
 		bool operator != (const Vector3& other) const;
