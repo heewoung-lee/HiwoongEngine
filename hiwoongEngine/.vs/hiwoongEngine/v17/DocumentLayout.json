@@ -342,21 +342,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 201,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Player.cpp",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Player\\Player.cpp",
-              "RelativeDocumentMoniker": "DoomProject\\Player\\Player.cpp",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Player\\Player.cpp",
-              "RelativeToolTip": "DoomProject\\Player\\Player.cpp",
-              "ViewState": "AgIAAGYAAAAAAAAAAAAAAHoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-09-04T05:01:22.656Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 77,
@@ -393,6 +380,19 @@
               "ViewState": "AgIAADcAAAAAAAAAAAAYwHsAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-08-21T06:18:12.051Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Player.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Player\\Player.cpp",
+              "RelativeDocumentMoniker": "DoomProject\\Player\\Player.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Player\\Player.cpp",
+              "RelativeToolTip": "DoomProject\\Player\\Player.cpp",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAAAHoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-09-04T05:01:22.656Z",
               "EditorCaption": ""
             },
             {
