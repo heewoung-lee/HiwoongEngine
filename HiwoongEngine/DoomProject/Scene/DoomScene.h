@@ -4,6 +4,7 @@
 #include "Camera/Camera3D.h"
 #include "Render/MeshRenderer.h"
 #include "Player/Player.h"
+#include "Map/DoomMap.h"
 #include <memory>
 
 namespace Hiwoong
@@ -27,14 +28,8 @@ namespace Hiwoong
 		std::unique_ptr<Camera3D> camera;
 
 		MeshRenderer meshRenderer;
-		Mesh wallMesh;
 
-		//테스트용
-		Matrix4x4 wallModel;
-		Matrix4x4 rightWallModel;
-		Matrix4x4 leftWallModel;
-		Matrix4x4 floorModel;
-		Matrix4x4 ceilingModel;
+		std::shared_ptr<DoomMap> doomMap;
 	};
 
 

@@ -94,10 +94,23 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Map\BuildImplements\EmptyTileBuilder.cpp" />
+    <ClCompile Include="Map\BuildImplements\MonsterSpawnTileBuilder.cpp" />
+    <ClCompile Include="Map\BuildImplements\PlayerSpawnTileBuilder.cpp" />
+    <ClCompile Include="Map\BuildImplements\WallTileBuilder.cpp" />
+    <ClCompile Include="Map\DoomMap.cpp" />
+    <ClCompile Include="Map\TileBuilderRegistry.cpp" />
     <ClCompile Include="Player\Player.cpp" />
     <ClCompile Include="Scene\DoomScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Map\BuildImplements\EmptyTileBuilder.h" />
+    <ClInclude Include="Map\BuildImplements\MonsterSpawnTileBuilder.h" />
+    <ClInclude Include="Map\BuildImplements\PlayerSpawnTileBuilder.h" />
+    <ClInclude Include="Map\BuildImplements\WallTileBuilder.h" />
+    <ClInclude Include="Map\DoomMap.h" />
+    <ClInclude Include="Map\ITileBuilder.h" />
+    <ClInclude Include="Map\TileBuilderRegistry.h" />
     <ClInclude Include="Player\Player.h" />
     <ClInclude Include="Scene\DoomScene.h" />
   </ItemGroup>

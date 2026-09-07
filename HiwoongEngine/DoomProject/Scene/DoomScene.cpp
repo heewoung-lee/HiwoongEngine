@@ -4,29 +4,9 @@
 #include "GameObject/GameObject.h"
 #include "Player/Player.h"
 #include "Engine/Engine.h"
-
 namespace Hiwoong
 {
-	DoomScene::DoomScene(): 
-		wallModel(Matrix4x4::Translation(Vector3(0, 0, 5))),
-
-		rightWallModel(Matrix4x4::Translation(Vector3(2, 0, 3))*
-			Matrix4x4::RotationY(MathConstants::Pi / 2.0f)),
-
-		leftWallModel(Matrix4x4::Translation(Vector3(-2, 0, 3))*
-			Matrix4x4::RotationY(3 * MathConstants::Pi / 2.0f)),
-
-		floorModel(
-			Matrix4x4::Translation(Vector3(0, 1, 3))*
-			Matrix4x4::RotationX(3 * MathConstants::Pi / 2.0f)*
-			Matrix4x4::Scale(Vector3(1.0f,2.0f,1.0f))
-		),
-
-		ceilingModel(
-			Matrix4x4::Translation(Vector3(0, -1, 3))*
-			Matrix4x4::RotationX(MathConstants::Pi / 2.0f)*
-			Matrix4x4::Scale(Vector3(1.0f, 2.0f, 1.0f))
-		)
+	DoomScene::DoomScene()
 	{
 	}
 
@@ -35,7 +15,6 @@ namespace Hiwoong
 		player = Instantiate<Player>();
 
 		std::shared_ptr<TransformComponent> playerTr = player->GetComponent<TransformComponent>();
-
 		camera = std::make_unique<Camera3D>(*playerTr);
 	}
 
@@ -46,24 +25,9 @@ namespace Hiwoong
 	{
 		Scene::SceneInitialize();
 
-		wallMesh.vertices =
-		{
-			Vertex{Vector3(-2,-1,0)},
-			Vertex{Vector3(2,-1,0)},
-			Vertex{Vector3(2,1,0)},
-			Vertex{Vector3(-2,1,0)},
-		};
-
-		//법선 벡터가 -z축으로 나오는 방향으로 
-		Triangle tri1 = { 0,2,1};
-		Triangle tri2 = { 0,3,2 };
-
-		wallMesh.triangles.emplace_back(tri1);
-		wallMesh.triangles.emplace_back(tri2);
-
+		doomMap = Instantiate<DoomMap>("Assets/Maps/Level01.txt");
 
 		SpawnPlayer();
-
 	}
 
 	void DoomScene::Update(double deltatime)
@@ -94,11 +58,12 @@ namespace Hiwoong
 			nearPlane
 		);
 
-		meshRenderer.Render(wallMesh, wallModel, renderView);
-		meshRenderer.Render(wallMesh, rightWallModel, renderView);
-		meshRenderer.Render(wallMesh, leftWallModel, renderView);
-		meshRenderer.Render(wallMesh, floorModel, renderView);
-		meshRenderer.Render(wallMesh, ceilingModel, renderView);
+		meshRenderer.Render(
+			doomMap->GetMapMesh(),
+			Matrix4x4::Identity(),
+			renderView
+		);
+
 	}
 
 }
