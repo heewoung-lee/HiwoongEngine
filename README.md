@@ -11,8 +11,6 @@
 </table>
 
 ### 3D ASCII 큐브
-
-
 https://github.com/user-attachments/assets/639897e7-3dc8-43dd-8a19-020b15c6207a
 <p align="center"><sub>Model·View·Projection, 삼각형 래스터화, Depth Buffer, 법선 기반 ASCII 조명을 적용한 결과</sub></p>
 
@@ -20,6 +18,9 @@ https://github.com/user-attachments/assets/639897e7-3dc8-43dd-8a19-020b15c6207a
 ### ASCII DOOM(~진행중)
 <img width="1672" height="941" alt="image" src="https://github.com/user-attachments/assets/6aa996cd-3888-4ba7-840a-eed2e2bc6dde" />
 
+## 9.7일 맵 렌더링 및 플레이어 이동
+
+https://github.com/user-attachments/assets/865c266e-8450-480e-a423-dcdda1b79d45
 
 ---
 
