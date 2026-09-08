@@ -13,12 +13,16 @@ namespace Hiwoong
 	void DoomScene::SpawnPlayer()
 	{
 		player = Instantiate<Player>();
+		player->SetMap(doomMap);
+		//플레이어 포지션 셋팅.
+		//플레이어는 둠 맵을 월드 포지션으로 두고, 둠맵이 조회한 플레이어 포지션으로 설정 
+		player->SetPosition(
+			doomMap->GetPlayerSpawnPosition()
+		);
 
 		std::shared_ptr<TransformComponent> playerTr = player->GetComponent<TransformComponent>();
 		camera = std::make_unique<Camera3D>(*playerTr);
 	}
-
-
 
 
 	void DoomScene::SceneInitialize()
@@ -27,12 +31,19 @@ namespace Hiwoong
 
 		doomMap = Instantiate<DoomMap>("Assets/Maps/Level01.txt");
 
-		SpawnPlayer();
+		//콜백 등록
+		doomMap->AddOnMapBuilt([this]()
+		{
+			this->SpawnPlayer();
+		});
 	}
 
 	void DoomScene::Update(double deltatime)
 	{
 		Scene::Update(deltatime);
+
+		if (camera == nullptr) return;
+
 		const Matrix4x4 view = camera->GetViewMatrix();
 
 		const Vector2 screenSize = GetScreenSize();
@@ -51,12 +62,18 @@ namespace Hiwoong
 			farPlane
 		);
 
-		const RenderView renderView(
+		RenderView renderView(
 			view,
 			projection,
 			screenSize,
 			nearPlane
 		);
+		renderView.spotLight.position = player->GetWorldPosition();
+		renderView.spotLight.direction = camera->GetForward().Normalized();
+		
+		renderView.cameraToWorld =
+			Matrix4x4::Translation(player->GetWorldPosition()) *
+			Matrix4x4::RotationY(camera->GetYaw());
 
 		meshRenderer.Render(
 			doomMap->GetMapMesh(),

@@ -3,6 +3,7 @@
 #include "GameObject/GameObject.h"
 #include "Core/Core.h"
 #include "Math/Vector2.h"
+#include "Physics/CollisionSystem.h"
 #include <type_traits>
 #include <utility>
 #include <vector>
@@ -33,6 +34,11 @@ namespace Hiwoong
 		virtual void Update(double deltaTime);
 		virtual void Draw();
 
+		//Check Collision
+		bool CanMoveTo(
+			const GameObject& movingObject,
+			const Vector3& nextPosition
+		) const;
 
 		// template of game object spawner
 		template<typename T, typename ...Args,
@@ -75,6 +81,7 @@ namespace Hiwoong
 
 	private:
 		Vector2 screenSize;
+		CollisionSystem collisionSystem;
 	};
 
 

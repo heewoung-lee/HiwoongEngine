@@ -1,6 +1,7 @@
 #include "CollisionSystem.h"
 #include "GameObject/GameObject.h"
 #include "Component/BoxColliderComponent.h"
+#include "Component/BoxCollider3DComponent.h"
 #include <vector>
 
 namespace Hiwoong
@@ -47,6 +48,39 @@ namespace Hiwoong
 			pair.other->OnCollision(pair.gameObject);
 		}
 
+	}
+	bool CollisionSystem::CanMoveTo(
+		const GameObject& movingObject, 
+		const Vector3& nextPosition, 
+		const std::vector<std::shared_ptr<GameObject>>& gameObjectList) const
+	{
+		const std::shared_ptr<BoxCollider3DComponent> movingCollider =
+			movingObject.GetComponent<BoxCollider3DComponent>();
+
+		if (movingCollider == nullptr) return false;
+
+
+		for (const std::shared_ptr<GameObject>& other : gameObjectList)
+		{
+			//없는 객체거나 자기자신 그리고 비활성객체는 제외
+			if (other == nullptr || other.get() == &movingObject || !other->IsActive()) continue;
+
+			const std::shared_ptr<BoxCollider3DComponent> otherCollider = other->GetComponent<BoxCollider3DComponent>();
+			
+			if (otherCollider == nullptr) continue;
+
+			//이동예정위치에 상대와 겹치는경우
+			if (movingCollider->Intersects(
+				nextPosition,
+				*otherCollider,
+				other->GetWorldPosition()))
+			{
+				return false;//충돌처리
+			}
+
+		}
+		//어느 콜라이더와도 충돌하지 않으면움직일 수 있음./
+		return true;
 	}
 	bool CollisionSystem::Test(const std::shared_ptr<GameObject>& left, const std::shared_ptr<GameObject>& right)
 	{

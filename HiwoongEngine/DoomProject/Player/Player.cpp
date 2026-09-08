@@ -2,6 +2,9 @@
 #include "Component/TransformComponent.h"
 #include "Core/Input.h"
 #include "Math/MathConstants.h"
+#include "Map/DoomMap.h"
+#include "Component/BoxCollider3DComponent.h"
+#include "Scene/Scene.h"
 #include <iostream>
 #include <cmath>
 
@@ -14,6 +17,7 @@ namespace Hiwoong
 	{
 		super::Start();
 		transform = GetComponent<TransformComponent>();
+		AddComponent<BoxCollider3DComponent>(Vector3(collisionHalfSize, collisionHalfSize, collisionHalfSize));
 	}
 
 	void Player::Update(double deltaTime)
@@ -38,12 +42,36 @@ namespace Hiwoong
 			direction = direction.Normalized();
 		}
 
+		const std::shared_ptr<Scene> scene = GetOwner();
+
+		if (scene == nullptr)
+			return;
+
 		Vector3 movement = (direction * 3.0f * static_cast<float>(frameDeltaTime));
+		Vector3 position = transform->GetWorldPosition();
 
-		Vector3 curPos = transform->GetLocalPosition();
-		transform->SetLocalPosition(curPos + movement);//이동
+		//X 방향 이동검사 
+		Vector3 nextPosition = position;
+		nextPosition.x += movement.x;
 
+		if (scene->CanMoveTo(*this, nextPosition))
+		{
+			position = nextPosition;
+		}
+
+		//X 방향 이동 확인후에 Z방향 이동확인.
+		nextPosition = position;
+		nextPosition.z += movement.z;
+		
+		if (scene->CanMoveTo(*this, nextPosition))
+		{
+			position = nextPosition;
+		}
+
+		//X방향 Z방향 각각확인후에 포지션 적용. //벽을 따라 미끄러짐
+		transform->SetWorldPosition(position);
 	}
+
 
 	void Player::TurnLeft(Vector3& rotation)
 	{

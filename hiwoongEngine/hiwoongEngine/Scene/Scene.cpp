@@ -68,6 +68,17 @@ namespace Hiwoong
 			gameObject->Draw();
 		}
 	}
+	bool Scene::CanMoveTo(
+		const GameObject& movingObject,
+		const Vector3& nextPosition
+	) const
+	{
+		return collisionSystem.CanMoveTo(
+			movingObject,
+			nextPosition,
+			gameObjectList
+		);
+	}
 	void Scene::ProcessAddAndDestoryActors()
 	{
 		for (const std::shared_ptr<GameObject>& gameObejct : gameObjectList)

@@ -65,11 +65,9 @@ namespace Hiwoong
 
 		//이면을 어떤 문자로 그릴지 계산하는 함수
 		char CalculateShadeCharacter(
-			const Vector3& worldNormal,
-			const Vector3& lightDirection,
+			float brightness,
 			const std::vector<char>& shadeCharacters
 		) const;
-
 
 		// 삼각형 내부 픽셀의 깊이와 출력을 요청하는 함수.
 		void DrawTriangle(
@@ -79,8 +77,28 @@ namespace Hiwoong
 			float depth0,
 			float depth1,
 			float depth2,
-			const Vector2& screenSize,
-			char shadeCharacter
+			const Vector3& cameraPoint0,
+			const Vector3& cameraPoint1,
+			const Vector3& cameraPoint2,
+			const RenderView& renderView,
+			const Vector3& worldNormal,
+			float baseBrightness,
+			const std::vector<char>& shadeCharacters
+		) const;
+
+		//방향광 밝기 계산 함수
+		float CalculateDirectionalBrightness(
+			const Vector3& worldNormal,
+			const Vector3& lightDirection
+		) const;
+
+		/*worldPosition: 빛을 받는 표면 지점의 월드 위치
+		worldNormal : 그 표면이 향하는 방향
+		light : 손전등의 위치·방향·거리·각도·세기*/
+		float CalculateSpotBrightness(
+			const Vector3& worldPosition,
+			const Vector3& worldNormal,
+			const SpotLight& light
 		) const;
 	};
 }

@@ -30,6 +30,7 @@ namespace Hiwoong
 		MeshRenderer meshRenderer;
 
 		std::shared_ptr<DoomMap> doomMap;
+
 	};
 
 

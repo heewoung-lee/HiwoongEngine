@@ -4,6 +4,8 @@
 #include "Render/SoftwareRasterizer.h"
 #include "Render/Renderer.h"
 #include "Math/Color.h"
+#include "Math/MathConstants.h"
+#include <cmath>
 #include <algorithm>
 #include <vector>
 namespace Hiwoong
@@ -223,12 +225,27 @@ namespace Hiwoong
 
 
 				//현재 빛이 얼마만큼 묻는 지를 계산하고, 빛을 받은 양에 따라 문자 결정
-				const char shadeCharacter = CalculateShadeCharacter(worldNormal, lightDirection, shadeCharacters);
+				const float ambientBrightness = 0.15f;
+				const float directionalIntensity = 0.2f;
+
+				const float brightness =
+					ambientBrightness +
+					directionalIntensity *
+					CalculateDirectionalBrightness(worldNormal, lightDirection);
+
 
 				//카메라 반대쪽은 내부를 채울 필요가 없으니 렌더링 영역에서 제외
 				if (SoftwareRasterizer::IsBackFace(point0, point1, point2)) continue;
 
-				DrawTriangle(point0, point1, point2,clippedDepths[0], clippedDepths[i], clippedDepths[i+1],renderView.screenSize,shadeCharacter);
+				DrawTriangle(
+					point0, point1, point2,
+					clippedDepths[0], clippedDepths[i], clippedDepths[i + 1],
+					clippedPositions[0], clippedPositions[i], clippedPositions[i + 1],
+					renderView,
+					worldNormal,
+					brightness,
+					shadeCharacters
+				);
 			}
 		}
 
@@ -267,27 +284,24 @@ namespace Hiwoong
 					renderView.screenSize.y
 				);
 
+
+
 			screenPositions.emplace_back(screenPosition);
 			depths.emplace_back(ndcPosition.z);
 		}
 	}
 
 	char MeshRenderer::CalculateShadeCharacter(
-		const Vector3& worldNormal,
-		const Vector3& lightDirection,
+		float brightness,
 		const std::vector<char>& shadeCharacters) const
 	{
+		brightness = std::clamp(brightness, 0.0f, 1.0f);
 
-		//삼각형이 바라보고 있는 방향과 광원이 있는 월드방향을 내적
-		const float lightAmount = Vector3::Dot(lightDirection, worldNormal);
-
-		const float brightness = std::clamp(lightAmount, 0.0f, 1.0f);
-
-		const std::size_t rightRenderIdx = static_cast<std::size_t>(brightness * (shadeCharacters.size() - 1));
+		const std::size_t rightRenderIdx =
+			static_cast<std::size_t>(brightness * (shadeCharacters.size() - 1));
 
 		return shadeCharacters[rightRenderIdx];
 	}
-
 	void MeshRenderer::DrawTriangle(
 		const Vector2& point0,
 		const Vector2& point1,
@@ -295,15 +309,26 @@ namespace Hiwoong
 		float depth0,
 		float depth1,
 		float depth2,
-		const Vector2& screenSize,
-		char shadeCharacter) const
+		const Vector3& cameraPoint0,
+		const Vector3& cameraPoint1,
+		const Vector3& cameraPoint2,
+		const RenderView& renderView, 
+		const Vector3& worldNormal,
+		float baseBrightness,
+		const std::vector<char>& shadeCharacters) const
 	{
 
 		//살아남은 삼각형 내부의 화면 칸을 구하기.
 		const std::vector<Vector2> pixels =
 			SoftwareRasterizer::RasterizeTriangle(point0, point1, point2,
-				screenSize.x, screenSize.y);
+				renderView.screenSize.x, renderView.screenSize.y);
 
+		//화면에서는 가까운 부분이 크게,
+		// 먼 부분이 작게 보이므로 공간 좌표를 단순히 섞으면 위치가 틀어짐
+		// 이 깊이의 역수 1/z를 이용해 그 차이를 보정
+		const float inverseZ0 = 1.0f / cameraPoint0.z;
+		const float inverseZ1 = 1.0f / cameraPoint1.z;
+		const float inverseZ2 = 1.0f / cameraPoint2.z;
 
 		//바리센트릭 가중치를 사용해,
 		//각 픽셀들의 깊이값을 계산.
@@ -318,6 +343,45 @@ namespace Hiwoong
 					point0,
 					point1,
 					point2);
+
+			const float interpolatedInverseZ =
+				weights.x * inverseZ0 +
+				weights.y * inverseZ1 +
+				weights.z * inverseZ2;
+
+			const Vector3 cameraPosition =
+				(
+					cameraPoint0 * (weights.x * inverseZ0) +
+					cameraPoint1 * (weights.y * inverseZ1) +
+					cameraPoint2 * (weights.z * inverseZ2)
+					) * (1.0f / interpolatedInverseZ);
+
+			//픽셀의 카메라 좌표를 월드 좌표로 변환.
+			const Vector4 worldPosition4 =
+				renderView.cameraToWorld *
+				Vector4(
+					cameraPosition.x,
+					cameraPosition.y,
+					cameraPosition.z,
+					1.0f
+				);
+
+			const Vector3 worldPosition(
+				worldPosition4.x,
+				worldPosition4.y,
+				worldPosition4.z
+			);
+
+			const float spotBrightness = CalculateSpotBrightness(
+				worldPosition,
+				worldNormal,
+				renderView.spotLight
+			);
+
+			const char shadeCharacter = CalculateShadeCharacter(
+				baseBrightness + spotBrightness,
+				shadeCharacters
+			);
 
 			//픽셀 깊이.
 			const float depth =
@@ -336,6 +400,75 @@ namespace Hiwoong
 				0 // 정렬 순서
 			);
 		}
+	}
+
+	float MeshRenderer::CalculateDirectionalBrightness(const Vector3& worldNormal, const Vector3& lightDirection) const
+	{
+		const float lightAmount = Vector3::Dot(lightDirection, worldNormal);
+		return std::clamp(lightAmount, 0.0f, 1.0f);
+	}
+
+	float MeshRenderer::CalculateSpotBrightness(
+		const Vector3& worldPosition,
+		const Vector3& worldNormal,
+		const SpotLight& light
+	) const
+	{
+		//표면 위치 - 손전등 위치
+		const Vector3 lightToPoint = worldPosition - light.position;
+		const float distance = lightToPoint.Length();
+		
+		if (light.range <= 0.0f ||
+			distance <= 0.0f ||
+			distance >= light.range)
+		{
+			return 0.0f;
+		}
+
+		const Vector3 directionToPoint = lightToPoint.Normalized();
+		const float distanceAttenuation = 1.0f - distance / light.range;
+
+		//바깥 각도도 코사인 값으로 바꿔 비교 
+		const float cosTheta =
+			Vector3::Dot(light.direction, directionToPoint);
+
+		const float outerCos = std::cos(
+			light.outerHalfAngleDegrees * MathConstants::Pi / 180.0f
+		);
+		//30도 이상 벗어난 지점은 밝기를 0도로 반환.
+		if (cosTheta <= outerCos)
+		{
+			return 0.0f;
+		}
+
+		//안쪽 각도 비교 안쪽 20도는 완전히 밝음
+		const float innerCos = std::cos(
+			light.innerHalfAngleDegrees * MathConstants::Pi / 180.0f
+		);
+
+		//각도에 따라 밝기가 줄어들음 30-> 20도
+		const float angleAttenuation = std::clamp(
+			(cosTheta - outerCos) / (innerCos - outerCos),
+			0.0f,
+			1.0f
+		);
+
+		// 표면이 빛을 향하는 정도
+		// directionToPoint는 손전등 → 표면이므로, 
+		// 반대로 뒤집어 표면 → 손전등 방향을 구함/
+		// 그 방향과 면의 법선을 비교
+		const Vector3 directionToLight = directionToPoint * -1.0f;
+
+		const float surfaceBrightness = std::clamp(
+			Vector3::Dot(worldNormal, directionToLight),
+			0.0f,
+			1.0f
+		);
+
+		return light.intensity
+			* distanceAttenuation
+			* angleAttenuation
+			* surfaceBrightness;
 	}
 
 }

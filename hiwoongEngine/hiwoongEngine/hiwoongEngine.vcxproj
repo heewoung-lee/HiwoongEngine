@@ -104,6 +104,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera\Camera3D.cpp" />
+    <ClCompile Include="Component\BoxCollider3DComponent.cpp" />
     <ClCompile Include="Component\BoxColliderComponent.cpp" />
     <ClCompile Include="Component\Component.cpp" />
     <ClCompile Include="Component\SpriteRendererComponent.cpp" />
@@ -123,6 +124,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClCompile Include="Render\Renderer.cpp" />
     <ClCompile Include="Render\ScreenBuffer.cpp" />
     <ClCompile Include="Render\SoftwareRasterizer.cpp" />
+    <ClCompile Include="Render\SpotLight.cpp" />
     <ClCompile Include="Render\Triangle.cpp" />
     <ClCompile Include="Render\Vertex.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
@@ -130,6 +132,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\Camera3D.h" />
+    <ClInclude Include="Component\BoxCollider3DComponent.h" />
     <ClInclude Include="Component\BoxColliderComponent.h" />
     <ClInclude Include="Component\Component.h" />
     <ClInclude Include="Component\SpriteRendererComponent.h" />
@@ -154,6 +157,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClInclude Include="Render\RenderView.h" />
     <ClInclude Include="Render\ScreenBuffer.h" />
     <ClInclude Include="Render\SoftwareRasterizer.h" />
+    <ClInclude Include="Render\SpotLight.h" />
     <ClInclude Include="Render\Triangle.h" />
     <ClInclude Include="Render\Vertex.h" />
     <ClInclude Include="Scene\Scene.h" />

@@ -2,6 +2,7 @@
 
 #include "Math/Matrix4x4.h"
 #include "Math/Vector2.h"
+#include "Render/SpotLight.h"
 
 namespace Hiwoong
 {
@@ -27,6 +28,8 @@ namespace Hiwoong
 		Matrix4x4 projection; //FOV 화면 비율 Near or Far 옵션으로 만든 행렬
 		Vector2 screenSize;// 화면 크기.
 		float nearPlane; // 거리
+		SpotLight spotLight;
+		Matrix4x4 cameraToWorld = Matrix4x4::Identity(); //카메라 좌표->월드좌표
 	};
 }
 

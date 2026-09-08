@@ -4,6 +4,9 @@
 #include "Render/Mesh.h"
 #include <string>
 #include <vector>
+#include <functional>
+
+
 namespace Hiwoong
 {
     class DoomMap : public GameObject
@@ -11,6 +14,8 @@ namespace Hiwoong
         TYPE_DECALRATIONS(DoomMap, GameObject)
 
     public:
+        void AddOnMapBuilt(std::function<void()> callback);
+
         DoomMap(const std::string& mapPath);
         ~DoomMap() override = default;
 
@@ -31,8 +36,15 @@ namespace Hiwoong
         {
             return monsterSpawnPositions;
         }
-
         void Start() override;
+
+        bool IsWallTile(int x, int z) const;
+
+        //벽이나 장애물이 있다면 플레이어에게 이동하지말라고 말해야함.
+        bool CanMoveTo(
+            const Vector3& worldPosition,
+            float halfSize
+        ) const;
 
     private:
         std::string mapPath;
@@ -47,8 +59,12 @@ namespace Hiwoong
 
         Mesh mapMesh;
 
+        //맵의 콜백함수들을 모은다.
+        std::vector<std::function<void()>> onMapBuiltCallbacks;
+
         void LoadMap();
         void BuildMap();
         void RegisterTileBuilders();
+        void BroadcastOnMapBuilt();
     };
 }
