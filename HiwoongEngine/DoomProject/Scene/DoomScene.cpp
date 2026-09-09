@@ -68,6 +68,11 @@ namespace Hiwoong
 			screenSize,
 			nearPlane
 		);
+
+		//기본 밝기 조정.
+		renderView.ambientBrightness = 0.2f;
+		renderView.directionalIntensity = 0.0f;
+
 		renderView.spotLight.position = player->GetWorldPosition();
 		renderView.spotLight.direction = camera->GetForward().Normalized();
 		

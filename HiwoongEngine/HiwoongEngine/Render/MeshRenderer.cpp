@@ -23,8 +23,9 @@ namespace Hiwoong
 
 
 		//임시용임 없앨것.(Test)
-		std::vector<char> rightRender = {
-	'.', ':', '-', '=', '+', '*', '#', '%', '@'
+		std::vector<char> rightRender = 
+		{
+			' ', '.', ':', '*', '#', '@'
 		};
 
 		//모델 x 뷰 x 프로젝션
@@ -225,8 +226,8 @@ namespace Hiwoong
 
 
 				//현재 빛이 얼마만큼 묻는 지를 계산하고, 빛을 받은 양에 따라 문자 결정
-				const float ambientBrightness = 0.15f;
-				const float directionalIntensity = 0.2f;
+				const float ambientBrightness = renderView.ambientBrightness;
+				const float directionalIntensity = renderView.directionalIntensity;
 
 				const float brightness =
 					ambientBrightness +
@@ -337,12 +338,15 @@ namespace Hiwoong
 		//픽셀의 깊이를 계산할 수 있음.
 		for (const Vector2& pixel : pixels)
 		{
+			//화면 비중을 구하는 작업. 
 			const Vector3 weights =
 				SoftwareRasterizer::CalculateBarycentric(
 					pixel,
 					point0,
 					point1,
 					point2);
+
+			//화면 비중을 깊이로 나눈 값들으 ㅣ 합.
 
 			const float interpolatedInverseZ =
 				weights.x * inverseZ0 +
@@ -441,14 +445,10 @@ namespace Hiwoong
 			return 0.0f;
 		}
 
-		//안쪽 각도 비교 안쪽 20도는 완전히 밝음
-		const float innerCos = std::cos(
-			light.innerHalfAngleDegrees * MathConstants::Pi / 180.0f
-		);
 
 		//각도에 따라 밝기가 줄어들음 30-> 20도
 		const float angleAttenuation = std::clamp(
-			(cosTheta - outerCos) / (innerCos - outerCos),
+			(cosTheta - outerCos) / (1.0f - outerCos),
 			0.0f,
 			1.0f
 		);

@@ -18,7 +18,6 @@ namespace Hiwoong
 		void Start() override;
 		void Update(double deltaTime) override;
 
-
 		void TurnLeft(Vector3& rotation);
 		void TurnRight(Vector3& rotation);
 
@@ -37,6 +36,7 @@ namespace Hiwoong
 		double frameDeltaTime;
 		Vector3 direction;
 		float collisionHalfSize = 0.2f;//충돌크기
+
 	};
 }
 

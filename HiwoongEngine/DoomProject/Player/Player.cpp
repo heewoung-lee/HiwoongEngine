@@ -72,7 +72,6 @@ namespace Hiwoong
 		transform->SetWorldPosition(position);
 	}
 
-
 	void Player::TurnLeft(Vector3& rotation)
 	{
 		if (Input::Get().GetKey('Q'))
@@ -133,6 +132,7 @@ namespace Hiwoong
 		}
 		
 	}
+
 
 	void Player::MoveLeft(const Vector3& rotation)
 	{
