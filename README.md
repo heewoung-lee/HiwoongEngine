@@ -22,6 +22,12 @@ https://github.com/user-attachments/assets/639897e7-3dc8-43dd-8a19-020b15c6207a
 
 https://github.com/user-attachments/assets/865c266e-8450-480e-a423-dcdda1b79d45
 
+
+## 9.9일 손전등 구현
+
+https://github.com/user-attachments/assets/5a2b94c3-1b5d-4a2d-8865-a76ca032c596
+
+
 ---
 
 HiwoongEngine은 OpenGL, DirectX 같은 그래픽 API나 외부 게임 프레임워크 없이 C++ 표준 라이브러리와 Windows 콘솔 API로 동작합니다.
