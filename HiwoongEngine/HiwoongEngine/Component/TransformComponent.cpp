@@ -1,6 +1,7 @@
 #include "TransformComponent.h"
 #include "Math/Vector3.h"
-
+#include "Math/MathConstants.h"
+#include <cmath>
 
 namespace Hiwoong
 {
@@ -9,7 +10,10 @@ namespace Hiwoong
 	(
 		Vector3 position, 
 		Vector3 rotation, 
-		Vector3 scale): localPosition(position), rotation(rotation), scale(scale), previousWorldPosition(position){}
+		Vector3 scale): localPosition(position), rotation(rotation), scale(scale), previousWorldPosition(position)
+	{
+		SetRotation(rotation);
+	}
 
 	void TransformComponent::SavePreviousWorldPosition()
 	{
@@ -45,6 +49,17 @@ namespace Hiwoong
 		{
 			localPosition = newPosition - parentTransform->GetWorldPosition();
 		}
+	}
+
+	void TransformComponent::SetRotation(const Vector3& newRotation)
+	{
+		const float fullTurn = 2.0f * MathConstants::Pi; //360도를 라디안으로 바꾼값.
+
+		rotation = Vector3(
+			std::fmod(newRotation.x, fullTurn),
+			std::fmod(newRotation.y, fullTurn),
+			std::fmod(newRotation.z, fullTurn)
+			);
 	}
 
 	Matrix4x4 TransformComponent::GetModelMatrix() const

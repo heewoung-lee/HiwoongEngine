@@ -154,7 +154,7 @@ namespace Hiwoong
 				currentColor
 			);
 
-			block->AttachTo(shared_from_this(), false);
+			block->SetParent(shared_from_this(), false);
 
 			blocks[index] = block;
 		}

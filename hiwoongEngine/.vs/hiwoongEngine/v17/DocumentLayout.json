@@ -3,12 +3,88 @@
   "WorkspaceRootPath": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Player\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|solutionrelative:DoomProject\\Player\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\hiwoongEngine\\hiwoongEngine\\Core\\Input.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Core\\Input.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Core\\Input.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Core\\Input.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\hiwoongEngine\\DoomProject\\Player\\CrossHair.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|solutionrelative:DoomProject\\Player\\CrossHair.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\hiwoongEngine\\DoomProject\\Player\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|solutionrelative:DoomProject\\Player\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\hiwoongEngine\\DoomProject\\Player\\CrossHair.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|solutionrelative:DoomProject\\Player\\CrossHair.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Engine\\Engine.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Engine\\Engine.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\hiwoongEngine\\hiwoongEngine\\Component\\MouseLookComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Component\\MouseLookComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Component\\TransformComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Component\\TransformComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Component\\TransformComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Component\\TransformComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\hiwoongEngine\\hiwoongEngine\\Component\\MouseLookComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Component\\MouseLookComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\GameObject\\GameObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\GameObject\\GameObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Component\\Component.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Component\\Component.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Scene\\Scene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Scene\\Scene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\GameObject\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\GameObject\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Component\\SpriteRendererComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Component\\SpriteRendererComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\hiwoongEngine\\DoomProject\\Player\\Gun.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|solutionrelative:DoomProject\\Player\\Gun.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Component\\SpriteRendererComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Component\\SpriteRendererComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\hiwoongEngine\\DoomProject\\Player\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|solutionrelative:DoomProject\\Player\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\hiwoongEngine\\DoomProject\\Player\\Gun.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|solutionrelative:DoomProject\\Player\\Gun.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Scene\\DoomScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|solutionrelative:DoomProject\\Scene\\DoomScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Map\\DoomMap.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|solutionrelative:DoomProject\\Map\\DoomMap.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Scene\\DoomScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -19,11 +95,7 @@
       "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Render\\RenderView.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Scene\\DoomScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|solutionrelative:DoomProject\\Scene\\DoomScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\hiwoongEngine\\hiwoongEngine\\Render\\MeshRenderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Render\\MeshRenderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Render\\MeshRenderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
@@ -59,20 +131,8 @@
       "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Scene\\Scene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Scene\\Scene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Scene\\Scene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Physics\\CollisionSystem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Physics\\CollisionSystem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\GameObject\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\GameObject\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Map\\DoomMap.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|solutionrelative:DoomProject\\Map\\DoomMap.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Render\\Renderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -115,10 +175,6 @@
       "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Math\\Vector3.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Component\\TransformComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Component\\TransformComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Render\\ScreenBuffer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Render\\ScreenBuffer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -127,16 +183,8 @@
       "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Render\\ScreenBuffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Engine\\Engine.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Engine\\Engine.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\INCLUDES\\HIWOONGENGINE\\GAMEOBJECT\\GAMEOBJECT.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|solutionrelative:INCLUDES\\HIWOONGENGINE\\GAMEOBJECT\\GAMEOBJECT.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\GameObject\\GameObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\GameObject\\GameObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Map\\BuildImplements\\MonsterSpawnTileBuilder.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -215,10 +263,6 @@
       "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Math\\Matrix4x4.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Component\\TransformComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Component\\TransformComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Camera\\Camera3D.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Camera\\Camera3D.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -233,10 +277,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\INCLUDES\\HIWOONGENGINE\\MATH\\VECTOR3.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|solutionrelative:INCLUDES\\HIWOONGENGINE\\MATH\\VECTOR3.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Component\\SpriteRendererComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Component\\SpriteRendererComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F0BF183B-C5A3-4214-981A-04E245B1BAF4}|DoomProject\\DoomProject.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\INCLUDES\\HIWOONGENGINE\\CAMERA\\CAMERA3D.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -315,14 +355,6 @@
       "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Math\\Vector2.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Component\\SpriteRendererComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Component\\SpriteRendererComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Core\\Input.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Core\\Input.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Math\\MathConstants.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Math\\MathConstants.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -353,10 +385,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Component\\BoxColliderComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Component\\BoxColliderComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Component\\Component.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|solutionrelative:hiwoongEngine\\Component\\Component.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{24249147-7B15-40AE-81EF-13F84CE22DDE}|hiwoongEngine\\hiwoongEngine.vcxproj|C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\hiwoongEngine\\Component\\BoxColliderComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -413,38 +441,38 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 268,
+          "DockedWidth": 203,
           "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 13,
               "Title": "GameObject.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\GameObject\\GameObject.cpp",
               "RelativeDocumentMoniker": "HiwoongEngine\\GameObject\\GameObject.cpp",
               "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\GameObject\\GameObject.cpp",
               "RelativeToolTip": "HiwoongEngine\\GameObject\\GameObject.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKQAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAGEAAAAAAAAAAAAowHEAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-09-04T05:00:51.765Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Player.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Player\\Player.cpp",
               "RelativeDocumentMoniker": "DoomProject\\Player\\Player.cpp",
               "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Player\\Player.cpp",
               "RelativeToolTip": "DoomProject\\Player\\Player.cpp",
-              "ViewState": "AgIAADQAAAAAAAAAAAAowEkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABAAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-09-04T05:01:22.656Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 36,
               "Title": "BoxCollider3DComponent.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\BoxCollider3DComponent.cpp",
               "RelativeDocumentMoniker": "HiwoongEngine\\Component\\BoxCollider3DComponent.cpp",
@@ -456,7 +484,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 30,
               "Title": "BoxCollider3DComponent.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\BoxCollider3DComponent.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\Component\\BoxCollider3DComponent.h",
@@ -468,7 +496,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 37,
               "Title": "DoomMap.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Map\\DoomMap.cpp",
               "RelativeDocumentMoniker": "DoomProject\\Map\\DoomMap.cpp",
@@ -476,11 +504,12 @@
               "RelativeToolTip": "DoomProject\\Map\\DoomMap.cpp",
               "ViewState": "AgIAAGwAAAAAAAAAAAAAAHkAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-09-07T05:33:03.886Z"
+              "WhenOpened": "2026-09-07T05:33:03.886Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 46,
               "Title": "MonsterSpawnTileBuilder.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Map\\BuildImplements\\MonsterSpawnTileBuilder.cpp",
               "RelativeDocumentMoniker": "DoomProject\\Map\\BuildImplements\\MonsterSpawnTileBuilder.cpp",
@@ -492,7 +521,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 96,
+              "DocumentIndex": 103,
               "Title": "Edge.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Edge.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\Render\\Edge.h",
@@ -504,7 +533,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 41,
               "Title": "MonsterSpawnTileBuilder.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Map\\BuildImplements\\MonsterSpawnTileBuilder.h",
               "RelativeDocumentMoniker": "DoomProject\\Map\\BuildImplements\\MonsterSpawnTileBuilder.h",
@@ -516,7 +545,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 53,
               "Title": "Renderer.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Renderer.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\Render\\Renderer.h",
@@ -528,7 +557,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 66,
               "Title": "HiwoongEngineTests.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngineTests\\HiwoongEngineTests.cpp",
               "RelativeDocumentMoniker": "HiwoongEngineTests\\HiwoongEngineTests.cpp",
@@ -540,7 +569,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 86,
+              "DocumentIndex": 94,
               "Title": "Vector4.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\Includes\\HiwoongEngine\\Math\\Vector4.h",
               "RelativeDocumentMoniker": "Includes\\HiwoongEngine\\Math\\Vector4.h",
@@ -552,7 +581,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 90,
+              "DocumentIndex": 97,
               "Title": "MeshFactory.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\MeshFactory.cpp",
               "RelativeDocumentMoniker": "HiwoongEngine\\Render\\MeshFactory.cpp",
@@ -565,64 +594,181 @@
           ]
         },
         {
-          "DockedWidth": 187,
-          "SelectedChildIndex": 3,
+          "DockedWidth": 252,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "RenderView.h",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\RenderView.h",
-              "RelativeDocumentMoniker": "HiwoongEngine\\Render\\RenderView.h",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\RenderView.h",
-              "RelativeToolTip": "HiwoongEngine\\Render\\RenderView.h",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAowB4AAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-09-03T04:29:20.221Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Main.cpp",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Main.cpp",
-              "RelativeDocumentMoniker": "DoomProject\\Main.cpp",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Main.cpp",
-              "RelativeToolTip": "DoomProject\\Main.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-09-02T11:43:57.246Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "DoomScene.cpp",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Scene\\DoomScene.cpp",
-              "RelativeDocumentMoniker": "DoomProject\\Scene\\DoomScene.cpp",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Scene\\DoomScene.cpp",
-              "RelativeToolTip": "DoomProject\\Scene\\DoomScene.cpp",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAB0AAAAbAAAAAAAAAA==",
+              "Title": "CrossHair.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Player\\CrossHair.cpp",
+              "RelativeDocumentMoniker": "DoomProject\\Player\\CrossHair.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Player\\CrossHair.cpp",
+              "RelativeToolTip": "DoomProject\\Player\\CrossHair.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-09-03T02:26:31.023Z",
+              "WhenOpened": "2026-09-10T11:55:35.238Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Player.h",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Player\\Player.h",
-              "RelativeDocumentMoniker": "DoomProject\\Player\\Player.h",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Player\\Player.h",
-              "RelativeToolTip": "DoomProject\\Player\\Player.h",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAB4AAAAPAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "CrossHair.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Player\\CrossHair.h",
+              "RelativeDocumentMoniker": "DoomProject\\Player\\CrossHair.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Player\\CrossHair.h",
+              "RelativeToolTip": "DoomProject\\Player\\CrossHair.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-09-04T04:59:08.705Z",
+              "WhenOpened": "2026-09-10T11:55:24.441Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MouseLookComponent.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\MouseLookComponent.cpp",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Component\\MouseLookComponent.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\MouseLookComponent.cpp",
+              "RelativeToolTip": "HiwoongEngine\\Component\\MouseLookComponent.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-09-10T08:41:07.512Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "GameObject.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\GameObject\\GameObject.h",
+              "RelativeDocumentMoniker": "HiwoongEngine\\GameObject\\GameObject.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\GameObject\\GameObject.h",
+              "RelativeToolTip": "HiwoongEngine\\GameObject\\GameObject.h",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAAAGsAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-09-04T05:23:41.761Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Engine.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Engine\\Engine.cpp",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Engine\\Engine.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Engine\\Engine.cpp",
+              "RelativeToolTip": "HiwoongEngine\\Engine\\Engine.cpp",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAAEIAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-08-28T08:39:43.788Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Input.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Core\\Input.h",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Core\\Input.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Core\\Input.h",
+              "RelativeToolTip": "HiwoongEngine\\Core\\Input.h",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAFEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-09-04T04:39:35.967Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
+              "Title": "TransformComponent.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\TransformComponent.h",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Component\\TransformComponent.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\TransformComponent.h",
+              "RelativeToolTip": "HiwoongEngine\\Component\\TransformComponent.h",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAowBsAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-08-22T11:38:17.752Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Input.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Core\\Input.cpp",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Core\\Input.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Core\\Input.cpp",
+              "RelativeToolTip": "HiwoongEngine\\Core\\Input.cpp",
+              "ViewState": "AgIAAKIAAAAAAAAAAAAAAMoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-09-10T08:25:35.208Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MouseLookComponent.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\MouseLookComponent.h",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Component\\MouseLookComponent.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\MouseLookComponent.h",
+              "RelativeToolTip": "HiwoongEngine\\Component\\MouseLookComponent.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-09-10T08:37:37.524Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TransformComponent.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\TransformComponent.cpp",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Component\\TransformComponent.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\TransformComponent.cpp",
+              "RelativeToolTip": "HiwoongEngine\\Component\\TransformComponent.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-08-22T11:38:42.173Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Component.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\Component.h",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Component\\Component.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\Component.h",
+              "RelativeToolTip": "HiwoongEngine\\Component\\Component.h",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABwAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-08-22T11:37:54.11Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "SpriteRendererComponent.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\SpriteRendererComponent.cpp",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Component\\SpriteRendererComponent.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\SpriteRendererComponent.cpp",
+              "RelativeToolTip": "HiwoongEngine\\Component\\SpriteRendererComponent.cpp",
+              "ViewState": "AgIAACYAAAAAAAAAAAAiwD4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-09-04T06:33:55.503Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Scene.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Scene\\Scene.h",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Scene\\Scene.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Scene\\Scene.h",
+              "RelativeToolTip": "HiwoongEngine\\Scene\\Scene.h",
+              "ViewState": "AgIAABgAAAAAAAAAAAAiwCMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-08-21T11:03:36.114Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
               "Title": "SoftwareRasterizer.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\SoftwareRasterizer.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\Render\\SoftwareRasterizer.h",
@@ -630,12 +776,37 @@
               "RelativeToolTip": "HiwoongEngine\\Render\\SoftwareRasterizer.h",
               "ViewState": "AgIAABkAAAAAAAAAAAAtwCwAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-08-20T11:44:02.985Z",
+              "WhenOpened": "2026-08-20T11:44:02.985Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Gun.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Player\\Gun.cpp",
+              "RelativeDocumentMoniker": "DoomProject\\Player\\Gun.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Player\\Gun.cpp",
+              "RelativeToolTip": "DoomProject\\Player\\Gun.cpp",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAiwBgAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-09-10T06:24:16.712Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 16,
+              "Title": "SpriteRendererComponent.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\SpriteRendererComponent.h",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Component\\SpriteRendererComponent.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\SpriteRendererComponent.h",
+              "RelativeToolTip": "HiwoongEngine\\Component\\SpriteRendererComponent.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-08-21T12:13:59.63Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
               "Title": "SoftwareRasterizer.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\SoftwareRasterizer.cpp",
               "RelativeDocumentMoniker": "HiwoongEngine\\Render\\SoftwareRasterizer.cpp",
@@ -643,12 +814,49 @@
               "RelativeToolTip": "HiwoongEngine\\Render\\SoftwareRasterizer.cpp",
               "ViewState": "AgIAAIQAAAAAAAAAAAAtwI4AAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-08-22T11:28:33.74Z",
+              "WhenOpened": "2026-08-22T11:28:33.74Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Player.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Player\\Player.h",
+              "RelativeDocumentMoniker": "DoomProject\\Player\\Player.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Player\\Player.h",
+              "RelativeToolTip": "DoomProject\\Player\\Player.h",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-09-04T04:59:08.705Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 21,
+              "Title": "DoomScene.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Scene\\DoomScene.cpp",
+              "RelativeDocumentMoniker": "DoomProject\\Scene\\DoomScene.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Scene\\DoomScene.cpp",
+              "RelativeToolTip": "DoomProject\\Scene\\DoomScene.cpp",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAB0AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-09-03T02:26:31.023Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Gun.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Player\\Gun.h",
+              "RelativeDocumentMoniker": "DoomProject\\Player\\Gun.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Player\\Gun.h",
+              "RelativeToolTip": "DoomProject\\Player\\Gun.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-09-10T06:22:23.639Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
               "Title": "MeshRenderer.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\MeshRenderer.cpp",
               "RelativeDocumentMoniker": "HiwoongEngine\\Render\\MeshRenderer.cpp",
@@ -656,12 +864,61 @@
               "RelativeToolTip": "HiwoongEngine\\Render\\MeshRenderer.cpp",
               "ViewState": "AgIAANIAAAAAAAAAAAAAAN4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-09-03T05:43:30.657Z",
+              "WhenOpened": "2026-09-03T05:43:30.657Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "DoomMap.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Map\\DoomMap.h",
+              "RelativeDocumentMoniker": "DoomProject\\Map\\DoomMap.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Map\\DoomMap.h",
+              "RelativeToolTip": "DoomProject\\Map\\DoomMap.h",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAADUAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-09-06T11:09:51.514Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 19,
+              "Title": "DoomScene.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Scene\\DoomScene.h",
+              "RelativeDocumentMoniker": "DoomProject\\Scene\\DoomScene.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Scene\\DoomScene.h",
+              "RelativeToolTip": "DoomProject\\Scene\\DoomScene.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-09-03T02:17:09.568Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Main.cpp",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Main.cpp",
+              "RelativeDocumentMoniker": "DoomProject\\Main.cpp",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Main.cpp",
+              "RelativeToolTip": "DoomProject\\Main.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-09-02T11:43:57.246Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "RenderView.h",
+              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\RenderView.h",
+              "RelativeDocumentMoniker": "HiwoongEngine\\Render\\RenderView.h",
+              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\RenderView.h",
+              "RelativeToolTip": "HiwoongEngine\\Render\\RenderView.h",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAowB4AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-09-03T04:29:20.221Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
               "Title": "MeshRenderer.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\MeshRenderer.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\Render\\MeshRenderer.h",
@@ -669,25 +926,11 @@
               "RelativeToolTip": "HiwoongEngine\\Render\\MeshRenderer.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-09-03T04:19:59.277Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-03T04:19:59.277Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "DoomScene.h",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Scene\\DoomScene.h",
-              "RelativeDocumentMoniker": "DoomProject\\Scene\\DoomScene.h",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Scene\\DoomScene.h",
-              "RelativeToolTip": "DoomProject\\Scene\\DoomScene.h",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAB0AAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-09-03T02:17:09.568Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 28,
               "Title": "SpotLight.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\SpotLight.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\Render\\SpotLight.h",
@@ -699,7 +942,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 29,
               "Title": "SpotLight.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\SpotLight.cpp",
               "RelativeDocumentMoniker": "HiwoongEngine\\Render\\SpotLight.cpp",
@@ -711,7 +954,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 33,
               "Title": "Renderer.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Renderer.cpp",
               "RelativeDocumentMoniker": "HiwoongEngine\\Render\\Renderer.cpp",
@@ -723,20 +966,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "DoomMap.h",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Map\\DoomMap.h",
-              "RelativeDocumentMoniker": "DoomProject\\Map\\DoomMap.h",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Map\\DoomMap.h",
-              "RelativeToolTip": "DoomProject\\Map\\DoomMap.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-09-06T11:09:51.514Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 32,
               "Title": "CollisionSystem.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Physics\\CollisionSystem.cpp",
               "RelativeDocumentMoniker": "HiwoongEngine\\Physics\\CollisionSystem.cpp",
@@ -744,11 +974,12 @@
               "RelativeToolTip": "HiwoongEngine\\Physics\\CollisionSystem.cpp",
               "ViewState": "AgIAADcAAAAAAAAAAAAowEoAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-08-21T12:05:14.418Z"
+              "WhenOpened": "2026-08-21T12:05:14.418Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 31,
               "Title": "Scene.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Scene\\Scene.cpp",
               "RelativeDocumentMoniker": "HiwoongEngine\\Scene\\Scene.cpp",
@@ -760,19 +991,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Scene.h",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Scene\\Scene.h",
-              "RelativeDocumentMoniker": "HiwoongEngine\\Scene\\Scene.h",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Scene\\Scene.h",
-              "RelativeToolTip": "HiwoongEngine\\Scene\\Scene.h",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAACUAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-08-21T11:03:36.114Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 34,
               "Title": "WallTileBuilder.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Map\\BuildImplements\\WallTileBuilder.cpp",
               "RelativeDocumentMoniker": "DoomProject\\Map\\BuildImplements\\WallTileBuilder.cpp",
@@ -784,7 +1003,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 35,
               "Title": "CollisionSystem.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Physics\\CollisionSystem.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\Physics\\CollisionSystem.h",
@@ -792,11 +1011,12 @@
               "RelativeToolTip": "HiwoongEngine\\Physics\\CollisionSystem.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-09-08T11:21:57.279Z"
+              "WhenOpened": "2026-09-08T11:21:57.279Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 38,
               "Title": "ITileBuilder.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Map\\ITileBuilder.h",
               "RelativeDocumentMoniker": "DoomProject\\Map\\ITileBuilder.h",
@@ -808,31 +1028,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "Engine.cpp",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Engine\\Engine.cpp",
-              "RelativeDocumentMoniker": "HiwoongEngine\\Engine\\Engine.cpp",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Engine\\Engine.cpp",
-              "RelativeToolTip": "HiwoongEngine\\Engine\\Engine.cpp",
-              "ViewState": "AgIAAIcAAAAAAAAAAAAWwJoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-08-28T08:39:43.788Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "TransformComponent.cpp",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\TransformComponent.cpp",
-              "RelativeDocumentMoniker": "HiwoongEngine\\Component\\TransformComponent.cpp",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\TransformComponent.cpp",
-              "RelativeToolTip": "HiwoongEngine\\Component\\TransformComponent.cpp",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAMwCAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-08-22T11:38:42.173Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 40,
               "Title": "Vertex.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Vertex.cpp",
               "RelativeDocumentMoniker": "HiwoongEngine\\Render\\Vertex.cpp",
@@ -844,7 +1040,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 39,
               "Title": "Vertex.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Vertex.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\Render\\Vertex.h",
@@ -856,7 +1052,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 42,
               "Title": "Vector3.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Math\\Vector3.cpp",
               "RelativeDocumentMoniker": "HiwoongEngine\\Math\\Vector3.cpp",
@@ -868,7 +1064,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 45,
               "Title": "GameObject.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\Includes\\HiwoongEngine\\GameObject\\GameObject.h",
               "RelativeDocumentMoniker": "Includes\\HiwoongEngine\\GameObject\\GameObject.h",
@@ -880,7 +1076,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 49,
               "Title": "EmptyTileBuilder.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Map\\BuildImplements\\EmptyTileBuilder.h",
               "RelativeDocumentMoniker": "DoomProject\\Map\\BuildImplements\\EmptyTileBuilder.h",
@@ -892,7 +1088,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 44,
               "Title": "ScreenBuffer.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\ScreenBuffer.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\Render\\ScreenBuffer.h",
@@ -904,7 +1100,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 43,
               "Title": "ScreenBuffer.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\ScreenBuffer.cpp",
               "RelativeDocumentMoniker": "HiwoongEngine\\Render\\ScreenBuffer.cpp",
@@ -916,20 +1112,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "GameObject.h",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\GameObject\\GameObject.h",
-              "RelativeDocumentMoniker": "HiwoongEngine\\GameObject\\GameObject.h",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\GameObject\\GameObject.h",
-              "RelativeToolTip": "HiwoongEngine\\GameObject\\GameObject.h",
-              "ViewState": "AgIAAIkAAAAAAAAAAAAWwJgAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-09-04T05:23:41.761Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 47,
               "Title": "PlayerSpawnTileBuilder.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Map\\BuildImplements\\PlayerSpawnTileBuilder.cpp",
               "RelativeDocumentMoniker": "DoomProject\\Map\\BuildImplements\\PlayerSpawnTileBuilder.cpp",
@@ -941,7 +1124,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 48,
               "Title": "TileBuilderRegistry.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Map\\TileBuilderRegistry.h",
               "RelativeDocumentMoniker": "DoomProject\\Map\\TileBuilderRegistry.h",
@@ -953,7 +1136,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 50,
               "Title": "EmptyTileBuilder.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Map\\BuildImplements\\EmptyTileBuilder.cpp",
               "RelativeDocumentMoniker": "DoomProject\\Map\\BuildImplements\\EmptyTileBuilder.cpp",
@@ -965,7 +1148,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 51,
               "Title": "PlayerSpawnTileBuilder.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Map\\BuildImplements\\PlayerSpawnTileBuilder.h",
               "RelativeDocumentMoniker": "DoomProject\\Map\\BuildImplements\\PlayerSpawnTileBuilder.h",
@@ -977,7 +1160,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 52,
               "Title": "TileBuilderRegistry.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Map\\TileBuilderRegistry.cpp",
               "RelativeDocumentMoniker": "DoomProject\\Map\\TileBuilderRegistry.cpp",
@@ -989,7 +1172,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 54,
               "Title": "WallTileBuilder.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\Map\\BuildImplements\\WallTileBuilder.h",
               "RelativeDocumentMoniker": "DoomProject\\Map\\BuildImplements\\WallTileBuilder.h",
@@ -1001,7 +1184,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 55,
               "Title": "CubeRotationComponent.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\Cube\\CubeRotationComponent.cpp",
               "RelativeDocumentMoniker": "CubeProject\\Cube\\CubeRotationComponent.cpp",
@@ -1013,7 +1196,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 56,
               "Title": "CubeRotationComponent.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\Cube\\CubeRotationComponent.h",
               "RelativeDocumentMoniker": "CubeProject\\Cube\\CubeRotationComponent.h",
@@ -1025,7 +1208,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 58,
               "Title": "CubeObject.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\Cube\\CubeObject.cpp",
               "RelativeDocumentMoniker": "CubeProject\\Cube\\CubeObject.cpp",
@@ -1037,7 +1220,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 59,
               "Title": "CubeObject.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\Cube\\CubeObject.h",
               "RelativeDocumentMoniker": "CubeProject\\Cube\\CubeObject.h",
@@ -1045,12 +1228,11 @@
               "RelativeToolTip": "CubeProject\\Cube\\CubeObject.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-08-21T07:12:03.12Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-21T07:12:03.12Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 61,
               "Title": "CubeProject.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\CubeProject.cpp",
               "RelativeDocumentMoniker": "CubeProject\\CubeProject.cpp",
@@ -1062,7 +1244,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 57,
               "Title": "CubeScene.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\Test\\CubeScene.cpp",
               "RelativeDocumentMoniker": "CubeProject\\Test\\CubeScene.cpp",
@@ -1074,7 +1256,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 60,
               "Title": "Engine.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Engine\\Engine.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\Engine\\Engine.h",
@@ -1086,7 +1268,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 62,
               "Title": "CubeScene.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\Test\\CubeScene.h",
               "RelativeDocumentMoniker": "CubeProject\\Test\\CubeScene.h",
@@ -1098,7 +1280,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 64,
               "Title": "Matrix4x4.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Math\\Matrix4x4.cpp",
               "RelativeDocumentMoniker": "HiwoongEngine\\Math\\Matrix4x4.cpp",
@@ -1106,11 +1288,12 @@
               "RelativeToolTip": "HiwoongEngine\\Math\\Matrix4x4.cpp",
               "ViewState": "AgIAAMEAAAAAAAAAAAAQwI4AAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-09-01T09:24:10.867Z"
+              "WhenOpened": "2026-09-01T09:24:10.867Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 63,
               "Title": "Matrix4x4.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Math\\Matrix4x4.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\Math\\Matrix4x4.h",
@@ -1122,19 +1305,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
-              "Title": "TransformComponent.h",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\TransformComponent.h",
-              "RelativeDocumentMoniker": "HiwoongEngine\\Component\\TransformComponent.h",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\TransformComponent.h",
-              "RelativeToolTip": "HiwoongEngine\\Component\\TransformComponent.h",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAswB8AAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-08-22T11:38:17.752Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 68,
               "Title": "Vector3.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\Includes\\HiwoongEngine\\Math\\Vector3.h",
               "RelativeDocumentMoniker": "Includes\\HiwoongEngine\\Math\\Vector3.h",
@@ -1146,7 +1317,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 67,
               "Title": "Vector3.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Math\\Vector3.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\Math\\Vector3.h",
@@ -1158,7 +1329,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 65,
               "Title": "Camera3D.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Camera\\Camera3D.cpp",
               "RelativeDocumentMoniker": "HiwoongEngine\\Camera\\Camera3D.cpp",
@@ -1166,12 +1337,11 @@
               "RelativeToolTip": "HiwoongEngine\\Camera\\Camera3D.cpp",
               "ViewState": "AgIAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-09-01T09:58:05.108Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-01T09:58:05.108Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 70,
               "Title": "Camera3D.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Camera\\Camera3D.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\Camera\\Camera3D.h",
@@ -1179,11 +1349,12 @@
               "RelativeToolTip": "HiwoongEngine\\Camera\\Camera3D.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-09-01T09:58:03.239Z"
+              "WhenOpened": "2026-09-01T09:58:03.239Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 69,
               "Title": "Camera3D.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\Includes\\HiwoongEngine\\Camera\\Camera3D.h",
               "RelativeDocumentMoniker": "Includes\\HiwoongEngine\\Camera\\Camera3D.h",
@@ -1195,19 +1366,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
-              "Title": "SpriteRendererComponent.cpp",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\SpriteRendererComponent.cpp",
-              "RelativeDocumentMoniker": "HiwoongEngine\\Component\\SpriteRendererComponent.cpp",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\SpriteRendererComponent.cpp",
-              "RelativeToolTip": "HiwoongEngine\\Component\\SpriteRendererComponent.cpp",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAswBkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-09-04T06:33:55.503Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 71,
               "Title": "SpawnManager.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\SpawnManager\\SpawnManager.h",
               "RelativeDocumentMoniker": "TetrisProject\\GameObject\\SpawnManager\\SpawnManager.h",
@@ -1219,7 +1378,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 72,
               "Title": "TetrisModule.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\Interface\\TetrisModule.cpp",
               "RelativeDocumentMoniker": "TetrisProject\\Interface\\TetrisModule.cpp",
@@ -1227,11 +1386,12 @@
               "RelativeToolTip": "TetrisProject\\Interface\\TetrisModule.cpp",
               "ViewState": "AgIAAMkAAAAAAAAAAAAswNwAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-09-04T07:58:08.601Z"
+              "WhenOpened": "2026-09-04T07:58:08.601Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 70,
+              "DocumentIndex": 80,
               "Title": "Wall.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\BackGround\\Wall.h",
               "RelativeDocumentMoniker": "TetrisProject\\GameObject\\BackGround\\Wall.h",
@@ -1243,7 +1403,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 74,
               "Title": "Block.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\Block.cpp",
               "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TetrisBlocks\\Block.cpp",
@@ -1255,7 +1415,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 75,
               "Title": "Block.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TetrisBlocks\\Block.h",
               "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TetrisBlocks\\Block.h",
@@ -1267,7 +1427,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 68,
+              "DocumentIndex": 78,
               "Title": "GameStatesUI.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\Scene\\GameStatesUI.h",
               "RelativeDocumentMoniker": "TetrisProject\\Scene\\GameStatesUI.h",
@@ -1279,7 +1439,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 73,
+              "DocumentIndex": 83,
               "Title": "BackGround.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\BackGround\\BackGround.h",
               "RelativeDocumentMoniker": "TetrisProject\\GameObject\\BackGround\\BackGround.h",
@@ -1291,7 +1451,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 77,
               "Title": "TextObject.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TextObject.h",
               "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TextObject.h",
@@ -1303,7 +1463,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 71,
+              "DocumentIndex": 81,
               "Title": "Wall.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\BackGround\\Wall.cpp",
               "RelativeDocumentMoniker": "TetrisProject\\GameObject\\BackGround\\Wall.cpp",
@@ -1315,7 +1475,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 76,
               "Title": "Vector2.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Math\\Vector2.cpp",
               "RelativeDocumentMoniker": "HiwoongEngine\\Math\\Vector2.cpp",
@@ -1327,7 +1487,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 73,
               "Title": "TetrisBoard.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\BackGround\\TetrisBoard.cpp",
               "RelativeDocumentMoniker": "TetrisProject\\GameObject\\BackGround\\TetrisBoard.cpp",
@@ -1335,12 +1495,11 @@
               "RelativeToolTip": "TetrisProject\\GameObject\\BackGround\\TetrisBoard.cpp",
               "ViewState": "AgIAAGYAAAAAAAAAAAAswIAAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-09-04T07:59:41.503Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-04T07:59:41.503Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 74,
+              "DocumentIndex": 84,
               "Title": "TestGameObject.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\TestGameObject.cpp",
               "RelativeDocumentMoniker": "TetrisProject\\GameObject\\TestGameObject.cpp",
@@ -1352,7 +1511,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 72,
+              "DocumentIndex": 82,
               "Title": "BackGround.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\BackGround\\BackGround.cpp",
               "RelativeDocumentMoniker": "TetrisProject\\GameObject\\BackGround\\BackGround.cpp",
@@ -1364,7 +1523,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 69,
+              "DocumentIndex": 79,
               "Title": "GameStatesUI.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\Scene\\GameStatesUI.cpp",
               "RelativeDocumentMoniker": "TetrisProject\\Scene\\GameStatesUI.cpp",
@@ -1372,12 +1531,11 @@
               "RelativeToolTip": "TetrisProject\\Scene\\GameStatesUI.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-09-04T07:54:57.891Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-04T07:54:57.891Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 75,
+              "DocumentIndex": 85,
               "Title": "TetrisModule.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\Interface\\TetrisModule.h",
               "RelativeDocumentMoniker": "TetrisProject\\Interface\\TetrisModule.h",
@@ -1389,7 +1547,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 76,
+              "DocumentIndex": 86,
               "Title": "SpawnManager.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\GameObject\\SpawnManager\\SpawnManager.cpp",
               "RelativeDocumentMoniker": "TetrisProject\\GameObject\\SpawnManager\\SpawnManager.cpp",
@@ -1401,7 +1559,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 77,
+              "DocumentIndex": 87,
               "Title": "Vector2.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Math\\Vector2.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\Math\\Vector2.h",
@@ -1413,31 +1571,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 78,
-              "Title": "SpriteRendererComponent.h",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\SpriteRendererComponent.h",
-              "RelativeDocumentMoniker": "HiwoongEngine\\Component\\SpriteRendererComponent.h",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\SpriteRendererComponent.h",
-              "RelativeToolTip": "HiwoongEngine\\Component\\SpriteRendererComponent.h",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAACQAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-08-21T12:13:59.63Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 79,
-              "Title": "Input.h",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Core\\Input.h",
-              "RelativeDocumentMoniker": "HiwoongEngine\\Core\\Input.h",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Core\\Input.h",
-              "RelativeToolTip": "HiwoongEngine\\Core\\Input.h",
-              "ViewState": "AgIAACAAAAAAAAAAAAAYwDMAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-09-04T04:39:35.967Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 80,
+              "DocumentIndex": 88,
               "Title": "MathConstants.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Math\\MathConstants.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\Math\\MathConstants.h",
@@ -1445,12 +1579,11 @@
               "RelativeToolTip": "HiwoongEngine\\Math\\MathConstants.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-09-03T09:45:28.926Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-03T09:45:28.926Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 81,
+              "DocumentIndex": 89,
               "Title": "Vector4.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Math\\Vector4.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\Math\\Vector4.h",
@@ -1462,7 +1595,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 82,
+              "DocumentIndex": 90,
               "Title": "Main.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\Main.cpp",
               "RelativeDocumentMoniker": "TetrisProject\\Main.cpp",
@@ -1474,7 +1607,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 84,
+              "DocumentIndex": 92,
               "Title": "TestScene.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\Scene\\TestScene.cpp",
               "RelativeDocumentMoniker": "TetrisProject\\Scene\\TestScene.cpp",
@@ -1486,7 +1619,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 83,
+              "DocumentIndex": 91,
               "Title": "GameOver.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\TetrisProject\\Scene\\GameOver.cpp",
               "RelativeDocumentMoniker": "TetrisProject\\Scene\\GameOver.cpp",
@@ -1498,7 +1631,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 85,
+              "DocumentIndex": 93,
               "Title": "Vector4.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Math\\Vector4.cpp",
               "RelativeDocumentMoniker": "HiwoongEngine\\Math\\Vector4.cpp",
@@ -1510,19 +1643,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 88,
-              "Title": "Component.h",
-              "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\Component.h",
-              "RelativeDocumentMoniker": "HiwoongEngine\\Component\\Component.h",
-              "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\Component.h",
-              "RelativeToolTip": "HiwoongEngine\\Component\\Component.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-08-22T11:37:54.11Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 87,
+              "DocumentIndex": 95,
               "Title": "BoxColliderComponent.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\BoxColliderComponent.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\Component\\BoxColliderComponent.h",
@@ -1534,7 +1655,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 89,
+              "DocumentIndex": 96,
               "Title": "BoxColliderComponent.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Component\\BoxColliderComponent.cpp",
               "RelativeDocumentMoniker": "HiwoongEngine\\Component\\BoxColliderComponent.cpp",
@@ -1546,7 +1667,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 93,
+              "DocumentIndex": 100,
               "Title": "Mesh.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Mesh.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\Render\\Mesh.h",
@@ -1554,12 +1675,11 @@
               "RelativeToolTip": "HiwoongEngine\\Render\\Mesh.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-08-20T10:57:08.311Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-20T10:57:08.311Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 91,
+              "DocumentIndex": 98,
               "Title": "Core.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Core\\Core.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\Core\\Core.h",
@@ -1571,7 +1691,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 92,
+              "DocumentIndex": 99,
               "Title": "Mesh.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Mesh.cpp",
               "RelativeDocumentMoniker": "HiwoongEngine\\Render\\Mesh.cpp",
@@ -1583,7 +1703,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 94,
+              "DocumentIndex": 101,
               "Title": "Triangle.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Triangle.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\Render\\Triangle.h",
@@ -1595,7 +1715,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 100,
+              "DocumentIndex": 107,
               "Title": "SoftwareRasterizer.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\Includes\\HiwoongEngine\\Render\\SoftwareRasterizer.h",
               "RelativeDocumentMoniker": "Includes\\HiwoongEngine\\Render\\SoftwareRasterizer.h",
@@ -1607,7 +1727,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 95,
+              "DocumentIndex": 102,
               "Title": "MeshFactory.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\MeshFactory.h",
               "RelativeDocumentMoniker": "HiwoongEngine\\Render\\MeshFactory.h",
@@ -1619,7 +1739,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 97,
+              "DocumentIndex": 104,
               "Title": "LineTestObject.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\Test\\LineTestObject.cpp",
               "RelativeDocumentMoniker": "CubeProject\\Test\\LineTestObject.cpp",
@@ -1631,7 +1751,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 98,
+              "DocumentIndex": 105,
               "Title": "LineTestObject.h",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\CubeProject\\Test\\LineTestObject.h",
               "RelativeDocumentMoniker": "CubeProject\\Test\\LineTestObject.h",
@@ -1643,7 +1763,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 99,
+              "DocumentIndex": 106,
               "Title": "Edge.cpp",
               "DocumentMoniker": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\HiwoongEngine\\Render\\Edge.cpp",
               "RelativeDocumentMoniker": "HiwoongEngine\\Render\\Edge.cpp",

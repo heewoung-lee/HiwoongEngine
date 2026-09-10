@@ -12,7 +12,6 @@
 #include <utility> //std::forward
 #include <vector>
 
-
 namespace Hiwoong
 {
 	//front 
@@ -50,7 +49,7 @@ namespace Hiwoong
 		void SavePreviousState();
 
 		//Select ParentGameobject in Scene Graph
-		void AttachTo(
+		void SetParent(
 			const std::shared_ptr<GameObject>& newParent,
 			bool keepWorldPosition = true);
 
@@ -104,6 +103,10 @@ namespace Hiwoong
 
 			return nullptr;
 		}
+
+		//게임 오브젝트 생성 템플릿 함수
+		template<typename T, typename... Args>
+		std::shared_ptr<T> Instantiate(Args&&... args);
 
 		//Getter / Setter
 		inline bool HasBeganPlay() const { return hasBeganPlay; }
@@ -173,6 +176,18 @@ namespace Hiwoong
 
 		int sortingOrder = 0;
 	};
+
+
+	
+	template<typename T>
+	std::shared_ptr<T> Component::GetComponent() const
+	{
+		const std::shared_ptr<GameObject> gameObject = GetOwner();
+		if (gameObject == nullptr)
+			return nullptr;
+		
+		return gameObject->GetComponent<T>();
+	}
 
 }
 

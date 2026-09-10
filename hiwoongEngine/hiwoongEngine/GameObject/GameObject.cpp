@@ -105,7 +105,7 @@ namespace Hiwoong
 		}
 	}
 
-	void GameObject::AttachTo(const std::shared_ptr<GameObject>& newParent, bool keepWorldPosition)
+	void GameObject::SetParent(const std::shared_ptr<GameObject>& newParent, bool keepWorldPosition)
 	{
 		// if there are no parents and pointer that we will set for parent is this continue
 		if (newParent == nullptr || newParent.get() == this ) return;

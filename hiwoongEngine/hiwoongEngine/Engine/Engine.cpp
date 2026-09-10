@@ -57,9 +57,7 @@ namespace Hiwoong
 		while (isQuit == false)
 		{
 
-			//Precess Input
-			ProcessInput();
-
+		
 			//Check Current CounterTime
 			QueryPerformanceCounter(&counter);
 
@@ -70,6 +68,15 @@ namespace Hiwoong
 			double deltaTime = static_cast<double>(currentTime - previousTime) / static_cast<double>(frequency.QuadPart);
 			if (deltaTime < oneFrameTime) continue;
 			
+			//9.10일 위치 수정 이전에는 모든 입력을 매 반복문마다 받게끔 했는데,
+			// 이렇게 하니. 마우스 움직임을 읽는 횟수가, 화면을 갱신하는 횟수보다 많아짐.
+			// 우리의 마우스 이동은 직전 프레임에서 지금 프레임의 차이를 보고 이동하는건데.
+			// 너무 많은 움직임을 읽고 화면은 그 움직인 조금만 이동함.
+			// 그래서 이제 프레임 대기가 끝난 뒤 입력을 읽어 해당 이동량을 바로 Update에서 수정하도록 함.
+			//Precess Input
+			ProcessInput();
+
+
 			
 			ShowCurrentFPS(deltaTime, fpsElapsed, fpsFrameCount);
 

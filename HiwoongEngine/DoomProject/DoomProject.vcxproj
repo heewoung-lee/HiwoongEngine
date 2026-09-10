@@ -100,6 +100,8 @@
     <ClCompile Include="Map\BuildImplements\WallTileBuilder.cpp" />
     <ClCompile Include="Map\DoomMap.cpp" />
     <ClCompile Include="Map\TileBuilderRegistry.cpp" />
+    <ClCompile Include="Player\CrossHair.cpp" />
+    <ClCompile Include="Player\Gun.cpp" />
     <ClCompile Include="Player\Player.cpp" />
     <ClCompile Include="Scene\DoomScene.cpp" />
   </ItemGroup>
@@ -111,6 +113,8 @@
     <ClInclude Include="Map\DoomMap.h" />
     <ClInclude Include="Map\ITileBuilder.h" />
     <ClInclude Include="Map\TileBuilderRegistry.h" />
+    <ClInclude Include="Player\CrossHair.h" />
+    <ClInclude Include="Player\Gun.h" />
     <ClInclude Include="Player\Player.h" />
     <ClInclude Include="Scene\DoomScene.h" />
   </ItemGroup>

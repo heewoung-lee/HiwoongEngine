@@ -22,7 +22,7 @@ namespace Hiwoong
 	public:
 		//default declaration construct and destrecut
 		Input();
-		~Input() = default;
+		~Input();
 
 		//Create Check KeyInput Method
 		
@@ -33,6 +33,7 @@ namespace Hiwoong
 		// Check Getkey
 		bool GetKey(int keycode) const;
 
+		float GetMouseDeltaX() const { return mouseDeltaX; }
 
 		//Access singleton
 		static Input& Get();
@@ -45,6 +46,8 @@ namespace Hiwoong
 		// Save the previous key state
 		void SavePreviousInput();
 
+		void ProcessKeyboardInput();
+		void ProcessMouseInput();
 
 	private:
 		//keyboard count
@@ -53,6 +56,30 @@ namespace Hiwoong
 		KeyState keystates[256] = {};
 		//static instance for singleton
 		static Input* instance;
+
+
+		//이동량은 현재 x위치 - 이전x위치.
+		float mouseDeltaX = 0.0f;
+
+
+		//이전 위치.
+		int previousMouseX = 0;
+		//이전위치를 한번이라도 읽었는지.
+		bool hasPreviousMousePosition = false;
+
+
+		//마우스의 원래 설정을 저장하고 드래그 선택 기능을 끄기
+		void InitializeConsoleInput();
+		//종료할 때 마우스의 원래 설정으로 복원하기
+		void RestoreConsoleInput();
+
+		// 변경하기전 콘솔입력 설정
+		unsigned long originalConsoleMode = 0;
+
+		// 원래 설정을 읽어 저장했는지 여부
+		bool hasOriginalConsoleMode = false;
+
+
 
 	};
 

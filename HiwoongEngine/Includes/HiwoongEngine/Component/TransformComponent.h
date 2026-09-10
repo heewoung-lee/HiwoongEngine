@@ -33,7 +33,9 @@ namespace Hiwoong
 		inline void SetParent(std::weak_ptr<TransformComponent> newParent) { parent = newParent; }
 
 		inline void SetLocalPosition(const Vector3& newPosition) { localPosition = newPosition; }
-		inline void SetRotation(const Vector3& newRotation) { rotation = newRotation; }
+		
+		//9.10일 수정 SetRotation에서 370도도 = 10, 770 = 10 처럼 무한히 회전값이 중첩되지 않도록 수정
+		void SetRotation(const Vector3& newRotation);
 		inline void SetScale(const Vector3& newScale) { scale = newScale; }
 
 		Vector3 GetWorldPosition() const;

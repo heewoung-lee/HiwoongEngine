@@ -42,11 +42,11 @@ namespace Hiwoong
 
 		// template of game object spawner
 		template<typename T, typename ...Args,
-			typename = std::enable_if_t<std::is_base_of<GameObject,T>::value>>
+			typename = std::enable_if_t<std::is_base_of<GameObject, T>::value>>
 			std::shared_ptr<T> Instantiate(Args&&... args)
 		{
 			// Instantiate GameObject
-			std::shared_ptr<T> newGameObject = 
+			std::shared_ptr<T> newGameObject =
 				std::make_shared<T>(std::forward<Args>(args)...);
 
 
@@ -60,7 +60,7 @@ namespace Hiwoong
 
 
 		//Getter.
-		inline bool HasInitialized() const {return hasInitialzed;}
+		inline bool HasInitialized() const { return hasInitialzed; }
 
 		inline Vector2 GetScreenSize() const { return screenSize; }
 		inline void SetScreenSize(const Vector2& newSize) { screenSize = newSize; }
@@ -84,5 +84,18 @@ namespace Hiwoong
 		CollisionSystem collisionSystem;
 	};
 
+
+	//게임 오브젝트의 Instantiate를 씬에서의 Instantiate로 감싼다
+	//이유: 씬을 호출하지 않고 GameObject에서 Instantiate를 호출하고 싶기 때문에.
+	//편의를 위해 이렇게 함.
+	template<typename T, typename... Args>
+	std::shared_ptr<T> GameObject::Instantiate(Args&&... args)
+	{
+		const std::shared_ptr<Scene> scene = GetOwner();
+
+		if (scene == nullptr) return nullptr;
+
+		return scene->Instantiate<T>(std::forward<Args>(args)...);
+	}
 
 }

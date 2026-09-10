@@ -1,3 +1,4 @@
+
 #include "Player.h"
 #include "Component/TransformComponent.h"
 #include "Core/Input.h"
@@ -5,6 +6,11 @@
 #include "Map/DoomMap.h"
 #include "Component/BoxCollider3DComponent.h"
 #include "Scene/Scene.h"
+#include "Player/Gun.h"
+#include "Component/MouseLookComponent.h"
+#include "Player/CrossHair.h"
+
+#include <cassert>
 #include <iostream>
 #include <cmath>
 
@@ -18,6 +24,21 @@ namespace Hiwoong
 		super::Start();
 		transform = GetComponent<TransformComponent>();
 		AddComponent<BoxCollider3DComponent>(Vector3(collisionHalfSize, collisionHalfSize, collisionHalfSize));
+
+		std::shared_ptr<Gun> gun = Instantiate<Gun>();
+		assert(gun != nullptr);
+		gun->SetParent(shared_from_this(), false);
+
+		AddComponent<MouseLookComponent>();
+
+
+		//크로스헤어.
+		auto crosshair = Instantiate<Crosshair>();
+
+		if (crosshair != nullptr)
+		{
+			crosshair->SetParent(shared_from_this(), false);
+		}
 	}
 
 	void Player::Update(double deltaTime)
@@ -27,10 +48,6 @@ namespace Hiwoong
 		direction = Vector3(0, 0, 0);
 
 		Vector3 rotation = transform->GetRotation();
-
-		TurnLeft(rotation);
-		TurnRight(rotation);
-		transform->SetRotation(rotation);
 
 		MoveForward(rotation);
 		MoveBack(rotation);
