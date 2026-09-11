@@ -172,8 +172,30 @@ namespace Hiwoong
 	void Renderer::Draw()
 	{
 		Clear();
+		//일시정지때 캡쳐한 화면이 유지될 수 있게 Draw에 선언
+		DrawCapturedFrame();
 		DrawRenderQueue();
 		Present();
+	}
+	void Renderer::CaptureFrame()
+	{
+		if (frame == nullptr) return;
+
+		//전체 픽셀 수 계산
+		const int cellCount = static_cast<int>(screenSize.x) * static_cast<int>(screenSize.y);
+
+		//현재 화면의 첫번쨰 칸 주소를 가져옴.
+		const CHAR_INFO* source = frame->charInfoArray.get();
+		//첫번쨰 주소부터 cellcount개 만큼 복사
+		capturedFrame.assign(source, source + cellCount);
+
+		//사이즈 복사
+		capturedFrameSize = screenSize;
+	}
+	void Renderer::ClearCapturedFrame()
+	{
+		capturedFrame.clear();
+		capturedFrameSize = Vector2::Zero;
 	}
 	void Renderer::Resize(const Vector2& screenSize)
 	{
@@ -307,6 +329,24 @@ namespace Hiwoong
 
 		//Cycle Buffers
 		currentBufferIndex = 1 - currentBufferIndex;
+	}
+
+	void Renderer::DrawCapturedFrame()
+	{
+		if (frame == nullptr || capturedFrame.empty()) return;
+
+		//화면 크기가 스크린사이즈와 다를경우 반환
+		if (capturedFrameSize != screenSize) return;
+
+		//순회 하면서 사진에 있는 픽셀의 정보를 그대로 옮긴다.
+		for (std::size_t i = 0; i < capturedFrame.size(); ++i)
+		{
+			frame->charInfoArray[i] = capturedFrame[i];
+
+			// 밝은 색상을 표시하는 속성을 끈다. 조금 어둡게
+			frame->charInfoArray[i].Attributes &=
+				static_cast<WORD>(~FOREGROUND_INTENSITY);
+		}
 	}
 	
 	const ScreenBuffer* const Renderer::GetCurrentBuffer() const

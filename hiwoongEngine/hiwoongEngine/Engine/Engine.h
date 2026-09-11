@@ -33,6 +33,9 @@ namespace Hiwoong
 
 		void Quit();
 
+		//게임씬으로 되돌아가기
+		void ResumeScene();
+
 
 		//request add Level
 		template<
@@ -47,6 +50,22 @@ namespace Hiwoong
 			);
 		}
 
+		template<typename T, typename... Args>
+		void OpenPauseScene(Args&&... args)
+		{
+			if (mainScene == nullptr ||
+				pausedScene != nullptr ||
+				nextScene != nullptr)
+			{
+				return;
+			}
+
+			// 보여줄 메뉴씬을 준비한다.
+			AddNewScene<T>(std::forward<Args>(args)...);
+
+			// 현재 게임씬을 보관
+			pausedScene = mainScene;
+		}
 
 		static Engine& Get();
 
@@ -96,6 +115,9 @@ namespace Hiwoong
 		std::shared_ptr<Scene> mainScene;
 
 		std::shared_ptr<Scene> nextScene;
+
+		// 메뉴가 열려 있는 동안 기존 게임 씬을 보관한다.
+		std::shared_ptr<Scene> pausedScene;
 		
 		std::unique_ptr<Input> input;
 

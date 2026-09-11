@@ -5,8 +5,9 @@
 
 namespace Hiwoong
 {
-	enum class Hiwoong_API Color : WORD
-	{
+    enum class Hiwoong_API Color : WORD
+    {
+        Black = 0,
         Red = FOREGROUND_RED | FOREGROUND_INTENSITY,
         Green = FOREGROUND_GREEN | FOREGROUND_INTENSITY,
         Blue = FOREGROUND_BLUE | FOREGROUND_INTENSITY,

@@ -95,15 +95,25 @@ namespace Hiwoong
 			//Transition Level
 			if (nextScene != nullptr)
 			{
+				//메뉴화면이 들어온상태. 
+				if (pausedScene != nullptr && mainScene == pausedScene)
+				{
+					//렌더러는 캡쳐된 게임플레이 화면을 렌더링
+					renderer->CaptureFrame();
+				}
+				else
+				{
+					//게임 재게 또는 씬 전환시.
+					renderer->ClearCapturedFrame();
+				}
+
+				//일반씬 전환
 				if (mainScene != nullptr)
 				{
 					mainScene.reset();
 				}
 
-				// changine owner ship next to main.
 				mainScene = std::move(nextScene);
-
-				//organizing 
 				nextScene.reset();
 			}
 
@@ -123,6 +133,16 @@ namespace Hiwoong
 	void Engine::Quit()
 	{
 		isQuit = true;
+	}
+	void Engine::ResumeScene()
+	{
+		if (pausedScene == nullptr || nextScene != nullptr) return;
+
+		// 보관한 게임 씬으로 전환을 예약
+		nextScene = pausedScene;
+
+		// nextScene이 게임 씬을 보관하므로 이 참조는 비운다.
+		pausedScene.reset();
 	}
 	float Engine::GetScreenAspectRatio() const
 	{

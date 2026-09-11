@@ -93,6 +93,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Component\PauseMenuComponent.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map\BuildImplements\EmptyTileBuilder.cpp" />
     <ClCompile Include="Map\BuildImplements\MonsterSpawnTileBuilder.cpp" />
@@ -100,12 +101,19 @@
     <ClCompile Include="Map\BuildImplements\WallTileBuilder.cpp" />
     <ClCompile Include="Map\DoomMap.cpp" />
     <ClCompile Include="Map\TileBuilderRegistry.cpp" />
+    <ClCompile Include="Menu\MenuBackground.cpp" />
+    <ClCompile Include="Menu\MenuFrame.cpp" />
+    <ClCompile Include="Menu\PauseTitle.cpp" />
+    <ClCompile Include="Menu\QuitButton.cpp" />
+    <ClCompile Include="Menu\ResumeButton.cpp" />
     <ClCompile Include="Player\CrossHair.cpp" />
     <ClCompile Include="Player\Gun.cpp" />
     <ClCompile Include="Player\Player.cpp" />
     <ClCompile Include="Scene\DoomScene.cpp" />
+    <ClCompile Include="Scene\MenuScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Component\PauseMenuComponent.h" />
     <ClInclude Include="Map\BuildImplements\EmptyTileBuilder.h" />
     <ClInclude Include="Map\BuildImplements\MonsterSpawnTileBuilder.h" />
     <ClInclude Include="Map\BuildImplements\PlayerSpawnTileBuilder.h" />
@@ -113,10 +121,16 @@
     <ClInclude Include="Map\DoomMap.h" />
     <ClInclude Include="Map\ITileBuilder.h" />
     <ClInclude Include="Map\TileBuilderRegistry.h" />
+    <ClInclude Include="Menu\MenuBackground.h" />
+    <ClInclude Include="Menu\MenuFrame.h" />
+    <ClInclude Include="Menu\PauseTitle.h" />
+    <ClInclude Include="Menu\QuitButton.h" />
+    <ClInclude Include="Menu\ResumeButton.h" />
     <ClInclude Include="Player\CrossHair.h" />
     <ClInclude Include="Player\Gun.h" />
     <ClInclude Include="Player\Player.h" />
     <ClInclude Include="Scene\DoomScene.h" />
+    <ClInclude Include="Scene\MenuScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

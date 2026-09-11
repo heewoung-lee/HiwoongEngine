@@ -9,6 +9,7 @@
 #include "Player/Gun.h"
 #include "Component/MouseLookComponent.h"
 #include "Player/CrossHair.h"
+#include "Component/PauseMenuComponent.h"
 
 #include <cassert>
 #include <iostream>
@@ -30,7 +31,7 @@ namespace Hiwoong
 		gun->SetParent(shared_from_this(), false);
 
 		AddComponent<MouseLookComponent>();
-
+		AddComponent<PauseMenuComponent>();
 
 		//크로스헤어.
 		auto crosshair = Instantiate<Crosshair>();

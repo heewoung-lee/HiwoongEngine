@@ -116,6 +116,12 @@ namespace Hiwoong
 		// Draw Event Method (it will be called by engine)
 		void Draw();
 
+		//현재 게임플레이 씬을 캡쳐하는 함수. 메뉴화면등 에서 쓰임.
+		void CaptureFrame();
+
+		//일시정지 화면을 지우는 함수
+		void ClearCapturedFrame();
+
 		void Resize(const Vector2& screenSize);
 
 		Vector2 GetScreenSize() const
@@ -153,6 +159,9 @@ namespace Hiwoong
 		//when we use the Twice Buffer Backfuffer draws next frame;
 		void Present();
 
+		//저장한 사진을 그리는 함수.
+		void DrawCapturedFrame();
+
 		// Buffer can draw this frame
 		const ScreenBuffer* const GetCurrentBuffer() const;
 
@@ -173,6 +182,13 @@ namespace Hiwoong
 		// organizing 2 dimention Array of drawing the characters 
 		std::unique_ptr<Frame> frame;
 
+		// 저장한 화면의 문자와 색상
+		std::vector<CHAR_INFO> capturedFrame;
+
+		// 저장한 화면의 가로·세로 칸 수
+		Vector2 capturedFrameSize = Vector2::Zero;
+
+
 		// screen consle buffer
 		std::unique_ptr<ScreenBuffer> screenBufferArray[2] = {};
 
@@ -190,6 +206,9 @@ namespace Hiwoong
 
 		//Create twice ScreenBuffer
 		void CreateSceenBuffer(const Vector2& newScreenSize);
+
+
+
 
 	};
 }
