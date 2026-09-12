@@ -48,6 +48,19 @@ namespace Hiwoong
 		return *instance;
 	}
 
+	void Input::SetMouseLocked(bool locked)
+	{
+		isMouseLocked = locked;
+		mouseDeltaX = 0.0f;
+		hasPreviousMousePosition = false;
+
+		//가두기 해제
+		if (!isMouseLocked)
+		{
+			ClipCursor(nullptr);
+		}
+	}
+
 	//PrecessInput
 	void Input::ProcessInput()
 	{
@@ -75,6 +88,10 @@ namespace Hiwoong
 	void Input::ProcessMouseInput()
 	{
 		mouseDeltaX = 0.0f;
+
+		// 잠금이 꺼져 있으면 가두기와 중앙 복귀를 건너뛴다.
+		if (isMouseLocked == false)
+			return;
 
 		//게임 콘솔 창을 가져옴
 		const HWND gameWindow = GetConsoleWindow();

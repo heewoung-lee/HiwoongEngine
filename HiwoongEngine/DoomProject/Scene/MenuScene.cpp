@@ -15,6 +15,9 @@ namespace Hiwoong
 	{
 		Scene::SceneInitialize();
 
+		//메뉴씬에 들어오면 마우스는 가두면 안된다.
+		Input::Get().SetMouseLocked(false);
+
 		const auto size = GetScreenSize();
 		Instantiate<MenuBackground>();
 		Instantiate<MenuFrame>();
@@ -34,6 +37,15 @@ namespace Hiwoong
 
 	void MenuScene::ProcessKeyboardInput()
 	{
+		if (Input::Get().GetKeyDown(VK_UP))
+		{
+			selectedIndex = (2 + selectedIndex - 1) % 2;
+		}
+		else if (Input::Get().GetKeyDown(VK_DOWN))
+		{
+			selectedIndex = (selectedIndex + 1) % 2;
+		}
+
 		if (Input::Get().GetKeyDown(VK_RETURN))
 		{
 			if (selectedIndex == 0)
@@ -49,15 +61,7 @@ namespace Hiwoong
 
 	void MenuScene::UpdateHighlight()
 	{
-		if (Input::Get().GetKeyDown(VK_UP))
-		{
-			selectedIndex = (2 + selectedIndex - 1) % 2;
-		}
-		else if (Input::Get().GetKeyDown(VK_DOWN))
-		{
-			selectedIndex = (selectedIndex + 1) % 2;
-		}
-
+	
 		resumeRenderer->SetColor(
 			selectedIndex == 0 ? Color::Green : Color::Gray
 		);
@@ -67,20 +71,21 @@ namespace Hiwoong
 		);
 	}
 
-	void MenuScene::CancelMenu()
+	bool MenuScene::ISCancelMenu()
 	{
 		if (Input::Get().GetKeyDown(VK_ESCAPE))
 		{
 			Engine::Get().ResumeScene();
-			return;
+			return true;
 		}
+		return false;
 	}
 
 	void MenuScene::Update(double deltaTime)
 	{
 		Scene::Update(deltaTime);
 
-		CancelMenu();
+		if (ISCancelMenu() == true) return;
 		ProcessKeyboardInput();
 		UpdateHighlight();
 

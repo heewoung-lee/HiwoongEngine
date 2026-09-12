@@ -19,7 +19,7 @@ namespace Hiwoong
 	private:
 		void ProcessKeyboardInput(); // 방향키 선택 이동 + Enter 실행
 		void UpdateHighlight();      // 선택 상태에 따라 색상 변경
-		void CancelMenu();
+		bool ISCancelMenu();
 	private:
 		// 0: 재개, 1: 종료
 		int selectedIndex = 0;

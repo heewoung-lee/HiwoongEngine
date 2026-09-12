@@ -143,6 +143,9 @@ namespace Hiwoong
 
 		// nextScene이 게임 씬을 보관하므로 이 참조는 비운다.
 		pausedScene.reset();
+
+		//마우스 잠금해제
+		Input::Get().SetMouseLocked(true);
 	}
 	float Engine::GetScreenAspectRatio() const
 	{

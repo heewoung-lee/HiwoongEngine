@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CubeProject", "CubeProject\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DoomProject", "DoomProject\DoomProject.vcxproj", "{F0BF183B-C5A3-4214-981A-04E245B1BAF4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CursorTest", "CursorTest\CursorTest.vcxproj", "{93FF1D45-E6E4-424A-8F32-BAD9A36EAE4F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -53,6 +55,14 @@ Global
 		{F0BF183B-C5A3-4214-981A-04E245B1BAF4}.Release|x64.ActiveCfg = Release|x64
 		{F0BF183B-C5A3-4214-981A-04E245B1BAF4}.Release|x64.Build.0 = Release|x64
 		{F0BF183B-C5A3-4214-981A-04E245B1BAF4}.Release|x86.ActiveCfg = Release|x64
+		{93FF1D45-E6E4-424A-8F32-BAD9A36EAE4F}.Debug|x64.ActiveCfg = Debug|x64
+		{93FF1D45-E6E4-424A-8F32-BAD9A36EAE4F}.Debug|x64.Build.0 = Debug|x64
+		{93FF1D45-E6E4-424A-8F32-BAD9A36EAE4F}.Debug|x86.ActiveCfg = Debug|Win32
+		{93FF1D45-E6E4-424A-8F32-BAD9A36EAE4F}.Debug|x86.Build.0 = Debug|Win32
+		{93FF1D45-E6E4-424A-8F32-BAD9A36EAE4F}.Release|x64.ActiveCfg = Release|x64
+		{93FF1D45-E6E4-424A-8F32-BAD9A36EAE4F}.Release|x64.Build.0 = Release|x64
+		{93FF1D45-E6E4-424A-8F32-BAD9A36EAE4F}.Release|x86.ActiveCfg = Release|Win32
+		{93FF1D45-E6E4-424A-8F32-BAD9A36EAE4F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

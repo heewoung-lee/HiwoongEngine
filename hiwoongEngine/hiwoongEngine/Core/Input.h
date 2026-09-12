@@ -38,6 +38,10 @@ namespace Hiwoong
 		//Access singleton
 		static Input& Get();
 
+
+		void SetMouseLocked(bool locked);
+
+
 	private:
 
 		//Check the Input in this frame
@@ -48,6 +52,7 @@ namespace Hiwoong
 
 		void ProcessKeyboardInput();
 		void ProcessMouseInput();
+
 
 	private:
 		//keyboard count
@@ -79,8 +84,8 @@ namespace Hiwoong
 		// 원래 설정을 읽어 저장했는지 여부
 		bool hasOriginalConsoleMode = false;
 
-
-
+		//마우스 잠금여부확인
+		bool isMouseLocked = true;
 	};
 
 }
