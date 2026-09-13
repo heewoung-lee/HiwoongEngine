@@ -18,26 +18,25 @@ https://github.com/user-attachments/assets/639897e7-3dc8-43dd-8a19-020b15c6207a
 ### ASCII DOOM(~진행중)
 <img width="1672" height="941" alt="image" src="https://github.com/user-attachments/assets/6aa996cd-3888-4ba7-840a-eed2e2bc6dde" />
 
-## Step1,맵 렌더링 및 플레이어 이동
+## Step1, 맵 렌더링 및 플레이어 이동
 
 https://github.com/user-attachments/assets/865c266e-8450-480e-a423-dcdda1b79d45
 
-
-## Step2,일 손전등 구현
+## Step2, 일 손전등 구현
 
 https://github.com/user-attachments/assets/5a2b94c3-1b5d-4a2d-8865-a76ca032c596
 
-
-## Step3,총기 및 크로스헤어 구현
+## Step3, 총기 및 크로스헤어 구현
 
 https://github.com/user-attachments/assets/ad7fd86f-5ee3-47ba-800e-8a30ebba1aff
 
-
-## Step4,일시정지 메뉴 구현
+## Step4, 일시정지 메뉴 구현
 
 https://github.com/user-attachments/assets/472910dd-32d5-4a0f-b779-d556f6dc4e8c
 
+## Step5, 마우스 커서 숨기기
 
+https://github.com/user-attachments/assets/da1e2ae7-e510-43eb-9f87-d4b80016d05d
 
 
 ---
