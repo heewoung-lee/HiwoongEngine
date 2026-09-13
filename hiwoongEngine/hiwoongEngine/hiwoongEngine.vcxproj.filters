@@ -96,6 +96,15 @@
     <ClCompile Include="Component\MouseLookComponent.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Render\ConsoleRenderOutput.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\ConsoleRenderOptions.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\WindowRenderOutput.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Engine.h">
@@ -192,6 +201,18 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Component\MouseLookComponent.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\IRenderOutput.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\ConsoleRenderOutput.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\ConsoleRenderOptions.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\WindowRenderOutput.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

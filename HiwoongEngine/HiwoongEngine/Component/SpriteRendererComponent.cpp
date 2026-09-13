@@ -25,8 +25,7 @@ namespace Hiwoong
 		if (transform == nullptr) return;
 
 
-		//9.10일 월드 포지션에서 로컬 포지션 으로 수정함. 
-		Vector3 position = transform->GetLocalPosition();
+		Vector3 position = transform->GetWorldPosition();
 
 		std::istringstream stream(image);
 		std::string line;

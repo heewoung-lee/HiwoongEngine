@@ -1,5 +1,6 @@
 #pragma once
 #include "Core/Core.h"
+#include "Render/IRenderOutput.h"
 #include <memory>
 
 namespace Hiwoong
@@ -26,7 +27,7 @@ namespace Hiwoong
 		};
 
 	public:
-		Engine();
+		explicit Engine(std::unique_ptr<IRenderOutput> output = nullptr);
 		virtual ~Engine();
 
 		void Run();

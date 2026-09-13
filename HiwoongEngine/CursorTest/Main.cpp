@@ -6,6 +6,39 @@ LRESULT CALLBACK WindowProc(
     WPARAM wParam,
     LPARAM lParam)
 {
+    if (message == WM_PAINT)
+    {
+        PAINTSTRUCT paint{};
+        HDC dc = BeginPaint(window, &paint);
+
+        // 다시 그려야 하는 영역을 검정으로 채운다.
+        FillRect(
+            dc,
+            &paint.rcPaint,
+            static_cast<HBRUSH>(GetStockObject(BLACK_BRUSH))
+        );
+
+        // 모든 문자의 폭이 같은 글꼴을 사용한다.
+        HGDIOBJ previousFont =
+            SelectObject(dc, GetStockObject(SYSTEM_FIXED_FONT));
+
+        SetBkMode(dc, TRANSPARENT);
+        SetTextColor(dc, RGB(0, 255, 0));
+
+        const char text[] = "ASCII DOOM  HP 100  AMMO 24";
+
+        TextOutA(
+            dc, 20, 20,
+            text,
+            static_cast<int>(sizeof(text) - 1)
+        );
+
+        SelectObject(dc, previousFont);
+        EndPaint(window, &paint);
+        return 0;
+    }
+
+
     // 창 내부에서 커서 모양을 정하라는 요청
     if (message == WM_SETCURSOR &&
         LOWORD(lParam) == HTCLIENT)
@@ -59,8 +92,12 @@ LRESULT CALLBACK WindowProc(
 
 int main()
 {
+   
+
     const HINSTANCE instance = GetModuleHandleW(nullptr);
     const wchar_t* className = L"CursorTestWindow";
+
+
 
     // 창의 기본 설정과 요청 처리 함수를 등록한다.
     WNDCLASSW windowClass{};
@@ -69,7 +106,7 @@ int main()
     windowClass.lpszClassName = className;
     windowClass.hCursor = LoadCursorW(nullptr, IDC_ARROW);
     windowClass.hbrBackground =
-        reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1);
+        static_cast<HBRUSH>(GetStockObject(BLACK_BRUSH));
 
     if (!RegisterClassW(&windowClass))
         return 1;

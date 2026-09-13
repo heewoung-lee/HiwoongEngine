@@ -1,9 +1,12 @@
 #include "ScreenBuffer.h"
 #include <cassert>
-
+#include <cwchar>
 namespace Hiwoong
 {
-	ScreenBuffer::ScreenBuffer(const Vector2& screenSize) : screenSize(screenSize)
+	ScreenBuffer::ScreenBuffer(
+		const Vector2& screenSize,
+		const ConsoleRenderOptions& options)
+		: screenSize(screenSize)
 	{
 		////create ConsoleBuffer;
 
@@ -37,12 +40,29 @@ namespace Hiwoong
 		//Check rectSize
 		assert(result == TRUE);
 
+		//폰트 적용
+		ApplyFontOptions(options);
+
 		// Setting screenBuffer size and Checking exception
 		COORD coord = {};
 		coord.X = static_cast<short>(screenSize.x);
 		coord.Y = static_cast<short>(screenSize.y);
 
+		CONSOLE_SCREEN_BUFFER_INFO bufferInfo{};
+		GetConsoleScreenBufferInfo(screenBuffer, &bufferInfo);
+
+		CONSOLE_FONT_INFOEX fontInfo{};
+		fontInfo.cbSize = sizeof(fontInfo);
+		GetCurrentConsoleFontEx(screenBuffer, FALSE, &fontInfo);
+
+		const int minimumWidthPixels = GetSystemMetrics(SM_CXMIN);
+		const int minimumHeightPixels = GetSystemMetrics(SM_CYMIN);
+
+
 		result = SetConsoleScreenBufferSize(screenBuffer, coord);
+
+		const DWORD error =
+			result ? ERROR_SUCCESS : GetLastError();
 
 		assert(result == TRUE);
 
@@ -63,6 +83,8 @@ namespace Hiwoong
 
 		info.bVisible = FALSE;
 		SetConsoleCursorInfo(screenBuffer, &info);
+
+
 	}
 	ScreenBuffer::~ScreenBuffer()
 	{
@@ -147,6 +169,50 @@ namespace Hiwoong
 		// 문자 개수가 아니라, 문자 한 칸의 픽셀 너비와 높이를 전달한다.
 		outSize = Vector2(info.dwFontSize.X, info.dwFontSize.Y);
 		return true;
+	}
+
+	void ScreenBuffer::ApplyFontOptions(const ConsoleRenderOptions& options)
+	{
+		BOOL result = FALSE;
+
+		const bool hasFontName = !options.fontName.empty();
+		const bool hasCharacterSize =
+			options.characterSize.x > 0 &&
+			options.characterSize.y > 0;
+
+		if (hasFontName || hasCharacterSize)
+		{
+			CONSOLE_FONT_INFOEX requestedFont{};
+			requestedFont.cbSize = sizeof(requestedFont);
+
+			// 지정하지 않은 항목은 기존 설정을 유지한다.
+			result = GetCurrentConsoleFontEx(
+				screenBuffer, FALSE, &requestedFont
+			);
+			assert(result != FALSE);
+
+			if (hasFontName)
+			{
+				wcsncpy_s(
+					requestedFont.FaceName,
+					options.fontName.c_str(),
+					_TRUNCATE
+				);
+			}
+
+			if (hasCharacterSize)
+			{
+				requestedFont.dwFontSize.X =
+					static_cast<SHORT>(options.characterSize.x);
+				requestedFont.dwFontSize.Y =
+					static_cast<SHORT>(options.characterSize.y);
+			}
+
+			result = SetCurrentConsoleFontEx(
+				screenBuffer, FALSE, &requestedFont
+			);
+			assert(result != FALSE);
+		}
 	}
 
 	

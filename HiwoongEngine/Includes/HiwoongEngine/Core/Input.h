@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core/Core.h"
+#include <Windows.h>
 
 namespace Hiwoong
 {
@@ -38,9 +39,11 @@ namespace Hiwoong
 		//Access singleton
 		static Input& Get();
 
+		static bool IsMouseLockedTo(HWND window);
 
 		void SetMouseLocked(bool locked);
 
+		void SetMouseWindow(HWND window);
 
 	private:
 
@@ -85,7 +88,9 @@ namespace Hiwoong
 		bool hasOriginalConsoleMode = false;
 
 		//마우스 잠금여부확인
-		bool isMouseLocked = true;
+		bool isMouseLocked = false;
+
+		HWND mouseWindow = nullptr;
 	};
 
 }

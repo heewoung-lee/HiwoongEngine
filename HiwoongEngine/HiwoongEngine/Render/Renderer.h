@@ -1,5 +1,5 @@
 #pragma once
-
+#include "IRenderOutput.h"
 #include "Core/Core.h"
 #include "Math/Vector2.h"
 #include "Math/Color.h"
@@ -7,11 +7,10 @@
 #include <iostream>
 #include <vector>
 #include <memory>
+#include <utility>
 
 namespace Hiwoong
 {
-	class ScreenBuffer;
-
 	//Draw to Screen 
 	class Hiwoong_API Renderer
 	{
@@ -93,7 +92,10 @@ namespace Hiwoong
 		};
 
 	public:
-		Renderer(const Vector2& screenSize);
+		Renderer(
+			const Vector2& screenSize,
+			std::unique_ptr<IRenderOutput> output = nullptr
+		);
 		~Renderer();
 
 		//GameObject request rendercommand to Renderer with SummitMethod
@@ -123,6 +125,8 @@ namespace Hiwoong
 		void ClearCapturedFrame();
 
 		void Resize(const Vector2& screenSize);
+
+		bool ProcessEvents();
 
 		Vector2 GetScreenSize() const
 		{
@@ -162,8 +166,8 @@ namespace Hiwoong
 		//저장한 사진을 그리는 함수.
 		void DrawCapturedFrame();
 
-		// Buffer can draw this frame
-		const ScreenBuffer* const GetCurrentBuffer() const;
+		//Create twice ScreenBuffer
+		void CreateSceenBuffer(const Vector2& newScreenSize);
 
 	private:
 
@@ -188,13 +192,6 @@ namespace Hiwoong
 		// 저장한 화면의 가로·세로 칸 수
 		Vector2 capturedFrameSize = Vector2::Zero;
 
-
-		// screen consle buffer
-		std::unique_ptr<ScreenBuffer> screenBufferArray[2] = {};
-
-		// Back bufferIdx(draw buffer)
-		int currentBufferIndex = 0;
-
 		//LineRenderer List
 		std::vector<LineRenderCommand> lineRenderQueue;
 
@@ -204,11 +201,9 @@ namespace Hiwoong
 		//Vertex
 		std::vector<Triangle> triangles;
 
-		//Create twice ScreenBuffer
-		void CreateSceenBuffer(const Vector2& newScreenSize);
 
-
-
+		// 프로젝트에서 선택한 화면 출력 구현
+		std::unique_ptr<IRenderOutput> renderOutput;
 
 	};
 }

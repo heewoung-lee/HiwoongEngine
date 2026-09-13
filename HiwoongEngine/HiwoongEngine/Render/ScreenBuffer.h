@@ -1,4 +1,5 @@
 #pragma once
+#include "ConsoleRenderOptions.h"
 #include "Math/Vector2.h"
 #include <Windows.h>
 
@@ -7,7 +8,10 @@ namespace Hiwoong
 	class ScreenBuffer
 	{
 	public: 
-		ScreenBuffer(const Vector2& screenSize);
+		ScreenBuffer(
+			const Vector2& screenSize,
+			const ConsoleRenderOptions& options = {}
+		);
 		~ScreenBuffer();
 
 		// Initialize Screen
@@ -20,6 +24,9 @@ namespace Hiwoong
 		inline HANDLE GetScreenBuffer() const { return screenBuffer; }
 
 		bool TryGetCharacterSize(Vector2& outSize) const;
+
+	private:
+		void ApplyFontOptions(const ConsoleRenderOptions& options);
 
 
 	private:

@@ -9,13 +9,13 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-
+#include <utility>
 namespace Hiwoong
 {
 	//SingleTon
 	Engine* Engine::instance = nullptr;
 
-	Engine::Engine()
+	Engine::Engine(std::unique_ptr<IRenderOutput> output)
 	{
 		assert(instance == nullptr);
 		instance = this;
@@ -26,7 +26,10 @@ namespace Hiwoong
 		//etting owner and create Input instance
 		input = std::make_unique<Input>();
 
-		renderer = std::make_unique<Renderer>(Vector2(setting.width,setting.height));
+		renderer = std::make_unique<Renderer>(
+			Vector2(setting.width, setting.height),
+			std::move(output)
+		);
 		Util::SetRandomSeed();
 
 	}
@@ -68,6 +71,14 @@ namespace Hiwoong
 			double deltaTime = static_cast<double>(currentTime - previousTime) / static_cast<double>(frequency.QuadPart);
 			if (deltaTime < oneFrameTime) continue;
 			
+			// 창 메시지를 처리하고, 종료 요청이면 반복문을 끝낸다.
+			if (!renderer->ProcessEvents())
+			{
+				Quit();
+				break;
+			}
+
+
 			//9.10일 위치 수정 이전에는 모든 입력을 매 반복문마다 받게끔 했는데,
 			// 이렇게 하니. 마우스 움직임을 읽는 횟수가, 화면을 갱신하는 횟수보다 많아짐.
 			// 우리의 마우스 이동은 직전 프레임에서 지금 프레임의 차이를 보고 이동하는건데.

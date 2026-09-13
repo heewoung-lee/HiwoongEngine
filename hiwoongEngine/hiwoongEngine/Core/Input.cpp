@@ -47,7 +47,28 @@ namespace Hiwoong
 		assert(instance != nullptr);
 		return *instance;
 	}
+	bool Input::IsMouseLockedTo(HWND window)
+	{
+		if (instance == nullptr || !instance->isMouseLocked)
+		{
+			return false;
+		}
 
+		const HWND target =
+			instance->mouseWindow != nullptr
+			? instance->mouseWindow
+			: GetConsoleWindow();
+
+		return window != nullptr && target == window;
+	}
+	void Input::SetMouseWindow(HWND window)
+	{
+		ClipCursor(nullptr);
+
+		mouseWindow = window;
+		mouseDeltaX = 0.0f;
+		hasPreviousMousePosition = false;
+	}
 	void Input::SetMouseLocked(bool locked)
 	{
 		isMouseLocked = locked;
@@ -94,7 +115,10 @@ namespace Hiwoong
 			return;
 
 		//게임 콘솔 창을 가져옴
-		const HWND gameWindow = GetConsoleWindow();
+		const HWND gameWindow =
+			mouseWindow != nullptr
+			? mouseWindow
+			: GetConsoleWindow();
 
 		//현재 사용중인 창을 가져옴
 		if (gameWindow == nullptr || GetForegroundWindow() != gameWindow)

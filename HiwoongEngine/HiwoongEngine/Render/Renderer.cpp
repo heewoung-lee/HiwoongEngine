@@ -1,12 +1,11 @@
 #include "Renderer.h"
-#include "ScreenBuffer.h"
 #include "Math/Vector2.h"
 #include <cassert>
 #include <Windows.h>
 #include <iostream>
 #include <limits>
 #include "SoftwareRasterizer.h"
-
+#include "ConsoleRenderOutput.h"
 
 namespace Hiwoong
 {
@@ -127,21 +126,27 @@ namespace Hiwoong
 	// static valuable initlize
 	Renderer* Renderer::instance = nullptr;
 
-	Renderer::Renderer(const Vector2& screenSize) : screenSize(screenSize)
+	Renderer::Renderer(
+		const Vector2& screenSize,
+		std::unique_ptr<IRenderOutput> output)
+		: screenSize(screenSize),
+		renderOutput(std::move(output))
 	{
 		assert(instance == nullptr);
 		instance = this;
 
+		// 전달받은 출력 객체가 없으면 기존 콘솔 출력을 사용한다.
+		if (renderOutput == nullptr)
+		{
+			renderOutput = std::make_unique<ConsoleRenderOutput>();
+		}
+
 		CreateSceenBuffer(screenSize);
 	}
-
 
 	Renderer::~Renderer()
 	{
 		instance = nullptr;
-
-		//recorver default console
-		SetConsoleActiveScreenBuffer(GetStdHandle(STD_OUTPUT_HANDLE));
 	}
 
 	void Renderer::Submit(const std::string& image, const Vector2& position, Color color, int sortingOrder)
@@ -201,6 +206,11 @@ namespace Hiwoong
 	{
 		CreateSceenBuffer(screenSize);
 	}
+
+	bool Renderer::ProcessEvents()
+	{
+		return renderOutput->ProcessEvents();
+	}
 	//Save lineRenderer to draw 
 	void Renderer::SubmitLine(
 		const Vector2& start,
@@ -227,12 +237,7 @@ namespace Hiwoong
 
 	void Renderer::Clear()
 	{
-		// frame init
 		frame->Clear();
-
-		// console buffer init
-		GetCurrentBuffer()->Clear();
-
 	}
 	void Renderer::DrawRenderQueue()
 	{
@@ -308,27 +313,17 @@ namespace Hiwoong
 			);
 		}
 
-		//send current Backbuffer
-		GetCurrentBuffer()->Draw(frame->charInfoArray.get());
 
 		//Clear RenderQueue
 		renderQueue.clear();
 		lineRenderQueue.clear();
 		pointRenderQueue.clear();
 
-		SetConsoleTextAttribute(
-			GetCurrentBuffer()->GetScreenBuffer(),
-			static_cast<WORD>(Color::White)
-		);
 	}
 
 	void Renderer::Present()
 	{
-		// Current BackBuffer Enable
-		SetConsoleActiveScreenBuffer(GetCurrentBuffer()->GetScreenBuffer());
-
-		//Cycle Buffers
-		currentBufferIndex = 1 - currentBufferIndex;
+		renderOutput->Present(frame->charInfoArray.get());
 	}
 
 	void Renderer::DrawCapturedFrame()
@@ -349,43 +344,18 @@ namespace Hiwoong
 		}
 	}
 	
-	const ScreenBuffer* const Renderer::GetCurrentBuffer() const
-	{
-		return screenBufferArray[currentBufferIndex].get();
-	}
 	void Renderer::CreateSceenBuffer(const Vector2& newScreenSize)
 	{
-		std::unique_ptr<ScreenBuffer> newBuffer0 = std::make_unique<ScreenBuffer>(newScreenSize);
-		std::unique_ptr<ScreenBuffer> newBuffer1 = std::make_unique<ScreenBuffer>(newScreenSize);
+		// 문자·깊이 계산용 배열은 Renderer가 관리한다.
+		auto newFrame = std::make_unique<Frame>(newScreenSize);
+		newFrame->Clear();
 
-		newBuffer0->Clear();
-		newBuffer1->Clear();
+		// 실제 출력에 필요한 버퍼는 출력 구현이 준비한다.
+		renderOutput->Resize(newScreenSize);
 
-		std::unique_ptr<Frame> newframe = std::make_unique<Frame>(newScreenSize);
-		newframe->Clear();
-
-
-		SetConsoleActiveScreenBuffer(
-			newBuffer0->GetScreenBuffer()
-		);
-
-		// move owner
-		screenBufferArray[0] = std::move(newBuffer0);
-		screenBufferArray[1] = std::move(newBuffer1);
-
-		// Setting 0 consoleBuffer to show
-		SetConsoleActiveScreenBuffer(screenBufferArray[0]->GetScreenBuffer());
-
-		frame = std::move(newframe);
-
+		frame = std::move(newFrame);
 		screenSize = newScreenSize;
-		currentBufferIndex = 0;
-
-		if (!GetCurrentBuffer()->TryGetCharacterSize(characterSize))
-		{
-			OutputDebugStringA("[ConsoleFont] Character size unavailable.\n");
-		}
-
+		characterSize = renderOutput->GetCharacterSize();
 	}
 	
 }
