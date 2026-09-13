@@ -14,9 +14,42 @@ LRESULT CALLBACK WindowProc(
         return TRUE;        // 우리가 처리했으므로 기본 처리를 막는다.
     }
 
+    // 창 안을 클릭하면 커서를 가둔다.
+    if (message == WM_LBUTTONDOWN)
+    {
+        RECT area{};
+        POINT origin{};
+
+        if (!GetClientRect(window, &area) ||
+            !ClientToScreen(window, &origin))
+        {
+            return 0;
+        }
+
+        // 창 내부 좌표를 모니터 전체 기준 좌표로 바꾼다.
+        OffsetRect(&area, origin.x, origin.y);
+
+        if (!ClipCursor(&area))
+        {
+            MessageBoxW(window, L"Mouse lock failed.",
+                L"Cursor Test", MB_OK);
+        }
+
+        return 0;
+    }
+
+    // ESC를 누르거나 다른 창으로 전환하면 해제한다.
+    if ((message == WM_KEYDOWN && wParam == VK_ESCAPE) ||
+        message == WM_KILLFOCUS)
+    {
+        ClipCursor(nullptr);
+        return 0;
+    }
+
     // 창을 닫으면 프로그램 종료를 요청한다.
     if (message == WM_DESTROY)
     {
+        ClipCursor(nullptr);
         PostQuitMessage(0);
         return 0;
     }
