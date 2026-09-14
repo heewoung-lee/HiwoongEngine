@@ -7,7 +7,6 @@ using namespace Hiwoong;
 
 int main()
 {
-
 	auto output =
 		std::make_unique<WindowRenderOutput>(Vector2(4, 8));
 

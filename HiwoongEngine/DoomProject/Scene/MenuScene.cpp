@@ -8,6 +8,7 @@
 #include "Menu/QuitButton.h"
 #include "Core/Input.h"
 #include "Engine/Engine.h"
+#include "Render/Renderer.h"
 
 namespace Hiwoong
 {
@@ -15,7 +16,9 @@ namespace Hiwoong
 	{
 		Scene::SceneInitialize();
 
-		//메뉴씬에 들어오면 마우스는 가두면 안된다.
+		// 게임에서 사용하던 전체 출력 크기를 유지한다.
+		SetScreenSize(Renderer::Get().GetScreenSize());
+
 		Input::Get().SetMouseLocked(false);
 
 		const auto size = GetScreenSize();

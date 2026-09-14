@@ -34,7 +34,7 @@ namespace Hiwoong
 		AddComponent<PauseMenuComponent>();
 
 		//크로스헤어.
-		auto crosshair = Instantiate<Crosshair>();
+		std::shared_ptr<Crosshair> crosshair = Instantiate<Crosshair>();
 
 		if (crosshair != nullptr)
 		{
@@ -149,6 +149,40 @@ namespace Hiwoong
 			direction += right;
 		}
 		
+	}
+
+	void Player::SetHp(int value)
+	{
+		if (value < 0) value = 0;
+		if (hp == value) return;
+
+		hp = value;
+
+		//콜백함수 수행
+		for (const auto& callback : hpChangeCallbacks)
+		{
+			if (callback != nullptr)
+			{
+				callback(hp);
+			}
+		}
+
+	}
+
+	void Player::SetAmmo(int value)
+	{
+		if (value < 0) value = 0;
+		if (ammo == value) return;
+		ammo = value;
+
+		for (const auto& callback : ammoChangeCallbacks)
+		{
+			if (callback != nullptr)
+			{
+				callback(ammo);
+			}
+		}
+
 	}
 
 

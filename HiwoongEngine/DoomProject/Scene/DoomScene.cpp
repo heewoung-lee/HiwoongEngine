@@ -4,6 +4,9 @@
 #include "GameObject/GameObject.h"
 #include "Player/Player.h"
 #include "Engine/Engine.h"
+#include "UI/PlayerHUID.h"
+#include "Render/Renderer.h"
+
 namespace Hiwoong
 {
 	DoomScene::DoomScene()
@@ -22,12 +25,34 @@ namespace Hiwoong
 
 		std::shared_ptr<TransformComponent> playerTr = player->GetComponent<TransformComponent>();
 		camera = std::make_unique<Camera3D>(*playerTr);
+
+
+		//플레이어의 상태UI
+		const int hudScale = 1;
+
+		//PlayerHUID의 위치는 늘어난곳에 위치 해야함.
+		const auto hud = Instantiate<PlayerHUID>(player, hudScale);
+
+		hud->SetPosition(Vector3(
+			0.0f,
+			gameSize.y,
+			0.0f
+		));
 	}
 
 
 	void DoomScene::SceneInitialize()
 	{
 		Scene::SceneInitialize();
+
+		gameSize = GetScreenSize();
+
+		// 기존 게임 영역 아래에 UI 공간을 추가한다.
+		SetScreenSize(Vector2(
+			gameSize.x,
+			gameSize.y + hudHeight
+		));
+
 
 		doomMap = Instantiate<DoomMap>("Assets/Maps/Level01.txt");
 
@@ -45,9 +70,13 @@ namespace Hiwoong
 		if (camera == nullptr) return;
 
 		const Matrix4x4 view = camera->GetViewMatrix();
+	
+		const Vector2 screenSize = gameSize;
+		const Vector2 characterSize = Renderer::Get().GetCharacterSize();
 
-		const Vector2 screenSize = GetScreenSize();
-		const float aspectRatio = Engine::Get().GetScreenAspectRatio();
+		const float aspectRatio =
+			(static_cast<float>(gameSize.x) / gameSize.y) *
+			(static_cast<float>(characterSize.x) / characterSize.y);
 
 		const float fieldOfView = 60.0f * MathConstants::Pi / 180.0f;
 

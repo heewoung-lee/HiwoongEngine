@@ -67,12 +67,14 @@ namespace Hiwoong
 
 		mouseWindow = window;
 		mouseDeltaX = 0.0f;
+		mouseDeltaY = 0.0f;
 		hasPreviousMousePosition = false;
 	}
 	void Input::SetMouseLocked(bool locked)
 	{
 		isMouseLocked = locked;
 		mouseDeltaX = 0.0f;
+		mouseDeltaY = 0.0f;
 		hasPreviousMousePosition = false;
 
 		//가두기 해제
@@ -109,6 +111,7 @@ namespace Hiwoong
 	void Input::ProcessMouseInput()
 	{
 		mouseDeltaX = 0.0f;
+		mouseDeltaY = 0.0f;
 
 		// 잠금이 꺼져 있으면 가두기와 중앙 복귀를 건너뛴다.
 		if (isMouseLocked == false)
@@ -172,6 +175,10 @@ namespace Hiwoong
 			mouseDeltaX = static_cast<float>(
 				mousePosition.x - previousMouseX
 				);
+
+			mouseDeltaY = static_cast<float>(
+				mousePosition.y - previousMouseY
+				);
 		}
 
 
@@ -188,12 +195,14 @@ namespace Hiwoong
 		if (SetCursorPos(centerX, centerY) == false)
 		{
 			mouseDeltaX = 0.0f;
+			mouseDeltaY = 0.0f;
 			hasPreviousMousePosition = false;
 			ClipCursor(nullptr);
 			return;
 		}
 
 		previousMouseX = centerX;
+		previousMouseY = centerY;
 		hasPreviousMousePosition = true;
 	}
 	//흐름은 원래 설정 저장 → 

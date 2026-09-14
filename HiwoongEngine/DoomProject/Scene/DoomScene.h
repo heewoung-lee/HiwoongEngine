@@ -18,7 +18,10 @@ namespace Hiwoong
 
 		void SceneInitialize() override;
 		void Update(double deltatime) override;
-		
+		inline Vector2 GetGameSize() const
+		{
+			return gameSize;
+		}
 
 	private:
 		void SpawnPlayer();
@@ -31,6 +34,9 @@ namespace Hiwoong
 
 		std::shared_ptr<DoomMap> doomMap;
 
+		Vector2 gameSize = Vector2::Zero;
+		//플레이어 상태UI의 크기 우선 하드코딩;; 잘되면 바꿀것
+		float hudHeight = 10.0f;
 	};
 
 

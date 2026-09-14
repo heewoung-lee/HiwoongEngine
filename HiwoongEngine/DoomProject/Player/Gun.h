@@ -11,6 +11,8 @@ namespace Hiwoong
 
 	public:
 		Gun();
+
+		void Start() override;
 	};
 
 

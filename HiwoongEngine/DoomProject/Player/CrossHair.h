@@ -9,5 +9,6 @@ namespace Hiwoong
 
     public:
         Crosshair();
+        void Start() override;
     };
 }
