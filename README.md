@@ -38,6 +38,10 @@ https://github.com/user-attachments/assets/472910dd-32d5-4a0f-b779-d556f6dc4e8c
 
 https://github.com/user-attachments/assets/da1e2ae7-e510-43eb-9f87-d4b80016d05d
 
+## Step6, UI 구현
+
+<img width="1191" height="797" alt="image" src="https://github.com/user-attachments/assets/3ea52078-7417-41f8-8499-c2cbdfe82e95" />
+
 
 ---
 
