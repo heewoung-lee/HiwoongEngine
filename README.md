@@ -4,15 +4,18 @@
 
 Scene, GameObject, Component로 게임을 구성하고, CPU에서 계산한 3D 장면을 문자와 색상으로 표현합니다. 같은 엔진을 사용한 아스키 둠, 아스키 큐브, 아스키 테트리스를 통해 입력부터 화면 출력까지의 동작을 확인할 수 있습니다.
 
+<br>
+</br>
+
+
 ## 엔진으로 만든 작품
 
-### [1. 아스키 둠 · ASCII Doom](AsciiDoom/README.md)
+### [1. 아스키 둠 · ASCII Doom](AsciiDoom/README.md) (~진행중)
 
 3D 맵 위에서 이동하며 조명을 비추고, 일시정지 메뉴와 체력·탄약 UI를 사용하는 개발 중인 1인칭 데모입니다.
 
 <p align="center">
   <a href="AsciiDoom/README.md"><img src="https://github.com/user-attachments/assets/6aa996cd-3888-4ba7-840a-eed2e2bc6dde" width="760" alt="ASCII Doom 최종 목표 목업"></a><br>
-  <sub>최종 목표 목업</sub>
 </p>
 
 ### [2. 아스키 큐브 · ASCII Cube](AsciiCube/README.md)
@@ -90,8 +93,6 @@ Component 검색에는 [HiwoongObject](HiwoongEngine/src/Core/HiwoongObject.h)�
 ### 2. 한 프레임의 실행 순서
 
 <img width="1400" height="430" alt="입력, 초기화, Start, Update, Draw, 씬 전환과 예약 처리의 흐름" src="https://github.com/user-attachments/assets/a1110a71-ddfb-4340-880d-df0695fc9a08" />
-
-> 기존 그림에는 목표 FPS가 120으로 표시되어 있지만, 현재 공통 설정은 60입니다. `Draw`는 명령 수집뿐 아니라 합성·출력까지 수행하며, 창 이벤트 처리와 이전 입력 상태 저장을 포함한 현재 흐름은 아래와 같습니다.
 
 ```mermaid
 flowchart LR
