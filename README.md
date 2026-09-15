@@ -218,7 +218,7 @@ GameObject끼리 부모·자식 관계를 맺으면 자식은 자신의 로컬 �
 
 테트리스로 Scene, Component, 입력, 2D 문자 렌더링을 검증한 뒤, 3D를 엔진내에 구현했습니다. CPU가 3D 좌표를 콘솔의 문자 셀로 바꾸는 전 과정을 직접 처리합니다.
 
-<img width="1400" height="570" alt="Image" src="https://github.com/user-attachments/assets/ef9073e9-461a-47a6-906a-b8e3e0454b88" />
+<img width="1400" height="740" alt="Image" src="https://github.com/user-attachments/assets/1b041d32-4405-4913-aed2-ace02550b80a" />
 
 ### 기존 구조에서 무엇을 재사용했나요?
 
