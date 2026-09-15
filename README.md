@@ -90,8 +90,6 @@ Component 검색에는 [HiwoongObject](HiwoongEngine/src/Core/HiwoongObject.h)�
 
 <img width="1400" height="430" alt="입력, 초기화, Start, Update, Draw, 씬 전환과 예약 처리의 흐름" src="https://github.com/user-attachments/assets/a1110a71-ddfb-4340-880d-df0695fc9a08" />
 
-> 기존 그림에는 목표 FPS가 120으로 표시되어 있지만, 현재 공통 설정은 60입니다. `Draw`는 명령 수집뿐 아니라 합성·출력까지 수행하며, 창 이벤트 처리와 이전 입력 상태 저장을 포함한 현재 흐름은 아래와 같습니다.
-
 ```mermaid
 flowchart LR
     A[창 이벤트·입력] --> B[씬 초기화·Start]
