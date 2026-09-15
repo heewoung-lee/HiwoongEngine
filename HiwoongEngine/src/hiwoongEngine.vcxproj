@@ -66,7 +66,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy *.h ..\Includes\HiwoongEngine /e /y /i</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy $(OutDir)\HiwoongEngine.dll ..\Library\HiwoongEngine\$(Configuration)\ /e /y /i
@@ -92,7 +93,8 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy *.h ..\Includes\HiwoongEngine /e /y /i</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy $(OutDir)\HiwoongEngine.dll ..\Library\HiwoongEngine\$(Configuration)\ /e /y /i

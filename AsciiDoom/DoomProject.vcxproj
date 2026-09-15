@@ -16,6 +16,7 @@
     <ProjectGuid>{f0bf183b-c5a3-4214-981a-04e245b1baf4}</ProjectGuid>
     <RootNamespace>DoomProject</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>AsciiDoom</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -44,12 +45,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(ProjectDir)..\Bin\$(Configuration)\$(ProjectName)\</OutDir>
-    <IntDir>$(ProjectDir)..\Intermediate\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)Bin\$(Configuration)\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(ProjectDir)..\Bin\$(Configuration)\$(ProjectName)\</OutDir>
-    <IntDir>$(ProjectDir)..\Intermediate\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)Bin\$(Configuration)\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -58,14 +59,15 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Includes\HiwoongEngine;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\HiwoongEngine\src\;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(SolutionDir)Library\HiwoongEngine\$(Configuration)\HiwoongEngine.dll" "$(OutDir)" /Y /I</Command>
+      <Command>xcopy "$(SolutionDir)Library\HiwoongEngine\$(Configuration)\HiwoongEngine.dll" "$(OutDir)" /Y /I
+xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -77,21 +79,17 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Includes\HiwoongEngine;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\HiwoongEngine\src\;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(SolutionDir)Library\HiwoongEngine\$(Configuration)\HiwoongEngine.dll" "$(OutDir)" /Y /I</Command>
+      <Command>xcopy "$(SolutionDir)Library\HiwoongEngine\$(Configuration)\HiwoongEngine.dll" "$(OutDir)" /Y /I
+xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\hiwoongEngine\hiwoongEngine.vcxproj">
-      <Project>{24249147-7b15-40ae-81ef-13f84ce22dde}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Component\CrossHairMoveComponent.cpp" />
     <ClCompile Include="Component\PauseMenuComponent.cpp" />
@@ -145,6 +143,11 @@
     <ClInclude Include="UI\HPDisplay.h" />
     <ClInclude Include="UI\HpDisplayComponent.h" />
     <ClInclude Include="UI\PlayerHUID.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\hiwoongEngine\src\hiwoongEngine.vcxproj">
+      <Project>{24249147-7b15-40ae-81ef-13f84ce22dde}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

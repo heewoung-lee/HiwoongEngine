@@ -16,6 +16,7 @@
     <ProjectGuid>{a0436469-8b80-418d-8b5e-084d0688a495}</ProjectGuid>
     <RootNamespace>CubeProject</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>AsciiCube</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -57,7 +58,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)Includes\HiwoongEngine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);..\HiwoongEngine\src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -65,7 +66,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy ..\Library\HiwoongEngine\$(Configuration)\HiwoongEngine.dll $(OutDir) /e /y /i</Command>
+      <Command>xcopy "$(ProjectDir)..\HiwoongEngine\Library\HiwoongEngine\$(Configuration)\HiwoongEngine.dll" "$(OutDir)" /e /y /i</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -76,7 +77,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)Includes\HiwoongEngine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);..\HiwoongEngine\src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -84,7 +85,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy ..\Library\HiwoongEngine\$(Configuration)\HiwoongEngine.dll $(OutDir) /e /y /i</Command>
+      <Command>xcopy "$(ProjectDir)..\HiwoongEngine\Library\HiwoongEngine\$(Configuration)\HiwoongEngine.dll" "$(OutDir)" /e /y /i</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -95,15 +96,15 @@
     <ClCompile Include="Test\LineTestObject.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\hiwoongEngine\hiwoongEngine.vcxproj">
-      <Project>{24249147-7b15-40ae-81ef-13f84ce22dde}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Cube\CubeObject.h" />
     <ClInclude Include="Cube\CubeRotationComponent.h" />
     <ClInclude Include="Test\CubeScene.h" />
     <ClInclude Include="Test\LineTestObject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\hiwoongEngine\src\hiwoongEngine.vcxproj">
+      <Project>{24249147-7b15-40ae-81ef-13f84ce22dde}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

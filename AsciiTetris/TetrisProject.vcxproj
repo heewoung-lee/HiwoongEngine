@@ -16,6 +16,7 @@
     <ProjectGuid>{00f21bc7-b823-40fa-a836-90912c75ecaf}</ProjectGuid>
     <RootNamespace>TetrisProject</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>AsciiTetris</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -57,17 +58,17 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\HiwoongEngine\;$(ProjectDir)\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\HiwoongEngine\src\;$(ProjectDir)\</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>HiwoongEngine.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\Library\HiwoongEngine\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\HiwoongEngine\Library\HiwoongEngine\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy ..\Library\HiwoongEngine\$(Configuration)\HiwoongEngine.dll $(OutDir) /e /y /i
+      <Command>xcopy "$(ProjectDir)..\HiwoongEngine\Library\HiwoongEngine\$(Configuration)\HiwoongEngine.dll" "$(OutDir)" /e /y /i
 
 xcopy $(SolutionDir)Assets $(OutDir)..\Assets\ /e /y /i</Command>
     </PostBuildEvent>
@@ -80,17 +81,17 @@ xcopy $(SolutionDir)Assets $(OutDir)..\Assets\ /e /y /i</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\HiwoongEngine\;$(ProjectDir)\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\HiwoongEngine\src\;$(ProjectDir)\</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>HiwoongEngine.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\Library\HiwoongEngine\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\HiwoongEngine\Library\HiwoongEngine\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy ..\Library\HiwoongEngine\$(Configuration)\HiwoongEngine.dll $(OutDir) /e /y /i
+      <Command>xcopy "$(ProjectDir)..\HiwoongEngine\Library\HiwoongEngine\$(Configuration)\HiwoongEngine.dll" "$(OutDir)" /e /y /i
 
 xcopy $(SolutionDir)Assets $(OutDir)..\Assets\ /e /y /i</Command>
     </PostBuildEvent>
@@ -137,7 +138,7 @@ xcopy $(SolutionDir)Assets $(OutDir)..\Assets\ /e /y /i</Command>
     <ClInclude Include="Util\FileUtil.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\hiwoongEngine\hiwoongEngine.vcxproj">
+    <ProjectReference Include="..\hiwoongEngine\src\hiwoongEngine.vcxproj">
       <Project>{24249147-7b15-40ae-81ef-13f84ce22dde}</Project>
     </ProjectReference>
   </ItemGroup>

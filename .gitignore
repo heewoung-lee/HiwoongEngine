@@ -40,7 +40,8 @@
 
 # Markdown documents
 *.md
-!/README.md
+!**/README.md
+
 
 # Build output
 [Bb]in/
