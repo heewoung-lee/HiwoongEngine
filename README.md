@@ -25,9 +25,13 @@ https://github.com/user-attachments/assets/639897e7-3dc8-43dd-8a19-020b15c6207a
 
 블록 이동·회전·낙하, 줄 제거, 점수와 레벨을 구현해 엔진의 2D 객체 구조와 씬 전환을 적용한 게임입니다.
 
-<p align="center">
-  <a href="AsciiTetris/README.md"><img src="https://github.com/user-attachments/assets/e3aac143-c780-4849-aec3-6f6c003a9c8e" width="300" alt="ASCII Tetris의 블록 이동, 회전과 낙하 시연"></a>
-</p>
+<table>
+  <tr>
+    <td align="center"><a href="AsciiTetris/README.md"><img width="240" alt="ASCII Tetris의 블록 이동, 회전과 낙하 시연" src="https://github.com/user-attachments/assets/e3aac143-c780-4849-aec3-6f6c003a9c8e"></a><br><sub>플레이</sub></td>
+    <td align="center"><a href="AsciiTetris/README.md"><img width="240" alt="ASCII Tetris의 게임 오버 화면 전환" src="https://github.com/user-attachments/assets/1b7be359-cb4a-4c1d-8970-8a63505e4a90"></a><br><sub>게임 오버</sub></td>
+    <td align="center"><a href="AsciiTetris/README.md"><img width="240" alt="ASCII Tetris의 레벨업과 낙하 속도 변화" src="https://github.com/user-attachments/assets/cdb4ea95-407a-477e-874d-57338bec7e0d"></a><br><sub>레벨업</sub></td>
+  </tr>
+</table>
 
 ---
 
