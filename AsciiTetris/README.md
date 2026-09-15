@@ -1,6 +1,5 @@
 # ASCII Tetris
 
-[← HiwoongEngine 소개](../README.md)
 
 HiwoongEngine의 Scene, Component, 부모·자식 Transform, 문자 렌더링을 조합해 만든 콘솔 테트리스입니다. 7종의 조각을 움직이고 회전시켜 줄을 지우며, 점수에 따라 레벨과 자동 낙하 속도가 달라집니다.
 
@@ -29,7 +28,7 @@ HiwoongEngine의 Scene, Component, 부모·자식 Transform, 문자 렌더링을
 
 키 입력은 `GetKeyDown()`으로 처리하므로 누르기 시작한 프레임에 한 번 적용됩니다. 자동 낙하는 입력과 별도로 경과 시간을 누적해 처리합니다.
 
-공유 솔루션 [HiwoongEngine.sln](../HiwoongEngine/HiwoongEngine.sln)의 `AsciiTetris` 프로젝트로 실행합니다. 공통 빌드·실행 환경은 [루트 README](../README.md)를 참고하세요. 진입점은 [Main.cpp](Main.cpp)이며, 콘솔 출력 객체를 엔진에 전달하고 `TestScene`을 등록합니다.
+
 
 ## 책임을 나눈 구조
 
@@ -107,12 +106,3 @@ GameOver에서 `R`을 누르면 새 `TestScene`으로 들어갑니다. 현재 [G
 `SpawnManager`는 예약된 번호로 현재 조각을 만든 뒤, 0~6 범위에서 다음 번호를 뽑아 공유 상태에 저장합니다. 매번 범위 내 난수를 뽑는 방식이며, 7종을 한 번씩 섞어 소진하는 방식은 사용하지 않습니다.
 
 `GameStatesUI`는 점수·레벨·목표 점수·다음 번호가 이전 표시 값과 달라졌을 때 텍스트를 갱신합니다. 미리보기는 `@`를 표시하는 `TextObject` 네 개의 위치와 색상을 조각 종류에 맞게 변경합니다. 게임 보드용 Block을 생성하지 않고, 엔진의 `SpriteRendererComponent`를 사용한 [TextObject](GameObject/TextObject.h)를 재사용합니다.
-
-## 구현에서 확인할 수 있는 점
-
-- **엔진 기능의 게임 적용:** 입력 Component와 문자 렌더러를 조합하고, 부모 Transform으로 네 Block을 함께 이동합니다.
-- **화면과 규칙의 일치:** 줄을 지울 때 점유 배열, Block 참조, 실제 객체 위치를 함께 갱신합니다.
-- **생성과 동작의 분리:** 조각은 고정 완료를 콜백으로 알리고, 다음 조각 생성은 `SpawnManager`가 담당합니다.
-- **Scene과 상태의 수명 분리:** 보드를 포함한 Scene을 교체하면서 공유 점수·레벨을 UI와 게임 규칙에서 읽습니다.
-
-엔진의 공통 구조와 다른 적용 사례는 [HiwoongEngine README](../README.md)에서 확인할 수 있습니다.
