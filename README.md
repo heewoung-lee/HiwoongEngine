@@ -50,7 +50,6 @@ HiwoongEngine은 게임이 한 프레임을 만드는 과정을 이해하고 구
 | 2D 렌더링 | 문자열 스프라이트, 공백 투명 처리, 셀별 표시 순서 | [SpriteRendererComponent](HiwoongEngine/src/Component/SpriteRendererComponent.cpp) |
 | 3D 렌더링 | 원근 투영, 근평면 클리핑, 뒷면 제거, 삼각형 채우기·깊이 판정 | [MeshRenderer](HiwoongEngine/src/Render/MeshRenderer.cpp), [SoftwareRasterizer](HiwoongEngine/src/Render/SoftwareRasterizer.cpp) |
 | 조명 | 기본 밝기, 방향광, 거리·각도·표면 방향을 반영한 스포트라이트 | [RenderView](HiwoongEngine/src/Render/RenderView.h), [SpotLight](HiwoongEngine/src/Render/SpotLight.h) |
-| 화면 출력 | 콘솔 더블 버퍼와 Win32 창 출력, 문자 그림 캐시 | [IRenderOutput](HiwoongEngine/src/Render/IRenderOutput.h) |
 | 입력·이동 검사 | 키 상태 변화, 마우스 이동량·잠금, 이동 예정 위치의 AABB 검사 | [Input](HiwoongEngine/src/Core/Input.cpp), [CollisionSystem](HiwoongEngine/src/Physics/CollisionSystem.cpp) |
 
 기술 구성은 **C++17 · Windows API · Win32 콘솔 · GDI**입니다. 정점 변환과 삼각형 래스터화는 CPU에서 수행하고, 최종 결과는 문자 셀 단위로 출력합니다.
@@ -146,22 +145,7 @@ flowchart TD
 
 관련 코드: [MeshRenderer.cpp](HiwoongEngine/src/Render/MeshRenderer.cpp), [SoftwareRasterizer.cpp](HiwoongEngine/src/Render/SoftwareRasterizer.cpp), [Matrix4x4.cpp](HiwoongEngine/src/Math/Matrix4x4.cpp)
 
-### 5. 같은 프레임을 콘솔과 Win32 창으로 출력
-
-화면 출력은 `IRenderOutput`으로 분리했습니다. 게임 프로젝트가 출력 객체를 만들어 `Engine`에 전달하면, Renderer는 완성된 문자·색상 배열을 해당 출력 객체에 넘깁니다.
-
-| 출력 구현 | 표시 방식 | 적용 작품 |
-|---|---|---|
-| `ConsoleRenderOutput` | 두 콘솔 화면 버퍼에 번갈아 기록하고 활성화 | 아스키 큐브, 아스키 테트리스 |
-| `WindowRenderOutput` | 문자 그림을 픽셀 배열로 합성하고 GDI 백 버퍼를 창에 복사 | 아스키 둠 |
-
-Win32 창 출력은 **문자와 색상 조합별 그림을 캐시**합니다. 이미 그린 문자는 캐시된 픽셀을 재사용하고, 완성한 화면을 백 버퍼에서 `BitBlt`로 옮깁니다. 반복적인 글자 그리기 비용과 화면 깜빡임을 줄이기 위한 방식입니다.
-
-두 출력 구현은 `Resize()`, `Present()`, `GetCharacterSize()`를 공유합니다. 창의 메시지 처리는 `ProcessEvents()`로 엔진 루프에 연결합니다.
-
-관련 코드: [IRenderOutput.h](HiwoongEngine/src/Render/IRenderOutput.h), [ConsoleRenderOutput.cpp](HiwoongEngine/src/Render/ConsoleRenderOutput.cpp), [WindowRenderOutput.cpp](HiwoongEngine/src/Render/WindowRenderOutput.cpp)
-
-### 6. 입력과 이동 가능 여부
+### 5. 입력과 이동 가능 여부
 
 키보드는 현재·이전 프레임 상태를 비교해 누르고 있는 상태인 `GetKey`, 처음 누른 순간인 `GetKeyDown`, 놓은 순간인 `GetKeyUP`을 구분합니다.
 
