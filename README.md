@@ -6,33 +6,28 @@ Scene, GameObject, Component로 게임을 구성하고, CPU에서 계산한 3D �
 
 ## 엔진으로 만든 작품
 
-### 1. 아스키 둠 · ASCII Doom
+### [1. 아스키 둠 · ASCII Doom](AsciiDoom/README.md)
 
 3D 맵 위에서 이동하며 조명을 비추고, 일시정지 메뉴와 체력·탄약 UI를 사용하는 개발 중인 1인칭 데모입니다.
 
 <p align="center">
-  <a href="AsciiDoom/README.md"><img src="https://github.com/user-attachments/assets/3ea52078-7417-41f8-8499-c2cbdfe82e95" width="760" alt="ASCII Doom의 3D 게임 화면, 일시정지 메뉴와 하단 UI"></a>
+  <a href="AsciiDoom/README.md"><img src="https://github.com/user-attachments/assets/6aa996cd-3888-4ba7-840a-eed2e2bc6dde" width="760" alt="ASCII Doom 최종 목표 목업"></a><br>
+  <sub>최종 목표 목업</sub>
 </p>
 
-**[작품 소개 · 구현 내용 · 개발 과정 →](AsciiDoom/README.md)**
-
-### 2. 아스키 큐브 · ASCII Cube
+### [2. 아스키 큐브 · ASCII Cube](AsciiCube/README.md)
 
 회전하는 큐브를 통해 좌표 변환, 삼각형 채우기, 깊이 판정과 법선 기반 조명을 확인하는 3D 렌더링 데모입니다.
 
 https://github.com/user-attachments/assets/639897e7-3dc8-43dd-8a19-020b15c6207a
 
-**[작품 소개 · 구현 내용 · 렌더링 과정 →](AsciiCube/README.md)**
-
-### 3. 아스키 테트리스 · ASCII Tetris
+### [3. 아스키 테트리스 · ASCII Tetris](AsciiTetris/README.md)
 
 블록 이동·회전·낙하, 줄 제거, 점수와 레벨을 구현해 엔진의 2D 객체 구조와 씬 전환을 적용한 게임입니다.
 
 <p align="center">
   <a href="AsciiTetris/README.md"><img src="https://github.com/user-attachments/assets/e3aac143-c780-4849-aec3-6f6c003a9c8e" width="300" alt="ASCII Tetris의 블록 이동, 회전과 낙하 시연"></a>
 </p>
-
-**[작품 소개 · 구현 내용 · 조작 방법 →](AsciiTetris/README.md)**
 
 ---
 
@@ -58,9 +53,9 @@ HiwoongEngine은 게임이 한 프레임을 만드는 과정을 이해하고 구
 
 ### 1. Scene → GameObject → Component
 
-<img width="1200" height="620" alt="GameObject에 Transform과 기능 Component를 조립하는 구조" src="https://github.com/user-attachments/assets/cef34ad6-b1c0-451e-a3a3-5a8751cd8b40" />
+<img width="1200" alt="GameObject에 Transform과 렌더링·입력 Component를 조립하는 구조" src="https://github.com/user-attachments/assets/979efaba-61a9-4fea-9b56-c14d5356b9fd" />
 
-> 기존 그림의 `Transform + Input`은 입력을 사용하는 컴포넌트를 뜻합니다. 실제 `Input`은 엔진이 관리하는 별도 객체이며, 테트리스에는 `PlayerInputComponent`를 붙입니다.
+`Input`은 엔진이 관리하는 별도 객체입니다. 테트리스의 `PlayerInputComponent`는 이 객체에서 키 상태를 읽어 이동과 회전을 처리합니다.
 
 ```text
 Engine
