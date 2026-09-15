@@ -171,21 +171,3 @@ Win32 창 출력은 **문자와 색상 조합별 그림을 캐시**합니다. �
 
 관련 코드: [Input.cpp](HiwoongEngine/src/Core/Input.cpp), [MouseLookComponent.cpp](HiwoongEngine/src/Component/MouseLookComponent.cpp), [BoxCollider3DComponent.cpp](HiwoongEngine/src/Component/BoxCollider3DComponent.cpp)
 
-## 주요 폴더와 실행
-
-| 위치 | 내용 |
-|---|---|
-| [HiwoongEngine/src](HiwoongEngine/src) | 공통 엔진 소스 |
-| [AsciiDoom](AsciiDoom/README.md) | 아스키 둠 소개와 구현 내용 |
-| [AsciiCube](AsciiCube/README.md) | 아스키 큐브 소개와 구현 내용 |
-| [AsciiTetris](AsciiTetris/README.md) | 아스키 테트리스 소개와 구현 내용 |
-| [HiwoongEngineTests](HiwoongEngine/HiwoongEngineTests/HiwoongEngineTests.cpp) | 벡터·행렬·카메라 등 엔진 테스트 코드 |
-
-빌드 환경은 Windows, Visual Studio의 C++ 데스크톱 개발 도구, MSVC `v143`, Windows SDK입니다.
-
-1. [HiwoongEngine.sln](HiwoongEngine/HiwoongEngine.sln)을 엽니다.
-2. 구성을 `Debug`, 플랫폼을 `x64`로 선택합니다.
-3. 실행할 게임을 시작 프로젝트로 지정하고 빌드합니다.
-4. 해당 프로젝트의 **디버깅 → 작업 디렉터리**가 `$(TargetDir)`인지 확인한 뒤 실행합니다.
-
-공통 설정 원본은 [Config/Setting.txt](HiwoongEngine/Config/Setting.txt)입니다. 빌드 이벤트가 엔진 DLL과 설정·게임 리소스를 실행 경로에 맞춰 복사합니다. 설정 파일을 찾지 못해 실행이 중단되면 작업 디렉터리와 빌드 후 복사 결과를 확인합니다.
