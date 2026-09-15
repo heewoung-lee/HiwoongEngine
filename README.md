@@ -4,9 +4,9 @@
 
 <table>
   <tr>
-    <td align="center"><img src="docs/images/tetris-play.gif" width="270" alt="HiwoongEngine 테트리스 플레이"><br><sub>이동 · 회전 · 다음 블록 UI</sub></td>
-    <td align="center"><img src="docs/images/tetris-game-over.gif" width="270" alt="HiwoongEngine 테트리스 게임오버"><br><sub>보드 점유 검사와 GameOver 전환</sub></td>
-    <td align="center"><img src="docs/images/tetris-level-up.gif" width="270" alt="HiwoongEngine 테트리스 레벨업"><br><sub>상태 유지와 레벨별 낙하 속도</sub></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/e3aac143-c780-4849-aec3-6f6c003a9c8e"><br><sub>이동 · 회전 · 다음 블록 UI</sub></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/1b7be359-cb4a-4c1d-8970-8a63505e4a90"><br><sub>보드 점유 검사와 GameOver 전환</sub></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/cdb4ea95-407a-477e-874d-57338bec7e0d"><br><sub>상태 유지와 레벨별 낙하 속도</sub></td>
   </tr>
 </table>
 
@@ -86,9 +86,10 @@ Engine
 
 ## 2. 한 프레임의 동작
 
+<img width="1400" height="430" alt="Image" src="https://github.com/user-attachments/assets/a1110a71-ddfb-4340-880d-df0695fc9a08" />
+
 게임은 아래 순서를 빠르게 반복합니다.
 
-![HiwoongEngine 한 프레임의 흐름](docs/images/frame-lifecycle.svg)
 
 1. 키보드의 현재 상태를 읽습니다.
 2. 새 Scene이라면 `SceneInitialize()`를 실행합니다.
@@ -106,7 +107,7 @@ Engine
 
 하나의 거대한 상속 계층에 모든 기능을 넣지 않고, 필요한 기능을 Component로 붙입니다.
 
-![HiwoongEngine 컴포넌트 시스템](docs/images/component-system.svg)
+<img width="1200" height="620" alt="Image" src="https://github.com/user-attachments/assets/cef34ad6-b1c0-451e-a3a3-5a8751cd8b40" />
 
 모든 `GameObject`에는 `TransformComponent`가 기본으로 만들어집니다. 화면에 보여야 한다면 `SpriteRendererComponent`, 입력을 받아야 한다면 사용자 입력 Component를 추가하는 식입니다.
 
@@ -142,7 +143,7 @@ GameObject끼리 부모·자식 관계를 맺으면 자식은 자신의 로컬 �
 
 `SpriteRendererComponent`가 바로 콘솔을 수정하지는 않습니다. Renderer에 명령을 제출하고, 하나의 완성된 Frame을 만든 뒤 화면 버퍼에 기록합니다.
 
-![HiwoongEngine 콘솔 렌더링 파이프라인](docs/images/renderer-pipeline.svg)
+<img width="1400" height="570" alt="Image" src="https://github.com/user-attachments/assets/2af7be33-54b8-41ff-814e-af8d0d4072fe" />
 
 1. `SpriteRendererComponent`가 문자열, 월드 좌표, 색상, `sortingOrder`를 제출합니다.
 2. `Renderer`가 한 프레임의 `RenderCommand`를 모읍니다.
@@ -178,13 +179,13 @@ GameObject끼리 부모·자식 관계를 맺으면 자식은 자신의 로컬 �
 
 <table>
   <tr>
-    <td align="center"><img src="docs/images/tetris-play.gif" width="270" alt="HiwoongEngine 테트리스 플레이"><br><sub>이동 · 회전 · 다음 블록 UI</sub></td>
-    <td align="center"><img src="docs/images/tetris-game-over.gif" width="270" alt="HiwoongEngine 테트리스 게임오버"><br><sub>보드 점유 검사와 GameOver 전환</sub></td>
-    <td align="center"><img src="docs/images/tetris-level-up.gif" width="270" alt="HiwoongEngine 테트리스 레벨업"><br><sub>상태 유지와 레벨별 낙하 속도</sub></td>
+   <td align="center"><img src="https://github.com/user-attachments/assets/e3aac143-c780-4849-aec3-6f6c003a9c8e"><br><sub>이동 · 회전 · 다음 블록 UI</sub></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/1b7be359-cb4a-4c1d-8970-8a63505e4a90"><br><sub>보드 점유 검사와 GameOver 전환</sub></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/cdb4ea95-407a-477e-874d-57338bec7e0d"><br><sub>상태 유지와 레벨별 낙하 속도</sub></td>
   </tr>
 </table>
 
-![테트리스 블록의 논리 흐름](docs/images/tetris-flow.svg)
+<img width="1400" height="560" alt="Image" src="https://github.com/user-attachments/assets/e161f7e8-0750-45d8-aefa-187838eec2c2" />
 
 ### 테트리스는 어떤 논리로 만들었나요?
 
@@ -217,7 +218,7 @@ GameObject끼리 부모·자식 관계를 맺으면 자식은 자신의 로컬 �
 
 테트리스로 Scene, Component, 입력, 2D 문자 렌더링을 검증한 뒤, 3D를 엔진내에 구현했습니다. CPU가 3D 좌표를 콘솔의 문자 셀로 바꾸는 전 과정을 직접 처리합니다.
 
-![HiwoongEngine 2D와 3D 렌더링 파이프라인 비교](docs/images/rendering-2d-to-3d.svg)
+<img width="1400" height="570" alt="Image" src="https://github.com/user-attachments/assets/ef9073e9-461a-47a6-906a-b8e3e0454b88" />
 
 ### 기존 구조에서 무엇을 재사용했나요?
 
