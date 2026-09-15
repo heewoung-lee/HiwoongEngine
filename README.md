@@ -1,265 +1,191 @@
 # HiwoongEngine
 
-### 콘솔 테트리스
+**C++로 게임의 구조와 렌더링 과정을 직접 구현한 2D·3D ASCII 게임 엔진입니다.**
 
-<table>
-  <tr>
-    <td align="center"><img src="https://github.com/user-attachments/assets/e3aac143-c780-4849-aec3-6f6c003a9c8e"><br><sub>이동 · 회전 · 다음 블록 UI</sub></td>
-    <td align="center"><img src="https://github.com/user-attachments/assets/1b7be359-cb4a-4c1d-8970-8a63505e4a90"><br><sub>보드 점유 검사와 GameOver 전환</sub></td>
-    <td align="center"><img src="https://github.com/user-attachments/assets/cdb4ea95-407a-477e-874d-57338bec7e0d"><br><sub>상태 유지와 레벨별 낙하 속도</sub></td>
-  </tr>
-</table>
+Scene, GameObject, Component로 게임을 구성하고, CPU에서 계산한 3D 장면을 문자와 색상으로 표현합니다. 같은 엔진을 사용한 아스키 둠, 아스키 큐브, 아스키 테트리스를 통해 입력부터 화면 출력까지의 동작을 확인할 수 있습니다.
 
-### 3D ASCII 큐브
+## 엔진으로 만든 작품
+
+### 1. 아스키 둠 · ASCII Doom
+
+3D 맵 위에서 이동하며 조명을 비추고, 일시정지 메뉴와 체력·탄약 UI를 사용하는 개발 중인 1인칭 데모입니다.
+
+<p align="center">
+  <a href="AsciiDoom/README.md"><img src="https://github.com/user-attachments/assets/3ea52078-7417-41f8-8499-c2cbdfe82e95" width="760" alt="ASCII Doom의 3D 게임 화면, 일시정지 메뉴와 하단 UI"></a>
+</p>
+
+**[작품 소개 · 구현 내용 · 개발 과정 →](AsciiDoom/README.md)**
+
+### 2. 아스키 큐브 · ASCII Cube
+
+회전하는 큐브를 통해 좌표 변환, 삼각형 채우기, 깊이 판정과 법선 기반 조명을 확인하는 3D 렌더링 데모입니다.
+
 https://github.com/user-attachments/assets/639897e7-3dc8-43dd-8a19-020b15c6207a
-<p align="center"><sub>Model·View·Projection, 삼각형 래스터화, Depth Buffer, 법선 기반 ASCII 조명을 적용한 결과</sub></p>
 
+**[작품 소개 · 구현 내용 · 렌더링 과정 →](AsciiCube/README.md)**
 
-### ASCII DOOM(~진행중)
-<img width="1672" height="941" alt="image" src="https://github.com/user-attachments/assets/6aa996cd-3888-4ba7-840a-eed2e2bc6dde" />
+### 3. 아스키 테트리스 · ASCII Tetris
 
-## Step1, 맵 렌더링 및 플레이어 이동
+블록 이동·회전·낙하, 줄 제거, 점수와 레벨을 구현해 엔진의 2D 객체 구조와 씬 전환을 적용한 게임입니다.
 
-https://github.com/user-attachments/assets/865c266e-8450-480e-a423-dcdda1b79d45
+<p align="center">
+  <a href="AsciiTetris/README.md"><img src="https://github.com/user-attachments/assets/e3aac143-c780-4849-aec3-6f6c003a9c8e" width="300" alt="ASCII Tetris의 블록 이동, 회전과 낙하 시연"></a>
+</p>
 
-## Step2, 일 손전등 구현
-
-https://github.com/user-attachments/assets/5a2b94c3-1b5d-4a2d-8865-a76ca032c596
-
-## Step3, 총기 및 크로스헤어 구현
-
-https://github.com/user-attachments/assets/ad7fd86f-5ee3-47ba-800e-8a30ebba1aff
-
-## Step4, 일시정지 메뉴 구현
-
-https://github.com/user-attachments/assets/472910dd-32d5-4a0f-b779-d556f6dc4e8c
-
-## Step5, 마우스 커서 숨기기
-
-https://github.com/user-attachments/assets/da1e2ae7-e510-43eb-9f87-d4b80016d05d
-
-## Step6, UI 구현
-
-<img width="1191" height="797" alt="image" src="https://github.com/user-attachments/assets/3ea52078-7417-41f8-8499-c2cbdfe82e95" />
-
+**[작품 소개 · 구현 내용 · 조작 방법 →](AsciiTetris/README.md)**
 
 ---
 
-HiwoongEngine은 OpenGL, DirectX 같은 그래픽 API나 외부 게임 프레임워크 없이 C++ 표준 라이브러리와 Windows 콘솔 API로 동작합니다.
+## 엔진 소개
 
-| 영역 | 직접 구현한 내용 |
-|---|---|
-| 게임 루프 | 입력 → 초기화 → 시작 → 업데이트 → 그리기의 프레임 순서 |
-| Scene | 현재 Scene과 다음 Scene의 안전한 교체, GameObject 관리 |
-| GameObject | 생명주기, 부모·자식 관계, Component 보관 |
-| Component | `AddComponent<T>()`, `GetComponent<T>()`, 주인 객체 조회 |
-| Transform | 2D 부모·자식 좌표와 3D 위치·회전·크기(`T * R * S`) 계산 |
-| Input | 현재·이전 키 상태를 비교한 `GetKey`, `GetKeyDown`, `GetKeyUP` |
-| Renderer | 문자·색상·좌표·겹침 순서 처리, 콘솔 더블 버퍼링 |
-| 3D 수학 | `Vector3`, `Vector4`, `Matrix4x4`, 내적·외적, Model·View·Projection |
-| Software Rasterizer | Mesh·Triangle, 뒷면 제거, 삼각형 채우기, 깊이 버퍼, ASCII 조명 |
-| Type System | Component 검색에 사용하는 간단한 자체 RTTI와 상속 타입 확인 |
+HiwoongEngine은 게임이 한 프레임을 만드는 과정을 이해하고 구현하기 위한 프로젝트입니다. 테트리스에 필요한 2D 기반을 만든 뒤, 벡터·행렬 연산과 소프트웨어 래스터화를 추가해 3D ASCII 장면으로 확장했습니다.
 
----
+핵심 구조는 **게임 규칙, 객체에 붙는 기능, 렌더링 계산, 실제 화면 출력의 책임을 나누는 것**입니다. 세 작품은 하나의 저장소와 솔루션에서 공통 엔진 DLL을 사용합니다.
 
-## 1. 엔진의 소유 구조
+| 영역 | 구현 내용 | 주요 코드 |
+|---|---|---|
+| 실행 흐름 | 프레임 시간 계산, 입력·갱신·그리기, 예약된 씬 전환 | [Engine](HiwoongEngine/src/Engine/Engine.cpp) |
+| 객체 구성 | Scene의 객체 관리, Component 추가·조회와 생명주기 | [Scene](HiwoongEngine/src/Scene/Scene.h), [GameObject](HiwoongEngine/src/GameObject/GameObject.h) |
+| 좌표와 수학 | 위치·회전·크기, 부모 위치 상속, 벡터·행렬 연산 | [TransformComponent](HiwoongEngine/src/Component/TransformComponent.cpp), [Math](HiwoongEngine/src/Math) |
+| 2D 렌더링 | 문자열 스프라이트, 공백 투명 처리, 셀별 표시 순서 | [SpriteRendererComponent](HiwoongEngine/src/Component/SpriteRendererComponent.cpp) |
+| 3D 렌더링 | 원근 투영, 근평면 클리핑, 뒷면 제거, 삼각형 채우기·깊이 판정 | [MeshRenderer](HiwoongEngine/src/Render/MeshRenderer.cpp), [SoftwareRasterizer](HiwoongEngine/src/Render/SoftwareRasterizer.cpp) |
+| 조명 | 기본 밝기, 방향광, 거리·각도·표면 방향을 반영한 스포트라이트 | [RenderView](HiwoongEngine/src/Render/RenderView.h), [SpotLight](HiwoongEngine/src/Render/SpotLight.h) |
+| 화면 출력 | 콘솔 더블 버퍼와 Win32 창 출력, 문자 그림 캐시 | [IRenderOutput](HiwoongEngine/src/Render/IRenderOutput.h) |
+| 입력·이동 검사 | 키 상태 변화, 마우스 이동량·잠금, 이동 예정 위치의 AABB 검사 | [Input](HiwoongEngine/src/Core/Input.cpp), [CollisionSystem](HiwoongEngine/src/Physics/CollisionSystem.cpp) |
 
-`Engine`은 전체 프로그램을 운영하고 `Scene`은 현재 무대, `GameObject`는 무대 위 대상, `Component`는 대상에 붙이는 기능 부품입니다.
+기술 구성은 **C++17 · Windows API · Win32 콘솔 · GDI**입니다. 정점 변환과 삼각형 래스터화는 CPU에서 수행하고, 최종 결과는 문자 셀 단위로 출력합니다.
+
+## 동작 원리
+
+### 1. Scene → GameObject → Component
 
 ```text
 Engine
-  ├─ Input
-  ├─ Renderer
-  └─ Scene
-      └─ GameObject
-          └─ Component
+├─ Input                         입력 상태와 마우스 이동량
+├─ Renderer                      그리기 명령과 완성된 프레임
+│  └─ IRenderOutput              콘솔 또는 Win32 창으로 출력
+└─ Scene                         현재 장면의 객체와 생명주기 관리
+   └─ GameObject
+      ├─ TransformComponent      기본 위치·회전·크기
+      └─ 추가 Component          렌더링, 입력 등 객체별 기능
 ```
 
-- `Engine`은 `Input`과 `Renderer`를 하나씩 소유합니다.
-- `Scene`은 자신에게 존재하는 여러 `GameObject`를 소유합니다.
-- `GameObject`는 기본 `TransformComponent`와 추가 Component들을 소유합니다.
-- 자식이 부모를 조회할 때는 `weak_ptr`를 사용해 순환 소유를 막습니다.
+`GameObject`에는 `TransformComponent`가 기본으로 생성됩니다. 필요한 기능은 `AddComponent<T>()`로 붙이고 `GetComponent<T>()`로 조회합니다. Component도 소유 GameObject를 통해 다른 Component에 접근할 수 있습니다.
 
-즉, **위에서 아래로 수명을 책임지고 아래에서는 필요한 부모를 약하게 조회하는 구조**입니다.
+Scene이 GameObject를, GameObject가 자신의 Component를 보관합니다. 소유 Scene이나 GameObject, 부모·자식 객체를 다시 조회하는 관계에는 `weak_ptr`를 사용합니다. 객체의 수명 관리와 객체 사이의 연결을 구분하기 위한 구조입니다.
 
----
-
-## 2. 한 프레임의 동작
-
-<img width="1400" height="430" alt="Image" src="https://github.com/user-attachments/assets/a1110a71-ddfb-4340-880d-df0695fc9a08" />
-
-게임은 아래 순서를 빠르게 반복합니다.
-
-
-1. 키보드의 현재 상태를 읽습니다.
-2. 새 Scene이라면 `SceneInitialize()`를 실행합니다.
-3. 새 GameObject와 Component의 `Start()`를 한 번 실행합니다.
-4. `Update()`에서 위치와 게임 규칙을 계산합니다.
-5. `Draw()`에서 이번 프레임의 그리기 명령을 수집하고 출력합니다.
-6. 요청된 다음 Scene이 있다면 현재 Scene과 교체합니다.
-7. 예약된 GameObject·Component의 추가와 삭제를 반영합니다.
-
-생성과 삭제를 즉시 처리하지 않고 프레임 끝에 반영하는 이유는, 목록을 순회하는 도중 컨테이너가 바뀌어 반복자가 무효화되는 문제를 피하기 위해서입니다.
-
----
-
-## 3. 컴포넌트 기반 구조
-
-하나의 거대한 상속 계층에 모든 기능을 넣지 않고, 필요한 기능을 Component로 붙입니다.
-
-<img width="1200" height="620" alt="Image" src="https://github.com/user-attachments/assets/cef34ad6-b1c0-451e-a3a3-5a8751cd8b40" />
-
-모든 `GameObject`에는 `TransformComponent`가 기본으로 만들어집니다. 화면에 보여야 한다면 `SpriteRendererComponent`, 입력을 받아야 한다면 사용자 입력 Component를 추가하는 식입니다.
-
-```cpp
-auto renderer = AddComponent<SpriteRendererComponent>();
-auto input = AddComponent<PlayerInputComponent>();
-```
-
-`GameObject`는 `Start()`, `Update()`, `Draw()`를 자신에게 붙은 Component에 전달합니다. 그래서 기능은 분리되어 있지만 하나의 객체처럼 같은 생명주기로 움직입니다.
-
-### 부모·자식 Transform
-
-GameObject끼리 부모·자식 관계를 맺으면 자식은 자신의 로컬 좌표에 부모의 월드 좌표를 더합니다.
+현재 부모·자식 Transform은 **위치의 합성**을 지원합니다.
 
 ```text
-자식 월드 좌표 = 부모 월드 좌표 + 자식 로컬 좌표
+자식 월드 위치 = 부모 월드 위치 + 자식 로컬 위치
+Model 행렬 = 이동 × 회전 × 크기
 ```
 
-부모 하나를 움직였을 때 여러 자식이 함께 이동하는 복합 객체를 만들 수 있습니다.
+Model 행렬의 이동에는 월드 위치를 사용하고 회전·크기에는 해당 Transform의 값을 사용합니다. 부모 회전과 크기까지 누적하는 계층형 행렬 계산은 현재 구현 범위에 포함되지 않습니다.
 
-<details>
-<summary><strong>GetComponent&lt;T&gt;는 타입을 어떻게 찾나요?</strong></summary>
+Component 검색에는 [HiwoongObject](HiwoongEngine/src/Core/HiwoongObject.h)의 타입 ID와 부모 타입 확인을 사용합니다. 이 ID는 실행 중 타입 구분을 위한 값입니다.
 
-`HiwoongObject`에 간단한 런타임 타입 확인 기능을 구현했습니다. 타입마다 프로세스 안에서 구분되는 ID를 만들고 부모 타입을 연결해, 정확히 같은 타입뿐 아니라 상속 관계도 확인합니다. 이 ID는 저장 파일용 영구 ID가 아니라 실행 중 타입 비교용입니다.
+### 2. 한 프레임의 실행 순서
 
-관련 코드: `HiwoongEngine/HiwoongEngine/Core/HiwoongObject.h`
-
-</details>
-
----
-
-## 4. 문자가 화면에 그려지는 과정
-
-`SpriteRendererComponent`가 바로 콘솔을 수정하지는 않습니다. Renderer에 명령을 제출하고, 하나의 완성된 Frame을 만든 뒤 화면 버퍼에 기록합니다.
-
-<img width="1400" height="570" alt="Image" src="https://github.com/user-attachments/assets/2af7be33-54b8-41ff-814e-af8d0d4072fe" />
-
-1. `SpriteRendererComponent`가 문자열, 월드 좌표, 색상, `sortingOrder`를 제출합니다.
-2. `Renderer`가 한 프레임의 `RenderCommand`를 모읍니다.
-3. 각 화면 셀에서 기존 값과 `sortingOrder`를 비교해 앞에 보일 문자를 정합니다.
-4. 2차원 좌표를 1차원 인덱스로 바꾸어 `CHAR_INFO` Frame을 작성합니다.
-5. 두 개의 Win32 `ScreenBuffer`를 번갈아 활성화합니다.
-
-한 버퍼를 화면에 보여 주는 동안 다른 버퍼에 다음 프레임을 준비하기 때문에 콘솔의 깜빡임을 줄일 수 있습니다. Scene 크기가 바뀌면 Renderer와 두 ScreenBuffer, Frame도 새 크기에 맞게 다시 구성됩니다.
-
----
-
-## 5. 입력과 Scene 전환
-
-### 입력
-
-`Input`은 256개 가상 키의 현재 프레임과 이전 프레임 상태를 함께 저장합니다.
-
-| 함수 | 의미 |
-|---|---|
-| `GetKey(key)` | 지금 키가 눌려 있는가? |
-| `GetKeyDown(key)` | 이번 프레임에 처음 눌렸는가? |
-| `GetKeyUP(key)` | 이번 프레임에 놓였는가? |
-
-### Scene 전환
-
-게임 도중 새 Scene을 요청하면 즉시 현재 Scene을 파괴하지 않습니다. `nextScene`에 보관했다가 프레임의 정해진 전환 지점에서 교체합니다. 덕분에 `Update()` 도중 객체와 Scene의 수명이 갑자기 끝나는 상황을 피합니다.
-
----
-
-## 6. 2D 엔진 적용 사례: 콘솔 테트리스
-
-위의 2D 엔진 구조가 실제 게임을 운영할 수 있는지 확인하기 위해 콘솔 테트리스를 만들었습니다.
-
-<table>
-  <tr>
-   <td align="center"><img src="https://github.com/user-attachments/assets/e3aac143-c780-4849-aec3-6f6c003a9c8e"><br><sub>이동 · 회전 · 다음 블록 UI</sub></td>
-    <td align="center"><img src="https://github.com/user-attachments/assets/1b7be359-cb4a-4c1d-8970-8a63505e4a90"><br><sub>보드 점유 검사와 GameOver 전환</sub></td>
-    <td align="center"><img src="https://github.com/user-attachments/assets/cdb4ea95-407a-477e-874d-57338bec7e0d"><br><sub>상태 유지와 레벨별 낙하 속도</sub></td>
-  </tr>
-</table>
-
-<img width="1400" height="560" alt="Image" src="https://github.com/user-attachments/assets/e161f7e8-0750-45d8-aefa-187838eec2c2" />
-
-### 테트리스는 어떤 논리로 만들었나요?
-
-1. `SpawnManager`가 다음 조각 종류를 예약하고 7가지 `TetrisModule` 중 하나를 생성합니다.
-2. 하나의 `TetrisModule`은 자식 `Block` 네 개를 소유하며, 각 Block은 자신의 로컬 좌표에 그려집니다.
-3. 이동과 회전 전에 네 Block의 다음 월드 좌표가 비어 있는지 `TetrisBoard`에 확인합니다.
-4. 더 내려갈 수 없으면 Block을 보드 셀에 고정하고 완성된 줄을 찾습니다.
-5. 줄을 지운 뒤 위쪽 Block을 아래로 이동하고 점수와 레벨 상태를 갱신합니다.
-6. 공간이 있으면 다음 조각을 만들고, 스폰 위치가 막혀 있으면 GameOver Scene으로 전환합니다.
-
-보드는 `(x, y)`를 `y * width + x`로 바꾼 1차원 배열을 사용합니다. `TetrisGameState`는 Scene이 교체되어도 유지해야 하는 점수, 레벨, 다음 조각 정보를 보관합니다.
-
-<details>
-<summary><strong>조작 방법</strong></summary>
-
-| 키 | 동작 |
-|---|---|
-| `←` / `→` | 좌우 이동 |
-| `↓` | 한 칸 빠르게 내리기 |
-| `↑` | 시계 방향 회전 |
-| `Space` | 즉시 낙하하고 고정 |
-| `Esc` | 종료 |
-| GameOver에서 `R` | 게임 Scene으로 다시 진입 |
-
-</details>
-
----
-
-## 7. 2D 엔진을 3D ASCII 렌더러로 확장
-
-테트리스로 Scene, Component, 입력, 2D 문자 렌더링을 검증한 뒤, 3D를 엔진내에 구현했습니다. CPU가 3D 좌표를 콘솔의 문자 셀로 바꾸는 전 과정을 직접 처리합니다.
-
-<img width="1400" height="740" alt="Image" src="https://github.com/user-attachments/assets/1b041d32-4405-4913-aed2-ace02550b80a" />
-
-### 기존 구조에서 무엇을 재사용했나요?
-
-| 그대로 사용한 기반 | 3D를 위해 추가한 기능 |
-|---|---|
-| Scene → GameObject → Component 생명주기 | `Transform3DComponent`의 위치·회전·크기 |
-| 한 프레임의 그리기 명령을 모으는 Renderer | `Vector3`, `Vector4`, `Matrix4x4` 연산 |
-| 2D 좌표를 문자 셀에 쓰는 Frame | Vertex·Edge·Triangle로 구성한 Mesh |
-| 깔끔한 출력을 위한 두 개의 ScreenBuffer | 원근 투영, 뒷면 제거, 삼각형 래스터화 |
-| 문자 겹침을 해결하는 셀 단위 판정 | 셀마다 가까운 면을 고르는 Depth Buffer |
-
-즉, 엔진의 소유 구조와 프레임 흐름은 바꾸지 않고 **Renderer가 받아들일 수 있는 좌표와 가림 판정을 3D까지 확장**했습니다.
-
-### 3D 점 하나가 ASCII 문자가 되는 순서
-
-1. Mesh의 로컬 정점에 `Transform3DComponent`의 Model 행렬을 적용합니다.
-2. `LookAt` View 행렬로 카메라를 기준으로 좌표를 바꿉니다.
-3. Perspective 행렬과 원근 나누기로 멀리 있는 물체를 작게 만듭니다.
-4. 3D 좌표를 콘솔의 2D 셀 좌표로 변환합니다.
-5. 화면에서 뒤를 보는 삼각형은 Back-face Culling으로 건너뜁니다.
-6. 남은 삼각형 내부를 채우고, 바리센트릭 가중치로 각 셀의 깊이를 계산합니다.
-7. Depth Buffer로 가까운 면만 남기고, 법선과 빛 방향에 따라 ` .:-=+*#%@`를 선택합니다.
-
-### 3D Transform도 Component로 분리
-
-`Transform3DComponent` 하나가 Model 행렬을 만들기 때문에, Cube는 어떻게 이동·회전·확대해야 하는지 알 필요가 없습니다.
-
-```cpp
-Instantiate<CubeObject>(
-    Vector3(0, 0, 5),          // Position
-    Vector3(0.4f, 0.6f, 0),   // Rotation
-    Vector3(1, 1, 1)           // Scale
-);
+```mermaid
+flowchart LR
+    A[창 이벤트·입력] --> B[씬 초기화·Start]
+    B --> C[Update]
+    C --> D[Draw 명령 수집]
+    D --> E[프레임 합성·출력]
+    E --> F[씬 전환·예약 반영]
+    F --> G[이전 입력 상태 저장]
 ```
 
-### 결과: CPU로 그린 회전하는 ASCII 큐브
+`Engine::Run()`은 설정된 프레임 간격이 지나면 입력을 읽고, 실제 경과 시간인 `deltaTime`을 `Update()`에 전달합니다. 초기화와 `Start()`는 상태를 확인해 필요한 대상에 한 번 실행합니다.
 
-https://github.com/user-attachments/assets/639897e7-3dc8-43dd-8a19-020b15c6207a
-<p align="center"><sub>Model·View·Projection, 삼각형 래스터화, Depth Buffer, 법선 기반 ASCII 조명을 적용한 결과</sub></p>
+GameObject의 추가·삭제와 Component의 추가는 예약 목록을 통해 처리합니다. 순회 중인 목록을 즉시 바꾸지 않고 프레임 끝의 정해진 지점에서 반영합니다.
 
-매 프레임 8개의 정점과 12개의 삼각형을 변환하고, 화면에 보이는 픽셀을 다시 채우며 회전합니다.
+씬 전환도 `nextScene`에 예약합니다. 일시정지할 때는 현재 게임 씬을 `pausedScene`으로 보관하고 마지막 프레임의 문자·색상을 캡처합니다. 메뉴가 실행되는 동안 게임 씬의 상태를 유지하며, 재개 시 보관한 씬으로 돌아갑니다.
 
----
+관련 코드: [Engine.cpp](HiwoongEngine/src/Engine/Engine.cpp), [Scene.cpp](HiwoongEngine/src/Scene/Scene.cpp)
 
+### 3. 2D와 3D 결과를 하나의 문자 프레임으로 합성
+
+`SpriteRendererComponent`는 문자열을 줄 단위로 읽고, 공백을 제외한 구간을 Renderer에 제출합니다. 각 문자 위치에는 GameObject의 월드 위치를 반영합니다. 이 방식으로 스프라이트 주변 여백이 뒤쪽 장면을 가리지 않게 합니다.
+
+`Renderer`는 문자열, 선, 3D 셀 명령을 수집한 뒤 다음 세 배열을 사용해 프레임을 만듭니다.
+
+| 셀별 데이터 | 역할 |
+|---|---|
+| `CHAR_INFO` | 표시할 문자와 전경·배경 색상 속성 |
+| `sortingOrder` | 겹친 2D 요소와 3D 장면 사이의 표시 우선순위 |
+| Depth Buffer | 같은 표시 순서의 3D 셀 중 가까운 표면 선택 |
+
+화면 좌표 `(x, y)`는 `y * width + x`로 배열 위치에 대응합니다. `sortingOrder`가 높은 요소가 우선하고, 같은 순서의 3D 셀끼리는 더 작은 깊이 값을 남깁니다. 따라서 3D 장면과 문자로 만든 UI를 하나의 프레임에 합성할 수 있습니다.
+
+관련 코드: [Renderer.cpp](HiwoongEngine/src/Render/Renderer.cpp)
+
+### 4. 3D 삼각형이 ASCII 문자가 되는 과정
+
+공용 3D 렌더링 경로인 `MeshRenderer`는 다음 순서로 장면을 계산합니다.
+
+```mermaid
+flowchart TD
+    A[Mesh 정점·삼각형 인덱스] --> B[Model: 로컬 → 월드]
+    B --> C[View: 월드 → 카메라]
+    C --> D[근평면 클리핑]
+    D --> E[Projection·원근 나누기]
+    E --> F[화면 셀 좌표·뒷면 제거]
+    F --> G[삼각형 내부 셀과 바리센트릭 비중]
+    G --> H[원근 보정 위치·조명·문자 선택]
+    H --> I[Renderer: 표시 순서·깊이 비교]
+```
+
+- **좌표 변환:** Model·View·Projection 행렬로 물체를 카메라 관점의 화면 좌표로 옮깁니다. 문자 한 칸의 가로·세로 비율도 화면 종횡비 계산에 반영합니다.
+- **근평면 클리핑:** 카메라 바로 앞의 경계를 가로지르는 삼각형은 교점을 구해 잘라냅니다. 잘린 결과가 사각형이면 다시 삼각형으로 나눕니다.
+- **삼각형 채우기:** 화면상 뒷면을 제외하고 경계 안의 셀을 구합니다. 바리센트릭 좌표는 각 셀이 세 정점의 값을 얼마나 반영하는지 나타내는 비중입니다.
+- **원근 보정:** 화면 비중에 카메라 깊이의 역수 `1/z`를 반영해 셀에 해당하는 3D 위치를 복원합니다. 조명은 이 위치에서 계산하고, 깊이 버퍼에는 화면 비중으로 보간한 투영 후 깊이를 사용합니다.
+
+밝기는 기본 밝기와 방향광, 스포트라이트의 영향을 합쳐 계산합니다. 스포트라이트는 **광원과의 거리, 빛의 중심 방향과의 각도, 표면 법선 방향**을 각각 반영합니다. 계산한 밝기를 문자 배열에 대응시켜 `' '`, `.`, `:`, `*`, `#`, `@`처럼 밀도가 다른 문자로 표현합니다.
+
+관련 코드: [MeshRenderer.cpp](HiwoongEngine/src/Render/MeshRenderer.cpp), [SoftwareRasterizer.cpp](HiwoongEngine/src/Render/SoftwareRasterizer.cpp), [Matrix4x4.cpp](HiwoongEngine/src/Math/Matrix4x4.cpp)
+
+### 5. 같은 프레임을 콘솔과 Win32 창으로 출력
+
+화면 출력은 `IRenderOutput`으로 분리했습니다. 게임 프로젝트가 출력 객체를 만들어 `Engine`에 전달하면, Renderer는 완성된 문자·색상 배열을 해당 출력 객체에 넘깁니다.
+
+| 출력 구현 | 표시 방식 | 적용 작품 |
+|---|---|---|
+| `ConsoleRenderOutput` | 두 콘솔 화면 버퍼에 번갈아 기록하고 활성화 | 아스키 큐브, 아스키 테트리스 |
+| `WindowRenderOutput` | 문자 그림을 픽셀 배열로 합성하고 GDI 백 버퍼를 창에 복사 | 아스키 둠 |
+
+Win32 창 출력은 **문자와 색상 조합별 그림을 캐시**합니다. 이미 그린 문자는 캐시된 픽셀을 재사용하고, 완성한 화면을 백 버퍼에서 `BitBlt`로 옮깁니다. 반복적인 글자 그리기 비용과 화면 깜빡임을 줄이기 위한 방식입니다.
+
+두 출력 구현은 `Resize()`, `Present()`, `GetCharacterSize()`를 공유합니다. 창의 메시지 처리는 `ProcessEvents()`로 엔진 루프에 연결합니다.
+
+관련 코드: [IRenderOutput.h](HiwoongEngine/src/Render/IRenderOutput.h), [ConsoleRenderOutput.cpp](HiwoongEngine/src/Render/ConsoleRenderOutput.cpp), [WindowRenderOutput.cpp](HiwoongEngine/src/Render/WindowRenderOutput.cpp)
+
+### 6. 입력과 이동 가능 여부
+
+키보드는 현재·이전 프레임 상태를 비교해 누르고 있는 상태인 `GetKey`, 처음 누른 순간인 `GetKeyDown`, 놓은 순간인 `GetKeyUP`을 구분합니다.
+
+마우스는 프레임마다 이동량을 초기화한 뒤 새 이동량을 읽습니다. 잠금 대상 창을 지정할 수 있고, 잠금 중에는 커서를 창 안으로 제한한 뒤 중앙으로 되돌립니다. `MouseLookComponent`는 수평 이동량을 회전에 반영합니다.
+
+3D 이동은 이동 예정 위치에서 `BoxCollider3DComponent`끼리 AABB 검사를 수행합니다. AABB는 각 축에 나란한 박스이며, X·Y·Z 중 한 축이라도 범위가 떨어져 있으면 겹치지 않는 것으로 판단합니다. 현재 게임에서 사용하는 경로는 `Scene::CanMoveTo()`를 통한 이동 가능 여부 조회입니다.
+
+관련 코드: [Input.cpp](HiwoongEngine/src/Core/Input.cpp), [MouseLookComponent.cpp](HiwoongEngine/src/Component/MouseLookComponent.cpp), [BoxCollider3DComponent.cpp](HiwoongEngine/src/Component/BoxCollider3DComponent.cpp)
+
+## 주요 폴더와 실행
+
+| 위치 | 내용 |
+|---|---|
+| [HiwoongEngine/src](HiwoongEngine/src) | 공통 엔진 소스 |
+| [AsciiDoom](AsciiDoom/README.md) | 아스키 둠 소개와 구현 내용 |
+| [AsciiCube](AsciiCube/README.md) | 아스키 큐브 소개와 구현 내용 |
+| [AsciiTetris](AsciiTetris/README.md) | 아스키 테트리스 소개와 구현 내용 |
+| [HiwoongEngineTests](HiwoongEngine/HiwoongEngineTests/HiwoongEngineTests.cpp) | 벡터·행렬·카메라 등 엔진 테스트 코드 |
+
+빌드 환경은 Windows, Visual Studio의 C++ 데스크톱 개발 도구, MSVC `v143`, Windows SDK입니다.
+
+1. [HiwoongEngine.sln](HiwoongEngine/HiwoongEngine.sln)을 엽니다.
+2. 구성을 `Debug`, 플랫폼을 `x64`로 선택합니다.
+3. 실행할 게임을 시작 프로젝트로 지정하고 빌드합니다.
+4. 해당 프로젝트의 **디버깅 → 작업 디렉터리**가 `$(TargetDir)`인지 확인한 뒤 실행합니다.
+
+공통 설정 원본은 [Config/Setting.txt](HiwoongEngine/Config/Setting.txt)입니다. 빌드 이벤트가 엔진 DLL과 설정·게임 리소스를 실행 경로에 맞춰 복사합니다. 설정 파일을 찾지 못해 실행이 중단되면 작업 디렉터리와 빌드 후 복사 결과를 확인합니다.
