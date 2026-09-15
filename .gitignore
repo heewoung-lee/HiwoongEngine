@@ -37,10 +37,22 @@
 *.suo
 *.user
 
-# Build output
-[Bb]in/
-Intermediate/
 
 # Markdown documents
 *.md
 !/README.md
+
+# Build output
+[Bb]in/
+[Oo]bj/
+Intermediate/
+x64/
+x86/
+[Dd]ebug/
+[Rr]elease/
+
+# Visual Studio build files
+*.pdb
+*.ilk
+*.idb
+
