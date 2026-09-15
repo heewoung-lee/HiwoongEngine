@@ -57,3 +57,5 @@ x86/
 *.ilk
 *.idb
 
+
+/docs/images/
