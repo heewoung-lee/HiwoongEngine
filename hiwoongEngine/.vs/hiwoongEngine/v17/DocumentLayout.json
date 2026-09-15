@@ -596,7 +596,7 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 140,
+          "DockedWidth": 201,
           "SelectedChildIndex": 2,
           "Children": [
             {
@@ -846,7 +846,7 @@
           ]
         },
         {
-          "DockedWidth": 315,
+          "DockedWidth": 254,
           "SelectedChildIndex": 4,
           "Children": [
             {
@@ -909,7 +909,7 @@
               "RelativeDocumentMoniker": "DoomProject\\UI\\PlayerHUID.cpp",
               "ToolTip": "C:\\WorkSpace\\HiwoongEngine\\HiwoongEngine\\DoomProject\\UI\\PlayerHUID.cpp",
               "RelativeToolTip": "DoomProject\\UI\\PlayerHUID.cpp",
-              "ViewState": "AgIAADMAAAAAAAAAAAAAAEEAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAAEIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-09-14T08:37:32.348Z",
               "EditorCaption": ""
