@@ -6,7 +6,7 @@ Scene, GameObject, Component로 게임을 구성하고, CPU에서 계산한 3D �
 
 ## 엔진으로 만든 작품
 
-### [1. 아스키 둠 · ASCII Doom](AsciiDoom/README.md)
+### [1. 아스키 둠 · ASCII Doom](AsciiDoom/README.md) (~진행중)
 
 3D 맵 위에서 이동하며 조명을 비추고, 일시정지 메뉴와 체력·탄약 UI를 사용하는 개발 중인 1인칭 데모입니다.
 
