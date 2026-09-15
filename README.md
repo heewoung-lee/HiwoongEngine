@@ -12,7 +12,6 @@ Scene, GameObject, Component로 게임을 구성하고, CPU에서 계산한 3D �
 
 <p align="center">
   <a href="AsciiDoom/README.md"><img src="https://github.com/user-attachments/assets/6aa996cd-3888-4ba7-840a-eed2e2bc6dde" width="760" alt="ASCII Doom 최종 목표 목업"></a><br>
-  <sub>최종 목표 목업</sub>
 </p>
 
 ### [2. 아스키 큐브 · ASCII Cube](AsciiCube/README.md)
