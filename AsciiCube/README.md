@@ -1,24 +1,16 @@
 # ASCII Cube
-
-[HiwoongEngine 소개로 돌아가기](../README.md)
-
 HiwoongEngine의 3D 수학과 소프트웨어 렌더링을 확인하는 ASCII 큐브 데모입니다.
 CPU에서 정점을 변환하고 삼각형을 문자 셀로 채워, 회전하는 입체를 Windows 콘솔에 출력합니다.
 면의 방향에 따라 문자를 바꾸고 깊이를 비교해 입체감과 가림을 표현합니다.
+
+<br>
+</br>
 
 ## 실행 화면
 
 https://github.com/user-attachments/assets/639897e7-3dc8-43dd-8a19-020b15c6207a
 
 Model·View·Projection 변환, 삼각형 채우기, 깊이 버퍼, 법선 기반 ASCII 조명을 적용한 기록입니다.
-
-## 실행과 조작
-
-[공유 솔루션](../HiwoongEngine/HiwoongEngine.sln)의 `AsciiCube` 프로젝트를 실행합니다.
-개발 환경과 공통 빌드 방법은 [루트 README](../README.md)를 참고합니다.
-
-실행하면 큐브가 자동으로 회전합니다. 키보드나 마우스로 이동·회전하는 조작은 구현되어 있지 않습니다.
-종료는 콘솔 창을 닫거나 Visual Studio의 디버깅 중지를 사용합니다. `Esc` 종료 처리도 없습니다.
 
 ## 장면과 큐브
 
@@ -105,8 +97,3 @@ Cube는 별도의 `Camera3D` 객체 없이 `Draw()`에서 고정 View 행렬을 
 
 Cube의 자체 경로는 정점의 `w > 0`을 검사하며, 근거리 평면에 걸친 삼각형을 자르는 처리는 하지 않습니다.
 엔진의 공용 [MeshRenderer 구현](../HiwoongEngine/src/Render/MeshRenderer.cpp)에는 근거리 평면 클리핑과 스포트라이트 계산이 별도로 구현되어 있습니다.
-
-## 소스에서 확인할 수 있는 테스트
-
-[CubeProject.cpp](CubeProject.cpp)에 메시 개수, NDC 화면 변환, 선·삼각형 래스터화, 바리센트릭 가중치, 뒷면 판정, Transform 행렬을 확인하는 함수들이 있습니다.
-현재 `main()`의 `RunAllTests()` 호출은 주석 처리되어 있어, 기본 실행은 `CubeScene` 데모를 시작합니다.
