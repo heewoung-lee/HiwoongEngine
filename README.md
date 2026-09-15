@@ -59,6 +59,10 @@ HiwoongEngine은 게임이 한 프레임을 만드는 과정을 이해하고 구
 
 ### 1. Scene → GameObject → Component
 
+<img width="1200" height="620" alt="GameObject에 Transform과 기능 Component를 조립하는 구조" src="https://github.com/user-attachments/assets/cef34ad6-b1c0-451e-a3a3-5a8751cd8b40" />
+
+> 기존 그림의 `Transform + Input`은 입력을 사용하는 컴포넌트를 뜻합니다. 실제 `Input`은 엔진이 관리하는 별도 객체이며, 테트리스에는 `PlayerInputComponent`를 붙입니다.
+
 ```text
 Engine
 ├─ Input                         입력 상태와 마우스 이동량
@@ -87,6 +91,10 @@ Component 검색에는 [HiwoongObject](HiwoongEngine/src/Core/HiwoongObject.h)�
 
 ### 2. 한 프레임의 실행 순서
 
+<img width="1400" height="430" alt="입력, 초기화, Start, Update, Draw, 씬 전환과 예약 처리의 흐름" src="https://github.com/user-attachments/assets/a1110a71-ddfb-4340-880d-df0695fc9a08" />
+
+> 기존 그림에는 목표 FPS가 120으로 표시되어 있지만, 현재 공통 설정은 60입니다. `Draw`는 명령 수집뿐 아니라 합성·출력까지 수행하며, 창 이벤트 처리와 이전 입력 상태 저장을 포함한 현재 흐름은 아래와 같습니다.
+
 ```mermaid
 flowchart LR
     A[창 이벤트·입력] --> B[씬 초기화·Start]
@@ -107,6 +115,12 @@ GameObject의 추가·삭제와 Component의 추가는 예약 목록을 통해 �
 
 ### 3. 2D와 3D 결과를 하나의 문자 프레임으로 합성
 
+<img width="1400" height="570" alt="문자 렌더 명령을 Frame과 두 콘솔 화면 버퍼를 거쳐 표시하는 과정" src="https://github.com/user-attachments/assets/2af7be33-54b8-41ff-814e-af8d0d4072fe" />
+
+> 이 그림은 콘솔 출력 경로를 설명합니다. 현재는 `IRenderOutput`을 통해 출력 방식을 선택하며, 두 `ScreenBuffer`는 `ConsoleRenderOutput`이 관리합니다. 아스키 둠은 `WindowRenderOutput`으로 Win32 창에 출력합니다.
+>
+> 단계별 역할도 구분해야 합니다. Render Queue는 명령을 보관하고, 셀의 표시 순서·깊이 비교는 Frame에 기록할 때 수행합니다. `WriteConsoleOutputA`는 버퍼에 기록하며, `SetConsoleActiveScreenBuffer`가 표시할 버퍼를 전환합니다.
+
 `SpriteRendererComponent`는 문자열을 줄 단위로 읽고, 공백을 제외한 구간을 Renderer에 제출합니다. 각 문자 위치에는 GameObject의 월드 위치를 반영합니다. 이 방식으로 스프라이트 주변 여백이 뒤쪽 장면을 가리지 않게 합니다.
 
 `Renderer`는 문자열, 선, 3D 셀 명령을 수집한 뒤 다음 세 배열을 사용해 프레임을 만듭니다.
@@ -122,6 +136,12 @@ GameObject의 추가·삭제와 Component의 추가는 예약 목록을 통해 �
 관련 코드: [Renderer.cpp](HiwoongEngine/src/Render/Renderer.cpp)
 
 ### 4. 3D 삼각형이 ASCII 문자가 되는 과정
+
+<img width="1400" height="740" alt="2D 문자 배치와 3D 좌표 변환·삼각형 래스터화·깊이 판정의 비교" src="https://github.com/user-attachments/assets/1b041d32-4405-4913-aed2-ace02550b80a" />
+
+> 기존 비교 그림의 `Transform3D`는 현재 `TransformComponent`로 통합되어 있습니다. 실제 뒷면 제거는 삼각형을 셀로 채우기 전에 수행합니다. 하단 콘솔 출력은 기존 경로이며, 현재는 Win32 창 출력도 지원합니다.
+>
+> 그림의 표시 순서·깊이 비교는 Render Queue에 제출하기 전이 아니라, 제출된 명령으로 Frame을 작성하는 단계에서 수행합니다.
 
 공용 3D 렌더링 경로인 `MeshRenderer`는 다음 순서로 장면을 계산합니다.
 
