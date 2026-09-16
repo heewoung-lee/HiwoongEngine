@@ -1,25 +1,7 @@
 # ASCII Doom
 
-[← HiwoongEngine 소개](../README.md)
+HiwoongEngine의 3D ASCII 렌더러를 1인칭 게임에 적용하는 진행 중인 프로젝트입니다.
 
-HiwoongEngine의 3D ASCII 렌더러를 1인칭 게임에 적용하는 진행 중인 프로젝트입니다. 텍스트 맵을 3D 벽으로 구성하고, 이동·충돌·손전등·총 표시·일시정지·HUD를 연결했습니다.
-
-현재는 공간 탐색과 화면 구성을 구현한 단계입니다. 목표는 **작은 평면 맵 1개에서 총 1종과 몬스터 1종으로 한 판을 끝낼 수 있는 데모**입니다. 발사·명중 판정·몬스터 전투·승패 처리는 앞으로 연결할 기능입니다.
-
-## 현재 결과
-
-![ASCII Doom 최신 UI 구현 화면: 맵, 총, 조준점, HP와 AMMO](https://github.com/user-attachments/assets/3ea52078-7417-41f8-8499-c2cbdfe82e95)
-
-게임 영역 아래에 별도 HUD 영역을 배치한 결과입니다. HP와 AMMO는 큰 녹색 문자로 표시하며, 초기값은 각각 `100`, `24`입니다.
-
-| 영역 | 현재 구현 |
-|---|---|
-| 맵 | TXT 타일 로딩, 벽 메시와 충돌체 생성, 인접 벽의 내부 측면 제외 |
-| 이동 | WASD 이동, 대각선 속도 정규화, 축별 충돌 검사와 벽 미끄러짐 |
-| 시점·입력 | 마우스 좌우 회전, 조준점 상하 이동 제한, 커서 잠금·해제 |
-| 조명 | 플레이어를 따라가는 손전등, 거리·각도·표면 방향에 따른 문자 명암 |
-| 화면 | 다중행 총·조준점 스프라이트, 공백 투명 처리, 게임·HUD 영역 분리 |
-| UI·메뉴 | HP·AMMO 변경 콜백, 게임 상태를 유지하는 일시정지와 재개 |
 
 ## 개발 과정
 
@@ -47,7 +29,7 @@ https://github.com/user-attachments/assets/da1e2ae7-e510-43eb-9f87-d4b80016d05d
 
 ### Step 6. HP·AMMO UI
 
-[최신 UI 구현 화면 보기](https://github.com/user-attachments/assets/3ea52078-7417-41f8-8499-c2cbdfe82e95)
+![ASCII Doom 최신 UI 구현 화면: 맵, 총, 조준점, HP와 AMMO](https://github.com/user-attachments/assets/3ea52078-7417-41f8-8499-c2cbdfe82e95)
 
 ## 객체와 컴포넌트의 역할
 
