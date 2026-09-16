@@ -6,7 +6,7 @@ CPU에서 정점을 변환하고 삼각형을 문자 셀로 채워, 회전하는
 <br>
 </br>
 
-## 실행 화면
+## 플레이 화면
 
 https://github.com/user-attachments/assets/639897e7-3dc8-43dd-8a19-020b15c6207a
 
