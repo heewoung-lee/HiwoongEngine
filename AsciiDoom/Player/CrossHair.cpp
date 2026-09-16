@@ -12,9 +12,13 @@ namespace Hiwoong
 	Crosshair::Crosshair()
 	{
 		AddComponent<SpriteRendererComponent>(
-			"   |   \n"
-			"-- 0 --\n"
-			"   |   ", Color::Green, 101
+			std::vector<std::string>{
+			"   |   ",
+				"-- 0 --",
+				"   |   "
+		},
+			Color::Green,
+			101
 		);
 	}
 

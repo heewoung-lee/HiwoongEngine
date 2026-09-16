@@ -8,11 +8,13 @@ namespace Hiwoong
     ResumeButton::ResumeButton()
     {
         AddComponent<SpriteRendererComponent>(
-            "####  #####  #### #   # #   # #####\n"
-            "#   # #     #     #   # ## ## #    \n"
-            "####  ####   ###  #   # # # # #### \n"
-            "#  #  #         # #   # #   # #    \n"
-            "#   # ##### ####   ###  #   # #####",
+            std::vector<std::string>{
+                "####  #####  #### #   # #   # #####",
+                "#   # #     #     #   # ## ## #    ",
+                "####  ####   ###  #   # # # # #### ",
+                "#  #  #         # #   # #   # #    ",
+                "#   # ##### ####   ###  #   # #####"
+        },
             Color::Green,
             201
         );

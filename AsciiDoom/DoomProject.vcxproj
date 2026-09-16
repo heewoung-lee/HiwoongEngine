@@ -107,6 +107,7 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     <ClCompile Include="Menu\ResumeButton.cpp" />
     <ClCompile Include="Player\CrossHair.cpp" />
     <ClCompile Include="Player\Gun.cpp" />
+    <ClCompile Include="Player\GunAnimationData.cpp" />
     <ClCompile Include="Player\Player.cpp" />
     <ClCompile Include="Scene\DoomScene.cpp" />
     <ClCompile Include="Scene\MenuScene.cpp" />
@@ -134,6 +135,7 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     <ClInclude Include="Menu\ResumeButton.h" />
     <ClInclude Include="Player\CrossHair.h" />
     <ClInclude Include="Player\Gun.h" />
+    <ClInclude Include="Player\GunAnimationData.h" />
     <ClInclude Include="Player\Player.h" />
     <ClInclude Include="Scene\DoomScene.h" />
     <ClInclude Include="Scene\MenuScene.h" />

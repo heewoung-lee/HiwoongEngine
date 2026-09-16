@@ -18,7 +18,7 @@ namespace Hiwoong
             : GameObject(Vector3(position.x,position.y,0))
         {
             spriteRenderer = AddComponent<SpriteRendererComponent>(
-                text,
+                std::vector<std::string>{text},
                 color,
                 10
             );
@@ -29,7 +29,7 @@ namespace Hiwoong
         {
             std::shared_ptr<SpriteRendererComponent> renderer = spriteRenderer.lock();
             assert(renderer != nullptr);
-            renderer->SetImage(text);
+            renderer->SetImage(std::vector<std::string>{text});
         }
 
         void SetColor(Color color)

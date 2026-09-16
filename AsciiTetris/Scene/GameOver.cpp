@@ -12,9 +12,27 @@ namespace Hiwoong
 {
 	void GameOver::SceneInitialize()
 	{
+
 		const auto lines = FileUtil::LoadTextLines(
 			"../Assets/Stages/GameOver.txt"
 		);
+
+		int width = 0;
+
+		for (const std::string& line : lines)
+		{
+			const int lineWidth = static_cast<int>(line.size());
+
+			if (lineWidth > width)
+			{
+				width = lineWidth;
+			}
+		}
+
+		const int height = static_cast<int>(lines.size());
+
+		SetScreenSize(Vector2(width, height));
+
 		for (int y = 0; y < lines.size(); ++y)
 		{
 			Instantiate<TextObject>(

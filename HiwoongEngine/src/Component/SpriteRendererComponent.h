@@ -3,6 +3,7 @@
 #include "Component/Component.h"
 #include "Math/Color.h"
 #include <string>
+#include <vector>
 namespace Hiwoong
 {
 	class Hiwoong_API SpriteRendererComponent : public Component
@@ -11,18 +12,19 @@ namespace Hiwoong
 		
 	public:
 		SpriteRendererComponent(
-			const std::string& image = "",
+			const std::vector<std::string>& image,
 			Color color = Color::White,
 			int sortingOrder = 0
 		);
+
 		virtual ~SpriteRendererComponent() = default;
 
 		virtual void Draw() override;
 
-		//Getter/Setter
-		inline const std::string& GetImage() const { return image; }
-		inline void SetImage(const std::string& newImage) { image = newImage; }
-		inline int GetWidth() const { return static_cast<int>(image.size()); }
+		inline const std::vector<std::string>& GetImage() const{return image;}
+		inline void SetImage(const std::vector<std::string>& newImage){image = newImage;}
+
+		int GetMaxWidth() const;
 
 		inline Color GetColor() const { return color; }
 		inline void SetColor(Color newColor) { color = newColor; }
@@ -33,7 +35,7 @@ namespace Hiwoong
 
 	protected:
 		// string to show Console
-		std::string image;
+		std::vector<std::string> image;
 		
 		//Color
 		Color color = Color::White;

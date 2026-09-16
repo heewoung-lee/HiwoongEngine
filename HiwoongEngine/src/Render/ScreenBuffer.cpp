@@ -1,6 +1,7 @@
 #include "ScreenBuffer.h"
 #include <cassert>
 #include <cwchar>
+#include <algorithm>
 namespace Hiwoong
 {
 	ScreenBuffer::ScreenBuffer(
@@ -58,6 +59,8 @@ namespace Hiwoong
 		const int minimumWidthPixels = GetSystemMetrics(SM_CXMIN);
 		const int minimumHeightPixels = GetSystemMetrics(SM_CYMIN);
 
+		const COORD largestWindow =
+			GetLargestConsoleWindowSize(screenBuffer);
 
 		result = SetConsoleScreenBufferSize(screenBuffer, coord);
 
@@ -70,11 +73,18 @@ namespace Hiwoong
 		SMALL_RECT windowRect = {};
 		windowRect.Top = 0;
 		windowRect.Left = 0;
-		windowRect.Right = static_cast<short>(screenSize.x - 1);
-		windowRect.Bottom = static_cast<short>(screenSize.y - 1);
+		windowRect.Right = static_cast<short>(
+			(std::min)(screenSize.x, static_cast<int>(largestWindow.X)) - 1
+			);
+		windowRect.Bottom = static_cast<short>(
+			(std::min)(screenSize.y, static_cast<int>(largestWindow.Y)) - 1
+			);
 
 		result = SetConsoleWindowInfo(screenBuffer, TRUE, &windowRect);
-		
+
+		const DWORD windowError =
+			result ? ERROR_SUCCESS : GetLastError();
+
 		assert(result == TRUE);
 
 		//Setting Cursor disable

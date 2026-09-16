@@ -111,7 +111,6 @@ xcopy $(SolutionDir)Assets $(OutDir)..\Assets\ /e /y /i</Command>
     <ClCompile Include="GameObject\TetrisBlocks\SModule.cpp" />
     <ClCompile Include="GameObject\TetrisBlocks\TModule.cpp" />
     <ClCompile Include="GameObject\TetrisBlocks\ZModule.cpp" />
-    <ClCompile Include="GameObject\TextObject.cpp" />
     <ClCompile Include="Interface\TetrisModule.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Manager\TetrisGameState.cpp" />

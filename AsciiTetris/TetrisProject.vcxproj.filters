@@ -72,9 +72,6 @@
     <ClCompile Include="Util\FileUtil.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject\TextObject.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Manager\TetrisGameState.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>

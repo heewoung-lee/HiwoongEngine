@@ -2,6 +2,7 @@
 
 #include "GameObject/GameObject.h"
 #include "Math/Vector2.h"
+#include <vector>
 namespace Hiwoong
 {
 	class BigTextDisplayComponent : public Component
@@ -20,7 +21,7 @@ namespace Hiwoong
 		Vector2 GetTextSize() const;
 
 	private:
-		std::string BuildImage() const;
+		std::vector<std::string> BuildImage() const;
 
 
 	private:

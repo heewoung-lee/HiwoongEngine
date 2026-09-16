@@ -90,6 +90,9 @@
     <ClCompile Include="UI\AmmoDisplay.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Player\GunAnimationData.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene\DoomScene.h">
@@ -165,6 +168,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="UI\AmmoDisplay.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\GunAnimationData.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

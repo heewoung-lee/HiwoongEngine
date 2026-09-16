@@ -12,14 +12,11 @@ namespace Hiwoong
         const int width = 80;
         const int height = 34;
 
-        std::string image;
+        std::vector<std::string> image;
 
         for (int y = 0; y < height; ++y)
         {
-            image += std::string(width, '#');
-
-            if (y + 1 < height)
-                image += '\n';
+            image.emplace_back(std::string(width, '#'));
         }
 
         // 검정 문자로 뒤에 있는 게임 화면을 덮는다.

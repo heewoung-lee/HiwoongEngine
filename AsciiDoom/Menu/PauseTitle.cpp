@@ -2,7 +2,7 @@
 #include "Component/SpriteRendererComponent.h"
 #include "Component/TransformComponent.h"
 #include "Render/Renderer.h"
-
+#include <vector>
 namespace Hiwoong
 {
     PauseTitle::PauseTitle()
@@ -18,24 +18,20 @@ namespace Hiwoong
             "#     #   #  ###  ####  ##### #### "
         };
 
-        std::string image;
+        std::vector<std::string> image;
 
         for (const auto& row : rows)
         {
             std::string expandedRow;
 
-            // 가로 두 배 확대
             for (char character : row)
             {
                 expandedRow += character;
                 expandedRow += character;
             }
 
-            if (!image.empty())
-                image += '\n';
-
-            // 세로 두 배 확대
-            image += expandedRow + '\n' + expandedRow;
+            image.emplace_back(expandedRow);
+            image.emplace_back(expandedRow);
         }
 
         AddComponent<SpriteRendererComponent>(

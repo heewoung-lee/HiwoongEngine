@@ -7,6 +7,10 @@ namespace Hiwoong
 {
 	Block::Block(const Vector2& position, const Color& color) : GameObject(Vector3(position.x, position.y,0))
 	{
-		AddComponent<SpriteRendererComponent>("@", color, 1);
+		AddComponent<SpriteRendererComponent>(
+			std::vector<std::string>{"@"},
+			color,
+			1
+		);
 	}
 }

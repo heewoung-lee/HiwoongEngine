@@ -8,11 +8,13 @@ namespace Hiwoong
     QuitButton::QuitButton()
     {
         AddComponent<SpriteRendererComponent>(
-            " ###  #   # ##### #####\n"
-            "#   # #   #   #     #  \n"
-            "#   # #   #   #     #  \n"
-            "#  ## #   #   #     #  \n"
-            " ####  ###  #####   #  ",
+            std::vector<std::string>{
+                " ###  #   # ##### #####",
+                "#   # #   #   #     #  ",
+                "#   # #   #   #     #  ",
+                "#  ## #   #   #     #  ",
+                " ####  ###  #####   #  "
+        },
             Color::Gray,
             201
         );

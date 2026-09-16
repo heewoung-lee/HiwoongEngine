@@ -110,6 +110,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClCompile Include="Component\BoxColliderComponent.cpp" />
     <ClCompile Include="Component\Component.cpp" />
     <ClCompile Include="Component\MouseLookComponent.cpp" />
+    <ClCompile Include="Component\SpriteAnimationComponent.cpp" />
     <ClCompile Include="Component\SpriteRendererComponent.cpp" />
     <ClCompile Include="Component\TransformComponent.cpp" />
     <ClCompile Include="Core\Input.cpp" />
@@ -137,11 +138,13 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClCompile Include="Util\Util.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation\SpriteAnimationClip.h" />
     <ClInclude Include="Camera\Camera3D.h" />
     <ClInclude Include="Component\BoxCollider3DComponent.h" />
     <ClInclude Include="Component\BoxColliderComponent.h" />
     <ClInclude Include="Component\Component.h" />
     <ClInclude Include="Component\MouseLookComponent.h" />
+    <ClInclude Include="Component\SpriteAnimationComponent.h" />
     <ClInclude Include="Component\SpriteRendererComponent.h" />
     <ClInclude Include="Component\TransformComponent.h" />
     <ClInclude Include="Core\Core.h" />

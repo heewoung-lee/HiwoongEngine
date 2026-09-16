@@ -11,7 +11,10 @@ namespace Hiwoong
     HPDisplay::HPDisplay(const std::shared_ptr<Player>& player, int scale)
     {
         AddComponent<SpriteRendererComponent>(
-            "", Color::Green, 150);
+            std::vector<std::string>{},
+            Color::Green,
+            150
+        );
 
         // HPDisplay
         AddComponent<BigTextDisplayComponent>(
