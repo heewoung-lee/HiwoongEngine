@@ -31,6 +31,16 @@ https://github.com/user-attachments/assets/da1e2ae7-e510-43eb-9f87-d4b80016d05d
 
 ![ASCII Doom 최신 UI 구현 화면: 맵, 총, 조준점, HP와 AMMO](https://github.com/user-attachments/assets/3ea52078-7417-41f8-8499-c2cbdfe82e95)
 
+
+### Step 7. ShotAnimation
+
+
+https://github.com/user-attachments/assets/add28a26-4993-4756-ac9e-6a16d6e0a38a
+
+
+
+
+
 ## 객체와 컴포넌트의 역할
 
 공통 엔진의 Scene·GameObject·Component 구조를 재사용합니다. 게임 객체가 필요한 기능을 조합하고, 표시·입력·상태 전달을 나누어 구성했습니다.
