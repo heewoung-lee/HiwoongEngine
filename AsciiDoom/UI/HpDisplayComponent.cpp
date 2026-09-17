@@ -24,7 +24,7 @@ namespace Hiwoong
 		assert(display != nullptr);
 
 		//현재 플레이어의 HP를 처음 표시.
-		display->SetText("HP " + std::to_string(targetPlayer->GetHp()));
+		display->SetText("HP " + std::to_string(targetPlayer->GetCurrentHp()));
 
 		std::weak_ptr<BigTextDisplayComponent> weakDisplay = display;
 

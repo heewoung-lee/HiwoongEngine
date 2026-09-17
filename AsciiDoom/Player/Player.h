@@ -12,7 +12,7 @@ namespace Hiwoong
 
 	class Player : public GameObject
 	{
-		TYPE_DECALRATIONS(Player,GameObject)
+		TYPE_DECALRATIONS(Player, GameObject)
 
 	public:
 		explicit Player();
@@ -33,12 +33,14 @@ namespace Hiwoong
 		{
 			doomMap = map;
 		}
-
 		void SetHp(int value);
 		void SetAmmo(int value);
 
-		inline int GetHp() const { return hp; }
-		inline int GetAmmo() const { return ammo; }
+		inline int GetCurrentHp() const { return currentHp; }
+		inline int GetCurrentAmmo() const { return currentAmmo; }
+
+		inline int GetMaxAmmo() const { return Ammo; } // 재장전 전용
+
 
 		using OnHpChange = std::function<void(int)>;
 		using OnAmmoChange = std::function<void(int)>;
@@ -60,9 +62,12 @@ namespace Hiwoong
 		double frameDeltaTime;
 		Vector3 direction;
 		float collisionHalfSize = 0.2f;//충돌크기
-		
-		int hp = 100;
-		int ammo = 24;
+
+		const int Hp = 100;
+		const int Ammo = 12;
+
+		int currentHp = 0;
+		int currentAmmo = 0;
 
 		//콜백
 		std::vector<OnHpChange> hpChangeCallbacks;

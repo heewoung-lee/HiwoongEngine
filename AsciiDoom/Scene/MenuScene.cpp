@@ -9,7 +9,7 @@
 #include "Core/Input.h"
 #include "Engine/Engine.h"
 #include "Render/Renderer.h"
-
+#include "Component/MeshRenderComponent.h"
 namespace Hiwoong
 {
 	void MenuScene::SceneInitialize()
@@ -83,6 +83,7 @@ namespace Hiwoong
 		}
 		return false;
 	}
+
 
 	void MenuScene::Update(double deltaTime)
 	{

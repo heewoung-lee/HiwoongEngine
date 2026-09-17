@@ -92,7 +92,9 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Component\CrossHairMoveComponent.cpp" />
+    <ClCompile Include="Component\MeshRenderComponent.cpp" />
     <ClCompile Include="Component\PauseMenuComponent.cpp" />
+    <ClCompile Include="GameObject\Bullet.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map\BuildImplements\EmptyTileBuilder.cpp" />
     <ClCompile Include="Map\BuildImplements\MonsterSpawnTileBuilder.cpp" />
@@ -120,7 +122,9 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component\CrossHairMoveComponent.h" />
+    <ClInclude Include="Component\MeshRenderComponent.h" />
     <ClInclude Include="Component\PauseMenuComponent.h" />
+    <ClInclude Include="GameObject\Bullet.h" />
     <ClInclude Include="Map\BuildImplements\EmptyTileBuilder.h" />
     <ClInclude Include="Map\BuildImplements\MonsterSpawnTileBuilder.h" />
     <ClInclude Include="Map\BuildImplements\PlayerSpawnTileBuilder.h" />

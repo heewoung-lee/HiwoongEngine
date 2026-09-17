@@ -74,4 +74,19 @@ namespace Hiwoong
 			Matrix4x4::Scale(scale);
 	}
 
+	Vector3 TransformComponent::GetForward() const
+	{
+		//물체의 최종 회전 행렬연산
+		const Matrix4x4 rotationMatrix =
+			Matrix4x4::RotationZ(rotation.z) *
+			Matrix4x4::RotationY(rotation.y) *
+			Matrix4x4::RotationX(rotation.x);
+
+		// 기본 전방 + Z . w = 0이면 위치가 아닌 방향을 뜻함.
+		const Vector4 forward =
+			rotationMatrix * Vector4(0.0f, 0.0f, 1.0f, 0.0f);
+
+		return Vector3(forward.x, forward.y, forward.z).Normalized();
+	}
+
 }

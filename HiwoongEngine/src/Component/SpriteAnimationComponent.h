@@ -24,6 +24,8 @@ namespace Hiwoong
 		void Start() override;
 		void Update(double deltaTime) override;
 		bool Play(const SpriteAnimationClip& clip);
+
+		inline bool CheckPlaying() const { return isPlaying; }
 		
 	private:
 		//그림 한장을 표시하는 함수.

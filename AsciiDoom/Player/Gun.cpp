@@ -7,7 +7,10 @@
 #include "Component/SpriteAnimationComponent.h"
 #include "GunAnimationData.h"
 #include "Core/Input.h"
-
+#include "Player/CrossHair.h"
+#include "Camera/Camera3D.h"
+#include "GameObject/Bullet.h"
+#include <cmath>
 #include <cassert>
 
 namespace Hiwoong
@@ -49,17 +52,25 @@ namespace Hiwoong
 			std::dynamic_pointer_cast<DoomScene>(GetOwner());
 		assert(scene != nullptr);
 
-		const Vector2 size = scene->GetGameSize();
+		gameSize = scene->GetGameSize();
+
 
         constexpr int gunWidth = 25;
         constexpr int gunHeight = 18;
 
-        GetComponent<TransformComponent>()->SetLocalPosition(
-            Vector3((size.x - gunWidth) / 2, size.y - gunHeight, 0)
-        );
+		GetComponent<TransformComponent>()->SetLocalPosition(
+			Vector3(
+				(gameSize.x - gunWidth) / 2,
+				gameSize.y - gunHeight,
+				0
+			)
+		);
 
-       player = std::dynamic_pointer_cast<Player>(GetParent());
-       assert(player != nullptr);
+		assert(player != nullptr);
+
+		// 초기화할 때 소속 씬에서 카메라를 한 번 가져와 보관한다.
+		camera = scene->GetCamera();
+		assert(camera != nullptr);
 	}
 
 	void Gun::Fire()
@@ -67,7 +78,11 @@ namespace Hiwoong
         //마우스 왼쪽버튼을 눌렀을때만, 동작
 		if (Input::Get().GetKeyDown(VK_LBUTTON) == false) return;
 
-        if (player->GetAmmo() <= 0) return;
+		if (player->GetCurrentAmmo() <= 0)
+		{
+			ForceReload();
+			return;
+		}
 
 		assert(animation != nullptr);
 
@@ -76,19 +91,54 @@ namespace Hiwoong
 
 		if (animation->Play(GunAnimationData::Fire))
 		{
-			player->SetAmmo(player->GetAmmo() - 1);
+			// 보관한 약한 참조에서 크로스헤어를 가져온다.
+			const auto aimCrosshair = crosshair.lock();
+			assert(aimCrosshair != nullptr);
+
+			// 현재 크로스헤어 중심을 향하는 3D 방향을 구한다.
+			const Vector3 shotDirection = camera->ScreenPointToDirection(
+				aimCrosshair->GetScreenCenter(),
+				gameSize,
+				Renderer::Get().GetCharacterSize()
+			);
+
+			const auto bullet = Instantiate<Bullet>(
+				player->GetWorldPosition(),
+				shotDirection
+			);
+			assert(bullet != nullptr);
+
+			player->SetAmmo(player->GetCurrentAmmo() - 1);
 		}
 
 	}
 
 	void Gun::Reload()
 	{
-		if (!Input::Get().GetKeyDown('R')) return;
 
 		assert(animation != nullptr);
 		if (!animation->HasStared()) return;
 
-		animation->Play(GunAnimationData::Reload);
+
+		//리로드는 됐는데 애니메이션은 끝난경우, 즉 재장전 애니메이션이 다 된경우.
+		if (animation->CheckPlaying() == false && isReload == true)
+		{
+			isReload = false;
+			player->SetAmmo(player->GetMaxAmmo());
+		}
+
+		if (Input::Get().GetKeyDown('R') == false) return;
+		ForceReload();
+	}
+
+	void Gun::ForceReload()
+	{
+		if (player->GetCurrentAmmo() >= player->GetMaxAmmo()) return; //최대 탄약이랑 현재 탄약이랑 같으면 무시.
+
+		if (animation->Play(GunAnimationData::Reload)) // 재장전 모션이 다 끝나면 숫자 올라가게
+		{
+			isReload = true;
+		}
 	}
 
 }

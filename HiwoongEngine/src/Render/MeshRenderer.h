@@ -3,7 +3,7 @@
 #include "Render/Mesh.h"
 #include "Math/Matrix4x4.h"
 #include "Render/RenderView.h"
-
+#include "Math/Color.h"
 namespace Hiwoong
 {
 	class Hiwoong_API MeshRenderer
@@ -11,11 +11,11 @@ namespace Hiwoong
 
 	public : 
 		//메쉬를 모델->뷰->프로젝션 행렬순으로 계산한뒤 렌더링
-		void Render
-		(
+		void Render(
 			const Mesh& mesh,
 			const Matrix4x4& model,
-			const RenderView& renderView
+			const RenderView& renderView,
+			Color color = Color::White
 		) const;
 
 
@@ -27,7 +27,6 @@ namespace Hiwoong
 			float nearPlane);
 
 	private:
-
 		//로컬 정점 -> 월드 좌표-> 카메라 좌표 계산
 		void TransformVertices(
 			const Mesh& mesh,
@@ -52,7 +51,8 @@ namespace Hiwoong
 			const std::vector<Vector3>& cameraPositions,
 			const RenderView& renderView,
 			const Vector3& lightDirection,
-			const std::vector<char>& shadeCharacters
+			const std::vector<char>& shadeCharacters,
+			Color color
 		) const;
 
 		// 깊이에 따라 크게 또는 작게 보이도록 정점좌표를 계산
@@ -83,7 +83,8 @@ namespace Hiwoong
 			const RenderView& renderView,
 			const Vector3& worldNormal,
 			float baseBrightness,
-			const std::vector<char>& shadeCharacters
+			const std::vector<char>& shadeCharacters,
+			Color color
 		) const;
 
 		//방향광 밝기 계산 함수
@@ -100,5 +101,7 @@ namespace Hiwoong
 			const Vector3& worldNormal,
 			const SpotLight& light
 		) const;
+
+
 	};
 }

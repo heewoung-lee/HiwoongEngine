@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObject/GameObject.h"
-
+#include "Math/Vector2.h"
 namespace Hiwoong
 {
     class Crosshair : public GameObject
@@ -10,5 +10,6 @@ namespace Hiwoong
     public:
         Crosshair();
         void Start() override;
+        Vector2 GetScreenCenter() const;
     };
 }

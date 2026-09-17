@@ -14,7 +14,7 @@ namespace Hiwoong
 			150
 		);
 		AddComponent<BigTextDisplayComponent>(
-			"AMMO " + std::to_string(player->GetAmmo()), scale);
+			"AMMO " + std::to_string(player->GetCurrentAmmo()), scale);
 		AddComponent<AmmoDisplayComponent>(player);
 	}
 

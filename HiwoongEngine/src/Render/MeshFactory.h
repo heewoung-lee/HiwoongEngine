@@ -9,5 +9,10 @@ namespace Hiwoong
 	{
 	public:
 		static Mesh CreateCube(float size);
+		static Mesh CreateSphere(
+			float radius,
+			int sliceCount,
+			int stackCount
+		);
 	};
 }

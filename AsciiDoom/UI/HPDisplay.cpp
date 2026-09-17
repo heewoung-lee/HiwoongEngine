@@ -18,7 +18,7 @@ namespace Hiwoong
 
         // HPDisplay
         AddComponent<BigTextDisplayComponent>(
-            "HP " + std::to_string(player->GetHp()), scale);//글자를 크게 만들어서 스프라이트 렌더러에게 넘겨줌.
+            "HP " + std::to_string(player->GetCurrentHp()), scale);//글자를 크게 만들어서 스프라이트 렌더러에게 넘겨줌.
 
         AddComponent<HpDisplayComponent>(player);//현재 HP를 전달하는역할을 하는 컴포넌트 
     }

@@ -19,6 +19,8 @@ namespace Hiwoong
 {
 	Player::Player() : frameDeltaTime(0.0)
 	{
+		currentAmmo = Ammo;
+		currentHp = Hp;
 	}
 	void Player::Start()
 	{
@@ -26,20 +28,22 @@ namespace Hiwoong
 		transform = GetComponent<TransformComponent>();
 		AddComponent<BoxCollider3DComponent>(Vector3(collisionHalfSize, collisionHalfSize, collisionHalfSize));
 
+		//크로스헤어.
+		std::shared_ptr<Crosshair> crosshair = Instantiate<Crosshair>();
+		assert(crosshair != nullptr);
+
 		std::shared_ptr<Gun> gun = Instantiate<Gun>();
 		assert(gun != nullptr);
-		gun->SetParent(shared_from_this(), false);
+
+		gun->SetPlayer(
+			std::dynamic_pointer_cast<Player>(shared_from_this())
+		);
+		gun->SetCrosshair(crosshair);
 
 		AddComponent<MouseLookComponent>();
 		AddComponent<PauseMenuComponent>();
 
-		//크로스헤어.
-		std::shared_ptr<Crosshair> crosshair = Instantiate<Crosshair>();
-
-		if (crosshair != nullptr)
-		{
-			crosshair->SetParent(shared_from_this(), false);
-		}
+	
 	}
 
 	void Player::Update(double deltaTime)
@@ -154,16 +158,16 @@ namespace Hiwoong
 	void Player::SetHp(int value)
 	{
 		if (value < 0) value = 0;
-		if (hp == value) return;
+		if (currentHp == value) return;
 
-		hp = value;
+		currentHp = value;
 
 		//콜백함수 수행
 		for (const auto& callback : hpChangeCallbacks)
 		{
 			if (callback != nullptr)
 			{
-				callback(hp);
+				callback(currentHp);
 			}
 		}
 
@@ -172,14 +176,14 @@ namespace Hiwoong
 	void Player::SetAmmo(int value)
 	{
 		if (value < 0) value = 0;
-		if (ammo == value) return;
-		ammo = value;
+		if (currentAmmo == value) return;
+		currentAmmo = value;
 
 		for (const auto& callback : ammoChangeCallbacks)
 		{
 			if (callback != nullptr)
 			{
-				callback(ammo);
+				callback(currentAmmo);
 			}
 		}
 

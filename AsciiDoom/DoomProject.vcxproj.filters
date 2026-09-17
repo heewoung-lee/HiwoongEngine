@@ -93,6 +93,12 @@
     <ClCompile Include="Player\GunAnimationData.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\Bullet.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\MeshRenderComponent.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene\DoomScene.h">
@@ -171,6 +177,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Player\GunAnimationData.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Bullet.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\MeshRenderComponent.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

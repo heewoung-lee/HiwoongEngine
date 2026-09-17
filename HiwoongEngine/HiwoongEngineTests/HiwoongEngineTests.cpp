@@ -3,6 +3,7 @@
 #include "Math/Vector3.h"
 #include "Math/Vector4.h"
 #include "Math/Matrix4x4.h"
+#include "Math/MathConstants.h"
 #include "Render/Vertex.h"
 #include "Camera/Camera3D.h"
 #include "Component/TransformComponent.h"
@@ -10,6 +11,12 @@
 
 using namespace Hiwoong;
 using namespace std;
+
+namespace
+{
+    constexpr float cameraTestFieldOfView =
+        60.0f * MathConstants::Pi / 180.0f;
+}
 
 
     bool TestVector3Constructor()
@@ -374,7 +381,7 @@ using namespace std;
 
         trasform.SetRotation(Hiwoong::Vector3(0,PI/2,0));
 
-        Hiwoong::Camera3D camera(trasform);
+        Hiwoong::Camera3D camera(trasform, cameraTestFieldOfView);
 
         Hiwoong::Vector3 forward = camera.GetForward();
         Hiwoong::Vector3 expect(1, 0, 0);
@@ -391,7 +398,7 @@ using namespace std;
 
         trasform.SetRotation(Hiwoong::Vector3(0, PI / 2, 0));
 
-        Hiwoong::Camera3D camera(trasform);
+        Hiwoong::Camera3D camera(trasform, cameraTestFieldOfView);
 
         Hiwoong::Vector3 right = camera.GetRight();
         Hiwoong::Vector3 expect(0, 0, -1);
@@ -405,7 +412,7 @@ using namespace std;
         Vector4 worldPos(0,0,12,1);
         
         TransformComponent trsnform(cameraPos, rotation, Vector3(1, 1, 1));
-        Camera3D camera(trsnform);
+        Camera3D camera(trsnform, cameraTestFieldOfView);
 
         Vector4 expect(0,0,7,1);
 
@@ -427,7 +434,7 @@ using namespace std;
         Vector4 worldPos(6, 0, 2, 1);
 
         TransformComponent trsnform(cameraPos, rotation, Vector3(1, 1, 1));
-        Camera3D camera(trsnform);
+        Camera3D camera(trsnform, cameraTestFieldOfView);
 
 
         Vector4 expect(-2, 0, 6, 1);

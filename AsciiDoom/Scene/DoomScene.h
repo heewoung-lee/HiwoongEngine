@@ -5,6 +5,7 @@
 #include "Render/MeshRenderer.h"
 #include "Player/Player.h"
 #include "Map/DoomMap.h"
+#include "Math/MathConstants.h"
 #include <memory>
 
 namespace Hiwoong
@@ -22,9 +23,14 @@ namespace Hiwoong
 		{
 			return gameSize;
 		}
-
+		Camera3D* GetCamera() const
+		{
+			return camera.get();
+		}
 	private:
 		void SpawnPlayer();
+		//모든 오브젝트의 렌더링을 갱신하는 함수.
+		void RenderMeshes(const RenderView& renderView);
 
 	private :
 		std::shared_ptr<Player> player;

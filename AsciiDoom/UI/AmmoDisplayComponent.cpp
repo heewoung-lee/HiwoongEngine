@@ -20,7 +20,7 @@ namespace Hiwoong
 		const std::shared_ptr<BigTextDisplayComponent> display = GetComponent<BigTextDisplayComponent>();
 		assert(display != nullptr);
 
-		display->SetText("AMMO " + std::to_string(targetPlayer->GetAmmo()));
+		display->SetText("AMMO " + std::to_string(targetPlayer->GetCurrentAmmo()));
 
 
 		std::weak_ptr<BigTextDisplayComponent> weakDisplay = display;

@@ -14,7 +14,8 @@ namespace Hiwoong
 	void MeshRenderer::Render(
 		const Mesh& mesh,
 		const Matrix4x4& model,
-		const RenderView& renderView) const
+		const RenderView& renderView,
+		Color color) const
 	{
 
 		//광원방향 (Test)
@@ -43,8 +44,7 @@ namespace Hiwoong
 
 
 		TransformVertices(mesh, model, renderView.view, worldPositions, cameraPositions);
-		RenderTriangles(mesh, worldPositions, cameraPositions, renderView, lightDirection, rightRender);
-
+		RenderTriangles(mesh, worldPositions, cameraPositions, renderView, lightDirection, rightRender,color);
 
 	}
 
@@ -175,7 +175,8 @@ namespace Hiwoong
 		const std::vector<Vector3>& cameraPositions,
 		const RenderView& renderView,
 		const Vector3& lightDirection,
-		const std::vector<char>& shadeCharacters) const
+		const std::vector<char>& shadeCharacters,
+		Color color) const
 	{
 		//Triangle이 쓰는 정점 세개의 화면 좌표 찾기.
 		for (const Triangle& triangle : mesh.triangles)
@@ -237,7 +238,6 @@ namespace Hiwoong
 
 				//카메라 반대쪽은 내부를 채울 필요가 없으니 렌더링 영역에서 제외
 				if (SoftwareRasterizer::IsBackFace(point0, point1, point2)) continue;
-
 				DrawTriangle(
 					point0, point1, point2,
 					clippedDepths[0], clippedDepths[i], clippedDepths[i + 1],
@@ -245,7 +245,8 @@ namespace Hiwoong
 					renderView,
 					worldNormal,
 					brightness,
-					shadeCharacters
+					shadeCharacters,
+					color
 				);
 			}
 		}
@@ -316,7 +317,8 @@ namespace Hiwoong
 		const RenderView& renderView, 
 		const Vector3& worldNormal,
 		float baseBrightness,
-		const std::vector<char>& shadeCharacters) const
+		const std::vector<char>& shadeCharacters,
+		Color color) const
 	{
 
 		//살아남은 삼각형 내부의 화면 칸을 구하기.
@@ -400,7 +402,7 @@ namespace Hiwoong
 				pixel, //픽셀위치
 				depth, //픽셀깊이
 				shadeCharacter, //렌더링 문자 
-				Color::White, // 렌러딩 색상
+				color, // 렌러딩 색상
 				0 // 정렬 순서
 			);
 		}

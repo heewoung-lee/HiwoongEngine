@@ -6,6 +6,8 @@
 #include "Engine/Engine.h"
 #include "UI/PlayerHUID.h"
 #include "Render/Renderer.h"
+#include "Component/MeshRenderComponent.h"
+#include "GameObject/Bullet.h"
 
 namespace Hiwoong
 {
@@ -24,8 +26,11 @@ namespace Hiwoong
 		);
 
 		std::shared_ptr<TransformComponent> playerTr = player->GetComponent<TransformComponent>();
-		camera = std::make_unique<Camera3D>(*playerTr);
+		// 둠 프로젝트에서 사용할 시야각을 지정한다.
+		const float fieldOfView =
+			60.0f * MathConstants::Pi / 180.0f;
 
+		camera = std::make_unique<Camera3D>(*playerTr, fieldOfView);
 
 		//플레이어의 상태UI
 		const int hudScale = 1;
@@ -38,8 +43,44 @@ namespace Hiwoong
 			gameSize.y,
 			0.0f
 		));
+
+		// 표시와 이동을 확인하기 위한 임시 설정
+		const float testBulletSize = 0.05f;
+		const float testBulletSpeed = 2.0f;
+		const float testSpawnDistance = 0.1f;
+
+		const auto bullet = Instantiate<Bullet>(
+			testBulletSize,
+			testBulletSpeed
+		);
+
+		const auto bulletTransform =
+			bullet->GetComponent<TransformComponent>();
+
+		bulletTransform->SetWorldPosition(
+			player->GetWorldPosition() +
+			playerTr->GetForward() * testSpawnDistance
+		);
+
+		bulletTransform->SetRotation(playerTr->GetRotation());
+
 	}
 
+	void DoomScene::RenderMeshes(const RenderView& renderView)
+	{
+		for (const std::shared_ptr<GameObject> object : gameObjectList)
+		{
+			if (object == nullptr || object->IsActive() == false) continue;
+
+			const std::shared_ptr<MeshRenderComponent> meshDisplay =
+				object->GetComponent<MeshRenderComponent>();
+
+			if (meshDisplay == nullptr) continue;
+			if (meshDisplay->HasStared() == false) continue;
+
+			meshDisplay->Render(renderView);
+		}
+	}
 
 	void DoomScene::SceneInitialize()
 	{
@@ -78,7 +119,7 @@ namespace Hiwoong
 			(static_cast<float>(gameSize.x) / gameSize.y) *
 			(static_cast<float>(characterSize.x) / characterSize.y);
 
-		const float fieldOfView = 60.0f * MathConstants::Pi / 180.0f;
+		const float fieldOfView = camera->GetFieldOfView();
 
 		const float nearPlane = 0.1f;
 		const float farPlane = 100.0f;
@@ -115,6 +156,8 @@ namespace Hiwoong
 			renderView
 		);
 
+		//메쉬렌더러가 붙여진 컴포넌트들의 메쉬렌더링 업데이트 
+		RenderMeshes(renderView);
 	}
 
 }
