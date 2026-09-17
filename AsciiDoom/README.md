@@ -34,10 +34,12 @@ https://github.com/user-attachments/assets/da1e2ae7-e510-43eb-9f87-d4b80016d05d
 
 ### Step 7. ShotAnimation
 
-
 https://github.com/user-attachments/assets/add28a26-4993-4756-ac9e-6a16d6e0a38a
 
 
+### Step 8. ReloadAnimation
+
+https://github.com/user-attachments/assets/4a433b47-2877-48de-bc82-da66d511ef53
 
 
 
@@ -64,6 +66,9 @@ DoomScene
 | 책임 | 구현 위치 |
 |---|---|
 | 맵 완성 후 플레이어·카메라·HUD 연결 | [DoomScene.cpp](Scene/DoomScene.cpp) |
+
+
+
 | 이동 입력과 이동 적용, HP·AMMO 상태 | [Player.cpp](Player/Player.cpp) |
 | 수평 시점 회전 | [MouseLookComponent.cpp](../HiwoongEngine/src/Component/MouseLookComponent.cpp) |
 | 총 표시 | [Gun.cpp](Player/Gun.cpp) |
