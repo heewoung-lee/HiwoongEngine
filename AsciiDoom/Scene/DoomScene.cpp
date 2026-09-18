@@ -43,27 +43,6 @@ namespace Hiwoong
 			gameSize.y,
 			0.0f
 		));
-
-		// 표시와 이동을 확인하기 위한 임시 설정
-		const float testBulletSize = 0.05f;
-		const float testBulletSpeed = 2.0f;
-		const float testSpawnDistance = 0.1f;
-
-		const auto bullet = Instantiate<Bullet>(
-			testBulletSize,
-			testBulletSpeed
-		);
-
-		const auto bulletTransform =
-			bullet->GetComponent<TransformComponent>();
-
-		bulletTransform->SetWorldPosition(
-			player->GetWorldPosition() +
-			playerTr->GetForward() * testSpawnDistance
-		);
-
-		bulletTransform->SetRotation(playerTr->GetRotation());
-
 	}
 
 	void DoomScene::RenderMeshes(const RenderView& renderView)
