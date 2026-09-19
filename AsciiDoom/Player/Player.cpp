@@ -94,6 +94,18 @@ namespace Hiwoong
 		transform->SetWorldPosition(position);
 	}
 
+	void Player::TakeDamage(int damage)
+	{
+		assert(damage >= 0);
+
+		SetHp(currentHp - damage);//콜백때문에 체력 깎을때는 반드시 SetHP로 작업해야함.
+		if (currentHp <= 0)
+		{
+			//TODO: 여기에 게임오버 구문을 넣어야함 
+		}
+
+	}
+
 	void Player::TurnLeft(Vector3& rotation)
 	{
 		if (Input::Get().GetKey('Q'))

@@ -108,6 +108,9 @@
     <ClCompile Include="Component\SpriteAnimationComponent.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Component\SpriteRenderer3DComponent.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Engine.h">
@@ -222,6 +225,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Animation\SpriteAnimationClip.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\SpriteRenderer3DComponent.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\IRenderable3D.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

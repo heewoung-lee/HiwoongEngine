@@ -5,7 +5,7 @@
 #include "Render/RenderView.h"
 #include "Component/TransformComponent.h"
 #include "Math/Color.h"
-
+#include "Render/IRenderable3D.h"
 #include <memory>
 
 namespace Hiwoong
@@ -18,7 +18,7 @@ namespace Hiwoong
 	//즉 쉽게 렌더링을 하기위해 이미지 교체용 컴포넌트를 만듦.
 	//맘에 안들지만, 우선 이렇게 만들고 나중에 엔진을 수정하던가 해야겠다.
 	
-	class MeshRenderComponent : public Component
+	class MeshRenderComponent : public Component, public IRenderable3D
 	{
 		TYPE_DECALRATIONS(MeshRenderComponent,Component)
 		
@@ -30,6 +30,18 @@ namespace Hiwoong
 
 		void Start() override;
 		void Render(const RenderView& renderView);
+
+		const Mesh& GetMesh() const override;
+		Matrix4x4 GetModelMatrix(const RenderView& renderView) const override;
+		Color GetRenderColor() const override;
+
+		bool TryGetCharactor(
+			float u,
+			float v,
+			float brightness,
+			char& outCharacter
+		) const override;
+
 
 	private:
 		Mesh mesh;

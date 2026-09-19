@@ -1,4 +1,5 @@
 #include "DoomMap.h"
+#include "Component/MeshRenderComponent.h"
 #include "BuildImplements/WallTileBuilder.h"
 #include "BuildImplements/EmptyTileBuilder.h"
 #include "BuildImplements/PlayerSpawnTileBuilder.h"
@@ -63,7 +64,9 @@ namespace Hiwoong
 		RegisterTileBuilders();
 		BuildMap();
 
-		BroadcastOnMapBuilt();//콜백 호출
+		AddComponent<MeshRenderComponent>(mapMesh);
+
+		BroadcastOnMapBuilt(); //콜백 호출
 	}
 	//인접칸이 벽인지 확인하는 메서드.
 	//

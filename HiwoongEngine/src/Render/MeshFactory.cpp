@@ -100,6 +100,33 @@ namespace Hiwoong
         return result;
     }
 
+    Mesh MeshFactory::CreateQuad(float width, float height)
+    {
+        assert(width > 0.0f);
+        assert(height > 0.0f);
+
+        const float halfWidth = width * 0.5f;
+        const float halfHeight = height * 0.5f;
+
+        Mesh result;
+
+        result.vertices =
+        {
+            //위치
+            Vertex{Vector3(-halfWidth,-halfHeight,0.0f),0.0f,0.0f}, //왼위 1사분면
+            Vertex{Vector3(halfWidth,-halfHeight,0.0f),1.0f,0.0f}, //오위 2사분면
+            Vertex{Vector3(halfWidth,halfHeight,0.0f),1.0f,1.0f}, //오아래 4사분면
+            Vertex{Vector3(-halfWidth,halfHeight,0.0f),0.0f,1.0f}, //왼아래 3사분면
+        };
+
+        result.triangles =
+        {
+           Triangle{0,2,1},
+           Triangle{0,3,2}
+        };
+        return result;
+    }
+
 
     Mesh MeshFactory::CreateCube(float size)
     {

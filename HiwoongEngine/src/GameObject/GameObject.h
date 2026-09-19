@@ -44,7 +44,8 @@ namespace Hiwoong
 
 		void QuitGame();
 
-		void OnCollision(const std::shared_ptr<GameObject>& other);
+		//9.18일 virtual로 수정 최대한 유니티의 경험을 살려서 제작중.
+		virtual void OnCollision(const std::shared_ptr<GameObject>& other);
 
 		void SavePreviousState();
 

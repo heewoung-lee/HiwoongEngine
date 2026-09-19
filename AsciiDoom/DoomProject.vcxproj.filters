@@ -99,6 +99,9 @@
     <ClCompile Include="Component\MeshRenderComponent.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\EffectObject.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene\DoomScene.h">
@@ -183,6 +186,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Component\MeshRenderComponent.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\IDamageable.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\EffectObject.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

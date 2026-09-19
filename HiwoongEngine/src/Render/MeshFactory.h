@@ -14,5 +14,6 @@ namespace Hiwoong
 			int sliceCount,
 			int stackCount
 		);
+		static Mesh CreateQuad(float width, float height);
 	};
 }

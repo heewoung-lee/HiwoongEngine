@@ -2,6 +2,7 @@
 #include "Core/Core.h"
 #include "GameObject/GameObject.h"
 #include "Math/Vector2.h"
+#include "Interfaces/IDamageable.h"
 #include <memory>
 #include <functional>
 #include <vector>
@@ -10,7 +11,7 @@ namespace Hiwoong
 {
 	class DoomMap;
 
-	class Player : public GameObject
+	class Player : public GameObject , public IDamageable
 	{
 		TYPE_DECALRATIONS(Player, GameObject)
 
@@ -20,6 +21,8 @@ namespace Hiwoong
 
 		void Start() override;
 		void Update(double deltaTime) override;
+
+		void TakeDamage(int damage) override;
 
 		void TurnLeft(Vector3& rotation);
 		void TurnRight(Vector3& rotation);

@@ -56,6 +56,9 @@ namespace Hiwoong
 			}
 			actor->Update(deltaTime);
 		}
+
+		// 모든 객체의 이동이 끝난 뒤 충돌 검사를 수행한다.
+		collisionSystem.ProcessCollision(gameObjectList);
 	}
 	void Scene::Draw()
 	{

@@ -29,7 +29,7 @@ namespace Hiwoong
 		) const;
 
 	private:
-		bool Test(const std::shared_ptr<GameObject>& left, const std::shared_ptr<GameObject>& right);
+		bool CheckCollision(const std::shared_ptr<GameObject>& left, const std::shared_ptr<GameObject>& right);
 
 	};
 

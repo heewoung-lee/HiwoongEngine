@@ -1,6 +1,9 @@
+#include "Component/SpriteRenderer3DComponent.h"
 #include "MeshRenderComponent.h"
 #include "GameObject/GameObject.h"
-
+#include "Render/IRenderable3D.h"
+#include <algorithm>
+#include <vector>
 #include <cassert>
 
 
@@ -21,15 +24,47 @@ namespace Hiwoong
 		assert(transform != nullptr);
 	}
 
+
 	void MeshRenderComponent::Render(const RenderView& renderView)
+	{
+		meshRenderer.Render(*this, renderView);
+	}
+	const Mesh& MeshRenderComponent::GetMesh() const
+	{
+		return mesh;
+	}
+
+	Matrix4x4 MeshRenderComponent::GetModelMatrix(
+		const RenderView& renderView) const
 	{
 		assert(transform != nullptr);
 
-		const Matrix4x4 model =
-			Matrix4x4::Translation(transform->GetWorldPosition());
-
-		meshRenderer.Render(mesh, model, renderView, color);
-
+		return Matrix4x4::Translation(transform->GetWorldPosition());
 	}
 
+	Color MeshRenderComponent::GetRenderColor() const
+	{
+		return color;
+	}
+
+	bool MeshRenderComponent::TryGetCharactor(
+		float u,
+		float v,
+		float brightness,
+		char& outCharacter) const
+	{
+		static const std::vector<char> shadeCharacters =
+		{
+			' ', '.', ':', '*', '#', '@'
+		};
+
+		brightness = std::clamp(brightness, 0.0f, 1.0f);
+
+		const std::size_t index = static_cast<std::size_t>(
+			brightness * static_cast<float>(shadeCharacters.size() - 1)
+			);
+
+		outCharacter = shadeCharacters[index];
+		return true;
+	}
 }

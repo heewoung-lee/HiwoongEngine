@@ -111,6 +111,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClCompile Include="Component\Component.cpp" />
     <ClCompile Include="Component\MouseLookComponent.cpp" />
     <ClCompile Include="Component\SpriteAnimationComponent.cpp" />
+    <ClCompile Include="Component\SpriteRenderer3DComponent.cpp" />
     <ClCompile Include="Component\SpriteRendererComponent.cpp" />
     <ClCompile Include="Component\TransformComponent.cpp" />
     <ClCompile Include="Core\Input.cpp" />
@@ -145,6 +146,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClInclude Include="Component\Component.h" />
     <ClInclude Include="Component\MouseLookComponent.h" />
     <ClInclude Include="Component\SpriteAnimationComponent.h" />
+    <ClInclude Include="Component\SpriteRenderer3DComponent.h" />
     <ClInclude Include="Component\SpriteRendererComponent.h" />
     <ClInclude Include="Component\TransformComponent.h" />
     <ClInclude Include="Core\Core.h" />
@@ -162,6 +164,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClInclude Include="Render\ConsoleRenderOptions.h" />
     <ClInclude Include="Render\ConsoleRenderOutput.h" />
     <ClInclude Include="Render\Edge.h" />
+    <ClInclude Include="Render\IRenderable3D.h" />
     <ClInclude Include="Render\IRenderOutput.h" />
     <ClInclude Include="Render\Mesh.h" />
     <ClInclude Include="Render\MeshFactory.h" />

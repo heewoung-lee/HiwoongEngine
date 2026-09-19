@@ -95,6 +95,7 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     <ClCompile Include="Component\MeshRenderComponent.cpp" />
     <ClCompile Include="Component\PauseMenuComponent.cpp" />
     <ClCompile Include="GameObject\Bullet.cpp" />
+    <ClCompile Include="GameObject\EffectObject.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map\BuildImplements\EmptyTileBuilder.cpp" />
     <ClCompile Include="Map\BuildImplements\MonsterSpawnTileBuilder.cpp" />
@@ -125,6 +126,8 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     <ClInclude Include="Component\MeshRenderComponent.h" />
     <ClInclude Include="Component\PauseMenuComponent.h" />
     <ClInclude Include="GameObject\Bullet.h" />
+    <ClInclude Include="GameObject\EffectObject.h" />
+    <ClInclude Include="Interfaces\IDamageable.h" />
     <ClInclude Include="Map\BuildImplements\EmptyTileBuilder.h" />
     <ClInclude Include="Map\BuildImplements\MonsterSpawnTileBuilder.h" />
     <ClInclude Include="Map\BuildImplements\PlayerSpawnTileBuilder.h" />

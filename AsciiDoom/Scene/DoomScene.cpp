@@ -129,12 +129,6 @@ namespace Hiwoong
 			Matrix4x4::Translation(player->GetWorldPosition()) *
 			Matrix4x4::RotationY(camera->GetYaw());
 
-		meshRenderer.Render(
-			doomMap->GetMapMesh(),
-			Matrix4x4::Identity(),
-			renderView
-		);
-
 		//메쉬렌더러가 붙여진 컴포넌트들의 메쉬렌더링 업데이트 
 		RenderMeshes(renderView);
 	}

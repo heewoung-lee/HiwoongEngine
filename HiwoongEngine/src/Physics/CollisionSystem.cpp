@@ -2,8 +2,9 @@
 #include "GameObject/GameObject.h"
 #include "Component/BoxColliderComponent.h"
 #include "Component/BoxCollider3DComponent.h"
+#include <memory>
 #include <vector>
-
+#include <cassert>
 namespace Hiwoong
 {
 	void CollisionSystem::ProcessCollision(const std::vector<std::shared_ptr<GameObject>>& gameObjectList)
@@ -18,21 +19,36 @@ namespace Hiwoong
 		{
 			const std::shared_ptr<GameObject>& left = gameObjectList[ix];
 
-			if (left == nullptr || left->IsActive()) continue;
+			if (left == nullptr || left->IsActive() == false) continue;
+			
+			const std::shared_ptr<BoxCollider3DComponent> leftCollider
+				= left->GetComponent<BoxCollider3DComponent>();
+
+			if (leftCollider == nullptr) continue;
+			if (leftCollider->HasStared() == false) continue; //컴포넌트가 초기화 전이면 건너뛰어야함. 다음 프레임에서 확인.
 
 			for (int jx = ix + 1; jx < count;++jx)
 			{
 				const std::shared_ptr<GameObject>& right = gameObjectList[jx];
-				if (right == nullptr || right->IsActive()) continue;
+				if (right == nullptr || right->IsActive() == false) continue; //알겠지만. 없거나 비활성화면 건너뒤기
+				
+				const std::shared_ptr<BoxCollider3DComponent> rightCollider =
+					right->GetComponent<BoxCollider3DComponent>();
+				
+				if (rightCollider == nullptr) continue;
+				if (rightCollider->HasStared() == false) continue;
 
-				if (Test(left, right))
-				{
-					CollisionPair pair = {};
-					pair.gameObject = left;
-					pair.other = right;
+				if (leftCollider ->
+					Intersects(left->GetWorldPosition(), *rightCollider, right->GetWorldPosition()))
+				{//부딪혓으면
+					CollisionPair pair = {};  
+					pair.gameObject = left;//기준 오브젝트를 저장
+					pair.other = right;// 충돌체 오브젝트를 저장
 
+					//이번 프레임에서 충돌한 객체 리스트 저장
 					collidedObjectList.emplace_back(pair);
 				}
+
 			}
 		}
 
@@ -82,7 +98,7 @@ namespace Hiwoong
 		//어느 콜라이더와도 충돌하지 않으면움직일 수 있음./
 		return true;
 	}
-	bool CollisionSystem::Test(const std::shared_ptr<GameObject>& left, const std::shared_ptr<GameObject>& right)
+	bool CollisionSystem::CheckCollision(const std::shared_ptr<GameObject>& left, const std::shared_ptr<GameObject>& right)
 	{
 		if (left == nullptr || left->IsActive() == false || right == nullptr || right->IsActive() == false) return false;
 
