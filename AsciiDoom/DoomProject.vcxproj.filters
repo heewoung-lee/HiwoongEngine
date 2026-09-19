@@ -99,7 +99,10 @@
     <ClCompile Include="Component\MeshRenderComponent.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject\EffectObject.cpp">
+    <ClCompile Include="GameObject\EffectViewObject.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\BulletAnimationData.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -191,7 +194,10 @@
     <ClInclude Include="Interfaces\IDamageable.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject\EffectObject.h">
+    <ClInclude Include="GameObject\EffectViewObject.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\BulletAnimationData.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

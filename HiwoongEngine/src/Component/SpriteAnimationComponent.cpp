@@ -53,11 +53,30 @@ namespace Hiwoong
 			{
 				currentFrameIndex = 0;
 				isPlaying = false;
+
+				//콜백 호출
+				BroadcastOnAnimationEnd();
 				return;
 			}
 			ApplyFrame(currentFrameIndex);
 		}
 
+	}
+	void SpriteAnimationComponent::AddOnAnimationEnd(const AnimationEndCallback& callback)
+	{
+		if (callback == nullptr) return;
+		animationEndCallbacks.push_back(callback);
+	}
+
+	void SpriteAnimationComponent::BroadcastOnAnimationEnd()
+	{
+		for (const AnimationEndCallback& callback : animationEndCallbacks)
+		{
+			if (callback != nullptr)
+			{
+				callback();
+			}
+		}
 	}
 
 	bool SpriteAnimationComponent::Play(const SpriteAnimationClip& clip)

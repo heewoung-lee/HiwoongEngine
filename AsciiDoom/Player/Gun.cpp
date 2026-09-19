@@ -103,6 +103,7 @@ namespace Hiwoong
 			);
 
 			const auto bullet = Instantiate<Bullet>(
+				player,
 				player->GetWorldPosition(),
 				shotDirection
 			);

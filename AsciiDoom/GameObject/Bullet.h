@@ -14,6 +14,7 @@ namespace Hiwoong
 
 	public:
 		Bullet(
+			const std::shared_ptr<GameObject>& spawner, //충돌 거르기용
 			const Vector3& firePosition,  // 발사 시작 위치
 			const Vector3& fireDirection, // 날아갈 방향
 			float size = 0.03f,           // 탄환 크기
@@ -24,7 +25,9 @@ namespace Hiwoong
 		void Start() override;
 		void Update(double deltaTime) override;
 
-
+		void OnCollision(
+			const std::shared_ptr<GameObject>& other
+		) override;
 
 	private:
 		std::shared_ptr<BoxCollider3DComponent> collider;
@@ -41,6 +44,12 @@ namespace Hiwoong
 		Vector3 firePosition; // 발사 시작 위치
 		Vector3 fireDirection; // 날아갈 방향
 		float spawnDistance; // 시작 위치에서 앞으로 띄울 거리
+		Vector3 previousPosition = Vector3::Zero; 
+		std::weak_ptr<GameObject> spawner;
+
+		float lifeTime = 5;
+		float elapsedTime = 0;
+		
 	};
 
 

@@ -6,7 +6,7 @@
 #include "Engine/Engine.h"
 #include "UI/PlayerHUID.h"
 #include "Render/Renderer.h"
-#include "Component/MeshRenderComponent.h"
+#include "Render/IRenderable3D.h"
 #include "GameObject/Bullet.h"
 
 namespace Hiwoong
@@ -45,19 +45,26 @@ namespace Hiwoong
 		));
 	}
 
+	//TODO: 렌더링 방식이 정리 되고 안정화 되면, 부모 씬으로 격상시킬것.
 	void DoomScene::RenderMeshes(const RenderView& renderView)
 	{
-		for (const std::shared_ptr<GameObject> object : gameObjectList)
+		//씬에 있는 오브젝트 리스트들을 순회해서. IRenderable3D를 찾고 렌더링한다.
+		for (const std::shared_ptr<GameObject>& obj : gameObjectList)
 		{
-			if (object == nullptr || object->IsActive() == false) continue;
+			if (obj == nullptr || obj->IsActive() == false) continue;
 
-			const std::shared_ptr<MeshRenderComponent> meshDisplay =
-				object->GetComponent<MeshRenderComponent>();
+			for (const std::shared_ptr<Component>& component : obj->GetComponents())
+			{
+				//초기화 안된 컴포넌트는 조회하면 안됨.
+				if (component == nullptr || component->HasStared() == false) continue;
 
-			if (meshDisplay == nullptr) continue;
-			if (meshDisplay->HasStared() == false) continue;
+				const std::shared_ptr<IRenderable3D> renderable =
+					std::dynamic_pointer_cast<IRenderable3D>(component);
 
-			meshDisplay->Render(renderView);
+				if (renderable == nullptr) continue;
+
+				meshRenderer.Render(*renderable, renderView);
+			}
 		}
 	}
 

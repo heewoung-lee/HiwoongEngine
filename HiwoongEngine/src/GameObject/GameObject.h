@@ -114,6 +114,13 @@ namespace Hiwoong
 		inline bool IsActive() const { return isActive && !hasExpired; }
 		inline bool HasExpired() const { return hasExpired; }
 
+		//9.19일 추가 씬이 각 오브젝트의 컴포넌트를 찾아야 하는 경우가 생겨 만듦
+		inline const std::vector<std::shared_ptr<Component>>&
+			GetComponents() const
+		{
+			return componentList;
+		}
+
 		std::shared_ptr<Scene> GetOwner() const;
 		void SetOwner(std::weak_ptr<Scene> newOwner);
 

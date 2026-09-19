@@ -3,17 +3,22 @@
 #include "Math/Vector3.h"
 #include "Component/MeshRenderComponent.h"
 #include "Render/MeshFactory.h"
+#include "GameObject/EffectViewObject.h"
+#include "Component/BulletAnimationData.h"
+#include "Scene/Scene.h"
+#include "Interfaces/IDamageable.h"
 #include <cmath>
 #include <cassert>
 namespace Hiwoong
 {
     Bullet::Bullet(
+        const std::shared_ptr<GameObject>& spawner,
         const Vector3& firePosition,
         const Vector3& fireDirection,
         float size,
         float speed,
         float spawnDistance)
-        : speed(speed),
+        : speed(speed), spawner(spawner),
         firePosition(firePosition),
         fireDirection(fireDirection),
         spawnDistance(spawnDistance)
@@ -84,6 +89,16 @@ namespace Hiwoong
     {
         super::Update(deltaTime);
 
+        elapsedTime += static_cast<float>(deltaTime);
+
+        if (lifeTime <= elapsedTime)
+        {
+            Destroy();
+            return;
+        }
+
+        previousPosition = transform->GetWorldPosition();
+
         const Vector3 movement =
             transform->GetForward() *
             speed *
@@ -92,6 +107,38 @@ namespace Hiwoong
         transform->SetWorldPosition(
             transform->GetWorldPosition() + movement
         );
+
+       
+    }
+
+    void Bullet::OnCollision(
+        const std::shared_ptr<GameObject>& other
+    )
+    {
+        super::OnCollision(other);
+
+        if (other == spawner.lock())
+        {
+            return;
+        }
+
+
+        //9.19일 수정 충돌 이펙트가 벽뒤에 생성이됨
+        //그래서 이전 포지션에서 충돌이펙트를 렌더링하게 만듬
+        Instantiate<EffectViewObject>(
+            previousPosition,
+            BulletAnimationData::Collision
+        );
+
+        std::shared_ptr<IDamageable> target =
+            std::dynamic_pointer_cast<IDamageable>(other);
+
+        if (target != nullptr)
+        {
+            target->TakeDamage(10);
+        }
+
+        Destroy();
     }
 
 }

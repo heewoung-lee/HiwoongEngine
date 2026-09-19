@@ -1,7 +1,6 @@
 #pragma once
 #include "Component/Component.h"
 #include "Render/Mesh.h"
-#include "Render/MeshRenderer.h"
 #include "Render/RenderView.h"
 #include "Component/TransformComponent.h"
 #include "Math/Color.h"
@@ -29,7 +28,6 @@ namespace Hiwoong
 		);
 
 		void Start() override;
-		void Render(const RenderView& renderView);
 
 		const Mesh& GetMesh() const override;
 		Matrix4x4 GetModelMatrix(const RenderView& renderView) const override;
@@ -45,7 +43,6 @@ namespace Hiwoong
 
 	private:
 		Mesh mesh;
-		MeshRenderer meshRenderer;
 		std::shared_ptr<TransformComponent> transform;
 		Color color;
 	};

@@ -25,6 +25,8 @@ namespace Hiwoong
 			const Vector3& otherPosition
 		) const;
 
+
+
 	private:
 		Vector3 halfExtents;
 

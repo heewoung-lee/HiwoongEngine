@@ -6,6 +6,7 @@
 #include <vector>
 #include <memory>
 #include <cstddef>
+#include <functional>
 
 
 namespace Hiwoong
@@ -25,11 +26,18 @@ namespace Hiwoong
 		void Update(double deltaTime) override;
 		bool Play(const SpriteAnimationClip& clip);
 
+		using AnimationEndCallback = std::function<void()>;
+
+		void AddOnAnimationEnd(
+			const AnimationEndCallback& callback
+		);
+
 		inline bool CheckPlaying() const { return isPlaying; }
 		
 	private:
 		//그림 한장을 표시하는 함수.
 		void ApplyFrame(std::size_t frameIndex);
+		void BroadcastOnAnimationEnd();
 	private:
 
 		std::vector<std::vector<std::string>> frames; //실행할 그림들
@@ -38,6 +46,6 @@ namespace Hiwoong
 		bool isPlaying = false;//현재 재생중인지.
 		std::size_t currentFrameIndex = 0; // 현재 그림 번호
 		std::weak_ptr<SpriteRendererComponent> spriteRenderer;
-
+		std::vector<AnimationEndCallback> animationEndCallbacks;
 	};
 }

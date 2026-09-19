@@ -24,11 +24,6 @@ namespace Hiwoong
 		assert(transform != nullptr);
 	}
 
-
-	void MeshRenderComponent::Render(const RenderView& renderView)
-	{
-		meshRenderer.Render(*this, renderView);
-	}
 	const Mesh& MeshRenderComponent::GetMesh() const
 	{
 		return mesh;

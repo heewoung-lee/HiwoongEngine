@@ -91,11 +91,12 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Component\BulletAnimationData.cpp" />
     <ClCompile Include="Component\CrossHairMoveComponent.cpp" />
+    <ClCompile Include="GameObject\EffectViewObject.cpp" />
     <ClCompile Include="Component\MeshRenderComponent.cpp" />
     <ClCompile Include="Component\PauseMenuComponent.cpp" />
     <ClCompile Include="GameObject\Bullet.cpp" />
-    <ClCompile Include="GameObject\EffectObject.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map\BuildImplements\EmptyTileBuilder.cpp" />
     <ClCompile Include="Map\BuildImplements\MonsterSpawnTileBuilder.cpp" />
@@ -122,11 +123,12 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     <ClCompile Include="UI\PlayerHUID.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Component\BulletAnimationData.h" />
     <ClInclude Include="Component\CrossHairMoveComponent.h" />
+    <ClInclude Include="GameObject\EffectViewObject.h" />
     <ClInclude Include="Component\MeshRenderComponent.h" />
     <ClInclude Include="Component\PauseMenuComponent.h" />
     <ClInclude Include="GameObject\Bullet.h" />
-    <ClInclude Include="GameObject\EffectObject.h" />
     <ClInclude Include="Interfaces\IDamageable.h" />
     <ClInclude Include="Map\BuildImplements\EmptyTileBuilder.h" />
     <ClInclude Include="Map\BuildImplements\MonsterSpawnTileBuilder.h" />
