@@ -54,9 +54,13 @@ namespace Hiwoong
 				currentFrameIndex = 0;
 				isPlaying = false;
 
-				//콜백 호출
-				BroadcastOnAnimationEnd();
-				return;
+				//루프 애니메이션이 아닌 경우에만 종료처리.
+				if (isLooping == false)
+				{
+					isPlaying = false;
+					BroadcastOnAnimationEnd();
+					return;
+				}
 			}
 			ApplyFrame(currentFrameIndex);
 		}
@@ -90,6 +94,7 @@ namespace Hiwoong
 
 		frames = clip.frames;
 		duration = clip.duration;
+		isLooping = clip.isLooping;
 
 		currentFrameIndex = 0;
 		elapsedTime = 0.0;

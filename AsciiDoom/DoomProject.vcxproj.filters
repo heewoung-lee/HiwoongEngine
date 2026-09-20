@@ -105,6 +105,12 @@
     <ClCompile Include="Component\BulletAnimationData.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\Monster.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation\MonsterAnimationData.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene\DoomScene.h">
@@ -198,6 +204,15 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Component\BulletAnimationData.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Monster.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\MonsterAnimationSet.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\MonsterAnimationData.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

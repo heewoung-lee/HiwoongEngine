@@ -44,6 +44,7 @@ namespace Hiwoong
 		double duration = 0.0f; // 전체 재생 시간. 이후 
 		double elapsedTime = 0.0f; //경과 시간
 		bool isPlaying = false;//현재 재생중인지.
+		bool isLooping = false;
 		std::size_t currentFrameIndex = 0; // 현재 그림 번호
 		std::weak_ptr<SpriteRendererComponent> spriteRenderer;
 		std::vector<AnimationEndCallback> animationEndCallbacks;

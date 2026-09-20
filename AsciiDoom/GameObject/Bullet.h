@@ -30,6 +30,10 @@ namespace Hiwoong
 		) override;
 
 	private:
+		void UpdateLifetime(double deltaTime);
+		void UpdateMovement(double deltaTime);
+
+	private:
 		std::shared_ptr<BoxCollider3DComponent> collider;
 		float speed;
 

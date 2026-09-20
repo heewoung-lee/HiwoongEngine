@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameObject/GameObject.h"
+#include "Animation/SpriteAnimationClip.h"
 #include "Player/Player.h"
 #include "Math/Vector2.h"
 namespace Hiwoong
@@ -31,6 +32,8 @@ namespace Hiwoong
 		void Fire();
 		void Reload();
 		void ForceReload();
+
+		SpriteAnimationClip fireAnimationClip;
 
 		std::shared_ptr<Player> player;
 		std::weak_ptr<Crosshair> crosshair;

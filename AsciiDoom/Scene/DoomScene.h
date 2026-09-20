@@ -32,6 +32,9 @@ namespace Hiwoong
 		//모든 오브젝트의 렌더링을 갱신하는 함수.
 		void RenderMeshes(const RenderView& renderView);
 
+		//테스트 스폰
+		void SpawnTestMonster();
+
 	private :
 		std::shared_ptr<Player> player;
 		std::unique_ptr<Camera3D> camera;

@@ -19,18 +19,7 @@ namespace Hiwoong
 	Gun::Gun()
 	{
 		//발사 클립 애니메이션 정보
-		const SpriteAnimationClip& clip = GunAnimationData::Fire;
-
-		AddComponent<SpriteRendererComponent>(
-			clip.frames.back(),
-            Color::White,
-            100
-        );
-
-		animation = AddComponent<SpriteAnimationComponent>(
-			clip.frames,
-			clip.duration
-		);
+		fireAnimationClip = GunAnimationData::Fire;
 	}
 
 	void Gun::Update(double deltaTime)
@@ -43,8 +32,15 @@ namespace Hiwoong
 	void Gun::Start()
 	{
 		super::Start();
-
-
+		AddComponent<SpriteRendererComponent>(
+			fireAnimationClip.frames.back(),
+			Color::White,
+			100
+		);
+		animation = AddComponent<SpriteAnimationComponent>(
+			fireAnimationClip.frames,
+			fireAnimationClip.duration
+		);
 
 		//씬불러와서 게임플레이 화면의 크기 가져오기.
 		//타입 변환때문에 다이나믹 포인터 씀.
@@ -53,7 +49,6 @@ namespace Hiwoong
 		assert(scene != nullptr);
 
 		gameSize = scene->GetGameSize();
-
 
         constexpr int gunWidth = 25;
         constexpr int gunHeight = 18;

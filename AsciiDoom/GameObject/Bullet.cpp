@@ -88,27 +88,8 @@ namespace Hiwoong
     void Bullet::Update(double deltaTime)
     {
         super::Update(deltaTime);
-
-        elapsedTime += static_cast<float>(deltaTime);
-
-        if (lifeTime <= elapsedTime)
-        {
-            Destroy();
-            return;
-        }
-
-        previousPosition = transform->GetWorldPosition();
-
-        const Vector3 movement =
-            transform->GetForward() *
-            speed *
-            static_cast<float>(deltaTime);
-
-        transform->SetWorldPosition(
-            transform->GetWorldPosition() + movement
-        );
-
-       
+        UpdateLifetime(deltaTime);
+        UpdateMovement(deltaTime);
     }
 
     void Bullet::OnCollision(
@@ -139,6 +120,31 @@ namespace Hiwoong
         }
 
         Destroy();
+    }
+
+    void Bullet::UpdateLifetime(double deltaTime)
+    {
+        elapsedTime += static_cast<float>(deltaTime);
+
+        if (lifeTime <= elapsedTime)
+        {
+            Destroy();
+            return;
+        }
+    }
+
+    void Bullet::UpdateMovement(double deltaTime)
+    {
+        previousPosition = transform->GetWorldPosition();
+
+        const Vector3 movement =
+            transform->GetForward() *
+            speed *
+            static_cast<float>(deltaTime);
+
+        transform->SetWorldPosition(
+            transform->GetWorldPosition() + movement
+        );
     }
 
 }

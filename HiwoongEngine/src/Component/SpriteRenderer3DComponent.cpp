@@ -95,7 +95,7 @@ namespace Hiwoong
 
 		//y: UV를 이미지의 세로 줄 위치로 변환
 		const std::size_t y = (std::min)(
-			static_cast<std::size_t>((1.0f - v) * image.size()),
+			static_cast<std::size_t>(v * image.size()),
 			image.size() - 1
 			);
 

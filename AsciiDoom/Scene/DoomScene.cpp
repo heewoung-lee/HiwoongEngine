@@ -8,7 +8,8 @@
 #include "Render/Renderer.h"
 #include "Render/IRenderable3D.h"
 #include "GameObject/Bullet.h"
-
+#include "GameObject/Monster.h"
+#include "Animation/MonsterAnimationData.h"
 namespace Hiwoong
 {
 	DoomScene::DoomScene()
@@ -68,6 +69,8 @@ namespace Hiwoong
 		}
 	}
 
+	
+
 	void DoomScene::SceneInitialize()
 	{
 		Scene::SceneInitialize();
@@ -85,9 +88,10 @@ namespace Hiwoong
 
 		//콜백 등록
 		doomMap->AddOnMapBuilt([this]()
-		{
-			this->SpawnPlayer();
-		});
+			{
+				this->SpawnPlayer();
+				this->SpawnTestMonster();
+			});
 	}
 
 	void DoomScene::Update(double deltatime)
@@ -140,5 +144,19 @@ namespace Hiwoong
 		RenderMeshes(renderView);
 	}
 
+
+	void DoomScene::SpawnTestMonster()
+	{
+		const std::vector<Vector3>& spawnPositions =
+			doomMap->GetMonsterSpawnPositions();
+
+		for (const Vector3& spawnPosition : spawnPositions)
+		{
+			Instantiate<Monster>(
+				spawnPosition,
+				MonsterAnimationData::TestMonster
+			);
+		}
+	}
 }
 
