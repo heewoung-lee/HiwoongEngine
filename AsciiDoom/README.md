@@ -1,3 +1,6 @@
+
+
+
 # ASCII Doom
 
 HiwoongEngine의 3D ASCII 렌더러를 1인칭 게임에 적용하는 진행 중인 프로젝트입니다.
@@ -32,15 +35,19 @@ https://github.com/user-attachments/assets/da1e2ae7-e510-43eb-9f87-d4b80016d05d
 ![ASCII Doom 최신 UI 구현 화면: 맵, 총, 조준점, HP와 AMMO](https://github.com/user-attachments/assets/3ea52078-7417-41f8-8499-c2cbdfe82e95)
 
 
-### Step 7. ShotAnimation
+### Step 7. 발사 애니메이션
 
 https://github.com/user-attachments/assets/add28a26-4993-4756-ac9e-6a16d6e0a38a
 
 
-### Step 8. ReloadAnimation
+### Step 8. 재장전 애니메이션
 
 https://github.com/user-attachments/assets/4a433b47-2877-48de-bc82-da66d511ef53
 
+
+### Step 9. 탄환 발사 및 피격 효과
+
+https://github.com/user-attachments/assets/98f8e1cd-fc63-4a95-9056-60def4282a98
 
 
 ## 객체와 컴포넌트의 역할
