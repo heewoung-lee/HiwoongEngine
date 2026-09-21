@@ -50,6 +50,14 @@ https://github.com/user-attachments/assets/4a433b47-2877-48de-bc82-da66d511ef53
 https://github.com/user-attachments/assets/98f8e1cd-fc63-4a95-9056-60def4282a98
 
 
+### Step 10. 적 테스트
+
+
+https://github.com/user-attachments/assets/4320f76c-edb7-43d7-a17d-4f33a0b32d38
+
+
+
+
 ## 객체와 컴포넌트의 역할
 
 공통 엔진의 Scene·GameObject·Component 구조를 재사용합니다. 게임 객체가 필요한 기능을 조합하고, 표시·입력·상태 전달을 나누어 구성했습니다.
