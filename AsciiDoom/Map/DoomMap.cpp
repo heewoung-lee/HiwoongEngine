@@ -81,6 +81,36 @@ namespace Hiwoong
 		return rows[z][x] == '#';
 	}
 
+	/// <summary>
+	/// 현재 우리 맵에서는 소수 좌표가 없음. 그래서 현재 몬스터와
+	/// 타겟이 있는 타일의 위치를 변환해야함.
+	/// </summary>
+	/// <param name="worldPosition">현재 위치</param>
+	/// <returns>그 위치에 있는 타일의 인덱스</returns>
+	Vector2 DoomMap::WorldToGrid(const Vector3& worldPosition) const
+	{
+		const Vector3 mapRelativePosition =
+			worldPosition - GetWorldPosition();
+
+		return Vector2(
+			static_cast<int>(std::floor(mapRelativePosition.x + 0.5f)),
+			static_cast<int>(std::floor(mapRelativePosition.z + 0.5f))
+		);
+	}
+	/// <summary>
+	/// A*로 찾은 칸으로 몬스터를 이동시키기 위해 사용.
+	/// </summary>
+	/// <param name="gridPosition"></param>
+	/// <returns></returns>
+	Vector3 DoomMap::GridToWorld(const Vector2& gridPosition) const
+	{
+		return GetWorldPosition() + Vector3(
+			static_cast<float>(gridPosition.x),
+			0.0f,
+			static_cast<float>(gridPosition.y)
+		);
+	}
+
 	bool DoomMap::CanMoveTo(const Vector3& worldPosition, float halfSize) const
 	{
 

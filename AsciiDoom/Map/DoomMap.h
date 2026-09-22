@@ -2,6 +2,7 @@
 #include "GameObject/GameObject.h"
 #include "TileBuilderRegistry.h"
 #include "Render/Mesh.h"
+#include "Util/PathFinder.h"
 #include <string>
 #include <vector>
 #include <functional>
@@ -61,6 +62,11 @@ namespace Hiwoong
 
         //맵의 콜백함수들을 모은다.
         std::vector<std::function<void()>> onMapBuiltCallbacks;
+
+        /// <summary>
+        /// 타겟을 쫒아가는데 있어 계산된 값을 제공하는 인스턴스
+        /// </summary>
+        PathFinder pathFinder;
 
         void LoadMap();
         void BuildMap();

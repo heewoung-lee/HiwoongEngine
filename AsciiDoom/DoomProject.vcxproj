@@ -123,6 +123,7 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     <ClCompile Include="UI\HPDisplay.cpp" />
     <ClCompile Include="UI\HpDisplayComponent.cpp" />
     <ClCompile Include="UI\PlayerHUID.cpp" />
+    <ClCompile Include="Util\PathFinder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation\MonsterAnimationData.h" />
@@ -159,6 +160,7 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     <ClInclude Include="UI\HPDisplay.h" />
     <ClInclude Include="UI\HpDisplayComponent.h" />
     <ClInclude Include="UI\PlayerHUID.h" />
+    <ClInclude Include="Util\PathFinder.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\hiwoongEngine\src\hiwoongEngine.vcxproj">

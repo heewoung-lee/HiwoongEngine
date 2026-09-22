@@ -44,24 +44,8 @@ namespace Hiwoong
             firePosition + fireDirection * spawnDistance
         );
 
-        // 발사 방향을 탄환의 회전각으로 변환한다.
-        const float horizontalLength = std::sqrt(
-            fireDirection.x * fireDirection.x +
-            fireDirection.z * fireDirection.z
-        );
-
-        const float pitch = std::atan2(
-            -fireDirection.y,
-            horizontalLength
-        );
-
-        const float yaw = std::atan2(
-            fireDirection.x,
-            fireDirection.z
-        );
-
         // 기존 Update()가 이 전방 방향으로 이동한다.
-        transform->SetRotation(Vector3(pitch, yaw, 0.0f));
+        transform->SetRotation(GetRotationFromDirection());
 
         collider = AddComponent<BoxCollider3DComponent>(
             Vector3(
@@ -145,6 +129,27 @@ namespace Hiwoong
         transform->SetWorldPosition(
             transform->GetWorldPosition() + movement
         );
+    }
+
+    Vector3 Bullet::GetRotationFromDirection()
+    {
+        // 발사 방향을 탄환의 회전각으로 변환한다.
+        const float horizontalLength = std::sqrt(
+            fireDirection.x * fireDirection.x +
+            fireDirection.z * fireDirection.z
+        );
+
+        const float pitch = std::atan2(
+            -fireDirection.y,
+            horizontalLength
+        );
+
+        const float yaw = std::atan2(
+            fireDirection.x,
+            fireDirection.z
+        );
+
+        return Vector3(pitch, yaw,0.0f);
     }
 
 }

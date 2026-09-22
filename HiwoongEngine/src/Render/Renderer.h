@@ -116,7 +116,7 @@ namespace Hiwoong
 		);
 
 		// Draw Event Method (it will be called by engine)
-		void Draw();
+		void RenderFrame();
 
 		//현재 게임플레이 씬을 캡쳐하는 함수. 메뉴화면등 에서 쓰임.
 		void CaptureFrame();

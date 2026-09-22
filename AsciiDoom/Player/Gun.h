@@ -39,7 +39,7 @@ namespace Hiwoong
 		std::weak_ptr<Crosshair> crosshair;
 		std::shared_ptr< SpriteAnimationComponent> animation;
 
-		bool isReload = false; //현재 재장전중인가.
+		bool isReload = false;
 
 		// 카메라의 소유권은 씬에 있고, 총은 참조만 보관한다.
 		Camera3D* camera = nullptr;

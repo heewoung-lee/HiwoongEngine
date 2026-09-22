@@ -32,7 +32,7 @@ namespace Hiwoong
 		//Frame Event Function
 		virtual void Start();
 		virtual void Update(double deltaTime);
-		virtual void Draw();
+		virtual void SubmitRenderCommands();
 
 		//Check Collision
 		bool CanMoveTo(

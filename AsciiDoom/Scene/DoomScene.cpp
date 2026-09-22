@@ -140,7 +140,8 @@ namespace Hiwoong
 			Matrix4x4::Translation(player->GetWorldPosition()) *
 			Matrix4x4::RotationY(camera->GetYaw());
 
-		//메쉬렌더러가 붙여진 컴포넌트들의 메쉬렌더링 업데이트 
+		//메쉬렌더러가 붙여진 컴포넌트들의 메쉬렌더링 업데이트
+		//TODO:이건 특정 씬에서 하면 안된다. 모든 씬이 이 작업을 수행해야 하므로, 부모 메서드로 격상해야한다. 
 		RenderMeshes(renderView);
 	}
 

@@ -111,6 +111,9 @@
     <ClCompile Include="Animation\MonsterAnimationData.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Util\PathFinder.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene\DoomScene.h">
@@ -213,6 +216,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Animation\MonsterAnimationData.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\PathFinder.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

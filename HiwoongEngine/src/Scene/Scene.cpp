@@ -60,7 +60,7 @@ namespace Hiwoong
 		// 모든 객체의 이동이 끝난 뒤 충돌 검사를 수행한다.
 		collisionSystem.ProcessCollision(gameObjectList);
 	}
-	void Scene::Draw()
+	void Scene::SubmitRenderCommands()
 	{
 		for (std::shared_ptr<GameObject> gameObject : gameObjectList)
 		{

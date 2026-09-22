@@ -224,10 +224,10 @@ namespace Hiwoong
 		}
 
 		//Scene's GameObjects request to draw to the renderQueue
-		mainScene->Draw();
+		mainScene->SubmitRenderCommands();
 		
 		//RenderQueue draws GameObjects in thier storigies
-		renderer->Draw();
+		renderer->RenderFrame();
 	}
 
 	void Engine::SavePreviousInputState()

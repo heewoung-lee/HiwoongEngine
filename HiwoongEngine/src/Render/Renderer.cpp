@@ -174,7 +174,7 @@ namespace Hiwoong
 		pointRenderQueue.emplace_back(command);
 	}
 
-	void Renderer::Draw()
+	void Renderer::RenderFrame()
 	{
 		Clear();
 		//일시정지때 캡쳐한 화면이 유지될 수 있게 Draw에 선언
