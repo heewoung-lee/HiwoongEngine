@@ -80,6 +80,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PathFinder\AStarPathFinderTests.cpp" />
+    <ClCompile Include="PathFinder\NavigationGridTests.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PathFinder\AStarPathFinderTests.h" />
+    <ClInclude Include="PathFinder\NavigationGridTests.h" />
+    <ClInclude Include="TestRunner.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
