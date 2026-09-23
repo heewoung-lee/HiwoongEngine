@@ -13,7 +13,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AsciiCube", "..\AsciiCube\C
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AsciiTetris", "..\AsciiTetris\TetrisProject.vcxproj", "{00F21BC7-B823-40FA-A836-90912C75ECAF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DoomProject", "..\AsciiDoom\DoomProject.vcxproj", "{F0BF183B-C5A3-4214-981A-04E245B1BAF4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AsciiDoom", "..\AsciiDoom\DoomProject.vcxproj", "{F0BF183B-C5A3-4214-981A-04E245B1BAF4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AsciiDoomTests", "AsciiDoomTests\AsciiDoomTests.vcxproj", "{6FC51EA2-1E25-4610-B75E-FE50229D6823}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AsciiDoomCore", "AsciiDoomCore\AsciiDoomCore.vcxproj", "{FCCE99B3-93EE-4876-80C7-81FAC2E61C7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +73,18 @@ Global
 		{F0BF183B-C5A3-4214-981A-04E245B1BAF4}.Release|x64.Build.0 = Release|x64
 		{F0BF183B-C5A3-4214-981A-04E245B1BAF4}.Release|x86.ActiveCfg = Release|x64
 		{F0BF183B-C5A3-4214-981A-04E245B1BAF4}.Release|x86.Build.0 = Release|x64
+		{6FC51EA2-1E25-4610-B75E-FE50229D6823}.Debug|x64.ActiveCfg = Debug|x64
+		{6FC51EA2-1E25-4610-B75E-FE50229D6823}.Debug|x64.Build.0 = Debug|x64
+		{6FC51EA2-1E25-4610-B75E-FE50229D6823}.Debug|x86.ActiveCfg = Debug|x64
+		{6FC51EA2-1E25-4610-B75E-FE50229D6823}.Release|x64.ActiveCfg = Release|x64
+		{6FC51EA2-1E25-4610-B75E-FE50229D6823}.Release|x64.Build.0 = Release|x64
+		{6FC51EA2-1E25-4610-B75E-FE50229D6823}.Release|x86.ActiveCfg = Release|x64
+		{FCCE99B3-93EE-4876-80C7-81FAC2E61C7F}.Debug|x64.ActiveCfg = Debug|x64
+		{FCCE99B3-93EE-4876-80C7-81FAC2E61C7F}.Debug|x64.Build.0 = Debug|x64
+		{FCCE99B3-93EE-4876-80C7-81FAC2E61C7F}.Debug|x86.ActiveCfg = Debug|x64
+		{FCCE99B3-93EE-4876-80C7-81FAC2E61C7F}.Release|x64.ActiveCfg = Release|x64
+		{FCCE99B3-93EE-4876-80C7-81FAC2E61C7F}.Release|x64.Build.0 = Release|x64
+		{FCCE99B3-93EE-4876-80C7-81FAC2E61C7F}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

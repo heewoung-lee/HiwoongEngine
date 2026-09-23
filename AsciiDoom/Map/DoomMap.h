@@ -3,6 +3,8 @@
 #include "TileBuilderRegistry.h"
 #include "Render/Mesh.h"
 #include "Util/PathFinder.h"
+#include "Math/Vector2.h"
+#include "Math/Vector3.h"
 #include <string>
 #include <vector>
 #include <functional>
@@ -72,5 +74,8 @@ namespace Hiwoong
         void BuildMap();
         void RegisterTileBuilders();
         void BroadcastOnMapBuilt();
+
+        Vector2 WorldToGrid(const Vector3& worldPosition) const;
+        Vector3 GridToWorld(const Vector2& gridPosition) const;
     };
 }
