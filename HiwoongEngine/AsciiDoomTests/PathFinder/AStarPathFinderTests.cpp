@@ -1,6 +1,7 @@
 #include "AStarPathFinderTests.h"
 #include "PathFinder/NavigationGrid.h"
 #include "PathFinder/Implements/AStarPathFinder.h"
+#include "PathFinder/PathNode.h"
 
 #include <vector>
 
@@ -72,6 +73,60 @@ void Hiwoong::Tests::RunAStarPathFinderTests(TestRunner& testRunner)
 		detourPath[3] == GridPosition{ 1, 2 } &&
 		detourPath[4] == GridPosition{ 0, 2 },
 		"AStar finds path around wall"
+	);
+
+	 
+	AStarPriorityQueue queue;
+
+
+
+	queue.push(PathNode{
+	{ 0, 1 },
+	5,
+	6,
+	{ 0, 0 }
+		});
+
+	queue.push(PathNode{
+		{ 0, 0 },
+		5,
+		5,
+		{ 0, 0 }
+		});
+
+	queue.push(PathNode{
+		{ 0, 2 },
+		1,
+		2,
+		{ 0, 0 }
+		});
+
+	queue.push(PathNode{
+	{ 0, 9 },
+	0,
+	0,
+	{ 0, 0 }
+		});
+
+
+	queue.push(PathNode{
+	{ 0, 3 },
+	7,
+	6,
+	{ 0, 0 }
+		});
+
+
+	testRunner.Check(
+		queue.top().GetPosition() == GridPosition{ 0, 9 },
+		"PriorityQueue returns lowest-cost node"
+	);
+
+	queue.pop();
+
+	testRunner.Check(
+		queue.top().GetPosition() == GridPosition{ 0, 2 },
+		"PriorityQueue restores heap after pop"
 	);
 
 }

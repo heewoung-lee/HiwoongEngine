@@ -15,10 +15,12 @@
     <ClInclude Include="PathFinder\Implements\AStarPathFinder.h" />
     <ClInclude Include="PathFinder\Interfaces\IPathFinder.h" />
     <ClInclude Include="PathFinder\NavigationGrid.h" />
+    <ClInclude Include="PathFinder\PathNode.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PathFinder\Implements\AStarPathFinder.cpp" />
     <ClCompile Include="PathFinder\NavigationGrid.cpp" />
+    <ClCompile Include="PathFinder\PathNode.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

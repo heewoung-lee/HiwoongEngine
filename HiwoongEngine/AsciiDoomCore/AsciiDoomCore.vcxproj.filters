@@ -27,12 +27,18 @@
     <ClInclude Include="PathFinder\Implements\AStarPathFinder.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="PathFinder\PathNode.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PathFinder\NavigationGrid.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="PathFinder\Implements\AStarPathFinder.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="PathFinder\PathNode.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
