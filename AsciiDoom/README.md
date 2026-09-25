@@ -58,6 +58,91 @@ https://github.com/user-attachments/assets/4320f76c-edb7-43d7-a17d-4f33a0b32d38
 
 
 
+## 문제 해결 과정
+
+### 1. 의존성 주입 및 TDD 테스트 적용
+
+**문제**
+
+몬스터를 제작한 뒤 플레이어를 추적하는 로직을 구현하려고 했습니다. 이전에는 게임을 실행하면 구현 결과를 바로 확인할 수 있어 테스트 과정이 크게 번거롭지 않았습니다. 하지만 프로젝트가 복잡해지면서, 추적 로직을 확인하려면 게임을 플레이하고 몬스터의 상태와 이동을 관찰해야 했습니다. 원하는 상황을 매번 재현해야 하므로 다양한 조건을 즉시 검증하기 어려워졌습니다.
+
+또한 A* 알고리즘뿐 아니라 탐색에 사용할 우선순위 큐 같은 자료구조도 직접 구현하고자 했습니다. 이를 한꺼번에 게임에 연결하면 문제가 발생했을 때 자료구조, 경로 탐색, 몬스터 이동 중 어디에서 잘못됐는지 구분하기 어려웠습니다.
+
+다음과 같이 검증 과정을 바꾸어, 게임에서 상황을 재현하기 전에 계산 로직부터 확인할 수 있게 했습니다.
+
+```mermaid
+flowchart LR
+    subgraph BEFORE["기존: 플레이하며 결과 관찰"]
+        direction TB
+        B1["코드 수정"] --> B2["게임 실행"]
+        B2 --> B3["검사할 상황까지 플레이"]
+        B3 --> B4["몬스터의 상태와 이동 관찰"]
+        B4 -->|"문제 수정 후 다시 확인"| B1
+    end
+
+    subgraph AFTER["개선: 로직을 작은 단위로 자동 검증"]
+        direction TB
+        A1["입력과 기대 결과로 테스트 작성<br/>실패 확인"] --> A2["로직 구현"]
+        A2 --> A3["자동 테스트 실행"]
+        A3 -->|"실패"| A2
+        A3 -->|"통과"| A4["다음 조건의 테스트 추가"]
+        A4 --> A1
+    end
+
+    classDef manual fill:#fff7ed,stroke:#c2410c,color:#111827
+    classDef automated fill:#eff6ff,stroke:#2563eb,color:#111827
+    class B1,B2,B3,B4 manual
+    class A1,A2,A3,A4 automated
+```
+
+**해결 접근**
+
+이를 해결하기 위해 의존성 주입(DI)과 TDD를 도입했습니다. 몬스터의 추적 기능은 구체적인 A* 구현체 대신 길찾기 인터페이스에 의존하도록 설계했습니다. 게임플레이에서 `IPathFinder` 구현체를 사용하는 맵은 외부에서 구현체를 주입받고, 몬스터에는 이동에 필요한 경로를 제공하는 역할을 맡도록 계획했습니다. 길찾기 로직은 엔진에 의존하지 않는 `AsciiDoomCore`로 분리하고, `AsciiDoomTests`에서 게임을 실행하지 않고 입력과 결과를 직접 검증할 수 있게 했습니다.
+
+테스트에서는 작은 격자와 시작점·목표점을 넣고 예상 경로를 확인합니다. 먼저 원하는 동작을 테스트로 작성해 실패를 확인한 뒤, 이를 통과하도록 구현을 추가하는 방식으로 진행했습니다. 직접 만든 우선순위 큐도 삽입 후 최소 비용 노드가 선택되는지, 제거 후 다음 노드가 올바르게 선택되는지 별도로 검사합니다. 이렇게 각 로직을 작은 단위로 검증한 뒤 조합하고, 마지막에 몬스터에 연결하는 흐름을 선택했습니다.
+
+테스트에서는 구현체를 직접 만들어 검증하고, 게임에서는 인터페이스를 통해 사용할 수 있도록 구성합니다. 아래 그림은 맵과 몬스터를 게임플레이로 묶은 개념도입니다. **실선은 현재 구현된 관계**, **점선은 이후 연결할 관계**입니다.
+
+```mermaid
+flowchart TB
+    TEST["AsciiDoomTests<br/>게임 실행 없이 입력과 결과 검증"]
+
+    subgraph CORE["AsciiDoomCore · 엔진과 독립된 로직"]
+        CONTRACT["IPathFinder<br/>길찾기 계약"]
+        ASTAR["AStarPathFinder<br/>탐색 로직 구현 중"]
+        QUEUE["AStarPriorityQueue<br/>직접 만든 최소 힙"]
+        ASTAR -->|"인터페이스 구현"| CONTRACT
+        ASTAR -.->|"탐색에 사용 예정"| QUEUE
+    end
+
+    TEST -->|"경로 결과 검사"| ASTAR
+    TEST -->|"삽입·삭제·우선순위 검사"| QUEUE
+
+    subgraph GAME["게임 연결 · 예정"]
+        INSTALLER["Bootstrap / Installer<br/>사용할 구현체 선택"]
+        GAMEPLAY["게임플레이<br/>DoomMap · 몬스터 추적"]
+        INSTALLER -.->|"맵에 구현체 주입"| GAMEPLAY
+    end
+
+    INSTALLER -.->|"구현체 생성·선택"| ASTAR
+    GAMEPLAY -.->|"계약에 의존"| CONTRACT
+
+    classDef tests fill:#eff6ff,stroke:#2563eb,color:#111827
+    classDef core fill:#f0fdf4,stroke:#15803d,color:#111827
+    classDef planned fill:#fff7ed,stroke:#c2410c,color:#111827,stroke-dasharray:5 5
+    class TEST tests
+    class CONTRACT,ASTAR,QUEUE core
+    class INSTALLER,GAMEPLAY planned
+```
+
+**현재 적용 상태와 경험**
+
+현재는 길찾기 인터페이스와 독립된 테스트 환경, 격자 데이터 및 직접 구현한 우선순위 큐를 마련했습니다. A*의 직선 경로와 우선순위 큐 동작을 검사하고 있으며, 벽을 우회하는 경로 탐색은 실패하는 테스트를 기준으로 구현을 진행 중입니다. 검증된 길찾기 구현체를 맵에 주입하고, 제공된 경로를 따라 몬스터가 이동하는지 확인하는 단계는 이후에 연결할 예정입니다.
+
+이 방식은 이전 프로젝트에서도 사용해 온 개발 방식입니다. 복잡한 문제를 작은 로직으로 나누어 검증하고, 여러 테스트를 한 번에 반복 실행해 확인한 뒤 구현체를 연결하면, 게임에서 특정 상황을 매번 재현하는 부담을 줄일 수 있습니다.
+
+관련 코드: [IPathFinder](../HiwoongEngine/AsciiDoomCore/PathFinder/Interfaces/IPathFinder.h), [PathNode 및 우선순위 큐](../HiwoongEngine/AsciiDoomCore/PathFinder/PathNode.cpp), [길찾기·우선순위 큐 테스트](../HiwoongEngine/AsciiDoomTests/PathFinder/AStarPathFinderTests.cpp)
+
 ## 객체와 컴포넌트의 역할
 
 공통 엔진의 Scene·GameObject·Component 구조를 재사용합니다. 게임 객체가 필요한 기능을 조합하고, 표시·입력·상태 전달을 나누어 구성했습니다.
