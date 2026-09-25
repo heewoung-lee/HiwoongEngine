@@ -129,4 +129,24 @@ void Hiwoong::Tests::RunAStarPathFinderTests(TestRunner& testRunner)
 		"PriorityQueue restores heap after pop"
 	);
 
+
+	const std::vector<std::vector<bool>> unreachableTiles =
+	{
+		{ true, false, true },
+		{ true, false, true }
+	};
+
+	const NavigationGrid unreachableGrid(unreachableTiles);
+
+	const std::vector<GridPosition> unreachablePath =
+		pathFinder.FindPath(
+			unreachableGrid,
+			{ 0, 0 },
+			{ 0, 2 }
+		);
+
+	testRunner.Check(
+		unreachablePath.empty(),
+		"AStar returns empty path when target is unreachable"
+	);
 }

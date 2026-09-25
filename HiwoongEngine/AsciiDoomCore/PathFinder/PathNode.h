@@ -21,6 +21,7 @@ namespace Hiwoong
 		}
 		inline const GridPosition& GetPosition()const { return position; }
 		inline const int GetHCost() const { return hCost; }
+		inline int GetGCost() const{return gCost;}
 	private:
 		//이 노드의 격자위치
 		GridPosition position;
