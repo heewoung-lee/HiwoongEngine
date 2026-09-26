@@ -2,8 +2,21 @@
 #include "Scene/DoomScene.h"
 #include "Core/Input.h"
 #include "Render/WindowRenderOutput.h"
+#include "Bootstrap/DoomInstaller.h"
 #include <utility>
 using namespace Hiwoong;
+
+//9.26일 의존성 주입 추가.
+namespace
+{
+	void DependencyInjection(Engine& engine)
+	{
+		const std::shared_ptr<const IPathFinder> pathFinder =
+			DoomInstaller::CreatePathFinder();
+
+		engine.AddNewScene<DoomScene>(pathFinder);
+	}
+}
 
 int main()
 {
@@ -16,8 +29,7 @@ int main()
 
 	Input::Get().SetMouseWindow(gameWindow);
 	Input::Get().SetMouseLocked(true);
-
-	engine.AddNewScene<DoomScene>();
+	DependencyInjection(engine);
 	engine.Run();
 
 	return 0;

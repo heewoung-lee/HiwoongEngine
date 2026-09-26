@@ -114,6 +114,12 @@
     <ClCompile Include="Util\PathFinder.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Bootstrap\DoomInstaller.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\NavAIComponent.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene\DoomScene.h">
@@ -219,6 +225,18 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Util\PathFinder.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Bootstrap\DoomInstaller.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Navigation\INavigationMap.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Navigation\INavAIContext.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\NavAIComponent.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

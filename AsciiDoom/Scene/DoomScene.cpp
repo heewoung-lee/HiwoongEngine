@@ -12,10 +12,13 @@
 #include "Animation/MonsterAnimationData.h"
 namespace Hiwoong
 {
-	DoomScene::DoomScene()
+
+	DoomScene::DoomScene(
+		const std::shared_ptr<const IPathFinder>& pathFinder
+	)
+		: pathFinder(pathFinder)
 	{
 	}
-
 	void DoomScene::SpawnPlayer()
 	{
 		player = Instantiate<Player>();
@@ -70,6 +73,7 @@ namespace Hiwoong
 	}
 
 	
+
 
 	void DoomScene::SceneInitialize()
 	{
@@ -158,6 +162,18 @@ namespace Hiwoong
 				MonsterAnimationData::TestMonster
 			);
 		}
+	}
+	std::shared_ptr<const IPathFinder> DoomScene::GetPathFinder() const
+	{
+		return pathFinder;
+	}
+	std::shared_ptr<const INavigationMap> DoomScene::GetNavigationMap() const
+	{
+		return doomMap;
+	}
+	std::shared_ptr<GameObject> DoomScene::GetNavigationTarget() const
+	{
+		return player;
 	}
 }
 

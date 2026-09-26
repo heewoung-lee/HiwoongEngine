@@ -2,6 +2,8 @@
 #include "Component/SpriteRenderer3DComponent.h"
 #include "Component/SpriteAnimationComponent.h"
 #include "Component/BoxCollider3DComponent.h"
+#include "Component/NavAIComponent.h"
+
 #include <algorithm>
 #include <cassert>
 
@@ -45,7 +47,7 @@ namespace Hiwoong
 				size.z * 0.5f
 			)
 		);
-
+		AddComponent<NavAIComponent>(speed, attackRange);
 	}
 
 	void Monster::TakeDamage(int damage)

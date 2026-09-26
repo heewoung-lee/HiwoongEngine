@@ -61,6 +61,7 @@ namespace Hiwoong
 		super::Start();
 
 		LoadMap();
+		InitNavigationGrid();
 		RegisterTileBuilders();
 		BuildMap();
 
@@ -87,14 +88,14 @@ namespace Hiwoong
 	/// </summary>
 	/// <param name="worldPosition">현재 위치</param>
 	/// <returns>그 위치에 있는 타일의 인덱스</returns>
-	Vector2 DoomMap::WorldToGrid(const Vector3& worldPosition) const
+	GridPosition DoomMap::WorldToGrid(const Vector3& worldPosition) const
 	{
 		const Vector3 mapRelativePosition =
 			worldPosition - GetWorldPosition();
 
-		return Vector2(
-			static_cast<int>(std::floor(mapRelativePosition.x + 0.5f)),
-			static_cast<int>(std::floor(mapRelativePosition.z + 0.5f))
+		return GridPosition(
+			static_cast<int>(std::floor(mapRelativePosition.z + 0.5f)),
+			static_cast<int>(std::floor(mapRelativePosition.x + 0.5f))
 		);
 	}
 	/// <summary>
@@ -102,12 +103,12 @@ namespace Hiwoong
 	/// </summary>
 	/// <param name="gridPosition"></param>
 	/// <returns></returns>
-	Vector3 DoomMap::GridToWorld(const Vector2& gridPosition) const
+	Vector3 DoomMap::GridToWorld(const GridPosition& gridPosition) const
 	{
 		return GetWorldPosition() + Vector3(
-			static_cast<float>(gridPosition.x),
+			static_cast<float>(gridPosition.column),
 			0.0f,
-			static_cast<float>(gridPosition.y)
+			static_cast<float>(gridPosition.row)
 		);
 	}
 
@@ -152,6 +153,13 @@ namespace Hiwoong
 
 		//검사한 모든 칸에 벽이 없다면 ㅎ토과.
 		return true;
+	}
+
+	const NavigationGrid& DoomMap::GetNavigationGrid() const
+	{
+		assert(navigationGrid != nullptr);
+
+		return *navigationGrid;
 	}
 
 	//맵 읽기. 여기에서는 직사각형의 크키만 받을 것.
@@ -226,6 +234,31 @@ namespace Hiwoong
 			}
 		}
 
+	}
+	/// <summary>
+	/// 길찾기에 사용할 격자 초기화
+	/// </summary>
+	void DoomMap::InitNavigationGrid()
+	{
+		std::vector<std::vector<bool>> walkableTiles;
+
+		for (const std::string& row : rows)
+		{
+			std::vector<bool> walkableRow;
+
+			for (char tile : row)
+			{
+				//탐색이 가능한 지역은 . // 플레이어 // 몬스터 좌표 타일만 가능
+				const bool walkable =
+					tile == '.' ||
+					tile == 'P' ||
+					tile == 'M';
+
+				walkableRow.push_back(walkable);
+			}
+			walkableTiles.push_back(walkableRow);
+		}
+		navigationGrid = std::make_unique<NavigationGrid>(walkableTiles);
 	}
 
 }

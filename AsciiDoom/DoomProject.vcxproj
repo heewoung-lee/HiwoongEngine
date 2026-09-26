@@ -92,8 +92,10 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation\MonsterAnimationData.cpp" />
+    <ClCompile Include="Bootstrap\DoomInstaller.cpp" />
     <ClCompile Include="Component\BulletAnimationData.cpp" />
     <ClCompile Include="Component\CrossHairMoveComponent.cpp" />
+    <ClCompile Include="Component\NavAIComponent.cpp" />
     <ClCompile Include="GameObject\EffectViewObject.cpp" />
     <ClCompile Include="Component\MeshRenderComponent.cpp" />
     <ClCompile Include="Component\PauseMenuComponent.cpp" />
@@ -128,8 +130,10 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
   <ItemGroup>
     <ClInclude Include="Animation\MonsterAnimationData.h" />
     <ClInclude Include="Animation\MonsterAnimationSet.h" />
+    <ClInclude Include="Bootstrap\DoomInstaller.h" />
     <ClInclude Include="Component\BulletAnimationData.h" />
     <ClInclude Include="Component\CrossHairMoveComponent.h" />
+    <ClInclude Include="Component\NavAIComponent.h" />
     <ClInclude Include="GameObject\EffectViewObject.h" />
     <ClInclude Include="Component\MeshRenderComponent.h" />
     <ClInclude Include="Component\PauseMenuComponent.h" />
@@ -148,6 +152,8 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     <ClInclude Include="Menu\PauseTitle.h" />
     <ClInclude Include="Menu\QuitButton.h" />
     <ClInclude Include="Menu\ResumeButton.h" />
+    <ClInclude Include="Navigation\INavAIContext.h" />
+    <ClInclude Include="Navigation\INavigationMap.h" />
     <ClInclude Include="Player\CrossHair.h" />
     <ClInclude Include="Player\Gun.h" />
     <ClInclude Include="Player\GunAnimationData.h" />

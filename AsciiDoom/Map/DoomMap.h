@@ -2,9 +2,10 @@
 #include "GameObject/GameObject.h"
 #include "TileBuilderRegistry.h"
 #include "Render/Mesh.h"
-#include "Util/PathFinder.h"
 #include "Math/Vector2.h"
 #include "Math/Vector3.h"
+#include "Navigation/INavigationMap.h"
+#include <memory>
 #include <string>
 #include <vector>
 #include <functional>
@@ -12,8 +13,9 @@
 
 namespace Hiwoong
 {
-    class DoomMap : public GameObject
+    class DoomMap : public GameObject, public INavigationMap
     {
+
         TYPE_DECALRATIONS(DoomMap, GameObject)
 
     public:
@@ -49,6 +51,16 @@ namespace Hiwoong
             float halfSize
         ) const;
 
+        const NavigationGrid& GetNavigationGrid() const override;
+
+        GridPosition WorldToGrid(
+            const Vector3& worldPosition
+        ) const override;
+
+        Vector3 GridToWorld(
+            const GridPosition& gridPosition
+        ) const override;
+
     private:
         std::string mapPath;
         std::vector<std::string> rows;
@@ -65,17 +77,15 @@ namespace Hiwoong
         //맵의 콜백함수들을 모은다.
         std::vector<std::function<void()>> onMapBuiltCallbacks;
 
-        /// <summary>
-        /// 타겟을 쫒아가는데 있어 계산된 값을 제공하는 인스턴스
-        /// </summary>
-        PathFinder pathFinder;
+        //각 칸에 이동 가능 여부를 보관
+        std::unique_ptr<NavigationGrid> navigationGrid;
 
         void LoadMap();
         void BuildMap();
         void RegisterTileBuilders();
         void BroadcastOnMapBuilt();
+        void InitNavigationGrid();
 
-        Vector2 WorldToGrid(const Vector3& worldPosition) const;
-        Vector3 GridToWorld(const Vector2& gridPosition) const;
+      
     };
 }

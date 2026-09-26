@@ -149,4 +149,108 @@ void Hiwoong::Tests::RunAStarPathFinderTests(TestRunner& testRunner)
 		unreachablePath.empty(),
 		"AStar returns empty path when target is unreachable"
 	);
+
+	const NavigationGrid blockedEndpointGrid(
+		{
+			{ true, false }
+		});
+
+	const std::vector<GridPosition> blockedStartPath =
+		pathFinder.FindPath(
+			blockedEndpointGrid,
+			{ 0, 1 },
+			{ 0, 0 }
+		);
+
+	testRunner.Check(
+		blockedStartPath.empty(),
+		"AStar rejects blocked start"
+	);
+
+	const std::vector<GridPosition> blockedTargetPath =
+		pathFinder.FindPath(
+			blockedEndpointGrid,
+			{ 0, 0 },
+			{ 0, 1 }
+		);
+
+	testRunner.Check(
+		blockedTargetPath.empty(),
+		"AStar rejects blocked target"
+	);
+	const NavigationGrid singleTileGrid(
+		{
+			{ true }
+		});
+
+	const std::vector<GridPosition> outOfRangeStartPath =
+		pathFinder.FindPath(
+			singleTileGrid,
+			{ -1, 0 },
+			{ 0, 0 }
+		);
+
+	testRunner.Check(
+		outOfRangeStartPath.empty(),
+		"AStar rejects out-of-range start"
+	);
+
+	const std::vector<GridPosition> outOfRangeTargetPath =
+		pathFinder.FindPath(
+			singleTileGrid,
+			{ 0, 0 },
+			{ 0, 1 }
+		);
+
+	testRunner.Check(
+		outOfRangeTargetPath.empty(),
+		"AStar rejects out-of-range target"
+	);
+
+	//대각 선 확인
+	const NavigationGrid diagonalOnlyGrid(
+		{
+			{ true,  false },
+			{ false, true  }
+		});
+
+	const std::vector<GridPosition> diagonalOnlyPath =
+		pathFinder.FindPath(
+			diagonalOnlyGrid,
+			{ 0, 0 },
+			{ 1, 1 }
+		);
+
+	testRunner.Check(
+		diagonalOnlyPath.empty(),
+		"AStar does not move diagonally"
+	);
+
+
+	const NavigationGrid equalCostGrid(
+		{
+			{ true, true, true },
+			{ true, true, true },
+			{ true, true, true }
+		});
+
+	const std::vector<GridPosition> firstEqualCostPath =
+		pathFinder.FindPath(
+			equalCostGrid,
+			{ 0, 0 },
+			{ 2, 2 }
+		);
+
+	const std::vector<GridPosition> secondEqualCostPath =
+		pathFinder.FindPath(
+			equalCostGrid,
+			{ 0, 0 },
+			{ 2, 2 }
+		);
+
+	testRunner.Check(
+		firstEqualCostPath == secondEqualCostPath &&
+		firstEqualCostPath.size() == 5,
+		"AStar returns deterministic shortest path"
+	);
 }

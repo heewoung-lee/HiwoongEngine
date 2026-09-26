@@ -6,14 +6,20 @@
 #include "Player/Player.h"
 #include "Map/DoomMap.h"
 #include "Math/MathConstants.h"
+#include "Navigation/INavAIContext.h"
 #include <memory>
 
 namespace Hiwoong
 {
-	class DoomScene : public Scene
+	class IPathFinder;
+
+	class DoomScene : public Scene, public INavAIContext
 	{
 	public:
-		DoomScene();
+		//9.26일 변경, 씬에서 사용할 의존성인 패스파인더 추가
+		explicit DoomScene(
+			const std::shared_ptr<const IPathFinder>& pathFinder
+		);
 		~DoomScene() override = default;
 
 
@@ -35,6 +41,16 @@ namespace Hiwoong
 		//테스트 스폰
 		void SpawnTestMonster();
 
+
+		std::shared_ptr<const IPathFinder>
+			GetPathFinder() const override;
+
+		std::shared_ptr<const INavigationMap>
+			GetNavigationMap() const override;
+
+		std::shared_ptr<GameObject>
+			GetNavigationTarget() const override;
+
 	private :
 		std::shared_ptr<Player> player;
 		std::unique_ptr<Camera3D> camera;
@@ -46,6 +62,9 @@ namespace Hiwoong
 		Vector2 gameSize = Vector2::Zero;
 		//TODO:플레이어 상태UI의 크기 우선 하드코딩;; 잘되면 바꿀것
 		float hudHeight = 10.0f;
+
+		std::shared_ptr<const IPathFinder> pathFinder;
+
 	};
 
 

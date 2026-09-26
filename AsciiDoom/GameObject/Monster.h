@@ -18,14 +18,13 @@ namespace Hiwoong
 			const Vector3& spawnPosition,
 			const MonsterAnimationSet& animations,
 			int hp = 30,
-			float speed = 5.0f,
+			float speed = 1.0f,
 			float attackRange = 1.0f,
-			float scale = 1.0f
+			float scale = 0.7f //9.26일 잠깐 수정
 		);
 
 		void Start() override;
 		void TakeDamage(int damage) override;
-
 
 	private:
 		Vector3 InitSetColliderSize();
