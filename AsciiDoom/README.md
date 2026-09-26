@@ -52,9 +52,12 @@ https://github.com/user-attachments/assets/98f8e1cd-fc63-4a95-9056-60def4282a98
 
 ### Step 10. 적 테스트
 
-
 https://github.com/user-attachments/assets/4320f76c-edb7-43d7-a17d-4f33a0b32d38
 
+
+### Step 11. 길찾기 알고리즘
+
+https://github.com/user-attachments/assets/e4fcf815-cd4e-40b7-b00a-c392d1a5de45
 
 
 
