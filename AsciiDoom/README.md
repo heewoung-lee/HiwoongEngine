@@ -138,11 +138,7 @@ flowchart TB
     class INSTALLER,GAMEPLAY planned
 ```
 
-**현재 적용 상태와 경험**
 
-현재는 길찾기 인터페이스와 독립된 테스트 환경, 격자 데이터 및 직접 구현한 우선순위 큐를 마련했습니다. A*의 직선 경로와 우선순위 큐 동작을 검사하고 있으며, 벽을 우회하는 경로 탐색은 실패하는 테스트를 기준으로 구현을 진행 중입니다. 검증된 길찾기 구현체를 맵에 주입하고, 제공된 경로를 따라 몬스터가 이동하는지 확인하는 단계는 이후에 연결할 예정입니다.
-
-이 방식은 이전 프로젝트에서도 사용해 온 개발 방식입니다. 복잡한 문제를 작은 로직으로 나누어 검증하고, 여러 테스트를 한 번에 반복 실행해 확인한 뒤 구현체를 연결하면, 게임에서 특정 상황을 매번 재현하는 부담을 줄일 수 있습니다.
 
 관련 코드: [IPathFinder](../HiwoongEngine/AsciiDoomCore/PathFinder/Interfaces/IPathFinder.h), [PathNode 및 우선순위 큐](../HiwoongEngine/AsciiDoomCore/PathFinder/PathNode.cpp), [길찾기·우선순위 큐 테스트](../HiwoongEngine/AsciiDoomTests/PathFinder/AStarPathFinderTests.cpp)
 
