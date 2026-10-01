@@ -7,7 +7,7 @@
 #include <memory>
 #include <cstddef>
 #include <functional>
-
+#include <unordered_map>
 
 namespace Hiwoong
 {
@@ -24,20 +24,22 @@ namespace Hiwoong
 
 		void Start() override;
 		void Update(double deltaTime) override;
-		bool Play(const SpriteAnimationClip& clip);
-
+		bool Play(const SpriteAnimationClip& clip, bool force = false);
+		bool Play(const std::string& name);
+		void Bind(const std::string& name, const SpriteAnimationClip& clip);
 		using AnimationEndCallback = std::function<void()>;
 
 		void AddOnAnimationEnd(
 			const AnimationEndCallback& callback
 		);
 
+
 		inline bool CheckPlaying() const { return isPlaying; }
-		
 	private:
 		//그림 한장을 표시하는 함수.
 		void ApplyFrame(std::size_t frameIndex);
 		void BroadcastOnAnimationEnd();
+
 	private:
 
 		std::vector<std::vector<std::string>> frames; //실행할 그림들
@@ -48,5 +50,8 @@ namespace Hiwoong
 		std::size_t currentFrameIndex = 0; // 현재 그림 번호
 		std::weak_ptr<SpriteRendererComponent> spriteRenderer;
 		std::vector<AnimationEndCallback> animationEndCallbacks;
+
+		//애니메이션 클립을 이름으로 바인드해서 호출하기 편하게 만드는 딕셔너리.
+		std::unordered_map<std::string, SpriteAnimationClip> animationClips;
 	};
 }

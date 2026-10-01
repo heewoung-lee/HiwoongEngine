@@ -1,6 +1,7 @@
 #include "SpriteAnimationComponent.h"
 #include "Component/SpriteRendererComponent.h"
 #include "GameObject/GameObject.h"
+
 #include <cassert>
 #include <cstddef>
 
@@ -52,8 +53,6 @@ namespace Hiwoong
 			if (currentFrameIndex >= frames.size())
 			{
 				currentFrameIndex = 0;
-				isPlaying = false;
-
 				//루프 애니메이션이 아닌 경우에만 종료처리.
 				if (isLooping == false)
 				{
@@ -83,11 +82,10 @@ namespace Hiwoong
 		}
 	}
 
-	bool SpriteAnimationComponent::Play(const SpriteAnimationClip& clip)
+	bool SpriteAnimationComponent::Play(const SpriteAnimationClip& clip, bool force)
 	{
 		assert(HasStared());
-
-		if (isPlaying) return false;
+		if (isPlaying && force == false) return false;
 
 		assert(!clip.frames.empty());
 		assert(clip.duration > 0.0);
@@ -103,6 +101,23 @@ namespace Hiwoong
 		ApplyFrame(currentFrameIndex);
 
 		return true;
+	}
+	bool SpriteAnimationComponent::Play(const std::string& name)
+	{
+		if (animationClips.find(name) != animationClips.end())
+		{
+			return Play(animationClips[name], true);
+		}
+		return false;
+	}
+	void SpriteAnimationComponent::Bind(
+		const std::string& name,
+		const SpriteAnimationClip& clip)
+	{
+		//같은 이름이 있으면 오류
+		assert(animationClips.find(name) == animationClips.end());
+
+		animationClips.emplace(name, clip);
 	}
 }
 
