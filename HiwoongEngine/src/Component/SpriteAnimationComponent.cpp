@@ -1,7 +1,7 @@
 #include "SpriteAnimationComponent.h"
 #include "Component/SpriteRendererComponent.h"
 #include "GameObject/GameObject.h"
-
+#include "Animation/IAnimationStateSource.h"
 #include <cassert>
 #include <cstddef>
 
@@ -12,6 +12,15 @@ namespace Hiwoong
 	{
 		assert(this->frames.empty() == false);
 		assert(duration > 0.0);
+	}
+	SpriteAnimationComponent::SpriteAnimationComponent(
+		const std::vector<AnimationBinding>& bindings,
+		const std::string& initialAnimationName)
+		: animationBindings(bindings),
+		initialAnimationName(initialAnimationName)
+	{
+		assert(animationBindings.empty() == false);
+		assert(initialAnimationName.empty() == false);
 	}
 	//frames가 가진 그림 한장을 렌더러에 넘기기.
 	void SpriteAnimationComponent::ApplyFrame(std::size_t frameIndex)
@@ -36,10 +45,22 @@ namespace Hiwoong
 		assert(renderer != nullptr);
 
 		spriteRenderer = renderer;
+
+		InitAnimationBindings();
+		InitPlayback();
 	}
 	void SpriteAnimationComponent::Update(double deltaTime)
 	{
 		super::Update(deltaTime);
+
+		//IAnimationStateSource의 컴포넌트를 한번만 찾아서 콜백함수에 저장하는 초기화 함수
+		//Start에 넣으면 컴포넌트 순서에 영향을 받으므로 update에서 한번만 호출하도록
+		if (hasSubscribedStates == false)
+		{
+			InitStateSubscriptions();
+			hasSubscribedStates = true;
+		}
+
 
 		if (isPlaying == false) return;
 
@@ -82,17 +103,27 @@ namespace Hiwoong
 		}
 	}
 
-	bool SpriteAnimationComponent::Play(const SpriteAnimationClip& clip, bool force)
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="clip"></param>
+	/// <param name="force">새 요청이 현재 재생을 끊을지를 결정</param>
+	/// <returns></returns>
+	bool SpriteAnimationComponent::Play(const SpriteAnimationClip& clip)
 	{
 		assert(HasStared());
-		if (isPlaying && force == false) return false;
+		if (isPlaying && lockUntilFinished)
+			return false;
 
 		assert(!clip.frames.empty());
 		assert(clip.duration > 0.0);
 
+		currentAnimationName.clear();
+
 		frames = clip.frames;
 		duration = clip.duration;
 		isLooping = clip.isLooping;
+		lockUntilFinished = clip.lockUntilFinished;
 
 		currentFrameIndex = 0;
 		elapsedTime = 0.0;
@@ -104,10 +135,18 @@ namespace Hiwoong
 	}
 	bool SpriteAnimationComponent::Play(const std::string& name)
 	{
+		if (isPlaying && currentAnimationName == name)
+			return false;
+
 		if (animationClips.find(name) != animationClips.end())
 		{
-			return Play(animationClips[name], true);
+			if (Play(animationClips[name]) == false)
+				return false;
+
+			currentAnimationName = name;
+			return true;
 		}
+
 		return false;
 	}
 	void SpriteAnimationComponent::Bind(
@@ -118,6 +157,49 @@ namespace Hiwoong
 		assert(animationClips.find(name) == animationClips.end());
 
 		animationClips.emplace(name, clip);
+	}
+
+	void SpriteAnimationComponent::InitAnimationBindings()
+	{
+		for (const AnimationBinding& binding : animationBindings)
+		{
+			Bind(binding.name, binding.clip);
+		}
+	}
+	void SpriteAnimationComponent::InitPlayback()
+	{
+		if (initialAnimationName.empty()) return;
+
+		assert(animationClips.find(initialAnimationName) != animationClips.end());
+
+		Play(initialAnimationName);
+	}
+	void SpriteAnimationComponent::InitStateSubscriptions()
+	{
+		const auto ownerObject = GetOwner();
+		assert(ownerObject != nullptr);
+
+		const std::weak_ptr<SpriteAnimationComponent> animation =
+			GetComponent<SpriteAnimationComponent>();
+
+		for (const auto& component : ownerObject->GetComponents())
+		{
+			const auto source =
+				std::dynamic_pointer_cast<IAnimationStateSource>(component);
+
+			if (source == nullptr) continue;
+
+			source->AddOnAnimationStateChanged(
+				[animation](const std::string& name)
+				{
+					const auto instance = animation.lock();
+					if (instance == nullptr) return;
+
+					instance->Play(name);
+				}
+			);
+		}
+
 	}
 }
 

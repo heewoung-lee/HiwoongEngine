@@ -137,7 +137,7 @@ namespace Hiwoong::GunAnimationData
 			" [####|:|=======|:|####] ",
 			"[#####|:|#######|:|#####]"
 		}
-	}, 0.4
+    }, 0.4, false, true
 	};
 
     const SpriteAnimationClip Reload =
@@ -1145,7 +1145,9 @@ namespace Hiwoong::GunAnimationData
             " [####|:|=======|:|####] "
         },
         Fire.frames.back()
-    },
-    1.80
-    };
+   },
+   1.80,
+   false,
+   true
+  };
 }

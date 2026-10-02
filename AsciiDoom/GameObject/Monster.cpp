@@ -33,13 +33,7 @@ namespace Hiwoong
 			animations.idle.frames.front(),
 			Color::Magenta
 		);
-
-		animationComponent = AddComponent<SpriteAnimationComponent>(
-			animations.idle.frames,
-			animations.idle.duration
-		);
-
-		Vector3 size =  InitSetColliderSize();
+		Vector3 size = InitSetColliderSize();
 		AddComponent<BoxCollider3DComponent>(
 			Vector3(
 				size.x * 0.5f,
@@ -48,6 +42,16 @@ namespace Hiwoong
 			)
 		);
 		AddComponent<NavAIComponent>(speed, attackRange);
+		animationComponent = AddComponent<SpriteAnimationComponent>(
+			std::vector<AnimationBinding>{
+				{ "Idle", animations.idle },
+				{ "Run", animations.run },
+				{ "Attack", animations.attack },
+				{ "Dead", animations.dead }
+		},
+			"Idle"
+		);
+	
 	}
 
 	void Monster::TakeDamage(int damage)
@@ -87,6 +91,7 @@ namespace Hiwoong
 
 		return Vector3(worldWidth, worldHeight, worldWidth);
 	}
+
 
 }
 

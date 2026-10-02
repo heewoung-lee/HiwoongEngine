@@ -3,6 +3,9 @@
 #include "Component/Component.h"
 #include "PathFinder/GridPosition.h"
 #include "Math/Vector3.h"
+#include "Animation/IAnimationStateSource.h"
+
+#include <functional>
 #include <vector>
 #include <memory>
 #include <cstddef>
@@ -13,8 +16,9 @@ namespace Hiwoong
 	class GameObject;
 	class Scene;
 	class TransformComponent;
+	class SpriteAnimationComponent;
 
-	class NavAIComponent : public Component
+	class NavAIComponent : public Component, public IAnimationStateSource
 	{
 		TYPE_DECALRATIONS(NavAIComponent,Component)
 
@@ -32,6 +36,11 @@ namespace Hiwoong
 
 		void Start() override;
 		void Update(double deltaTime) override;
+
+		//이동이 시작될때 멈출때의 콜백함수.
+		void AddOnAnimationStateChanged(
+			const AnimationStateCallback& callback
+		) override;
 
 	private:
 		void InitReferences();
@@ -53,10 +62,16 @@ namespace Hiwoong
 		std::weak_ptr<GameObject> target;
 		std::weak_ptr<Scene> scene;
 		std::weak_ptr<TransformComponent> transform;
+		std::weak_ptr<SpriteAnimationComponent> animationComponent;
 
 		std::vector<GridPosition> path;
 		std::size_t currentPathIndex = 0;
 
+
+		std::vector<AnimationStateCallback> animationStateCallbacks;
+
+		bool isMoving = false;
+		void SetMoving(bool moving);
 	};
 }
 

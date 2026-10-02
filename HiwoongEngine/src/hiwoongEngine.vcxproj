@@ -139,6 +139,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClCompile Include="Util\Util.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation\IAnimationStateSource.h" />
     <ClInclude Include="Animation\SpriteAnimationClip.h" />
     <ClInclude Include="Camera\Camera3D.h" />
     <ClInclude Include="Component\BoxCollider3DComponent.h" />

@@ -5,6 +5,7 @@
 #include "Component/TransformComponent.h"
 #include "Navigation/INavigationMap.h"
 #include "PathFinder/Interfaces/IPathFinder.h"
+#include "Component/SpriteAnimationComponent.h"
 #include <cassert>
 
 namespace Hiwoong
@@ -37,16 +38,24 @@ namespace Hiwoong
 		const auto ownerTransform = transform.lock();
 
 		if (targetObject == nullptr || ownerTransform == nullptr)
+		{
+			SetMoving(false);
 			return;
+		}
 
 		if (targetObject->IsActive() == false)
+		{
+			SetMoving(false);
 			return;
+		}
 
 		//가까워지면 종료
 		if (IsWithinStopDistance(
 			ownerTransform->GetWorldPosition(),
 			targetObject->GetWorldPosition()))
 		{
+			//도착하면 정지 콜백
+			SetMoving(false);
 			return;
 		}
 
@@ -61,6 +70,14 @@ namespace Hiwoong
 		}
 		//경로를 따라 이동하고, 칸에 도착했을 때 갱신 시간이 됐다면 새 길을 찾는다.
 		FollowPath(deltaTime);
+	}
+
+	void NavAIComponent::AddOnAnimationStateChanged(
+		const AnimationStateCallback& callback)
+	{
+		if (callback == nullptr) return;
+
+		animationStateCallbacks.push_back(callback);
 	}
 
 	/// <summary>
@@ -82,6 +99,8 @@ namespace Hiwoong
 		target = context->GetNavigationTarget();
 
 		transform = GetComponent<TransformComponent>();
+		//애니메이션 컴포넌트를 가져오는 이유는 현재 돌아가는 애니메이션을 확인하기 위함.
+		animationComponent = GetComponent<SpriteAnimationComponent>();
 	}
 	/// <summary>
 	/// 내 위치와 대상 위치를 격자로 바꿔 A*에 전달하고, 결과를 path에 저장
@@ -132,12 +151,20 @@ namespace Hiwoong
 
 	void NavAIComponent::FollowPath(double deltaTime)
 	{
-		if (currentPathIndex >= path.size()) return;
+		if (currentPathIndex >= path.size())
+		{
+			SetMoving(false);
+			return;
+		}
 
 		const auto map = navigationMap.lock();
 		const auto ownerTransform = transform.lock();
 
-		if (map == nullptr || ownerTransform == nullptr) return;
+		if (map == nullptr || ownerTransform == nullptr)
+		{
+			SetMoving(false);
+			return;
+		}
 
 		const Vector3 currentPosition =
 			ownerTransform->GetWorldPosition();
@@ -191,11 +218,41 @@ namespace Hiwoong
 
 		if (currentScene->CanMoveTo(*ownerObject, nextPosition) == false)
 		{
+			SetMoving(false);
 			return;
 		}
 
 		//
 		ownerTransform->SetWorldPosition(nextPosition);
+		SetMoving(true);
+	}
+	/// <summary>
+	/// 해당 콜백을 통해 이동에 대한 상태가 바뀔때 콜백을 호출함.
+	/// </summary>
+	/// <param name="moving"></param>
+	void NavAIComponent::SetMoving(bool moving)
+	{
+		isMoving = moving;
+
+		const auto animation = animationComponent.lock();
+		assert(animation != nullptr);
+		if (animation == nullptr) return;
+
+		std::string animationName = "Idle";
+		if (isMoving)
+		{
+			animationName = "Run";
+		}
+
+		if (animation->GetCurrentAnimationName() == animationName)
+		{
+			return;
+		}
+
+		for (const AnimationStateCallback& callback : animationStateCallbacks)
+		{
+			callback(animationName);
+		}
 	}
 
 }
