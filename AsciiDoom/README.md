@@ -60,6 +60,14 @@ https://github.com/user-attachments/assets/4320f76c-edb7-43d7-a17d-4f33a0b32d38
 https://github.com/user-attachments/assets/e4fcf815-cd4e-40b7-b00a-c392d1a5de45
 
 
+### Step 12. 애니메이션 상태변경
+
+
+https://github.com/user-attachments/assets/5fe08a5e-9f18-4f6a-a9cd-0fca11ac458e
+
+
+
+
 
 ## 문제 해결 과정
 
