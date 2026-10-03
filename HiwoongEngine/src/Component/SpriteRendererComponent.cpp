@@ -7,20 +7,24 @@
 #include <string>
 namespace Hiwoong
 {
-	SpriteRendererComponent::SpriteRendererComponent(const std::vector<std::string>& image, Color color, int sortingOrder) 
-		: image(image), color(color), sortingOrder(sortingOrder){}
-
+	SpriteRendererComponent::SpriteRendererComponent(
+		const SpriteFrame& frame,
+		int sortingOrder)
+		: image(frame),
+		sortingOrder(sortingOrder)
+	{
+	}
 
 	//가로중 가장 큰길이 사용
 	int SpriteRendererComponent::GetMaxWidth() const
 	{
 		std::size_t width = 0;
 
-		for (const std::string& line : image)
+		for (const std::vector<SpriteCell>& row : image.cells)
 		{
-			if (line.size() > width)
+			if (row.size() > width)
 			{
-				width = line.size();
+				width = row.size();
 			}
 		}
 
@@ -42,34 +46,28 @@ namespace Hiwoong
 
 		Vector3 position = transform->GetWorldPosition();
 
-		int row = 0;
-
 		//9,10 일 여러줄을 읽을 수 있게 수정
 		//그리고 ' '빈 공백의 문자가 있을때는 렌더링하지 않고 인덱스는 유지하는방향으로 수정
-		for (const std::string& line : image)
+		for (std::size_t row = 0; row < image.cells.size(); ++row)
 		{
-			//공백이 아닌 문자의 위치를 찾는 변수.
-			std::size_t start = line.find_first_not_of(' ');
+			const std::vector<SpriteCell>& cellRow = image.cells[row];
 
-			while (start != std::string::npos)
+			for (std::size_t column = 0; column < cellRow.size(); ++column)
 			{
-				std::size_t end = line.find(' ', start);
+				const SpriteCell& cell = cellRow[column];
 
-				if (end == std::string::npos)
-					end = line.size();
+				if (cell.character == ' ') continue;
 
 				Renderer::Get().Submit(
-					line.substr(start, end - start),
+					std::string(1, cell.character),
 					Vector2(
-						position.x + static_cast<float>(start),
-						position.y + row
+						position.x + static_cast<float>(column),
+						position.y + static_cast<float>(row)
 					),
-					color,
+					cell.color,
 					sortingOrder
 				);
-				start = line.find_first_not_of(' ', end);
 			}
-			++row;
 		}
 
 

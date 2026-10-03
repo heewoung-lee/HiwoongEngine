@@ -65,11 +65,11 @@ namespace Hiwoong
 	void MenuScene::UpdateHighlight()
 	{
 	
-		resumeRenderer->SetColor(
+		resumeRenderer->SetWholeColor(
 			selectedIndex == 0 ? Color::Green : Color::Gray
 		);
 
-		quitRenderer->SetColor(
+		quitRenderer->SetWholeColor(
 			selectedIndex == 1 ? Color::Green : Color::Gray
 		);
 	}

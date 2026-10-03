@@ -173,8 +173,11 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClInclude Include="Render\Renderer.h" />
     <ClInclude Include="Render\RenderView.h" />
     <ClInclude Include="Render\ScreenBuffer.h" />
+    <ClInclude Include="Render\ShaderData.h" />
     <ClInclude Include="Render\SoftwareRasterizer.h" />
     <ClInclude Include="Render\SpotLight.h" />
+    <ClInclude Include="Render\SpriteColorPalette.h" />
+    <ClInclude Include="Render\SpriteFrame.h" />
     <ClInclude Include="Render\Triangle.h" />
     <ClInclude Include="Render\Vertex.h" />
     <ClInclude Include="Render\WindowRenderOutput.h" />

@@ -30,9 +30,13 @@ namespace Hiwoong
             }
         }
 
+        std::vector<std::string> colorRows(
+            height,
+            std::string(width, 'Y')
+        );
+
         AddComponent<SpriteRendererComponent>(
-            image,
-            Color::Yellow,
+            SpriteFrame(image, colorRows),
             200
         );
 

@@ -30,8 +30,7 @@ namespace Hiwoong
 		);
 
 		spriteRenderer = AddComponent<SpriteRenderer3DComponent>(
-			animations.idle.frames.front(),
-			Color::Magenta
+			animations.idle.frames.front()
 		);
 		Vector3 size = InitSetColliderSize();
 		AddComponent<BoxCollider3DComponent>(
@@ -70,18 +69,18 @@ namespace Hiwoong
 	{
 		assert(animations.idle.frames.empty() == false);
 
-		const std::vector<std::string>& idleFrame = animations.idle.frames.front();
+		const SpriteFrame& idleFrame = animations.idle.frames.front();
 
-		assert(idleFrame.empty() == false);
+		assert(idleFrame.cells.empty() == false);
 
 		std::size_t imageWidth = 0;
 
-		for (const std::string& row : idleFrame)
+		for (const std::vector<SpriteCell>& row : idleFrame.cells)
 		{
 			imageWidth = (std::max)(imageWidth, row.size());
 		}
 
-		const float imageHeight = static_cast<float>(idleFrame.size());
+		const float imageHeight = static_cast<float>(idleFrame.cells.size());
 
 		const float aspectRatio = static_cast<float>(imageWidth) / imageHeight;
 

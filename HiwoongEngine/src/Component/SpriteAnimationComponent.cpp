@@ -7,8 +7,10 @@
 
 namespace Hiwoong
 {
-	SpriteAnimationComponent::SpriteAnimationComponent
-	(std::vector<std::vector<std::string>> frames, double duration) : frames(frames), duration(duration)
+	SpriteAnimationComponent::SpriteAnimationComponent(
+		std::vector<SpriteFrame> frames,
+		double duration)
+		: frames(frames), duration(duration)
 	{
 		assert(this->frames.empty() == false);
 		assert(duration > 0.0);
@@ -31,9 +33,8 @@ namespace Hiwoong
 		const std::shared_ptr<SpriteRendererComponent> renderer = spriteRenderer.lock();
 		assert(renderer != nullptr);
 
-		const std::vector<std::string>& frame = frames[frameIndex];
+		const SpriteFrame& frame = frames[frameIndex];
 		renderer->SetImage(frame);
-
 	}
 	void SpriteAnimationComponent::Start()
 	{

@@ -8,6 +8,7 @@
 #include "Cube/CubeRotationComponent.h"
 #include "Component/TransformComponent.h"
 #include "Engine/Engine.h"
+#include "Render/ShaderData.h"
 #include <algorithm>
 #include <cassert>
 
@@ -276,12 +277,12 @@ namespace Hiwoong
 
     char CubeObject::GetShadeCharacter(float brightness) const
     {
-        static constexpr char shades[] = " .:-=+*#%@";
+        const std::vector<char>& shades =
+            ShaderData::DetailedShadeCharacters;
 
         brightness = std::clamp(brightness, 0.0f, 1.0f);
 
-        constexpr std::size_t lastIndex =
-            sizeof(shades) - 2;
+        const std::size_t lastIndex = shades.size() - 1;
 
         const std::size_t index =
             static_cast<std::size_t>(brightness * lastIndex);

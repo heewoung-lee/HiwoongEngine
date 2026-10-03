@@ -115,7 +115,7 @@ namespace Hiwoong
         );
     }
 
-    std::vector<std::string> BigTextDisplayComponent::BuildImage() const
+    SpriteFrame BigTextDisplayComponent::BuildImage() const
     {
         std::vector<std::string> image;
         const std::size_t height = glyphs.at(' ').size(); //높이를 구한다.
@@ -149,7 +149,13 @@ namespace Hiwoong
                 image.emplace_back(expandedRow);
             }
         }
-        return image;
+        
+        std::vector<std::string> colorRows;
+        for (const std::string& row : image)
+        {
+            colorRows.emplace_back(row.size(), 'G');
+        }
+        return SpriteFrame(image,colorRows);
     }
 
 }

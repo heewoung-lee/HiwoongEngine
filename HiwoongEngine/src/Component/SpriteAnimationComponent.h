@@ -26,7 +26,10 @@ namespace Hiwoong
 
 
 	public :
-		SpriteAnimationComponent(std::vector<std::vector<std::string>> frames, double duration);
+		SpriteAnimationComponent(
+			std::vector<SpriteFrame> frames,
+			double duration
+		);
 		SpriteAnimationComponent(
 			const std::vector<AnimationBinding>& bindings,
 			const std::string& initialAnimationName
@@ -69,7 +72,7 @@ namespace Hiwoong
 		std::vector<AnimationBinding> animationBindings;
 		std::string initialAnimationName;
 
-		std::vector<std::vector<std::string>> frames; //실행할 그림들
+		std::vector<SpriteFrame> frames;//실행할 그림들
 		double duration = 0.0f; // 전체 재생 시간. 이후 
 		double elapsedTime = 0.0f; //경과 시간
 		bool isPlaying = false;//현재 재생중인지.

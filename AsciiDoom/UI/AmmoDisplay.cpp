@@ -9,10 +9,11 @@ namespace Hiwoong
 	AmmoDisplay::AmmoDisplay(const std::shared_ptr<Player>& player, int scale)
 	{
 		AddComponent<SpriteRendererComponent>(
-			std::vector<std::string>{},
-			Color::Green,
+			SpriteFrame({}, {}),
 			150
 		);
+
+
 		AddComponent<BigTextDisplayComponent>(
 			"AMMO " + std::to_string(player->GetCurrentAmmo()), scale);
 		AddComponent<AmmoDisplayComponent>(player);

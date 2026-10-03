@@ -19,8 +19,7 @@ namespace Hiwoong
         transform->SetScale(Vector3(0.35f, 0.35f, 0.35f));
 
         AddComponent<SpriteRenderer3DComponent>(
-            animationClip.frames.front(),
-            Color::Red
+            animationClip.frames.front()
         );
 
         animationComponent = AddComponent<SpriteAnimationComponent>(

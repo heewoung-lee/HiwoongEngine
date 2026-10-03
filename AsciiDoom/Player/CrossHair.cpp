@@ -11,20 +11,28 @@ namespace Hiwoong
 {
 	Crosshair::Crosshair()
 	{
-		AddComponent<SpriteRendererComponent>(
-			std::vector<std::string>{
-			"   |   ",
-				"-- 0 --",
-				"   |   "
-		},
-			Color::Green,
-			101
-		);
+
 	}
 
 	void Crosshair::Start()
 	{
 		super::Start();
+
+		AddComponent<SpriteRendererComponent>(
+			SpriteFrame(
+				{
+					"   |   ",
+					"-- 0 --",
+					"   |   "
+				},
+		{
+			"   G   ",
+			"GG G GG",
+			"   G   "
+		}
+			),
+			101
+		);
 
 		const auto scene =
 			std::dynamic_pointer_cast<DoomScene>(GetOwner());

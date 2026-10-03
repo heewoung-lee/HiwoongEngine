@@ -16,7 +16,7 @@ namespace Hiwoong
 		assert(transform != nullptr);
 
 		const float imageWidth = static_cast<float>(GetMaxWidth());
-		const float imageHeight = static_cast<float>(GetImage().size());
+		const float imageHeight = static_cast<float>(GetImage().cells.size());
 
 		assert(imageWidth > 0.0f);
 		assert(imageHeight > 0.0f);
@@ -73,11 +73,17 @@ namespace Hiwoong
 	{
 		return GetColor();
 	}
-	bool SpriteRenderer3DComponent::TryGetCharactor(float u, float v, float brightness, char& outCharacter) const
+	bool SpriteRenderer3DComponent::TryGetCharactor(
+		float u,
+		float v,
+		float brightness,
+		char& outCharacter,
+		Color& outColor
+	) const
 	{
 		if (isVisible == false) return false;
 
-		if (image.empty() == true) return false;
+		if (image.cells.empty() == true) return false;
 
 		const int width = GetMaxWidth();
 		if (width <= 0) return false;
@@ -95,17 +101,23 @@ namespace Hiwoong
 
 		//y: UV를 이미지의 세로 줄 위치로 변환
 		const std::size_t y = (std::min)(
-			static_cast<std::size_t>(v * image.size()),
-			image.size() - 1
+			static_cast<std::size_t>(v * image.cells.size()),
+			image.cells.size() - 1
 			);
 
-		const std::string& row = image[y];
+		const std::vector<SpriteCell>& row = image.cells[y];
 
 		//x가 범위를 벗어나거나 빈문자면 false반환.
-		if (x >= row.size() || row[x] == ' ') return false;
+		if (x >= row.size()) return false;
+
+		const SpriteCell& cell = row[x];
+
+		if (cell.character == ' ') return false;
+
 
 		//해당 픽셀에 정보가 있다면, 반환
-		outCharacter = row[x];
+		outCharacter = cell.character;
+		outColor = cell.color;
 		return true;
 	}
 }

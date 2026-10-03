@@ -428,13 +428,15 @@ namespace Hiwoong
 			//데이터 통로를 한방에 모아서 설계함.
 
 			char character;
+			Color pixelColor;
 
 			//이 위치에 픽셀정보가 있는지 확인.
 			if (renderable.TryGetCharactor(
 				u,
 				v,
 				baseBrightness + spotBrightness,
-				character) == false)
+				character,
+				pixelColor) == false)
 			{
 				continue;
 			}
@@ -452,7 +454,7 @@ namespace Hiwoong
 				pixel, //픽셀위치
 				depth, //픽셀깊이
 				character, //렌더링 문자 
-				color, // 렌러딩 색상
+				pixelColor, // 렌러딩 색상
 				0 // 정렬 순서
 			);
 		}

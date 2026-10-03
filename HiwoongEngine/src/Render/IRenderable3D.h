@@ -17,12 +17,13 @@ namespace Hiwoong
 
 		virtual Color GetRenderColor() const = 0;
 
-		//픽셀의 정보를 넣을 때 나오는 문자.
+		//픽셀의 정보를 넣을 때 나오는 문자와 색상
 		virtual bool TryGetCharactor(
 			float u,
 			float v,
 			float brightness,
-			char& outCharacter
+			char& outCharacter,
+			Color& outColor
 		) const = 0;
 
 	};

@@ -20,9 +20,13 @@ namespace Hiwoong
         }
 
         // 검정 문자로 뒤에 있는 게임 화면을 덮는다.
+        std::vector<std::string> colorRows(
+            height,
+            std::string(width, 'K')
+        );
+
         AddComponent<SpriteRendererComponent>(
-            image,
-            Color::Black,
+            SpriteFrame(image, colorRows),
             199
         );
 

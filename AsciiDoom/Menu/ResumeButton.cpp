@@ -7,15 +7,24 @@ namespace Hiwoong
 {
     ResumeButton::ResumeButton()
     {
+        const std::vector<std::string> image =
+        {
+            "####  #####  #### #   # #   # #####",
+            "#   # #     #     #   # ## ## #    ",
+            "####  ####   ###  #   # # # # #### ",
+            "#  #  #         # #   # #   # #    ",
+            "#   # ##### ####   ###  #   # #####"
+        };
+
+        std::vector<std::string> colorRows;
+
+        for (const std::string& row : image)
+        {
+            colorRows.emplace_back(row.size(), 'G');
+        }
+
         AddComponent<SpriteRendererComponent>(
-            std::vector<std::string>{
-                "####  #####  #### #   # #   # #####",
-                "#   # #     #     #   # ## ## #    ",
-                "####  ####   ###  #   # # # # #### ",
-                "#  #  #         # #   # #   # #    ",
-                "#   # ##### ####   ###  #   # #####"
-        },
-            Color::Green,
+            SpriteFrame(image, colorRows),
             201
         );
 

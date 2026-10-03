@@ -2,6 +2,7 @@
 #include "MeshRenderComponent.h"
 #include "GameObject/GameObject.h"
 #include "Render/IRenderable3D.h"
+#include "Render/ShaderData.h"
 #include <algorithm>
 #include <vector>
 #include <cassert>
@@ -46,12 +47,10 @@ namespace Hiwoong
 		float u,
 		float v,
 		float brightness,
-		char& outCharacter) const
+		char& outCharacter,
+		Color& outColor) const
 	{
-		static const std::vector<char> shadeCharacters =
-		{
-			' ', '.', ':', '*', '#', '@'
-		};
+		const std::vector<char>& shadeCharacters = ShaderData::DetailedShadeCharacters;
 
 		brightness = std::clamp(brightness, 0.0f, 1.0f);
 
@@ -60,6 +59,7 @@ namespace Hiwoong
 			);
 
 		outCharacter = shadeCharacters[index];
+		outColor = color;
 		return true;
 	}
 }

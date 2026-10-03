@@ -10,9 +10,9 @@ namespace Hiwoong
 {
     HPDisplay::HPDisplay(const std::shared_ptr<Player>& player, int scale)
     {
+        //처음엔 빈그림을 넣고, 이후 HP 텍스트와 숫자가 자리하게 함
         AddComponent<SpriteRendererComponent>(
-            std::vector<std::string>{},
-            Color::Green,
+            SpriteFrame({}, {}),
             150
         );
 

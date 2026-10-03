@@ -2,6 +2,7 @@
 
 #include "GameObject/GameObject.h"
 #include "Math/Vector2.h"
+#include "Render/SpriteFrame.h"
 #include <vector>
 namespace Hiwoong
 {
@@ -21,7 +22,8 @@ namespace Hiwoong
 		Vector2 GetTextSize() const;
 
 	private:
-		std::vector<std::string> BuildImage() const;
+		//10.3일 렌더링 방식이 변경되어 수정함.
+		SpriteFrame BuildImage() const;
 
 
 	private:

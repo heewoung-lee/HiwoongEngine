@@ -2,6 +2,7 @@
 
 #include "Component/Component.h"
 #include "Math/Color.h"
+#include "Render/SpriteFrame.h"
 #include <string>
 #include <vector>
 namespace Hiwoong
@@ -12,8 +13,7 @@ namespace Hiwoong
 		
 	public:
 		SpriteRendererComponent(
-			const std::vector<std::string>& image,
-			Color color = Color::White,
+			const SpriteFrame& frame,
 			int sortingOrder = 0
 		);
 
@@ -21,13 +21,31 @@ namespace Hiwoong
 
 		virtual void Draw() override;
 
-		inline const std::vector<std::string>& GetImage() const{return image;}
-		inline void SetImage(const std::vector<std::string>& newImage){image = newImage;}
+		inline const SpriteFrame& GetImage() const
+		{
+			return image;
+		}
+
+		inline void SetImage(const SpriteFrame& newImage)
+		{
+			image = newImage;
+		}
 
 		int GetMaxWidth() const;
 
 		inline Color GetColor() const { return color; }
-		inline void SetColor(Color newColor) { color = newColor; }
+		inline void SetWholeColor(Color newColor)
+		{
+			color = newColor;
+
+			for (std::vector<SpriteCell>& row : image.cells)
+			{
+				for (SpriteCell& cell : row)
+				{
+					cell.color = newColor;
+				}
+			}
+		}
 
 		inline int GetSortingOrder() const { return sortingOrder; }
 		inline void SetSortingOrder(int newSortingOrder) { sortingOrder = newSortingOrder;}
@@ -35,7 +53,7 @@ namespace Hiwoong
 
 	protected:
 		// string to show Console
-		std::vector<std::string> image;
+		SpriteFrame image;
 		
 		//Color
 		Color color = Color::White;

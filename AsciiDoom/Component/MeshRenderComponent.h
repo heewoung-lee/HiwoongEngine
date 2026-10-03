@@ -37,7 +37,8 @@ namespace Hiwoong
 			float u,
 			float v,
 			float brightness,
-			char& outCharacter
+			char& outCharacter,
+			Color& outColor
 		) const override;
 
 

@@ -34,9 +34,15 @@ namespace Hiwoong
             image.emplace_back(expandedRow);
         }
 
+        std::vector<std::string> colorRows;
+
+        for (const std::string& row : image)
+        {
+            colorRows.emplace_back(row.size(), 'Y');
+        }
+
         AddComponent<SpriteRendererComponent>(
-            image,
-            Color::Yellow,
+            SpriteFrame(image, colorRows),
             200
         );
 

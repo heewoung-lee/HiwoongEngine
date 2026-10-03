@@ -34,7 +34,6 @@ namespace Hiwoong
 		super::Start();
 		AddComponent<SpriteRendererComponent>(
 			fireAnimationClip.frames.back(),
-			Color::White,
 			100
 		);
 		animation = AddComponent<SpriteAnimationComponent>(

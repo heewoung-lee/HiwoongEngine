@@ -39,7 +39,7 @@ namespace Hiwoong
 
             assert(renderer != nullptr);
 
-            renderer->SetColor(color);
+            renderer->SetWholeColor(color);
         }
     
     private:
