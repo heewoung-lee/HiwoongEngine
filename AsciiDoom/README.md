@@ -65,6 +65,10 @@ https://github.com/user-attachments/assets/e4fcf815-cd4e-40b7-b00a-c392d1a5de45
 
 https://github.com/user-attachments/assets/5fe08a5e-9f18-4f6a-a9cd-0fca11ac458e
 
+### Step 13. 픽셀 단위 음영 표현
+
+https://github.com/user-attachments/assets/b942b436-fb5e-4eb5-ae30-a69bb85c9eeb
+
 
 
 
