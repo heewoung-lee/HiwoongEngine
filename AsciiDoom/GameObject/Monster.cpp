@@ -3,7 +3,9 @@
 #include "Component/SpriteAnimationComponent.h"
 #include "Component/BoxCollider3DComponent.h"
 #include "Component/NavAIComponent.h"
-
+#include "Navigation/INavAIContext.h"
+#include <memory>
+#include "Scene/Scene.h"
 #include <algorithm>
 #include <cassert>
 
@@ -29,9 +31,7 @@ namespace Hiwoong
 			Vector3(scale, scale, scale)
 		);
 
-		spriteRenderer = AddComponent<SpriteRenderer3DComponent>(
-			animations.idle.frames.front()
-		);
+		
 		Vector3 size = InitSetColliderSize();
 		AddComponent<BoxCollider3DComponent>(
 			Vector3(
@@ -40,7 +40,15 @@ namespace Hiwoong
 				size.z * 0.5f
 			)
 		);
-		AddComponent<NavAIComponent>(speed, attackRange);
+		InitReferences();
+	
+	}
+	void Monster::InitReferences()
+	{
+		spriteRenderer = AddComponent<SpriteRenderer3DComponent>(
+			animations.idle.frames.front()
+		);
+		navAIComponent = AddComponent<NavAIComponent>();
 		animationComponent = AddComponent<SpriteAnimationComponent>(
 			std::vector<AnimationBinding>{
 				{ "Idle", animations.idle },
@@ -50,8 +58,61 @@ namespace Hiwoong
 		},
 			"Idle"
 		);
-	
+
+		const auto context =
+			std::dynamic_pointer_cast<INavAIContext>(GetOwner());
+
+		assert(context != nullptr);
+		if (context == nullptr) return;
+
+		target = context->GetNavigationTarget();
+
+		assert(!target.expired());
 	}
+
+	bool Monster::ChangeState(MonsterState nextState)
+	{
+		if (currentState == nextState)
+			return true;
+
+		std::string animationName;
+
+		switch (nextState)
+		{
+		case MonsterState::Idle:
+			animationName = "Idle";
+			break;
+
+		case MonsterState::Run:
+			animationName = "Run";
+			break;
+
+		case MonsterState::Attack:
+			animationName = "Attack";
+			break;
+
+		case MonsterState::Dead:
+			animationName = "Dead";
+			break;
+		}
+
+		if (animationComponent->Play(animationName) == false)
+			return false;
+
+		currentState = nextState;
+		return true;
+	}
+
+	bool Monster::IsWithinAttackRange(
+		const Vector3& targetPosition
+	) const
+	{
+		Vector3 difference = targetPosition - GetWorldPosition();
+		difference.y = 0.0f;
+
+		return difference.Length() <= attackRange;
+	}
+
 
 	void Monster::TakeDamage(int damage)
 	{

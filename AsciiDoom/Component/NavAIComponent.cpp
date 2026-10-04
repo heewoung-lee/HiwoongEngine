@@ -10,250 +10,55 @@
 
 namespace Hiwoong
 {
-
-	NavAIComponent::NavAIComponent(
-		float speed,
-		float stopDistance,
-		float repathInterval
-	)
-		: speed(speed),
-		stopDistance(stopDistance),
-		repathInterval(repathInterval),
-		repathElapsedTime(repathInterval) //바로 넣어서 처음부터 길찾기를 할 수 있도록
-	{
-	}
-
 	void NavAIComponent::Start()
 	{
 		super::Start();
 		InitReferences();
 	}
-
-
-	void NavAIComponent::Update(double deltaTime)
-	{
-		super::Update(deltaTime);
-
-		const auto targetObject = target.lock();
-		const auto ownerTransform = transform.lock();
-
-		if (targetObject == nullptr || ownerTransform == nullptr)
-		{
-			SetMoving(false);
-			return;
-		}
-
-		if (targetObject->IsActive() == false)
-		{
-			SetMoving(false);
-			return;
-		}
-
-		//가까워지면 종료
-		if (IsWithinStopDistance(
-			ownerTransform->GetWorldPosition(),
-			targetObject->GetWorldPosition()))
-		{
-			//도착하면 정지 콜백
-			SetMoving(false);
-			return;
-		}
-
-		repathElapsedTime += static_cast<float>(deltaTime);
-
-		//경로가 비어 있고 갱신 시간이 됐다면 길을 찾는다.
-		if (path.empty() &&
-			repathElapsedTime >= repathInterval)
-		{
-			RequestPath();
-
-		}
-		//경로를 따라 이동하고, 칸에 도착했을 때 갱신 시간이 됐다면 새 길을 찾는다.
-		FollowPath(deltaTime);
-	}
-
-	void NavAIComponent::AddOnAnimationStateChanged(
-		const AnimationStateCallback& callback)
-	{
-		if (callback == nullptr) return;
-
-		animationStateCallbacks.push_back(callback);
-	}
-
-	/// <summary>
-	/// 필요한 인스턴스 연결
-	/// </summary>
 	void NavAIComponent::InitReferences()
 	{
-		const std::shared_ptr<Scene> currentScene = GetScene();
+		const auto currentScene = GetScene();
 
-		const std::shared_ptr<INavAIContext> context =
+		const auto context =
 			std::dynamic_pointer_cast<INavAIContext>(currentScene);
 
 		assert(context != nullptr);
 		if (context == nullptr) return;
 
-		scene = currentScene;
 		pathFinder = context->GetPathFinder();
 		navigationMap = context->GetNavigationMap();
-		target = context->GetNavigationTarget();
 
-		transform = GetComponent<TransformComponent>();
-		//애니메이션 컴포넌트를 가져오는 이유는 현재 돌아가는 애니메이션을 확인하기 위함.
-		animationComponent = GetComponent<SpriteAnimationComponent>();
-	}
-	/// <summary>
-	/// 내 위치와 대상 위치를 격자로 바꿔 A*에 전달하고, 결과를 path에 저장
-	/// </summary>
-	void NavAIComponent::RequestPath()
-	{
-		path.clear();
-		repathElapsedTime = 0.0f;
-		currentPathIndex = 0;
-
-		const auto map = navigationMap.lock();
-		const auto targetObject = target.lock();
-		const auto ownerTransform = transform.lock();
-
-		if (map == nullptr ||
-			targetObject == nullptr ||
-			ownerTransform == nullptr ||
-			pathFinder == nullptr)
-		{
-			return;
-		}
-
-		if (targetObject->IsActive() == false) return;
-
-		const GridPosition start =
-			map->WorldToGrid(ownerTransform->GetWorldPosition());
-
-		const GridPosition destination =
-			map->WorldToGrid(targetObject->GetWorldPosition());
-
-		path = pathFinder->FindPath(
-			map->GetNavigationGrid(),
-			start,
-			destination
-		);
+		assert(pathFinder != nullptr);
+		assert(!navigationMap.expired());
 	}
 
-	bool NavAIComponent::IsWithinStopDistance(
-		const Vector3& currentPosition,
+	std::vector<Vector3> NavAIComponent::FindPath(
+		const Vector3& startPosition,
 		const Vector3& targetPosition
 	) const
 	{
-		Vector3 difference = targetPosition - currentPosition;
-		difference.y = 0.0f;
-
-		return difference.Length() <= stopDistance;
-	}
-
-	void NavAIComponent::FollowPath(double deltaTime)
-	{
-		if (currentPathIndex >= path.size())
-		{
-			SetMoving(false);
-			return;
-		}
-
 		const auto map = navigationMap.lock();
-		const auto ownerTransform = transform.lock();
 
-		if (map == nullptr || ownerTransform == nullptr)
+		assert(map != nullptr);
+		assert(pathFinder != nullptr);
+
+		if (map == nullptr || pathFinder == nullptr)
+			return {};
+
+		const auto gridPath = pathFinder->FindPath(
+			map->GetNavigationGrid(),
+			map->WorldToGrid(startPosition),
+			map->WorldToGrid(targetPosition)
+		);
+
+		std::vector<Vector3> worldPath;
+
+		for (const GridPosition& position : gridPath)
 		{
-			SetMoving(false);
-			return;
+			worldPath.push_back(map->GridToWorld(position));
 		}
 
-		const Vector3 currentPosition =
-			ownerTransform->GetWorldPosition();
-
-		const Vector3 waypoint =
-			map->GridToWorld(path[currentPathIndex]);
-
-		Vector3 direction = waypoint - currentPosition;
-		direction.y = 0.0f;
-
-		const float distance = direction.Length();
-
-		if (distance <= 0.01f)
-		{
-			++currentPathIndex;
-
-			if (repathElapsedTime >= repathInterval)
-			{
-				RequestPath();
-			}
-			else if (currentPathIndex >= path.size())
-			{
-				//기존 경로를 끝까지 따라왔으므로 비운다.
-				//Update에서 갱신 시간이 되면 다시 길을 찾는다.
-				path.clear();
-			}
-
-			return;
-		}
-
-		const Vector3 moveDirection = direction.Normalized();
-
-		float remainingDistance =
-			speed * static_cast<float>(deltaTime);
-
-		if (remainingDistance > distance)
-		{
-			remainingDistance = distance;
-		}
-
-
-		const Vector3 nextPosition = currentPosition + moveDirection * remainingDistance;
-
-		//이동해도 되는지 물어봐야 하기 때문에 씬을 호출
-		const auto currentScene = scene.lock();
-
-		//현재 이 컴포넌트가 붙어있는 오브젝트를 움직여야함.
-		const auto ownerObject = GetOwner();
-		assert(currentScene != nullptr);
-		assert(ownerObject != nullptr);
-
-		if (currentScene->CanMoveTo(*ownerObject, nextPosition) == false)
-		{
-			SetMoving(false);
-			return;
-		}
-
-		//
-		ownerTransform->SetWorldPosition(nextPosition);
-		SetMoving(true);
+		return worldPath;
 	}
-	/// <summary>
-	/// 해당 콜백을 통해 이동에 대한 상태가 바뀔때 콜백을 호출함.
-	/// </summary>
-	/// <param name="moving"></param>
-	void NavAIComponent::SetMoving(bool moving)
-	{
-		isMoving = moving;
-
-		const auto animation = animationComponent.lock();
-		assert(animation != nullptr);
-		if (animation == nullptr) return;
-
-		std::string animationName = "Idle";
-		if (isMoving)
-		{
-			animationName = "Run";
-		}
-
-		if (animation->GetCurrentAnimationName() == animationName)
-		{
-			return;
-		}
-
-		for (const AnimationStateCallback& callback : animationStateCallbacks)
-		{
-			callback(animationName);
-		}
-	}
-
 }
 

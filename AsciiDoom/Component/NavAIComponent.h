@@ -1,79 +1,34 @@
 #pragma once
 
 #include "Component/Component.h"
-#include "PathFinder/GridPosition.h"
 #include "Math/Vector3.h"
-#include "Animation/IAnimationStateSource.h"
 
-#include <functional>
 #include <vector>
 #include <memory>
-#include <cstddef>
+
 namespace Hiwoong
 {
-	class IPathFinder;
-	class INavigationMap;
-	class GameObject;
-	class Scene;
-	class TransformComponent;
-	class SpriteAnimationComponent;
+    class IPathFinder;
+    class INavigationMap;
 
-	class NavAIComponent : public Component, public IAnimationStateSource
-	{
-		TYPE_DECALRATIONS(NavAIComponent,Component)
+    class NavAIComponent : public Component
+    {
+        TYPE_DECALRATIONS(NavAIComponent, Component)
 
-	public:
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="speed">이동속도</param>
-		/// <param name="stopDistance">이거리까지 접근하면 정지</param>
-		/// <param name="repathInterval">경로를 재탐색하는데 필요한 최소간격</param>
-		NavAIComponent(
-			float speed,
-			float stopDistance,
-			float repathInterval = 0.25f);
+    public:
+        void Start() override;
 
-		void Start() override;
-		void Update(double deltaTime) override;
+        // 시작 위치에서 목적지까지의 월드 좌표 경로를 반환한다.
+        std::vector<Vector3> FindPath(
+            const Vector3& startPosition,
+            const Vector3& targetPosition
+        ) const;
 
-		//이동이 시작될때 멈출때의 콜백함수.
-		void AddOnAnimationStateChanged(
-			const AnimationStateCallback& callback
-		) override;
+    private:
+        //길찾기에 필요한 알고리즘과 맵을 보관
+        void InitReferences();
 
-	private:
-		void InitReferences();
-		void RequestPath();
-		bool IsWithinStopDistance(
-			const Vector3& currentPosition,
-			const Vector3& targetPosition
-		) const;
-		void FollowPath(double deltaTime);
-
-		float speed;
-		float stopDistance;
-		float repathInterval;
-		float repathElapsedTime;
-
-		std::shared_ptr<const IPathFinder> pathFinder;
-
-		std::weak_ptr<const INavigationMap> navigationMap;
-		std::weak_ptr<GameObject> target;
-		std::weak_ptr<Scene> scene;
-		std::weak_ptr<TransformComponent> transform;
-		std::weak_ptr<SpriteAnimationComponent> animationComponent;
-
-		std::vector<GridPosition> path;
-		std::size_t currentPathIndex = 0;
-
-
-		std::vector<AnimationStateCallback> animationStateCallbacks;
-
-		bool isMoving = false;
-		void SetMoving(bool moving);
-	};
+        std::shared_ptr<const IPathFinder> pathFinder;
+        std::weak_ptr<const INavigationMap> navigationMap;
+    };
 }
-
-
-
