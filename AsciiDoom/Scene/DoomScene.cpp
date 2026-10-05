@@ -9,7 +9,6 @@
 #include "Render/IRenderable3D.h"
 #include "GameObject/Bullet.h"
 #include "GameObject/Monster.h"
-#include "Animation/MonsterAnimationData.h"
 namespace Hiwoong
 {
 
@@ -157,10 +156,7 @@ namespace Hiwoong
 
 		for (const Vector3& spawnPosition : spawnPositions)
 		{
-			Instantiate<Monster>(
-				spawnPosition,
-				MonsterAnimationData::TestMonster
-			);
+			Instantiate<Monster>(spawnPosition);
 		}
 	}
 	std::shared_ptr<const IPathFinder> DoomScene::GetPathFinder() const

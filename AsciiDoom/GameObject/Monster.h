@@ -2,12 +2,9 @@
 
 #include "GameObject/GameObject.h"
 #include "Interfaces/IDamageable.h"
-#include "Animation/MonsterAnimationSet.h"
 
 namespace Hiwoong
 {
-	class SpriteRenderer3DComponent;
-	class SpriteAnimationComponent;
 	class NavAIComponent;
 
 	class Monster : public GameObject, public IDamageable
@@ -19,7 +16,6 @@ namespace Hiwoong
 
 		explicit Monster(
 			const Vector3& spawnPosition,
-			const MonsterAnimationSet& animations,
 			int hp = 30,
 			float speed = 1.0f,
 			float attackRange = 1.0f,
@@ -45,9 +41,6 @@ namespace Hiwoong
 		float speed;
 		float attackRange;
 		const float scale;
-		MonsterAnimationSet animations;
-		std::shared_ptr<SpriteRenderer3DComponent> spriteRenderer;
-		std::shared_ptr<SpriteAnimationComponent> animationComponent;
 		std::shared_ptr<NavAIComponent> navAIComponent;
 		std::weak_ptr<GameObject> target;//대부분은 플레이어
 
@@ -56,7 +49,7 @@ namespace Hiwoong
 		Vector3 InitSetColliderSize();
 		void InitReferences();
 		//유한상태머신 행동변경
-		bool ChangeState(MonsterState nextState);
+		void ChangeState(MonsterState nextState);
 		//공격이 가능한 거리인지 판별
 		bool IsWithinAttackRange(
 			const Vector3& targetPosition

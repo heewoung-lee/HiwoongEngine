@@ -91,7 +91,6 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Animation\MonsterAnimationData.cpp" />
     <ClCompile Include="Bootstrap\DoomInstaller.cpp" />
     <ClCompile Include="Component\BulletAnimationData.cpp" />
     <ClCompile Include="Component\CrossHairMoveComponent.cpp" />
@@ -128,8 +127,6 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     <ClCompile Include="Util\PathFinder.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animation\MonsterAnimationData.h" />
-    <ClInclude Include="Animation\MonsterAnimationSet.h" />
     <ClInclude Include="Bootstrap\DoomInstaller.h" />
     <ClInclude Include="Component\BulletAnimationData.h" />
     <ClInclude Include="Component\CrossHairMoveComponent.h" />
