@@ -112,7 +112,9 @@ namespace Hiwoong
 	/// <returns></returns>
 	bool SpriteAnimationComponent::Play(const SpriteAnimationClip& clip)
 	{
-		assert(HasStared());
+		if (HasStared() == false)
+			return false;
+
 		if (isPlaying && lockUntilFinished)
 			return false;
 

@@ -43,6 +43,29 @@ namespace Hiwoong
 		InitReferences();
 	
 	}
+	void Monster::Update(double deltaTime)
+	{
+		super::Update(deltaTime);
+		UpdateState();
+	}
+	void Monster::UpdateState()
+	{
+		const auto targetObject = target.lock();
+
+		if (targetObject ==nullptr || targetObject->IsActive() == false)
+		{
+			ChangeState(MonsterState::Idle);
+			return;
+		}
+
+		if (IsWithinAttackRange(targetObject->GetWorldPosition()))
+		{
+			ChangeState(MonsterState::Attack);
+			return;
+		}
+
+		ChangeState(MonsterState::Run);
+	}
 	void Monster::InitReferences()
 	{
 		spriteRenderer = AddComponent<SpriteRenderer3DComponent>(
@@ -113,6 +136,7 @@ namespace Hiwoong
 		return difference.Length() <= attackRange;
 	}
 
+	
 
 	void Monster::TakeDamage(int damage)
 	{
