@@ -1,4 +1,3 @@
-#include "Component/SpriteRenderer3DComponent.h"
 #include "MeshRenderComponent.h"
 #include "GameObject/GameObject.h"
 #include "Render/IRenderable3D.h"

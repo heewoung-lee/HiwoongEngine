@@ -5,7 +5,6 @@
 #include "Component/TransformComponent.h"
 #include "Navigation/INavigationMap.h"
 #include "PathFinder/Interfaces/IPathFinder.h"
-#include "Component/SpriteAnimationComponent.h"
 #include <cassert>
 
 namespace Hiwoong
