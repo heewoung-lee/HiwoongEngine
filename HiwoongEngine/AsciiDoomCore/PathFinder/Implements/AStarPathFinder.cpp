@@ -8,14 +8,22 @@ namespace Hiwoong
 	namespace
 	{
 
-		//맨해튼거리.
-		int CalculateManhattanDistance
-		(
+		//맨해튼거리. 10.5일 수정 대각선도 계산하도록
+		int CalculateDiagonalDistance(
 			const GridPosition& from,
 			const GridPosition& to
 		)
 		{
-			return std::abs(from.row - to.row) + std::abs(from.column - to.column);
+			const int rowDistance = std::abs(from.row - to.row);
+			const int columnDistance = std::abs(from.column - to.column);
+
+			const int diagonalSteps =
+				rowDistance < columnDistance ? rowDistance : columnDistance;
+
+			const int straightSteps =
+				std::abs(rowDistance - columnDistance);
+
+			return diagonalSteps * 14 + straightSteps * 10;
 		}
 
 		//상하좌우 배열 출력.
@@ -28,7 +36,11 @@ namespace Hiwoong
 				{ position.row - 1, position.column },
 				{ position.row, position.column + 1 },
 				{ position.row + 1, position.column },
-				{ position.row, position.column - 1 }
+				{ position.row, position.column - 1 },
+				{ position.row - 1, position.column - 1 }, 
+				{ position.row - 1, position.column + 1 }, 
+				{ position.row + 1, position.column - 1 }, 
+				{ position.row + 1, position.column + 1 }  
 			};
 		}
 		/// <summary>
@@ -119,7 +131,7 @@ namespace Hiwoong
 		openNodes.push(PathNode(
 			start,
 			0,
-			CalculateManhattanDistance(start, target),
+			CalculateDiagonalDistance(start, target),
 			start
 		));
 
@@ -166,16 +178,52 @@ namespace Hiwoong
 					continue;
 				}
 
+				const GridPosition currentPosition = currentNode.GetPosition();
+
+				const bool isDiagonal =
+					currentPosition.row != neighbor.row &&
+					currentPosition.column != neighbor.column;
+
+				//대각선으로 이동할 수 있는지 계산
+				if (isDiagonal)
+				{
+					const GridPosition horizontalTile =
+					{
+						currentPosition.row,
+						neighbor.column
+					};
+
+					const GridPosition verticalTile =
+					{
+						neighbor.row,
+						currentPosition.column
+					};
+
+					if (grid.IsWalkable(horizontalTile) == false ||
+						grid.IsWalkable(verticalTile) == false)
+					{
+						continue;
+					}
+				}
+
+
+				const int movementCost = isDiagonal ? 14 : 10;
+
 				const int newGCost =
-					currentNode.GetGCost() + 1;
+					currentNode.GetGCost() + movementCost;
 
 				openNodes.push(PathNode(
 					neighbor,
 					newGCost,
-					CalculateManhattanDistance(neighbor, target),
+					CalculateDiagonalDistance(neighbor, target),
 					currentNode.GetPosition()
 				));
+
+
 			}
+
+
+
 		}
 		return {};
 	}

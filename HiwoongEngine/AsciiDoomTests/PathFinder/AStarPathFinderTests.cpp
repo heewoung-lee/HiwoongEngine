@@ -250,7 +250,7 @@ void Hiwoong::Tests::RunAStarPathFinderTests(TestRunner& testRunner)
 
 	testRunner.Check(
 		firstEqualCostPath == secondEqualCostPath &&
-		firstEqualCostPath.size() == 5,
+		firstEqualCostPath.size() == 3,
 		"AStar returns deterministic shortest path"
 	);
 }
