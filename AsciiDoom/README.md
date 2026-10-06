@@ -70,7 +70,7 @@ https://github.com/user-attachments/assets/5fe08a5e-9f18-4f6a-a9cd-0fca11ac458e
 https://github.com/user-attachments/assets/b942b436-fb5e-4eb5-ae30-a69bb85c9eeb
 
 
-
+### Step 14. 몬스터의 2D 스프라이트 렌더러 -> 3D 메쉬 렌더러 방식 변경
 
 
 ## 문제 해결 과정
