@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -11,6 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ModelImport\ModelData.h" />
+    <ClInclude Include="ModelImport\ModelMesh.h" />
+    <ClInclude Include="ModelImport\ModelTriangle.h" />
+    <ClInclude Include="ModelImport\ModelVertex.h" />
     <ClInclude Include="PathFinder\GridPosition.h" />
     <ClInclude Include="PathFinder\Implements\AStarPathFinder.h" />
     <ClInclude Include="PathFinder\Interfaces\IPathFinder.h" />
