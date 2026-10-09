@@ -11,20 +11,39 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ModelImport\IMeshLoader.h" />
+    <ClInclude Include="ModelImport\IModelImporter.h" />
+    <ClInclude Include="ModelImport\IModelSource.h" />
+    <ClInclude Include="ModelImport\IModelSourceReader.h" />
+    <ClInclude Include="ModelImport\MeshLoader.h" />
+    <ClInclude Include="ModelImport\MeshLoadResult.h" />
+    <ClInclude Include="ModelImport\MeshSourceMapping.h" />
     <ClInclude Include="ModelImport\ModelData.h" />
+    <ClInclude Include="ModelImport\ModelImportContext.h" />
+    <ClInclude Include="ModelImport\ModelImporter.h" />
+    <ClInclude Include="ModelImport\ModelImportResult.h" />
     <ClInclude Include="ModelImport\ModelMesh.h" />
+    <ClInclude Include="ModelImport\ModelSourceReadResult.h" />
     <ClInclude Include="ModelImport\ModelTriangle.h" />
     <ClInclude Include="ModelImport\ModelVertex.h" />
+    <ClInclude Include="ModelImport\UfbxModelSourceReader.h" />
+    <ClInclude Include="ModelImport\UfbxModelSource.h" />
     <ClInclude Include="PathFinder\GridPosition.h" />
     <ClInclude Include="PathFinder\Implements\AStarPathFinder.h" />
     <ClInclude Include="PathFinder\Interfaces\IPathFinder.h" />
     <ClInclude Include="PathFinder\NavigationGrid.h" />
     <ClInclude Include="PathFinder\PathNode.h" />
+    <ClInclude Include="ThirdParty\ufbx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ModelImport\MeshLoader.cpp" />
+    <ClCompile Include="ModelImport\ModelImporter.cpp" />
+    <ClCompile Include="ModelImport\UfbxModelSource.cpp" />
+    <ClCompile Include="ModelImport\UfbxModelSourceReader.cpp" />
     <ClCompile Include="PathFinder\Implements\AStarPathFinder.cpp" />
     <ClCompile Include="PathFinder\NavigationGrid.cpp" />
     <ClCompile Include="PathFinder\PathNode.cpp" />
+    <ClCompile Include="ThirdParty\ufbx.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

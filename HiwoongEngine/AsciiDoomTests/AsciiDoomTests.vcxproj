@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="ModeImport\MeshLoaderTests.cpp" />
     <ClCompile Include="PathFinder\AStarPathFinderTests.cpp" />
     <ClCompile Include="PathFinder\NavigationGridTests.cpp" />
   </ItemGroup>

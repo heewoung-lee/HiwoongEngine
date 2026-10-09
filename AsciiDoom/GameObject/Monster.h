@@ -3,9 +3,11 @@
 #include "GameObject/GameObject.h"
 #include "Interfaces/IDamageable.h"
 
+
 namespace Hiwoong
 {
 	class NavAIComponent;
+	struct ModelData;
 
 	class Monster : public GameObject, public IDamageable
 	{
@@ -16,10 +18,11 @@ namespace Hiwoong
 
 		explicit Monster(
 			const Vector3& spawnPosition,
+			const std::shared_ptr<const ModelData>& model,
 			int hp = 30,
 			float speed = 1.0f,
 			float attackRange = 1.0f,
-			float scale = 0.7f //9.26일 잠깐 수정
+			float scale = 0.7f
 		);
 
 		void Start() override;
@@ -46,6 +49,7 @@ namespace Hiwoong
 
 
 	private:
+		void InitMeshRenderer();
 		Vector3 InitSetColliderSize();
 		void InitReferences();
 		//유한상태머신 행동변경
@@ -55,6 +59,10 @@ namespace Hiwoong
 			const Vector3& targetPosition
 		) const;
 		void UpdateState();
+
+
+		//10.9일 몬스터에 대한 모델 fbx 추가
+		std::shared_ptr<const ModelData> model;
 	};
 
 

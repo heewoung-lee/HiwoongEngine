@@ -112,6 +112,7 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     <ClCompile Include="Menu\PauseTitle.cpp" />
     <ClCompile Include="Menu\QuitButton.cpp" />
     <ClCompile Include="Menu\ResumeButton.cpp" />
+    <ClCompile Include="ModelImport\ModelMeshConverter.cpp" />
     <ClCompile Include="Player\CrossHair.cpp" />
     <ClCompile Include="Player\Gun.cpp" />
     <ClCompile Include="Player\GunAnimationData.cpp" />
@@ -149,6 +150,7 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     <ClInclude Include="Menu\PauseTitle.h" />
     <ClInclude Include="Menu\QuitButton.h" />
     <ClInclude Include="Menu\ResumeButton.h" />
+    <ClInclude Include="ModelImport\ModelMeshConverter.h" />
     <ClInclude Include="Navigation\INavAIContext.h" />
     <ClInclude Include="Navigation\INavigationMap.h" />
     <ClInclude Include="Player\CrossHair.h" />

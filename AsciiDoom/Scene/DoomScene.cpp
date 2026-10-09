@@ -13,9 +13,11 @@ namespace Hiwoong
 {
 
 	DoomScene::DoomScene(
-		const std::shared_ptr<const IPathFinder>& pathFinder
+		const std::shared_ptr<const IPathFinder>& pathFinder,
+		const std::shared_ptr<const ModelData>& monsterModel
 	)
-		: pathFinder(pathFinder)
+		: pathFinder(pathFinder),
+		monsterModel(monsterModel)
 	{
 	}
 	void DoomScene::SpawnPlayer()
@@ -156,7 +158,7 @@ namespace Hiwoong
 
 		for (const Vector3& spawnPosition : spawnPositions)
 		{
-			Instantiate<Monster>(spawnPosition);
+			Instantiate<Monster>(spawnPosition, monsterModel);
 		}
 	}
 	std::shared_ptr<const IPathFinder> DoomScene::GetPathFinder() const

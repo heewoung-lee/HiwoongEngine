@@ -57,5 +57,7 @@ x86/
 *.ilk
 *.idb
 
+*.pbx
 
 /docs/images/
+*.fbx

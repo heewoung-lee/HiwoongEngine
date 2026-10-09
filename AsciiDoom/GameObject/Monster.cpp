@@ -2,14 +2,18 @@
 #include "Component/BoxCollider3DComponent.h"
 #include "Component/NavAIComponent.h"
 #include "Navigation/INavAIContext.h"
-#include <memory>
+#include "ModelImport/ModelData.h"
+#include "ModelImport/ModelMeshConverter.h"
+#include "Component/MeshRenderComponent.h"
 #include "Scene/Scene.h"
+#include <memory>
 #include <cassert>
 
 namespace Hiwoong
 {
 	Monster::Monster(
 		const Vector3& spawnPosition,
+		const std::shared_ptr<const ModelData>& model,
 		int hp,
 		float speed,
 		float attackRange,
@@ -19,8 +23,10 @@ namespace Hiwoong
 		currentHp(hp),
 		speed(speed),
 		attackRange(attackRange),
-		scale(scale)
+		scale(scale),
+		model(model)
 	{
+		assert(this->model != nullptr);
 	}
 
 	void Monster::Start()
@@ -30,7 +36,7 @@ namespace Hiwoong
 		transform->SetScale(
 			Vector3(scale, scale, scale)
 		);
-
+		InitMeshRenderer();
 		
 		Vector3 size = InitSetColliderSize();
 		AddComponent<BoxCollider3DComponent>(
@@ -113,6 +119,18 @@ namespace Hiwoong
 
 	}
 
+	void Monster::InitMeshRenderer()
+	{
+		assert(!model->meshes.empty());
+
+		for (const ModelMesh& modelMesh : model->meshes)
+		{
+			AddComponent<MeshRenderComponent>(
+				ConvertToRenderMesh(modelMesh),
+				Color::Red
+			);
+		}
+	}
 	Vector3 Monster::InitSetColliderSize()
 	{
 		return Vector3(

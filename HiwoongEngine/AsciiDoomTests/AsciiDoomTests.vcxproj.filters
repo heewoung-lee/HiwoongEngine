@@ -24,6 +24,9 @@
     <ClCompile Include="PathFinder\AStarPathFinderTests.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="ModeImport\MeshLoaderTests.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestRunner.h">

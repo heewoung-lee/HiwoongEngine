@@ -34,7 +34,7 @@ namespace Hiwoong
 	{
 		assert(transform != nullptr);
 
-		return Matrix4x4::Translation(transform->GetWorldPosition());
+		return transform->GetModelMatrix();
 	}
 
 	Color MeshRenderComponent::GetRenderColor() const
