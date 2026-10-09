@@ -227,12 +227,12 @@ https://github.com/user-attachments/assets/5fe08a5e-9f18-4f6a-a9cd-0fca11ac458e
 ### Step 13. 픽셀 컬러 표시
 
 https://github.com/user-attachments/assets/b942b436-fb5e-4eb5-ae30-a69bb85c9eeb
-<<<<<<< Updated upstream
 
 
 ### Step 14. 몬스터의 2D 스프라이트 렌더러 -> 3D 메쉬 렌더러 방식 변경
 
 1) FBX를 통해 메쉬 가져오기
+   
 https://github.com/user-attachments/assets/beae9df2-e230-4d57-ae9d-7412b1c976b0
 
 
