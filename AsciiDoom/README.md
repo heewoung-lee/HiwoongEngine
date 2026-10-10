@@ -235,6 +235,9 @@ https://github.com/user-attachments/assets/b942b436-fb5e-4eb5-ae30-a69bb85c9eeb
    
 https://github.com/user-attachments/assets/beae9df2-e230-4d57-ae9d-7412b1c976b0
 
+2) UV매핑
+
+https://github.com/user-attachments/assets/9676c227-d0d1-4a04-aa30-9be947be6c2f
 
 
 
