@@ -21,6 +21,8 @@ namespace Hiwoong
         ) const override;
 
     private:
+        void CenterModel(ModelData& model) const;
+    private:
         std::shared_ptr<const IModelSourceReader> sourceReader;
         std::shared_ptr<const IMeshLoader> meshLoader;
     };

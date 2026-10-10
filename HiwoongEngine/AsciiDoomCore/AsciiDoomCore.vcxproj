@@ -24,8 +24,10 @@
     <ClInclude Include="ModelImport\ModelImportResult.h" />
     <ClInclude Include="ModelImport\ModelMesh.h" />
     <ClInclude Include="ModelImport\ModelSourceReadResult.h" />
+    <ClInclude Include="ModelImport\ModelTexture.h" />
     <ClInclude Include="ModelImport\ModelTriangle.h" />
     <ClInclude Include="ModelImport\ModelVertex.h" />
+    <ClInclude Include="ModelImport\PngTextureLoader.h" />
     <ClInclude Include="ModelImport\UfbxModelSourceReader.h" />
     <ClInclude Include="ModelImport\UfbxModelSource.h" />
     <ClInclude Include="PathFinder\GridPosition.h" />
@@ -38,6 +40,7 @@
   <ItemGroup>
     <ClCompile Include="ModelImport\MeshLoader.cpp" />
     <ClCompile Include="ModelImport\ModelImporter.cpp" />
+    <ClCompile Include="ModelImport\PngTextureLoader.cpp" />
     <ClCompile Include="ModelImport\UfbxModelSource.cpp" />
     <ClCompile Include="ModelImport\UfbxModelSourceReader.cpp" />
     <ClCompile Include="PathFinder\Implements\AStarPathFinder.cpp" />

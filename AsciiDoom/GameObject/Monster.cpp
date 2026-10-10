@@ -125,17 +125,54 @@ namespace Hiwoong
 
 		for (const ModelMesh& modelMesh : model->meshes)
 		{
-			AddComponent<MeshRenderComponent>(
-				ConvertToRenderMesh(modelMesh),
-				Color::Red
-			);
+			std::size_t materialCount = modelMesh.diffuseTextures.size();
+
+			if (materialCount == 0)
+				materialCount = 1;
+
+			for (std::size_t i = 0; i < materialCount; ++i)
+			{
+				Mesh mesh = ConvertToRenderMesh(modelMesh, i);
+
+				if (mesh.triangles.empty())
+					continue;
+
+				std::shared_ptr<const ModelTexture> texture;
+
+				if (i < modelMesh.diffuseTextures.size())
+					texture = modelMesh.diffuseTextures[i];
+
+				AddComponent<MeshRenderComponent>(
+					mesh,
+					Color::White,
+					texture
+				);
+			}
 		}
 	}
+	//실제 모델 높이로 충돌체 크기 맞추기
 	Vector3 Monster::InitSetColliderSize()
 	{
+		float halfHeight = 0.0f;
+
+		for (const ModelMesh& mesh : model->meshes)
+		{
+			for (const ModelVertex& vertex : mesh.vertices)
+			{
+				const float distance = std::abs(vertex.y);
+
+				if (distance > halfHeight)
+				{
+					halfHeight = distance;
+				}
+			}
+		}
+
+		assert(halfHeight > 0.0f);
+
 		return Vector3(
 			0.68f * scale,
-			1.8f * scale,
+			halfHeight * 2.0f * scale,
 			0.68f * scale
 		);
 	}

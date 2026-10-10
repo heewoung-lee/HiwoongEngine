@@ -3,6 +3,7 @@
 #include "ModelImport/MeshLoader.h"
 #include "ModelImport/UfbxModelSourceReader.h"
 #include "ModelImport/ModelImporter.h"
+#include "ModelImport/PngTextureLoader.h"
 #include <memory>
 #include <iostream>
 
@@ -11,6 +12,41 @@ namespace Hiwoong::Tests
     class FakeTriangleSource final : public IModelSource
     {
     public:
+
+        std::size_t GetCornerSourceVertexIndex(
+            std::size_t meshIndex,
+            std::size_t cornerIndex
+        ) const override
+        {
+            return cornerIndex;
+        }
+
+        ModelVertex GetCornerVertex(
+            std::size_t meshIndex,
+            std::size_t cornerIndex
+        ) const override
+        {
+            ModelVertex vertex = GetVertex(meshIndex, cornerIndex);
+
+            if (cornerIndex == 1)
+            {
+                vertex.u = 1.0f;
+            }
+
+            if (cornerIndex == 2)
+            {
+                vertex.v = 1.0f;
+            }
+
+            return vertex;
+        }
+
+        std::size_t GetCornerCount(
+            std::size_t meshIndex
+        ) const override
+        {
+            return 3;
+        }
 
         std::vector<ModelTriangle> TriangulateFace(
             std::size_t meshIndex,
@@ -30,11 +66,6 @@ namespace Hiwoong::Tests
             return "Triangle";
         }
 
-        std::size_t GetVertexCount(std::size_t meshIndex) const override
-        {
-            return vertices.size();
-        }
-
         ModelVertex GetVertex(
             std::size_t meshIndex,
             std::size_t vertexIndex
@@ -48,12 +79,11 @@ namespace Hiwoong::Tests
             return 1;
         }
 
-        std::vector<std::size_t> GetFaceVertexIndices(
-            std::size_t meshIndex,
-            std::size_t faceIndex
+        std::vector<std::string> GetDiffuseTexturePaths(
+            std::size_t meshIndex
         ) const override
         {
-            return { 0, 1, 2 };
+            return { "triangle-diffuse.png", "" };
         }
 
     private:
@@ -94,6 +124,24 @@ namespace Hiwoong::Tests
         const ModelMesh& mesh = result.meshes[0];
 
         testRunner.Check(
+            mesh.diffuseTexturePaths ==
+            std::vector<std::string>{ "triangle-diffuse.png", "" },
+            "MeshLoader preserves material texture slots"
+        );
+
+        testRunner.Check(
+            mesh.vertices[0].u == 0.0f &&
+            mesh.vertices[0].v == 0.0f &&
+
+            mesh.vertices[1].u == 1.0f &&
+            mesh.vertices[1].v == 0.0f &&
+
+            mesh.vertices[2].u == 0.0f &&
+            mesh.vertices[2].v == 1.0f,
+            "MeshLoader preserves corner UVs"
+        );
+
+        testRunner.Check(
             mesh.vertices[0].x == 0.0f &&
             mesh.vertices[0].y == 0.0f &&
             mesh.vertices[0].z == 0.0f &&
@@ -129,8 +177,7 @@ namespace Hiwoong::Tests
             "ModelSourceReader rejects missing file"
         );
         const ModelSourceReadResult monsterResult = reader.Read(
-            "C:/WorkSpace/HiwoongEngine/HiwoongEngine/"
-            "AsciiDoomTests/Assets/Monster.fbx"
+            "C:/WorkSpace/HiwoongEngine/AsciiDoom/Assets/Model/MonsterLow.fbx"
         );
 
         testRunner.Check(
@@ -171,6 +218,32 @@ namespace Hiwoong::Tests
                 << " / Vertices: " << modelMesh.vertices.size()
                 << " / Triangles: " << modelMesh.triangles.size()
                 << std::endl;
+
+            for (std::size_t i = 0;
+                i < modelMesh.diffuseTexturePaths.size();
+                ++i)
+            {
+                std::cout
+                    << "Material: " << i
+                    << " / Texture: " << modelMesh.diffuseTexturePaths[i]
+                    << std::endl;
+
+                ModelTexture texture;
+
+                const bool loaded = LoadPngTexture(
+                    modelMesh.diffuseTexturePaths[i],
+                    texture
+                );
+
+                testRunner.Check(
+                    loaded &&
+                    texture.width > 0 &&
+                    texture.height > 0 &&
+                    texture.rgbPixels.size() == texture.width * texture.height * 3,
+                    "PngTextureLoader reads RGB pixels"
+                );
+            }
+
         }
 
         const ModelImporter importer(
@@ -178,18 +251,23 @@ namespace Hiwoong::Tests
             std::make_shared<MeshLoader>()
         );
 
+
+
         const ModelImportResult importResult = importer.Import(
-            "C:/WorkSpace/HiwoongEngine/HiwoongEngine/"
-            "AsciiDoomTests/Assets/Monster.fbx"
+            "C:/WorkSpace/HiwoongEngine/AsciiDoom/Assets/Model/MonsterLow.fbx"
         );
 
         testRunner.Check(
             importResult.success &&
             !importResult.model.meshes.empty() &&
             !importResult.model.meshes[0].vertices.empty() &&
-            !importResult.model.meshes[0].triangles.empty(),
+            !importResult.model.meshes[0].triangles.empty() &&
+            importResult.model.meshes[0].diffuseTextures.size() == 2 &&
+            importResult.model.meshes[0].diffuseTextures[0] != nullptr &&
+            importResult.model.meshes[0].diffuseTextures[1] != nullptr,
             "ModelImporter imports monster FBX"
         );
+
     }
 
 }

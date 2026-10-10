@@ -7,5 +7,8 @@
 /// </summary>
 namespace Hiwoong
 {
-    Mesh ConvertToRenderMesh(const ModelMesh& modelMesh);
+    Mesh ConvertToRenderMesh(
+        const ModelMesh& modelMesh,
+        std::size_t materialIndex
+    );
 }

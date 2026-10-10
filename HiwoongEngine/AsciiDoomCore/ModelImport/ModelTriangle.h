@@ -11,5 +11,8 @@ namespace Hiwoong
         std::size_t index0 = 0;
         std::size_t index1 = 0;
         std::size_t index2 = 0;
+
+        // 이 삼각형이 사용하는 메시 내부의 재질 번호.
+        std::size_t materialIndex = 0;
     };
 }

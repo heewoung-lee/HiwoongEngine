@@ -22,22 +22,31 @@ namespace Hiwoong
             ModelMesh mesh;
             mesh.name = source->GetMeshName(meshIndex);
 
+            mesh.diffuseTexturePaths =
+                source->GetDiffuseTexturePaths(meshIndex);
+
+
             MeshSourceMapping mapping;
             mapping.sourceMeshIndex = meshIndex;
 
             // 원본 정점과 대응 번호를 복사
             const std::size_t vertexCount =
-                source->GetVertexCount(meshIndex);
+                source->GetCornerCount(meshIndex);
 
-            for (std::size_t vertexIndex = 0;
-                vertexIndex < vertexCount;
-                ++vertexIndex)
+
+            for (std::size_t cornerIndex = 0;
+                cornerIndex < vertexCount;
+                ++cornerIndex)
             {
                 mesh.vertices.push_back(
-                    source->GetVertex(meshIndex, vertexIndex)
+                    source->GetCornerVertex(meshIndex, cornerIndex)
                 );
 
-                mapping.sourceVertexIndices.push_back(vertexIndex);
+                mapping.sourceVertexIndices.push_back(
+                    source->GetCornerSourceVertexIndex(
+                        meshIndex, cornerIndex
+                    )
+                );
             }
 
             // 원본 면을 삼각형 데이터로 옮김

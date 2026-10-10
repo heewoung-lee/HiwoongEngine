@@ -8,5 +8,9 @@ namespace Hiwoong
         float x = 0.0f;
         float y = 0.0f;
         float z = 0.0f;
+
+        //어느 위치의 색을 사용할지
+        float u = 0.0f;
+        float v = 0.0f;
     };
 }

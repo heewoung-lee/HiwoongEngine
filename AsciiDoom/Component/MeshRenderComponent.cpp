@@ -11,8 +11,12 @@ namespace Hiwoong
 {
 	MeshRenderComponent::MeshRenderComponent(
 		const Mesh& mesh,
-		Color color)
-		: mesh(mesh), color(color)
+		Color color,
+		std::shared_ptr<const ModelTexture> texture
+	)
+		: mesh(mesh),
+		color(color),
+		texture(texture)
 	{
 	}
 

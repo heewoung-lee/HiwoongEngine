@@ -21,10 +21,6 @@ namespace Hiwoong
             std::size_t meshIndex
         ) const override;
 
-        std::size_t GetVertexCount(
-            std::size_t meshIndex
-        ) const override;
-
         ModelVertex GetVertex(
             std::size_t meshIndex,
             std::size_t vertexIndex
@@ -34,14 +30,27 @@ namespace Hiwoong
             std::size_t meshIndex
         ) const override;
 
-        std::vector<std::size_t> GetFaceVertexIndices(
+        std::vector<ModelTriangle> TriangulateFace(
             std::size_t meshIndex,
             std::size_t faceIndex
         ) const override;
 
-        std::vector<ModelTriangle> TriangulateFace(
+        std::size_t GetCornerCount(
+            std::size_t meshIndex
+        ) const override;
+
+        ModelVertex GetCornerVertex(
             std::size_t meshIndex,
-            std::size_t faceIndex
+            std::size_t cornerIndex
+        ) const override;
+
+        std::size_t GetCornerSourceVertexIndex(
+            std::size_t meshIndex,
+            std::size_t cornerIndex
+        ) const override;
+
+        std::vector<std::string> GetDiffuseTexturePaths(
+            std::size_t meshIndex
         ) const override;
 
     private:
