@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <vector>
 #include <cassert>
+#include <climits>
 
 
 namespace Hiwoong
@@ -62,7 +63,65 @@ namespace Hiwoong
 			);
 
 		outCharacter = shadeCharacters[index];
-		outColor = color;
+		outColor = GetTextureColor(u, v);
 		return true;
+	}
+	Color MeshRenderComponent::GetTextureColor(float u, float v) const
+	{
+		if (texture == nullptr)
+			return color;
+
+		assert(texture->width > 0 && texture->height > 0);
+		assert(texture->rgbPixels.size() ==
+			texture->width * texture->height * 3);
+
+		u = std::clamp(u, 0.0f, 1.0f);
+
+		// PNG는 위에서부터 저장되므로 세로 방향을 맞춘다.
+		v = std::clamp(1.0f - v, 0.0f, 1.0f);
+
+		const std::size_t column = (std::min)(
+			static_cast<std::size_t>(
+				u * static_cast<float>(texture->width)),
+			texture->width - 1
+			);
+
+		const std::size_t row = (std::min)(
+			static_cast<std::size_t>(
+				v * static_cast<float>(texture->height)),
+			texture->height - 1
+			);
+
+		const std::size_t byteIndex =
+			(row * texture->width + column) * 3;
+
+		const int red = texture->rgbPixels[byteIndex];
+		const int green = texture->rgbPixels[byteIndex + 1];
+		const int blue = texture->rgbPixels[byteIndex + 2];
+
+		int bestDistance = INT_MAX;
+		Color bestColor = Color::Black;
+
+		for (int i = 0; i < 16; ++i)
+		{
+			const COLORREF candidate = ShaderData::ColorPalette[i];
+
+			const int redDifference = red - GetRValue(candidate);
+			const int greenDifference = green - GetGValue(candidate);
+			const int blueDifference = blue - GetBValue(candidate);
+
+			const int distance =
+				redDifference * redDifference +
+				greenDifference * greenDifference +
+				blueDifference * blueDifference;
+
+			if (distance < bestDistance)
+			{
+				bestDistance = distance;
+				bestColor = static_cast<Color>(i);
+			}
+		}
+
+		return bestColor;
 	}
 }

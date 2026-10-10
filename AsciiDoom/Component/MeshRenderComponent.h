@@ -44,12 +44,13 @@ namespace Hiwoong
 			Color& outColor
 		) const override;
 
-
+		Color GetTextureColor(float u, float v) const;
 	private:
 		Mesh mesh;
 		std::shared_ptr<TransformComponent> transform;
 		Color color;
 		std::shared_ptr<const ModelTexture> texture;
+
 	};
 }
 
