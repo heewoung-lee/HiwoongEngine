@@ -11,8 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation\AnimationClip.h" />
+    <ClInclude Include="Animation\AnimationFrame.h" />
     <ClInclude Include="Animation\SkeletonPoseCalculator.h" />
     <ClInclude Include="Animation\SkinningCalculator.h" />
+    <ClInclude Include="ModelImport\AnimationLoader.h" />
+    <ClInclude Include="ModelImport\IAnimationLoader.h" />
     <ClInclude Include="ModelImport\IMeshLoader.h" />
     <ClInclude Include="ModelImport\IModelImporter.h" />
     <ClInclude Include="ModelImport\IModelSource.h" />
@@ -50,6 +54,7 @@
   <ItemGroup>
     <ClCompile Include="Animation\SkeletonPoseCalculator.cpp" />
     <ClCompile Include="Animation\SkinningCalculator.cpp" />
+    <ClCompile Include="ModelImport\AnimationLoader.cpp" />
     <ClCompile Include="ModelImport\MeshLoader.cpp" />
     <ClCompile Include="ModelImport\ModelMatrix.cpp" />
     <ClCompile Include="ModelImport\SkeletonLoader.cpp" />

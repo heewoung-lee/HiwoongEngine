@@ -18,5 +18,14 @@ namespace Hiwoong
 			const std::vector<ModelMatrix>& nodeMatrices,
 			const ModelMatrix& modelAlignment
 		);
+
+
+	private:
+		//관절 번호에 맞는 바인딩을 찾는 함수
+		static int FindBindingIdx(
+			const std::vector<SkinBinding>& bindings,
+			int nodeIdx
+		);
+
 	};
 }

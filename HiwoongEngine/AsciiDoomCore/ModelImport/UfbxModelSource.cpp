@@ -1,5 +1,6 @@
 #include "UfbxModelSource.h"
 #include "../ThirdParty/ufbx.h"
+#include <algorithm>
 #include <filesystem>
 #include <cstdint>
 #include <cassert>
@@ -320,6 +321,57 @@ namespace Hiwoong
 		}
 
 		return bindings;
+	}
+	std::vector<AnimationClip> UfbxModelSource::GetAnimationClips() const
+	{
+		std::vector<AnimationClip> clips;
+
+		for (const ufbx_anim_stack* sourceClip : scene->anim_stacks)
+		{
+			AnimationClip clip;
+
+			clip.name = sourceClip->name.data;
+			clip.duration = sourceClip->time_end - sourceClip->time_begin;
+
+			int frameIndex = 0;
+
+			while (true)
+			{
+				const double time = std::min(
+					frameIndex / 30.0,
+					clip.duration
+				);
+
+				ufbx_scene* evaluatedScene = ufbx_evaluate_scene(
+					scene,
+					sourceClip->anim,
+					sourceClip->time_begin + time,
+					nullptr,
+					nullptr
+				);
+
+				assert(evaluatedScene != nullptr);
+				if (evaluatedScene == nullptr)
+					return {};
+
+				UfbxModelSource frameSource(evaluatedScene);
+
+				AnimationFrame frame;
+				frame.time = time;
+				frame.nodes = frameSource.GetSkeletonNodes();
+
+				clip.frames.push_back(frame);
+
+				if (time >= clip.duration)
+					break;
+
+				++frameIndex;
+			}
+
+			clips.push_back(clip);
+		}
+
+		return clips;
 	}
 }
 

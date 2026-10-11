@@ -2,6 +2,7 @@
 
 #include "../ModelImport/ModelMatrix.h"
 #include "../ModelImport/SkeletonNode.h"
+#include "AnimationClip.h"
 #include <vector>
 
 namespace Hiwoong
@@ -15,6 +16,12 @@ namespace Hiwoong
 	public:
 		static std::vector<ModelMatrix> Calculate(
 			const std::vector<SkeletonNode>& nodes
+		);
+
+		static std::vector<ModelMatrix> Calculate(
+			const std::vector<SkeletonNode>& modelNodes,
+			const AnimationClip& clip,
+			double time
 		);
 	};
 }

@@ -7,7 +7,10 @@
 #include "ModelImport/SkeletonLoader.h"
 #include "ModelImport/SkinWeightLoader.h"
 #include "ModelImport/ModelMatrix.h"
+#include "ModelImport/AnimationLoader.h"
 #include "Animation/SkeletonPoseCalculator.h"
+#include "Animation/SkinningCalculator.h"
+#include "ThirdParty/ufbx.h"
 #include <cmath>
 #include <memory>
 #include <iostream>
@@ -17,6 +20,11 @@ namespace Hiwoong::Tests
 	class FakeTriangleSource final : public IModelSource
 	{
 	public:
+		std::vector<AnimationClip> GetAnimationClips() const override
+		{
+			return {};
+		}
+
 		std::vector<SkinBinding> GetSkinBindings(
 			std::size_t meshIndex
 		) const override
@@ -132,8 +140,385 @@ namespace Hiwoong::Tests
 		};
 	};
 
+	// 원본을 해제한 뒤에도 복사한 프레임 데이터가 유지되는지 검사한다.
+	void RunAnimationSourceTests(TestRunner& testRunner)
+	{
+		const std::vector<std::string> fileNames = {
+			"MonsterIdle.fbx", "MonsterWalk.fbx"
+		};
+		const UfbxModelSourceReader reader;
+
+		for (const std::string& fileName : fileNames)
+		{
+			const std::string filePath =
+				"C:/WorkSpace/HiwoongEngine/AsciiDoom/Assets/Model/" + fileName;
+			const std::string readLabel = "AnimationSource reads clips from " + fileName;
+			const std::string timeLabel = "AnimationSource preserves frame times in " + fileName;
+			const std::string poseLabel = "AnimationSource preserves animated poses in " + fileName;
+
+			ModelSourceReadResult sourceResult = reader.Read(filePath);
+			if (!sourceResult.success || sourceResult.source == nullptr)
+			{
+				testRunner.Check(false, readLabel.c_str());
+				continue;
+			}
+
+			const std::vector<AnimationClip> clips = sourceResult.source->GetAnimationClips();
+			sourceResult.source.reset();
+
+			// 별도 ufbx 조회로 클립 길이와 시간별 자세의 기대값을 구한다.
+			ufbx_load_opts options{};
+			options.target_axes = {
+				UFBX_COORDINATE_AXIS_POSITIVE_X,
+				UFBX_COORDINATE_AXIS_NEGATIVE_Y,
+				UFBX_COORDINATE_AXIS_NEGATIVE_Z
+			};
+			options.target_unit_meters = 1.0;
+			options.space_conversion = UFBX_SPACE_CONVERSION_MODIFY_GEOMETRY;
+			ufbx_error error{};
+			ufbx_scene* referenceScene = ufbx_load_file(filePath.c_str(), &options, &error);
+			if (referenceScene == nullptr)
+			{
+				testRunner.Check(false, readLabel.c_str());
+				continue;
+			}
+
+			bool hasClips = !clips.empty() &&
+				clips.size() == referenceScene->anim_stacks.count &&
+				referenceScene->nodes.count > 0;
+			if (hasClips)
+			{
+				for (std::size_t clipIndex = 0; clipIndex < clips.size(); ++clipIndex)
+				{
+					const AnimationClip& clip = clips[clipIndex];
+					const ufbx_anim_stack* sourceClip = referenceScene->anim_stacks.data[clipIndex];
+					if (!(clip.name == sourceClip->name.data &&
+						std::isfinite(clip.duration) && clip.duration > 0.0 &&
+						std::abs(clip.duration - (sourceClip->time_end - sourceClip->time_begin)) < 0.00000001 &&
+						clip.frames.size() > 1 &&
+						clip.frames.front().nodes.size() == referenceScene->nodes.count))
+					{
+						hasClips = false;
+						break;
+					}
+				}
+			}
+			testRunner.Check(hasClips, readLabel.c_str());
+
+			bool hasCorrectTimes = hasClips;
+			bool matchesSourcePoses = hasClips;
+			bool allClipsMove = hasClips;
+			if (hasClips)
+			{
+				for (std::size_t clipIndex = 0; clipIndex < clips.size(); ++clipIndex)
+				{
+					const AnimationClip& clip = clips[clipIndex];
+					const ufbx_anim_stack* sourceClip = referenceScene->anim_stacks.data[clipIndex];
+					bool hasMovement = false;
+
+					if (!(clip.frames.front().time == 0.0 &&
+						std::abs(clip.frames.back().time - clip.duration) < 0.00000001))
+						hasCorrectTimes = false;
+
+					for (std::size_t frameIndex = 0; frameIndex < clip.frames.size(); ++frameIndex)
+					{
+						const AnimationFrame& frame = clip.frames[frameIndex];
+						if (!(std::isfinite(frame.time) && frame.time >= 0.0 && frame.time <= clip.duration))
+						{
+							hasCorrectTimes = false;
+							matchesSourcePoses = false;
+							continue;
+						}
+						if (frameIndex > 0)
+						{
+							const double interval = frame.time - clip.frames[frameIndex - 1].time;
+							// 마지막 간격은 1/30초보다 짧아도 된다.
+							if (!(interval > 0.0 && interval <= 1.0 / 30.0 + 0.00000001) ||
+								(frameIndex + 1 < clip.frames.size() &&
+									std::abs(interval - 1.0 / 30.0) > 0.00000001))
+								hasCorrectTimes = false;
+						}
+
+						if (frame.nodes.size() != referenceScene->nodes.count)
+						{
+							matchesSourcePoses = false;
+							continue;
+						}
+						for (std::size_t nodeIndex = 0; nodeIndex < frame.nodes.size(); ++nodeIndex)
+						{
+							const SkeletonNode& node = frame.nodes[nodeIndex];
+							const ufbx_node* referenceNode = referenceScene->nodes.data[nodeIndex];
+							const int expectedParent = referenceNode->parent == nullptr ? -1 :
+								static_cast<int>(referenceNode->parent->typed_id);
+							if (node.name != referenceNode->name.data || node.parentIdx != expectedParent)
+								matchesSourcePoses = false;
+
+							const ufbx_transform expectedTransform = ufbx_evaluate_transform(
+								sourceClip->anim, referenceNode, sourceClip->time_begin + frame.time);
+							const ufbx_matrix expectedMatrix = ufbx_transform_to_matrix(&expectedTransform);
+							const ModelMatrix actualMatrix = ModelMatrix::FromNode(node);
+							const ModelMatrix firstMatrix = ModelMatrix::FromNode(
+								clip.frames.front().nodes[nodeIndex]);
+
+							// 회전 q와 -q는 같은 자세이므로 행렬로 비교한다.
+							for (int row = 0; row < 3; ++row)
+							{
+								for (int column = 0; column < 4; ++column)
+								{
+									if (!(std::abs(actualMatrix.values[row][column] -
+										expectedMatrix.cols[column].v[row]) <= 0.0001))
+										matchesSourcePoses = false;
+									if (std::abs(actualMatrix.values[row][column] -
+										firstMatrix.values[row][column]) > 0.00001f)
+										hasMovement = true;
+								}
+							}
+						}
+					}
+					if (!hasMovement)
+						allClipsMove = false;
+				}
+			}
+			ufbx_free_scene(referenceScene);
+
+			testRunner.Check(hasCorrectTimes, timeLabel.c_str());
+			testRunner.Check(matchesSourcePoses && allClipsMove, poseLabel.c_str());
+		}
+	}
+
+    bool AnimationPoseMatches(
+        const std::vector<ModelMatrix>& matrices,
+        const std::vector<float>& expectedXPositions
+    )
+    {
+        if (matrices.size() != expectedXPositions.size())
+            return false;
+
+        for (std::size_t i = 0; i < matrices.size(); ++i)
+        {
+            const ModelVertex position = matrices[i].TransformPoint({ 0.0f, 0.0f, 0.0f });
+            if (!(std::abs(position.x - expectedXPositions[i]) < 0.0001f &&
+                std::abs(position.y) < 0.0001f && std::abs(position.z) < 0.0001f))
+                return false;
+        }
+        return true;
+    }
+
+    void RunAnimationPoseTests(TestRunner& testRunner)
+    {
+        // 모델과 애니메이션의 관절 순서를 일부러 다르게 만든다.
+        std::vector<SkeletonNode> modelNodes(3);
+        modelNodes[0].name = "Root";
+        modelNodes[0].localPositionX = 1.0f;
+        modelNodes[1].name = "Child";
+        modelNodes[1].parentIdx = 0;
+        modelNodes[1].localPositionX = 2.0f;
+        modelNodes[2].name = "Helper";
+        modelNodes[2].localPositionX = 7.0f;
+
+        AnimationFrame firstFrame;
+        firstFrame.nodes = { modelNodes[1], modelNodes[0] };
+        firstFrame.nodes[0].parentIdx = 1;
+        firstFrame.nodes[1].localPositionX = 10.0f;
+
+        AnimationFrame secondFrame = firstFrame;
+        secondFrame.time = 0.2;
+        secondFrame.nodes[0].localPositionX = 3.0f;
+        secondFrame.nodes[1].localPositionX = 20.0f;
+
+        AnimationClip clip;
+        clip.duration = 0.2;
+        clip.frames = { firstFrame, secondFrame };
+        clip.sourceNodeIndices = { 1, 0, -1 };
+
+        testRunner.Check(
+            AnimationPoseMatches(SkeletonPoseCalculator::Calculate(modelNodes, clip, 0.0),
+                { 10.0f, 12.0f, 7.0f }),
+            "AnimationPose maps reordered nodes and preserves missing helper"
+        );
+        testRunner.Check(
+            AnimationPoseMatches(SkeletonPoseCalculator::Calculate(modelNodes, clip, 0.2),
+                { 20.0f, 23.0f, 7.0f }),
+            "AnimationPose selects pose at exact frame time"
+        );
+        testRunner.Check(
+            AnimationPoseMatches(SkeletonPoseCalculator::Calculate(modelNodes, clip, -1.0),
+                { 10.0f, 12.0f, 7.0f }) &&
+            AnimationPoseMatches(SkeletonPoseCalculator::Calculate(modelNodes, clip, 1.0),
+                { 20.0f, 23.0f, 7.0f }),
+            "AnimationPose clamps times to clip endpoints"
+        );
+
+        AnimationClip emptyClip;
+        testRunner.Check(
+            AnimationPoseMatches(SkeletonPoseCalculator::Calculate(modelNodes, emptyClip, 0.0),
+                { 1.0f, 3.0f, 7.0f }),
+            "AnimationPose preserves default pose for empty clip"
+        );
+
+        clip.frames = { firstFrame };
+        testRunner.Check(
+            AnimationPoseMatches(SkeletonPoseCalculator::Calculate(modelNodes, clip, 1.0),
+                { 10.0f, 12.0f, 7.0f }),
+            "AnimationPose supports a single frame"
+        );
+
+        const UfbxModelSourceReader reader;
+        const ModelSourceReadResult modelSource = reader.Read(
+            "C:/WorkSpace/HiwoongEngine/AsciiDoom/Assets/Model/MonsterLow.fbx");
+        if (!modelSource.success || modelSource.source == nullptr)
+        {
+            testRunner.Check(false, "AnimationPose reads base skeleton");
+            return;
+        }
+
+        const std::vector<SkeletonNode> monsterNodes = modelSource.source->GetSkeletonNodes();
+        const std::vector<ModelMatrix> defaultMatrices = SkeletonPoseCalculator::Calculate(monsterNodes);
+        std::vector<int> requiredNodeIndices;
+        for (std::size_t meshIndex = 0; meshIndex < modelSource.source->GetMeshCount(); ++meshIndex)
+        {
+            for (const SkinBinding& binding : modelSource.source->GetSkinBindings(meshIndex))
+                requiredNodeIndices.push_back(binding.nodeIdx);
+        }
+
+        const AnimationLoader animationLoader;
+        const std::vector<std::string> fileNames = { "MonsterIdle.fbx", "MonsterWalk.fbx" };
+        for (const std::string& fileName : fileNames)
+        {
+            const std::string filePath =
+                "C:/WorkSpace/HiwoongEngine/AsciiDoom/Assets/Model/" + fileName;
+            const std::string mappingLabel = "AnimationLoader maps model bones in " + fileName;
+            const std::string poseLabel = "AnimationPose matches source world poses in " + fileName;
+            ModelSourceReadResult sourceResult = reader.Read(filePath);
+            ModelImportContext animationContext;
+            animationContext.source = sourceResult.source;
+            std::vector<AnimationClip> clips;
+            const bool loaded = sourceResult.success && animationLoader.Load(
+                animationContext, monsterNodes, clips);
+
+            // 원본을 가진 두 참조를 모두 해제한 뒤 복사본을 사용한다.
+            sourceResult.source.reset();
+            animationContext.source.reset();
+
+            ufbx_load_opts options{};
+            options.target_axes = {
+                UFBX_COORDINATE_AXIS_POSITIVE_X,
+                UFBX_COORDINATE_AXIS_NEGATIVE_Y,
+                UFBX_COORDINATE_AXIS_NEGATIVE_Z
+            };
+            options.target_unit_meters = 1.0;
+            options.space_conversion = UFBX_SPACE_CONVERSION_MODIFY_GEOMETRY;
+            ufbx_error error{};
+            ufbx_scene* referenceScene = ufbx_load_file(filePath.c_str(), &options, &error);
+            if (referenceScene == nullptr)
+            {
+                testRunner.Check(false, mappingLabel.c_str());
+                testRunner.Check(false, poseLabel.c_str());
+                continue;
+            }
+
+            bool hasMapping = loaded && !clips.empty() && !requiredNodeIndices.empty() &&
+                clips.size() == referenceScene->anim_stacks.count &&
+                defaultMatrices.size() == monsterNodes.size();
+            if (hasMapping)
+            {
+                for (const AnimationClip& loadedClip : clips)
+                {
+                    if (loadedClip.sourceNodeIndices.size() != monsterNodes.size() ||
+                        loadedClip.frames.empty())
+                    {
+                        hasMapping = false;
+                        break;
+                    }
+                    for (std::size_t modelIndex = 0; modelIndex < monsterNodes.size(); ++modelIndex)
+                    {
+                        int expectedIndex = -1;
+                        for (const ufbx_node* referenceNode : referenceScene->nodes)
+                        {
+                            if (monsterNodes[modelIndex].name == referenceNode->name.data)
+                            {
+                                expectedIndex = static_cast<int>(referenceNode->typed_id);
+                                break;
+                            }
+                        }
+                        if (loadedClip.sourceNodeIndices[modelIndex] != expectedIndex)
+                            hasMapping = false;
+                    }
+                    for (int requiredIndex : requiredNodeIndices)
+                    {
+                        if (requiredIndex < 0 || requiredIndex >= static_cast<int>(monsterNodes.size()) ||
+                            loadedClip.sourceNodeIndices[requiredIndex] < 0)
+                            hasMapping = false;
+                    }
+                }
+            }
+            testRunner.Check(hasMapping, mappingLabel.c_str());
+
+            bool matchesWorldPoses = hasMapping;
+            if (hasMapping)
+            {
+                for (std::size_t clipIndex = 0; clipIndex < clips.size(); ++clipIndex)
+                {
+                    const AnimationClip& loadedClip = clips[clipIndex];
+                    const ufbx_anim_stack* sourceClip = referenceScene->anim_stacks.data[clipIndex];
+                    const std::vector<std::size_t> sampleIndices = {
+                        0, loadedClip.frames.size() / 2, loadedClip.frames.size() - 1
+                    };
+                    for (std::size_t sampleIndex : sampleIndices)
+                    {
+                        const double sampleTime = loadedClip.frames[sampleIndex].time;
+                        ufbx_scene* evaluatedScene = ufbx_evaluate_scene(
+                            referenceScene, sourceClip->anim, sourceClip->time_begin + sampleTime,
+                            nullptr, nullptr);
+                        if (evaluatedScene == nullptr)
+                        {
+                            matchesWorldPoses = false;
+                            break;
+                        }
+                        const std::vector<ModelMatrix> actualMatrices =
+                            SkeletonPoseCalculator::Calculate(monsterNodes, loadedClip, sampleTime);
+                        if (actualMatrices.size() != monsterNodes.size())
+                            matchesWorldPoses = false;
+                        else
+                        {
+                            for (std::size_t modelIndex = 0; modelIndex < monsterNodes.size(); ++modelIndex)
+                            {
+                                const int sourceIndex = loadedClip.sourceNodeIndices[modelIndex];
+                                if (sourceIndex == -1)
+                                {
+                                    for (int row = 0; row < 4; ++row)
+                                        for (int column = 0; column < 4; ++column)
+                                            if (!(std::abs(actualMatrices[modelIndex].values[row][column] -
+                                                defaultMatrices[modelIndex].values[row][column]) <= 0.0001f))
+                                                matchesWorldPoses = false;
+                                    continue;
+                                }
+                                if (sourceIndex < 0 || sourceIndex >= static_cast<int>(evaluatedScene->nodes.count))
+                                {
+                                    matchesWorldPoses = false;
+                                    continue;
+                                }
+                                const ufbx_matrix& expected = evaluatedScene->nodes.data[sourceIndex]->node_to_world;
+                                for (int row = 0; row < 3; ++row)
+                                    for (int column = 0; column < 4; ++column)
+                                        if (!(std::abs(actualMatrices[modelIndex].values[row][column] -
+                                            expected.cols[column].v[row]) <= 0.0001))
+                                            matchesWorldPoses = false;
+                            }
+                        }
+                        ufbx_free_scene(evaluatedScene);
+                    }
+                }
+            }
+            ufbx_free_scene(referenceScene);
+            testRunner.Check(matchesWorldPoses, poseLabel.c_str());
+        }
+    }
 	void RunMeshLoaderTests(TestRunner& testRunner)
 	{
+		RunAnimationSourceTests(testRunner);
+		RunAnimationPoseTests(testRunner);
+
 		SkeletonNode parent;
 		parent.localPositionX = 10.0f;
 		parent.localScaleX = 2.0f;
@@ -204,6 +589,63 @@ namespace Hiwoong::Tests
 		testRunner.Check(
 			hasCorrectHierarchy,
 			"SkeletonPoseCalculator applies all parents in source order"
+		);
+
+		ModelMesh skinMesh;
+		// X 중심이 2인 모델의 정렬된 위치와 원본 위치.
+		skinMesh.vertices = {
+			{ -1.0f, 0.0f, 0.0f, 0.25f, 0.75f },
+			{ 1.0f, 0.0f, 0.0f, 0.5f, 0.25f }
+		};
+		skinMesh.localVertices = {
+			{ 1.0f, 0.0f, 0.0f },
+			{ 3.0f, 0.0f, 0.0f }
+		};
+		skinMesh.skinWeights = {
+			{ { 0, 0.25f }, { 1, 0.75f } },
+			{}
+		};
+
+		SkinBinding firstBinding;
+		firstBinding.nodeIdx = 0;
+		firstBinding.geometryToBone.values[0][3] = -1.0f;
+
+		SkinBinding secondBinding;
+		secondBinding.nodeIdx = 1;
+		secondBinding.geometryToBone.values[0][3] = -1.0f;
+
+		// 관절 번호와 바인딩 목록 순서가 달라도 올바르게 연결해야 한다.
+		skinMesh.skinBindings = { secondBinding, firstBinding };
+
+		std::vector<ModelMatrix> skinNodeMatrices(2);
+		skinNodeMatrices[0].values[0][3] = 3.0f;
+		skinNodeMatrices[1].values[0][3] = 7.0f;
+
+		ModelMatrix skinAlignment;
+		skinAlignment.values[0][3] = -2.0f;
+
+		const std::vector<ModelVertex> skinnedVertices =
+			SkinningCalculator::Calculate(skinMesh, skinNodeMatrices, skinAlignment);
+
+		// (1 - 1 + 3) * 0.25 + (1 - 1 + 7) * 0.75 - 2 = 4.
+		testRunner.Check(
+			skinnedVertices.size() == 2 &&
+			std::abs(skinnedVertices[0].x - 4.0f) < 0.0001f &&
+			std::abs(skinnedVertices[0].y) < 0.0001f &&
+			std::abs(skinnedVertices[0].z) < 0.0001f &&
+			skinnedVertices[0].u == 0.25f &&
+			skinnedVertices[0].v == 0.75f,
+			"SkinningCalculator blends bone movement and preserves UVs"
+		);
+
+		testRunner.Check(
+			skinnedVertices.size() == 2 &&
+			skinnedVertices[1].x == 1.0f &&
+			skinnedVertices[1].y == 0.0f &&
+			skinnedVertices[1].z == 0.0f &&
+			skinnedVertices[1].u == 0.5f &&
+			skinnedVertices[1].v == 0.25f,
+			"SkinningCalculator preserves vertices without bone influence"
 		);
 
 		ModelImportContext context;
@@ -294,6 +736,12 @@ namespace Hiwoong::Tests
 			monsterResult.source != nullptr &&
 			monsterResult.source->GetMeshCount() > 0,
 			"ModelSourceReader reads monster FBX"
+		);
+
+		testRunner.Check(
+			monsterResult.success && monsterResult.source != nullptr &&
+			monsterResult.source->GetAnimationClips().empty(),
+			"AnimationSource returns no clips for static monster"
 		);
 
 		if (!monsterResult.success || monsterResult.source == nullptr)
@@ -434,6 +882,137 @@ namespace Hiwoong::Tests
 
 
 
+
+		// 원본 라이브러리 결과와 비교해 실제 FBX의 관절 행렬을 검사한다.
+		ufbx_load_opts referenceOptions{};
+		referenceOptions.target_axes = {
+			UFBX_COORDINATE_AXIS_POSITIVE_X,
+			UFBX_COORDINATE_AXIS_NEGATIVE_Y,
+			UFBX_COORDINATE_AXIS_NEGATIVE_Z
+		};
+		referenceOptions.target_unit_meters = 1.0;
+		referenceOptions.space_conversion = UFBX_SPACE_CONVERSION_MODIFY_GEOMETRY;
+		ufbx_error referenceError{};
+		ufbx_scene* referenceScene = ufbx_load_file(
+			"C:/WorkSpace/HiwoongEngine/AsciiDoom/Assets/Model/MonsterLow.fbx",
+			&referenceOptions, &referenceError
+		);
+
+		bool matchesSourcePose = false;
+		bool matchesBindPose = false;
+		bool hasBoneInfluence = false;
+
+		if (importResult.success && referenceScene != nullptr &&
+			!importResult.model.skeltonNodes.empty() &&
+			!importResult.model.meshes.empty())
+		{
+			const std::vector<ModelMatrix> defaultMatrices =
+				SkeletonPoseCalculator::Calculate(importResult.model.skeltonNodes);
+			matchesSourcePose =
+				defaultMatrices.size() == referenceScene->nodes.count;
+
+			if (matchesSourcePose)
+			{
+				for (std::size_t index = 0; index < defaultMatrices.size(); ++index)
+				{
+					const ufbx_matrix& reference = referenceScene->nodes.data[index]->node_to_world;
+					for (int row = 0; row < 3; ++row)
+					{
+						for (int column = 0; column < 4; ++column)
+						{
+							if (!(std::abs(defaultMatrices[index].values[row][column] -
+								reference.cols[column].v[row]) <= 0.0001))
+							{
+								matchesSourcePose = false;
+							}
+						}
+					}
+				}
+			}
+
+			matchesBindPose =
+				defaultMatrices.size() == referenceScene->nodes.count &&
+				importResult.model.meshes.size() == referenceScene->meshes.count;
+
+			if (matchesBindPose)
+			{
+				for (std::size_t meshIndex = 0; meshIndex < importResult.model.meshes.size(); ++meshIndex)
+				{
+					const ModelMesh& modelMesh = importResult.model.meshes[meshIndex];
+					const ufbx_mesh* sourceMesh = referenceScene->meshes.data[meshIndex];
+					if (modelMesh.vertices.empty() ||
+						modelMesh.localVertices.size() != modelMesh.vertices.size() ||
+						modelMesh.skinWeights.size() != modelMesh.vertices.size())
+					{
+						matchesBindPose = false;
+						break;
+					}
+
+					// 이 메시를 관절에 묶었을 때의 자세를 사용한다.
+					auto bindMatrices = defaultMatrices;
+					if (sourceMesh->skin_deformers.count > 0)
+					{
+						for (const ufbx_skin_cluster* cluster : sourceMesh->skin_deformers.data[0]->clusters)
+						{
+							if (cluster->bone_node == nullptr ||
+								cluster->bone_node->typed_id >= bindMatrices.size())
+							{
+								matchesBindPose = false;
+								break;
+							}
+							ModelMatrix& matrix = bindMatrices[cluster->bone_node->typed_id];
+							for (int row = 0; row < 3; ++row)
+							{
+								for (int column = 0; column < 4; ++column)
+								{
+									matrix.values[row][column] =
+										static_cast<float>(cluster->bind_to_world.cols[column].v[row]);
+								}
+							}
+						}
+					}
+					if (!matchesBindPose)
+						break;
+
+					const std::vector<ModelVertex> bindVertices = SkinningCalculator::Calculate(
+						modelMesh, bindMatrices, importResult.model.modelAlignment);
+					if (bindVertices.size() != modelMesh.vertices.size())
+					{
+						matchesBindPose = false;
+						break;
+					}
+
+					for (std::size_t index = 0; index < bindVertices.size(); ++index)
+					{
+						for (const SkinWeight& weight : modelMesh.skinWeights[index])
+						{
+							if (weight.weight > 0.0f)
+								hasBoneInfluence = true;
+						}
+						const ModelVertex& actual = bindVertices[index];
+						const ModelVertex& expected = modelMesh.vertices[index];
+						// 미터 단위에서 위치 오차를 0.1mm까지 허용한다.
+						if (!(std::abs(actual.x - expected.x) <= 0.0001f &&
+							std::abs(actual.y - expected.y) <= 0.0001f &&
+							std::abs(actual.z - expected.z) <= 0.0001f &&
+							actual.u == expected.u && actual.v == expected.v))
+						{
+							matchesBindPose = false;
+						}
+					}
+				}
+			}
+		}
+		ufbx_free_scene(referenceScene);
+
+		testRunner.Check(
+			matchesSourcePose,
+			"SkeletonPoseCalculator matches monster source node matrices"
+		);
+		testRunner.Check(
+			matchesBindPose && hasBoneInfluence,
+			"SkinningCalculator reconstructs monster bind pose"
+		);
 
 		monsterContext.meshMappings = monsterMeshResult.sourceMappings;
 		auto skinMeshes = monsterMeshResult.meshes;

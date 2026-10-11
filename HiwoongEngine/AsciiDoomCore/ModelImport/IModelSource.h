@@ -9,6 +9,7 @@
 #include "SkeletonNode.h"
 #include "SkinWeight.h"
 #include "SkinBinding.h"
+#include "../Animation/AnimationClip.h"
 namespace Hiwoong
 {
 	/// <summary>
@@ -82,5 +83,8 @@ namespace Hiwoong
 		virtual std::vector<SkinBinding> GetSkinBindings(
 			std::size_t meshIndex
 		) const = 0;
+
+		// 원본 FBX의 애니메이션과 시간별 관절 자세를 가져온다.
+		virtual std::vector<AnimationClip> GetAnimationClips() const = 0;
 	};
 }

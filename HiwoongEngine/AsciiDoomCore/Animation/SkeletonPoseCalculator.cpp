@@ -40,4 +40,53 @@ namespace Hiwoong
 
 		return matrices;
 	}
+	std::vector<ModelMatrix> SkeletonPoseCalculator::Calculate(
+		const std::vector<SkeletonNode>& modelNodes,
+		const AnimationClip& clip,
+		double time
+	)
+	{
+		std::vector<ModelMatrix> matrices = Calculate(modelNodes);
+		if (clip.frames.empty())
+			return matrices;
+
+		std::size_t frameIndex = 0;
+
+		for (std::size_t i = 1; i < clip.frames.size(); ++i)
+		{
+			if (clip.frames[i].time > time)
+				break;
+
+			frameIndex = i;
+		}
+
+		const AnimationFrame& frame = clip.frames[frameIndex];
+
+		const std::vector<ModelMatrix> animationMatrices =
+			Calculate(frame.nodes);
+
+		if (clip.sourceNodeIndices.size() != matrices.size())
+		{
+			assert(false && "Invalid animation node mapping");
+			return {};
+		}
+
+		for (std::size_t i = 0; i < matrices.size(); ++i)
+		{
+			const int sourceIndex = clip.sourceNodeIndices[i];
+
+			if (sourceIndex == -1)
+				continue;
+
+			if (sourceIndex < 0 ||
+				sourceIndex >= static_cast<int>(animationMatrices.size()))
+			{
+				assert(false && "Invalid animation node index");
+				return {};
+			}
+
+			matrices[i] = animationMatrices[sourceIndex];
+		}
+		return matrices;
+	}
 }
