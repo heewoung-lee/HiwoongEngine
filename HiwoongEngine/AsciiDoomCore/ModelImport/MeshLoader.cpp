@@ -42,10 +42,14 @@ namespace Hiwoong
                     source->GetCornerVertex(meshIndex, cornerIndex)
                 );
 
-                mapping.sourceVertexIndices.push_back(
-                    source->GetCornerSourceVertexIndex(
-                        meshIndex, cornerIndex
-                    )
+                const std::size_t sourceVertexIdx =
+                    source->GetCornerSourceVertexIndex(meshIndex, cornerIndex);
+
+                mapping.sourceVertexIndices.push_back(sourceVertexIdx);
+
+                // 같은 정점의 변환 전 위치를 보관한다.
+                mesh.localVertices.push_back(
+                    source->GetVertex(meshIndex, sourceVertexIdx)
                 );
             }
 

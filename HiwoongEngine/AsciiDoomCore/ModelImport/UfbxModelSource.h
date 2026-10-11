@@ -53,6 +53,16 @@ namespace Hiwoong
             std::size_t meshIndex
         ) const override;
 
+        std::vector<SkeletonNode> GetSkeletonNodes() const override;
+
+        std::vector<std::vector<SkinWeight>> GetSkinWeights(
+            std::size_t meshIndex
+        ) const override;
+
+        std::vector<SkinBinding> GetSkinBindings(
+            std::size_t meshIndex
+        ) const override;
+
     private:
         ufbx_scene* scene;
     };

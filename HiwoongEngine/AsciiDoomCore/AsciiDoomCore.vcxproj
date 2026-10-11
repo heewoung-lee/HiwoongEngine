@@ -11,14 +11,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation\SkeletonPoseCalculator.h" />
+    <ClInclude Include="Animation\SkinningCalculator.h" />
     <ClInclude Include="ModelImport\IMeshLoader.h" />
     <ClInclude Include="ModelImport\IModelImporter.h" />
     <ClInclude Include="ModelImport\IModelSource.h" />
     <ClInclude Include="ModelImport\IModelSourceReader.h" />
+    <ClInclude Include="ModelImport\ISkeletonLoader.h" />
+    <ClInclude Include="ModelImport\ISkinWeightLoader.h" />
     <ClInclude Include="ModelImport\MeshLoader.h" />
     <ClInclude Include="ModelImport\MeshLoadResult.h" />
     <ClInclude Include="ModelImport\MeshSourceMapping.h" />
     <ClInclude Include="ModelImport\ModelData.h" />
+    <ClInclude Include="ModelImport\ModelMatrix.h" />
+    <ClInclude Include="ModelImport\SkeletonLoader.h" />
     <ClInclude Include="ModelImport\ModelImportContext.h" />
     <ClInclude Include="ModelImport\ModelImporter.h" />
     <ClInclude Include="ModelImport\ModelImportResult.h" />
@@ -28,6 +34,10 @@
     <ClInclude Include="ModelImport\ModelTriangle.h" />
     <ClInclude Include="ModelImport\ModelVertex.h" />
     <ClInclude Include="ModelImport\PngTextureLoader.h" />
+    <ClInclude Include="ModelImport\SkeletonNode.h" />
+    <ClInclude Include="ModelImport\SkinBinding.h" />
+    <ClInclude Include="ModelImport\SkinWeight.h" />
+    <ClInclude Include="ModelImport\SkinWeightLoader.h" />
     <ClInclude Include="ModelImport\UfbxModelSourceReader.h" />
     <ClInclude Include="ModelImport\UfbxModelSource.h" />
     <ClInclude Include="PathFinder\GridPosition.h" />
@@ -38,9 +48,14 @@
     <ClInclude Include="ThirdParty\ufbx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation\SkeletonPoseCalculator.cpp" />
+    <ClCompile Include="Animation\SkinningCalculator.cpp" />
     <ClCompile Include="ModelImport\MeshLoader.cpp" />
+    <ClCompile Include="ModelImport\ModelMatrix.cpp" />
+    <ClCompile Include="ModelImport\SkeletonLoader.cpp" />
     <ClCompile Include="ModelImport\ModelImporter.cpp" />
     <ClCompile Include="ModelImport\PngTextureLoader.cpp" />
+    <ClCompile Include="ModelImport\SkinWeightLoader.cpp" />
     <ClCompile Include="ModelImport\UfbxModelSource.cpp" />
     <ClCompile Include="ModelImport\UfbxModelSourceReader.cpp" />
     <ClCompile Include="PathFinder\Implements\AStarPathFinder.cpp" />

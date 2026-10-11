@@ -6,6 +6,9 @@
 #include <vector>
 #include "ModelVertex.h"
 #include "ModelTriangle.h"
+#include "SkeletonNode.h"
+#include "SkinWeight.h"
+#include "SkinBinding.h"
 namespace Hiwoong
 {
 	/// <summary>
@@ -69,5 +72,15 @@ namespace Hiwoong
 			std::size_t meshIndex
 		) const = 0;
 
+		virtual std::vector<SkeletonNode> GetSkeletonNodes() const = 0;
+		
+		// 지정한 메시의 원본 정점 순서로 가중치 목록을 반환한다.
+		virtual std::vector<std::vector<SkinWeight>> GetSkinWeights(
+			std::size_t meshIndex
+		) const = 0;
+		// 지정한 메시의 관절 바인딩 목록을 반환한다.
+		virtual std::vector<SkinBinding> GetSkinBindings(
+			std::size_t meshIndex
+		) const = 0;
 	};
 }
