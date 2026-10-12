@@ -239,7 +239,9 @@ https://github.com/user-attachments/assets/beae9df2-e230-4d57-ae9d-7412b1c976b0
 
 https://github.com/user-attachments/assets/9676c227-d0d1-4a04-aa30-9be947be6c2f
 
-
+3) 애니메이션
+   
+https://github.com/user-attachments/assets/33cdb9ab-515f-455e-bad4-3dce3449dec7
 
 ## 문제 해결 과정
 
