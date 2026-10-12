@@ -242,6 +242,10 @@ https://github.com/user-attachments/assets/9676c227-d0d1-4a04-aa30-9be947be6c2f
 3) 애니메이션
 
 https://github.com/user-attachments/assets/745eb1be-686a-4f3c-84c6-df437a77ef4b
+ 
+https://github.com/user-attachments/assets/29db8578-6d9d-4685-bcf5-1cb5c9d7054f
+
+
 
 
 ## 문제 해결 과정
