@@ -6,6 +6,8 @@
 #include "ModelImport/ModelTexture.h"
 #include "Math/Color.h"
 #include "Render/IRenderable3D.h"
+#include "ModelImport/ModelVertex.h"
+#include <vector>
 #include <memory>
 
 namespace Hiwoong
@@ -45,6 +47,10 @@ namespace Hiwoong
 		) const override;
 
 		Color GetTextureColor(float u, float v) const;
+
+		void SetVertexPositions(
+			const std::vector<ModelVertex>& vertices
+		);
 	private:
 		Mesh mesh;
 		std::shared_ptr<TransformComponent> transform;

@@ -13,12 +13,36 @@ namespace
 {
 	ModelImportResult LoadFBX()
 	{
-		//10.9일 몬스터 FBX읽기
 		const auto modelImporter = DoomInstaller::CreateModelImporter();
 
-		const ModelImportResult result =
+		ModelImportResult result =
 			modelImporter->Import("Assets/Model/MonsterLow.fbx");
 
+
+
+		assert(result.success);
+		if (!result.success)
+			return result;
+
+		const bool idleLoaded = modelImporter->ImportAnimation(
+			result.model,
+			"Assets/Model/MonsterIdle.fbx",
+			"Idle"
+		);
+
+		const bool moveLoaded = modelImporter->ImportAnimation(
+			result.model,
+			"Assets/Model/MonsterWalk.fbx",
+			"Move"
+		);
+
+		const bool attackLoaded = modelImporter->ImportAnimation(
+			result.model,
+			"Assets/Model/MonsterAttack.fbx",
+			"Attack"
+		);
+
+		result.success = idleLoaded && moveLoaded && attackLoaded;
 		assert(result.success);
 
 		return result;

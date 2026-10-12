@@ -26,6 +26,12 @@ namespace Hiwoong
             const std::string& filePath
         ) const override;
 
+        bool ImportAnimation(
+            ModelData& model,
+            const std::string& filePath,
+            const std::string& name
+        ) const override;
+
     private:
         void CenterModel(ModelData& model) const;
     private:
@@ -35,4 +41,6 @@ namespace Hiwoong
         std::shared_ptr<const ISkinWeightLoader> skinWeightLoader;
         std::shared_ptr<const IAnimationLoader> animationLoader;
     };
+
+
 }

@@ -2,11 +2,13 @@
 
 #include "GameObject/GameObject.h"
 #include "Interfaces/IDamageable.h"
-
+#include <vector>
+#include <cstddef>
 
 namespace Hiwoong
 {
 	class NavAIComponent;
+	class ModelAnimationComponent;
 	struct ModelData;
 
 	class Monster : public GameObject, public IDamageable
@@ -59,10 +61,21 @@ namespace Hiwoong
 			const Vector3& targetPosition
 		) const;
 		void UpdateState();
+		//경로요청 메서드
+		void RequestPath();
 
+		// 주어진 방향으로 몬스터의 몸을 돌린다.
+		void UpdateFacing(const Vector3& direction, double deltaTime);
+
+		void FollowPath(double deltaTime);
+
+		std::vector<Vector3> path;
+		std::size_t currentPathIndex = 0;
 
 		//10.9일 몬스터에 대한 모델 fbx 추가
 		std::shared_ptr<const ModelData> model;
+
+		std::shared_ptr<ModelAnimationComponent> modelAnimationComponent;
 	};
 
 

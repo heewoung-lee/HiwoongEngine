@@ -856,7 +856,8 @@ namespace Hiwoong::Tests
 			std::make_shared<UfbxModelSourceReader>(),
 			std::make_shared<MeshLoader>(),
 			std::make_shared<SkeletonLoader>(),
-			std::make_shared<SkinWeightLoader>()
+			std::make_shared<SkinWeightLoader>(),
+			std::make_shared<AnimationLoader>()
 		);
 
 
@@ -882,6 +883,66 @@ namespace Hiwoong::Tests
 
 
 
+
+        // 같은 모델에 Idle과 Move를 차례로 추가한다.
+        ModelData animatedModel = importResult.model;
+        const bool idleLoaded = importResult.success && importer.ImportAnimation(
+            animatedModel,
+            "C:/WorkSpace/HiwoongEngine/AsciiDoom/Assets/Model/MonsterIdle.fbx",
+            "Idle"
+        );
+
+        testRunner.Check(
+            idleLoaded && animatedModel.animationClips.size() == 1 &&
+            animatedModel.animationClips[0].name == "Idle" &&
+            animatedModel.animationClips[0].duration > 0.0 &&
+            !animatedModel.animationClips[0].frames.empty() &&
+            animatedModel.animationClips[0].sourceNodeIndices.size() ==
+                animatedModel.skeltonNodes.size(),
+            "ModelImporter loads named Idle animation"
+        );
+
+        const std::size_t idleFrameCount =
+            animatedModel.animationClips.empty() ? 0 :
+            animatedModel.animationClips[0].frames.size();
+        const double idleDuration =
+            animatedModel.animationClips.empty() ? 0.0 :
+            animatedModel.animationClips[0].duration;
+
+        const bool moveLoaded = idleLoaded && importer.ImportAnimation(
+            animatedModel,
+            "C:/WorkSpace/HiwoongEngine/AsciiDoom/Assets/Model/MonsterWalk.fbx",
+            "Move"
+        );
+
+        testRunner.Check(
+            moveLoaded && animatedModel.animationClips.size() == 2 &&
+            animatedModel.animationClips[0].name == "Idle" &&
+            animatedModel.animationClips[0].frames.size() == idleFrameCount &&
+            animatedModel.animationClips[0].duration == idleDuration &&
+            animatedModel.animationClips[1].name == "Move" &&
+            animatedModel.animationClips[1].duration > 0.0 &&
+            !animatedModel.animationClips[1].frames.empty() &&
+            animatedModel.animationClips[1].sourceNodeIndices.size() ==
+                animatedModel.skeltonNodes.size(),
+            "ModelImporter appends Move without losing Idle"
+        );
+
+        const bool rejectsStaticFile = !importer.ImportAnimation(
+            animatedModel,
+            "C:/WorkSpace/HiwoongEngine/AsciiDoom/Assets/Model/MonsterLow.fbx",
+            "Unused"
+        );
+
+        testRunner.Check(
+            moveLoaded && rejectsStaticFile &&
+            animatedModel.animationClips.size() == 2 &&
+            animatedModel.animationClips[0].name == "Idle" &&
+            animatedModel.animationClips[0].frames.size() == idleFrameCount &&
+            animatedModel.animationClips[0].duration == idleDuration &&
+            animatedModel.animationClips[1].name == "Move",
+            "ModelImporter rejects animation-free FBX without losing clips"
+        );
 
 		// 원본 라이브러리 결과와 비교해 실제 FBX의 관절 행렬을 검사한다.
 		ufbx_load_opts referenceOptions{};

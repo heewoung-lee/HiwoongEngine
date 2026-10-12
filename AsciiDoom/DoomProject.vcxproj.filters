@@ -120,6 +120,9 @@
     <ClCompile Include="ModelImport\ModelMeshConverter.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Component\ModelAnimationComponent.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene\DoomScene.h">
@@ -234,6 +237,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="ModelImport\ModelMeshConverter.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\ModelAnimationComponent.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

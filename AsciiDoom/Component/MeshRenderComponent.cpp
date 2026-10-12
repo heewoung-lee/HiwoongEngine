@@ -124,4 +124,24 @@ namespace Hiwoong
 
 		return bestColor;
 	}
+	void MeshRenderComponent::SetVertexPositions(
+		const std::vector<ModelVertex>& vertices
+	)
+	{
+		assert(vertices.size() == mesh.vertices.size());
+
+		if (vertices.size() != mesh.vertices.size())
+			return;
+
+		for (std::size_t i = 0; i < vertices.size(); ++i)
+		{
+			const ModelVertex& vertex = vertices[i];
+
+			mesh.vertices[i].position = Vector3(
+				vertex.x,
+				vertex.y,
+				vertex.z
+			);
+		}
+	}
 }

@@ -36,6 +36,10 @@ namespace Hiwoong
 		const Vector3& targetPosition
 	) const
 	{
+		//만약 초기화가 안되었다면 빈 배열 출력 그러니깐 한프레임을 그냥넘긴다는 소리
+		if (HasStared() == false)
+			return {};
+
 		const auto map = navigationMap.lock();
 
 		assert(map != nullptr);

@@ -7,6 +7,7 @@
 #include "PngTextureLoader.h"
 #include "ISkeletonLoader.h"
 #include "ISkinWeightLoader.h"
+#include "IAnimationLoader.h"
 #include <algorithm>
 #include <limits>
 #include <utility>
@@ -18,17 +19,20 @@ namespace Hiwoong
 		std::shared_ptr<const IModelSourceReader> sourceReader,
 		std::shared_ptr<const IMeshLoader> meshLoader,
 		std::shared_ptr<const ISkeletonLoader> skeletonLoader,
-		std::shared_ptr<const ISkinWeightLoader> skinWeightLoader
+		std::shared_ptr<const ISkinWeightLoader> skinWeightLoader,
+		std::shared_ptr<const IAnimationLoader> animationLoader
 	)
 		: sourceReader(sourceReader),
 		meshLoader(meshLoader),
 		skeletonLoader(skeletonLoader),
-		skinWeightLoader(skinWeightLoader)
+		skinWeightLoader(skinWeightLoader),
+		animationLoader(animationLoader)
 	{
 		assert(this->sourceReader != nullptr);
 		assert(this->meshLoader != nullptr);
 		assert(this->skeletonLoader != nullptr);
 		assert(this->skinWeightLoader != nullptr);
+		assert(this->animationLoader != nullptr);
 	}
 
 	ModelImportResult ModelImporter::Import(
@@ -102,6 +106,35 @@ namespace Hiwoong
 		result.success = true;
 
 		return result;
+	}
+	bool ModelImporter::ImportAnimation(
+		ModelData& model,
+		const std::string& filePath,
+		const std::string& name
+	) const
+	{
+		const ModelSourceReadResult readResult =
+			sourceReader->Read(filePath);
+
+		if (!readResult.success || readResult.source == nullptr)
+			return false;
+
+		ModelImportContext context;
+		context.source = readResult.source;
+
+		std::vector<AnimationClip> clips;
+
+		if (!animationLoader->Load(context, model.skeltonNodes, clips))
+			return false;
+
+		// 지금 사용하는 Mixamo 파일은 파일당 애니메이션 하나.
+		if (clips.size() != 1)
+			return false;
+
+		clips[0].name = name;
+		model.animationClips.push_back(std::move(clips[0]));
+
+		return true;
 	}
 	void ModelImporter::CenterModel(ModelData& model) const
 	{

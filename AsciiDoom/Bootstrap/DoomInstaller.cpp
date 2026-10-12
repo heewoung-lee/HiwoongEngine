@@ -5,6 +5,8 @@
 #include "ModelImport/MeshLoader.h"
 #include "ModelImport/SkeletonLoader.h"
 #include "ModelImport/SkinWeightLoader.h"
+#include "ModelImport/AnimationLoader.h"
+
 namespace Hiwoong
 {
 	std::shared_ptr<const IPathFinder> DoomInstaller::CreatePathFinder()
@@ -19,7 +21,8 @@ namespace Hiwoong
 			std::make_shared<UfbxModelSourceReader>(),
 			std::make_shared<MeshLoader>(),
 			std::make_shared<SkeletonLoader>(),
-			std::make_shared<SkinWeightLoader>()
+			std::make_shared<SkinWeightLoader>(),
+			std::make_shared<AnimationLoader>()
 		);
 	}
 }

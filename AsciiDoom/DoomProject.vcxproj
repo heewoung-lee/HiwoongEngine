@@ -94,6 +94,7 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     <ClCompile Include="Bootstrap\DoomInstaller.cpp" />
     <ClCompile Include="Component\BulletAnimationData.cpp" />
     <ClCompile Include="Component\CrossHairMoveComponent.cpp" />
+    <ClCompile Include="Component\ModelAnimationComponent.cpp" />
     <ClCompile Include="Component\NavAIComponent.cpp" />
     <ClCompile Include="GameObject\EffectViewObject.cpp" />
     <ClCompile Include="Component\MeshRenderComponent.cpp" />
@@ -131,6 +132,7 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     <ClInclude Include="Bootstrap\DoomInstaller.h" />
     <ClInclude Include="Component\BulletAnimationData.h" />
     <ClInclude Include="Component\CrossHairMoveComponent.h" />
+    <ClInclude Include="Component\ModelAnimationComponent.h" />
     <ClInclude Include="Component\NavAIComponent.h" />
     <ClInclude Include="GameObject\EffectViewObject.h" />
     <ClInclude Include="Component\MeshRenderComponent.h" />

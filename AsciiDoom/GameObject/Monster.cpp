@@ -5,7 +5,11 @@
 #include "ModelImport/ModelData.h"
 #include "ModelImport/ModelMeshConverter.h"
 #include "Component/MeshRenderComponent.h"
+#include "Component/ModelAnimationComponent.h"
+#include "Math/MathUtils.h"
 #include "Scene/Scene.h"
+#include "Math/MathConstants.h"
+#include <cmath>
 #include <memory>
 #include <cassert>
 
@@ -36,6 +40,9 @@ namespace Hiwoong
 		transform->SetScale(
 			Vector3(scale, scale, scale)
 		);
+		modelAnimationComponent =
+			AddComponent<ModelAnimationComponent>(model, "Idle");
+
 		InitMeshRenderer();
 		
 		Vector3 size = InitSetColliderSize();
@@ -49,10 +56,42 @@ namespace Hiwoong
 		InitReferences();
 	
 	}
+	void Monster::UpdateFacing(
+		const Vector3& direction,
+		double deltaTime)
+	{
+		const float targetAngle =
+			std::atan2(direction.x, direction.z) + MathConstants::Pi;
+
+		const float currentAngle = transform->GetRotation().y;
+		const float ratio = 5.0f * static_cast<float>(deltaTime);
+
+		const float nextAngle = MathUtils::LerpAngle(
+			currentAngle,
+			targetAngle,
+			ratio
+		);
+
+		transform->SetRotation(Vector3(0.0f, nextAngle, 0.0f));
+	}
 	void Monster::Update(double deltaTime)
 	{
 		super::Update(deltaTime);
 		UpdateState();
+
+		if (currentState != MonsterState::Run)
+		{
+			path.clear();
+			return;
+		}
+
+		// 경로가 없거나 끝까지 이동했다면 다시 요청한다.
+		if (currentPathIndex >= path.size())
+		{
+			RequestPath();
+		}
+
+		FollowPath(deltaTime);
 	}
 	void Monster::UpdateState()
 	{
@@ -89,10 +128,23 @@ namespace Hiwoong
 
 	void Monster::ChangeState(MonsterState nextState)
 	{
-		if (currentState == nextState)
-			return;
+		bool accepted = false;
 
-		currentState = nextState;
+		if (nextState == MonsterState::Run)
+		{
+			accepted = modelAnimationComponent->Play("Move");
+		}
+		else if (nextState == MonsterState::Attack)
+		{
+			accepted = modelAnimationComponent->Play("Attack", true);
+		}
+		else
+		{
+			accepted = modelAnimationComponent->Play("Idle");
+		}
+
+		if (accepted)
+			currentState = nextState;
 	}
 
 	bool Monster::IsWithinAttackRange(
@@ -118,13 +170,79 @@ namespace Hiwoong
 		}
 
 	}
+	void Monster::RequestPath()
+	{
+		const auto targetObject = target.lock();
+		if (targetObject == nullptr)
+			return;
+
+		path = navAIComponent->FindPath(
+			GetWorldPosition(),
+			targetObject->GetWorldPosition()
+		);
+
+		// 이동 중 몬스터의 높이는 유지한다.
+		for (Vector3& position : path)
+		{
+			position.y = GetWorldPosition().y;
+		}
+
+		currentPathIndex = 0;
+	}
+	void Monster::FollowPath(double deltaTime)
+	{
+		if (currentPathIndex >= path.size())
+			return;
+
+		const Vector3 currentPosition = GetWorldPosition();
+
+		Vector3 direction = path[currentPathIndex] - currentPosition;
+		direction.y = 0.0f;
+
+		const float distance = direction.Length();
+
+		// 현재 경유지에 도착했다면 다음 경유지로 넘어간다.
+		if (distance <= 0.01f)
+		{
+			++currentPathIndex;
+			return;
+		}
+
+		float moveDistance = speed * static_cast<float>(deltaTime);
+
+		// 경유지를 지나치지 않도록 이동 거리를 제한한다.
+		if (moveDistance > distance)
+			moveDistance = distance;
+
+		const Vector3 nextPosition =
+			currentPosition + direction.Normalized() * moveDistance;
+
+		const auto scene = GetOwner();
+		assert(scene != nullptr);
+		if (scene == nullptr)
+			return;
+
+		// 이동이 막히면 기존 경로를 비운다.
+		if (scene->CanMoveTo(*this, nextPosition) == false)
+		{
+			path.clear();
+			return;
+		}
+		//회전 갱신
+		UpdateFacing(direction, deltaTime);
+		transform->SetWorldPosition(nextPosition);
+	}
 
 	void Monster::InitMeshRenderer()
 	{
 		assert(!model->meshes.empty());
 
-		for (const ModelMesh& modelMesh : model->meshes)
+		for (std::size_t meshIndex = 0;
+			meshIndex < model->meshes.size();
+			++meshIndex)
 		{
+			const ModelMesh& modelMesh = model->meshes[meshIndex];
+
 			std::size_t materialCount = modelMesh.diffuseTextures.size();
 
 			if (materialCount == 0)
@@ -142,11 +260,15 @@ namespace Hiwoong
 				if (i < modelMesh.diffuseTextures.size())
 					texture = modelMesh.diffuseTextures[i];
 
-				AddComponent<MeshRenderComponent>(
+				// 만든 렌더러를 변수에 보관한다.
+				const auto renderer = AddComponent<MeshRenderComponent>(
 					mesh,
 					Color::White,
 					texture
 				);
+
+				// 애니메이션 컴포넌트에게 연결할 렌더러를 알려준다.
+				modelAnimationComponent->BindRenderer(meshIndex, renderer);
 			}
 		}
 	}

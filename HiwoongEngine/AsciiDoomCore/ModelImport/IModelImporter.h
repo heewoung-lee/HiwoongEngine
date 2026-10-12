@@ -13,5 +13,11 @@ namespace Hiwoong
         virtual ModelImportResult Import(
             const std::string& filePath
         ) const = 0;
+
+        virtual bool ImportAnimation(
+            ModelData& model,
+            const std::string& filePath,
+            const std::string& name
+        ) const = 0;
     };
 }
