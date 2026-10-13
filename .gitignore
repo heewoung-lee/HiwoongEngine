@@ -59,3 +59,5 @@ x86/
 
 
 /docs/images/
+*.fbx
+*.blend
