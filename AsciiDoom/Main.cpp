@@ -3,19 +3,67 @@
 #include "Core/Input.h"
 #include "Render/WindowRenderOutput.h"
 #include "Bootstrap/DoomInstaller.h"
+#include "ModelImport/IModelImporter.h"
+#include <cassert>
 #include <utility>
 using namespace Hiwoong;
 
 //9.26일 의존성 주입 추가.
 namespace
 {
+	ModelImportResult LoadFBX()
+	{
+		const auto modelImporter = DoomInstaller::CreateModelImporter();
+
+		ModelImportResult result =
+			modelImporter->Import("Assets/Model/MonsterLow.fbx");
+
+
+
+		assert(result.success);
+		if (!result.success)
+			return result;
+
+		const bool idleLoaded = modelImporter->ImportAnimation(
+			result.model,
+			"Assets/Model/MonsterIdle.fbx",
+			"Idle"
+		);
+
+		const bool moveLoaded = modelImporter->ImportAnimation(
+			result.model,
+			"Assets/Model/MonsterWalk.fbx",
+			"Move"
+		);
+
+		const bool attackLoaded = modelImporter->ImportAnimation(
+			result.model,
+			"Assets/Model/MonsterAttack.fbx",
+			"Attack"
+		);
+
+		result.success = idleLoaded && moveLoaded && attackLoaded;
+		assert(result.success);
+
+		return result;
+	}
+
 	void DependencyInjection(Engine& engine)
 	{
-		const std::shared_ptr<const IPathFinder> pathFinder =
-			DoomInstaller::CreatePathFinder();
+		ModelImportResult monsterModelResult = LoadFBX();
 
-		engine.AddNewScene<DoomScene>(pathFinder);
+		const std::shared_ptr<const ModelData> monsterModel =
+			std::make_shared<ModelData>(
+				std::move(monsterModelResult.model)
+			);
+
+		const auto pathFinder = DoomInstaller::CreatePathFinder();
+
+		
+		engine.AddNewScene<DoomScene>(pathFinder, monsterModel);
 	}
+
+
 }
 
 int main()

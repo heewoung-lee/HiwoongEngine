@@ -111,6 +111,9 @@
     <ClCompile Include="Component\SpriteRenderer3DComponent.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Math\MathUtils.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Engine.h">
@@ -243,6 +246,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Render\ShaderData.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\MathUtils.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

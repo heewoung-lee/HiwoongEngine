@@ -108,9 +108,6 @@
     <ClCompile Include="GameObject\Monster.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Animation\MonsterAnimationData.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Util\PathFinder.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -118,6 +115,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Component\NavAIComponent.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelImport\ModelMeshConverter.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\ModelAnimationComponent.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -218,12 +221,6 @@
     <ClInclude Include="GameObject\Monster.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Animation\MonsterAnimationSet.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation\MonsterAnimationData.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Util\PathFinder.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -237,6 +234,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Component\NavAIComponent.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelImport\ModelMeshConverter.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\ModelAnimationComponent.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

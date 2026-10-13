@@ -1,26 +1,36 @@
 #include "Monster.h"
-#include "Component/SpriteRenderer3DComponent.h"
-#include "Component/SpriteAnimationComponent.h"
 #include "Component/BoxCollider3DComponent.h"
 #include "Component/NavAIComponent.h"
 #include "Navigation/INavAIContext.h"
-#include <memory>
+#include "ModelImport/ModelData.h"
+#include "ModelImport/ModelMeshConverter.h"
+#include "Component/MeshRenderComponent.h"
+#include "Component/ModelAnimationComponent.h"
+#include "Math/MathUtils.h"
 #include "Scene/Scene.h"
-#include <algorithm>
+#include "Math/MathConstants.h"
+#include <cmath>
+#include <memory>
 #include <cassert>
 
 namespace Hiwoong
 {
 	Monster::Monster(
-		const Vector3& spawnPosition, 
-		const MonsterAnimationSet& animations,
-		int hp, 
-		float speed, 
+		const Vector3& spawnPosition,
+		const std::shared_ptr<const ModelData>& model,
+		int hp,
+		float speed,
 		float attackRange,
-		float scale) : GameObject(spawnPosition), animations(animations),currentHp(hp),speed(speed),attackRange(attackRange),scale(scale)
+		float scale
+	)
+		: GameObject(spawnPosition),
+		currentHp(hp),
+		speed(speed),
+		attackRange(attackRange),
+		scale(scale),
+		model(model)
 	{
-		
-		
+		assert(this->model != nullptr);
 	}
 
 	void Monster::Start()
@@ -30,7 +40,10 @@ namespace Hiwoong
 		transform->SetScale(
 			Vector3(scale, scale, scale)
 		);
+		modelAnimationComponent =
+			AddComponent<ModelAnimationComponent>(model, "Idle");
 
+		InitMeshRenderer();
 		
 		Vector3 size = InitSetColliderSize();
 		AddComponent<BoxCollider3DComponent>(
@@ -43,10 +56,42 @@ namespace Hiwoong
 		InitReferences();
 	
 	}
+	void Monster::UpdateFacing(
+		const Vector3& direction,
+		double deltaTime)
+	{
+		const float targetAngle =
+			std::atan2(direction.x, direction.z) + MathConstants::Pi;
+
+		const float currentAngle = transform->GetRotation().y;
+		const float ratio = 5.0f * static_cast<float>(deltaTime);
+
+		const float nextAngle = MathUtils::LerpAngle(
+			currentAngle,
+			targetAngle,
+			ratio
+		);
+
+		transform->SetRotation(Vector3(0.0f, nextAngle, 0.0f));
+	}
 	void Monster::Update(double deltaTime)
 	{
 		super::Update(deltaTime);
 		UpdateState();
+
+		if (currentState != MonsterState::Run)
+		{
+			path.clear();
+			return;
+		}
+
+		// 경로가 없거나 끝까지 이동했다면 다시 요청한다.
+		if (currentPathIndex >= path.size())
+		{
+			RequestPath();
+		}
+
+		FollowPath(deltaTime);
 	}
 	void Monster::UpdateState()
 	{
@@ -68,19 +113,7 @@ namespace Hiwoong
 	}
 	void Monster::InitReferences()
 	{
-		spriteRenderer = AddComponent<SpriteRenderer3DComponent>(
-			animations.idle.frames.front()
-		);
 		navAIComponent = AddComponent<NavAIComponent>();
-		animationComponent = AddComponent<SpriteAnimationComponent>(
-			std::vector<AnimationBinding>{
-				{ "Idle", animations.idle },
-				{ "Run", animations.run },
-				{ "Attack", animations.attack },
-				{ "Dead", animations.dead }
-		},
-			"Idle"
-		);
 
 		const auto context =
 			std::dynamic_pointer_cast<INavAIContext>(GetOwner());
@@ -93,37 +126,25 @@ namespace Hiwoong
 		assert(!target.expired());
 	}
 
-	bool Monster::ChangeState(MonsterState nextState)
+	void Monster::ChangeState(MonsterState nextState)
 	{
-		if (currentState == nextState)
-			return true;
+		bool accepted = false;
 
-		std::string animationName;
-
-		switch (nextState)
+		if (nextState == MonsterState::Run)
 		{
-		case MonsterState::Idle:
-			animationName = "Idle";
-			break;
-
-		case MonsterState::Run:
-			animationName = "Run";
-			break;
-
-		case MonsterState::Attack:
-			animationName = "Attack";
-			break;
-
-		case MonsterState::Dead:
-			animationName = "Dead";
-			break;
+			accepted = modelAnimationComponent->Play("Move");
+		}
+		else if (nextState == MonsterState::Attack)
+		{
+			accepted = modelAnimationComponent->Play("Attack", true);
+		}
+		else
+		{
+			accepted = modelAnimationComponent->Play("Idle");
 		}
 
-		if (animationComponent->Play(animationName) == false)
-			return false;
-
-		currentState = nextState;
-		return true;
+		if (accepted)
+			currentState = nextState;
 	}
 
 	bool Monster::IsWithinAttackRange(
@@ -149,31 +170,133 @@ namespace Hiwoong
 		}
 
 	}
-
-	Vector3 Monster::InitSetColliderSize()
+	void Monster::RequestPath()
 	{
-		assert(animations.idle.frames.empty() == false);
+		const auto targetObject = target.lock();
+		if (targetObject == nullptr)
+			return;
 
-		const SpriteFrame& idleFrame = animations.idle.frames.front();
+		path = navAIComponent->FindPath(
+			GetWorldPosition(),
+			targetObject->GetWorldPosition()
+		);
 
-		assert(idleFrame.cells.empty() == false);
-
-		std::size_t imageWidth = 0;
-
-		for (const std::vector<SpriteCell>& row : idleFrame.cells)
+		// 이동 중 몬스터의 높이는 유지한다.
+		for (Vector3& position : path)
 		{
-			imageWidth = (std::max)(imageWidth, row.size());
+			position.y = GetWorldPosition().y;
 		}
 
-		const float imageHeight = static_cast<float>(idleFrame.cells.size());
+		currentPathIndex = 0;
+	}
+	void Monster::FollowPath(double deltaTime)
+	{
+		if (currentPathIndex >= path.size())
+			return;
 
-		const float aspectRatio = static_cast<float>(imageWidth) / imageHeight;
+		const Vector3 currentPosition = GetWorldPosition();
 
-		const float worldHeight = scale;
-		const float worldWidth = scale * aspectRatio;
+		Vector3 direction = path[currentPathIndex] - currentPosition;
+		direction.y = 0.0f;
 
+		const float distance = direction.Length();
 
-		return Vector3(worldWidth, worldHeight, worldWidth);
+		// 현재 경유지에 도착했다면 다음 경유지로 넘어간다.
+		if (distance <= 0.01f)
+		{
+			++currentPathIndex;
+			return;
+		}
+
+		float moveDistance = speed * static_cast<float>(deltaTime);
+
+		// 경유지를 지나치지 않도록 이동 거리를 제한한다.
+		if (moveDistance > distance)
+			moveDistance = distance;
+
+		const Vector3 nextPosition =
+			currentPosition + direction.Normalized() * moveDistance;
+
+		const auto scene = GetOwner();
+		assert(scene != nullptr);
+		if (scene == nullptr)
+			return;
+
+		// 이동이 막히면 기존 경로를 비운다.
+		if (scene->CanMoveTo(*this, nextPosition) == false)
+		{
+			path.clear();
+			return;
+		}
+		//회전 갱신
+		UpdateFacing(direction, deltaTime);
+		transform->SetWorldPosition(nextPosition);
+	}
+
+	void Monster::InitMeshRenderer()
+	{
+		assert(!model->meshes.empty());
+
+		for (std::size_t meshIndex = 0;
+			meshIndex < model->meshes.size();
+			++meshIndex)
+		{
+			const ModelMesh& modelMesh = model->meshes[meshIndex];
+
+			std::size_t materialCount = modelMesh.diffuseTextures.size();
+
+			if (materialCount == 0)
+				materialCount = 1;
+
+			for (std::size_t i = 0; i < materialCount; ++i)
+			{
+				Mesh mesh = ConvertToRenderMesh(modelMesh, i);
+
+				if (mesh.triangles.empty())
+					continue;
+
+				std::shared_ptr<const ModelTexture> texture;
+
+				if (i < modelMesh.diffuseTextures.size())
+					texture = modelMesh.diffuseTextures[i];
+
+				// 만든 렌더러를 변수에 보관한다.
+				const auto renderer = AddComponent<MeshRenderComponent>(
+					mesh,
+					Color::White,
+					texture
+				);
+
+				// 애니메이션 컴포넌트에게 연결할 렌더러를 알려준다.
+				modelAnimationComponent->BindRenderer(meshIndex, renderer);
+			}
+		}
+	}
+	//실제 모델 높이로 충돌체 크기 맞추기
+	Vector3 Monster::InitSetColliderSize()
+	{
+		float halfHeight = 0.0f;
+
+		for (const ModelMesh& mesh : model->meshes)
+		{
+			for (const ModelVertex& vertex : mesh.vertices)
+			{
+				const float distance = std::abs(vertex.y);
+
+				if (distance > halfHeight)
+				{
+					halfHeight = distance;
+				}
+			}
+		}
+
+		assert(halfHeight > 0.0f);
+
+		return Vector3(
+			0.68f * scale,
+			halfHeight * 2.0f * scale,
+			0.68f * scale
+		);
 	}
 
 

@@ -3,8 +3,11 @@
 #include "Render/Mesh.h"
 #include "Render/RenderView.h"
 #include "Component/TransformComponent.h"
+#include "ModelImport/ModelTexture.h"
 #include "Math/Color.h"
 #include "Render/IRenderable3D.h"
+#include "ModelImport/ModelVertex.h"
+#include <vector>
 #include <memory>
 
 namespace Hiwoong
@@ -22,9 +25,11 @@ namespace Hiwoong
 		TYPE_DECALRATIONS(MeshRenderComponent,Component)
 		
 	public:
+		//10.10일 ModelTexture 이미지 인자 추가
 		explicit MeshRenderComponent(
 			const Mesh& mesh,
-			Color color = Color::White
+			Color color = Color::White,
+			std::shared_ptr<const ModelTexture> texture = nullptr
 		);
 
 		void Start() override;
@@ -41,11 +46,17 @@ namespace Hiwoong
 			Color& outColor
 		) const override;
 
+		Color GetTextureColor(float u, float v) const;
 
+		void SetVertexPositions(
+			const std::vector<ModelVertex>& vertices
+		);
 	private:
 		Mesh mesh;
 		std::shared_ptr<TransformComponent> transform;
 		Color color;
+		std::shared_ptr<const ModelTexture> texture;
+
 	};
 }
 

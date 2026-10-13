@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -11,16 +11,65 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation\AnimationClip.h" />
+    <ClInclude Include="Animation\AnimationFrame.h" />
+    <ClInclude Include="Animation\SkeletonPoseCalculator.h" />
+    <ClInclude Include="Animation\SkinningCalculator.h" />
+    <ClInclude Include="ModelImport\AnimationLoader.h" />
+    <ClInclude Include="ModelImport\IAnimationLoader.h" />
+    <ClInclude Include="ModelImport\IMeshLoader.h" />
+    <ClInclude Include="ModelImport\IModelImporter.h" />
+    <ClInclude Include="ModelImport\IModelSource.h" />
+    <ClInclude Include="ModelImport\IModelSourceReader.h" />
+    <ClInclude Include="ModelImport\ISkeletonLoader.h" />
+    <ClInclude Include="ModelImport\ISkinWeightLoader.h" />
+    <ClInclude Include="ModelImport\MeshLoader.h" />
+    <ClInclude Include="ModelImport\MeshLoadResult.h" />
+    <ClInclude Include="ModelImport\MeshSourceMapping.h" />
+    <ClInclude Include="ModelImport\ModelData.h" />
+    <ClInclude Include="ModelImport\SkeletonLoader.h" />
+    <ClInclude Include="ModelImport\ModelImportContext.h" />
+    <ClInclude Include="ModelImport\ModelImporter.h" />
+    <ClInclude Include="ModelImport\ModelImportResult.h" />
+    <ClInclude Include="ModelImport\ModelMesh.h" />
+    <ClInclude Include="ModelImport\ModelSourceReadResult.h" />
+    <ClInclude Include="ModelImport\ModelTexture.h" />
+    <ClInclude Include="ModelImport\ModelTriangle.h" />
+    <ClInclude Include="ModelImport\ModelVertex.h" />
+    <ClInclude Include="ModelImport\PngTextureLoader.h" />
+    <ClInclude Include="ModelImport\SkeletonNode.h" />
+    <ClInclude Include="ModelImport\SkinBinding.h" />
+    <ClInclude Include="ModelImport\SkinWeight.h" />
+    <ClInclude Include="ModelImport\SkinWeightLoader.h" />
+    <ClInclude Include="ModelImport\UfbxModelSourceReader.h" />
+    <ClInclude Include="ModelImport\UfbxModelSource.h" />
     <ClInclude Include="PathFinder\GridPosition.h" />
     <ClInclude Include="PathFinder\Implements\AStarPathFinder.h" />
     <ClInclude Include="PathFinder\Interfaces\IPathFinder.h" />
     <ClInclude Include="PathFinder\NavigationGrid.h" />
     <ClInclude Include="PathFinder\PathNode.h" />
+    <ClInclude Include="ThirdParty\ufbx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation\SkeletonPoseCalculator.cpp" />
+    <ClCompile Include="Animation\SkinningCalculator.cpp" />
+    <ClCompile Include="ModelImport\AnimationLoader.cpp" />
+    <ClCompile Include="ModelImport\MeshLoader.cpp" />
+    <ClCompile Include="ModelImport\SkeletonLoader.cpp" />
+    <ClCompile Include="ModelImport\ModelImporter.cpp" />
+    <ClCompile Include="ModelImport\PngTextureLoader.cpp" />
+    <ClCompile Include="ModelImport\SkinWeightLoader.cpp" />
+    <ClCompile Include="ModelImport\UfbxModelSource.cpp" />
+    <ClCompile Include="ModelImport\UfbxModelSourceReader.cpp" />
     <ClCompile Include="PathFinder\Implements\AStarPathFinder.cpp" />
     <ClCompile Include="PathFinder\NavigationGrid.cpp" />
     <ClCompile Include="PathFinder\PathNode.cpp" />
+    <ClCompile Include="ThirdParty\ufbx.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\src\hiwoongEngine.vcxproj">
+      <Project>{24249147-7b15-40ae-81ef-13f84ce22dde}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -62,6 +111,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -77,6 +127,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

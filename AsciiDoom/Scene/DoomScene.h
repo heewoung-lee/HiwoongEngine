@@ -12,13 +12,15 @@
 namespace Hiwoong
 {
 	class IPathFinder;
+	struct ModelData; //로드한 모델 데이터
 
 	class DoomScene : public Scene, public INavAIContext
 	{
 	public:
 		//9.26일 변경, 씬에서 사용할 의존성인 패스파인더 추가
 		explicit DoomScene(
-			const std::shared_ptr<const IPathFinder>& pathFinder
+			const std::shared_ptr<const IPathFinder>& pathFinder,
+			const std::shared_ptr<const ModelData>& monsterModel
 		);
 		~DoomScene() override = default;
 
@@ -64,6 +66,7 @@ namespace Hiwoong
 		float hudHeight = 10.0f;
 
 		std::shared_ptr<const IPathFinder> pathFinder;
+		std::shared_ptr<const ModelData> monsterModel;
 
 	};
 

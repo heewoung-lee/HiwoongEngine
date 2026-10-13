@@ -2,7 +2,6 @@
 
 #include "Component/Component.h"
 #include "Math/Vector3.h"
-
 #include <vector>
 #include <memory>
 

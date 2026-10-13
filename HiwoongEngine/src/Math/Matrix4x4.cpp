@@ -8,6 +8,21 @@ namespace Hiwoong
     {
     }
 
+    float Matrix4x4::GetValue(int row, int column) const
+    {
+        assert(row >= 0 && row < 4);
+        assert(column >= 0 && column < 4);
+
+        return values[row][column];
+    }
+
+    void Matrix4x4::SetValue(int row, int column, float value)
+    {
+        assert(row >= 0 && row < 4);
+        assert(column >= 0 && column < 4);
+
+        values[row][column] = value;
+    }
     Matrix4x4 Hiwoong::Matrix4x4::Identity()
     {
         Matrix4x4 result;
@@ -194,6 +209,27 @@ namespace Hiwoong
         result.values[2][3] = -(nearPlane * farPlane) / depthRange;
         //current object distance
         result.values[3][2] = 1.0f;
+
+        return result;
+    }
+
+    Matrix4x4 Matrix4x4::RotationQuaternion(
+        float x, float y, float z, float w
+    )
+    {
+        Matrix4x4 result = Identity();
+
+        result.values[0][0] = 1.0f - 2.0f * (y * y + z * z);
+        result.values[0][1] = 2.0f * (x * y - z * w);
+        result.values[0][2] = 2.0f * (x * z + y * w);
+
+        result.values[1][0] = 2.0f * (x * y + z * w);
+        result.values[1][1] = 1.0f - 2.0f * (x * x + z * z);
+        result.values[1][2] = 2.0f * (y * z - x * w);
+
+        result.values[2][0] = 2.0f * (x * z - y * w);
+        result.values[2][1] = 2.0f * (y * z + x * w);
+        result.values[2][2] = 1.0f - 2.0f * (x * x + y * y);
 
         return result;
     }

@@ -16,13 +16,18 @@
 /// </summary>
 namespace Hiwoong
 {
+	class IModelImporter;
+
 	class DoomInstaller final 
 	{
 		// 구현체를 생성하고 주입만 할 것이기에 DoomInstaller의 인스턴스는 필요없음. 
 		// 즉 DoomInstaller는 의존성 안내 표지판 역할
 	public:
 		static std::shared_ptr<const IPathFinder> CreatePathFinder();
+		static std::shared_ptr<const IModelImporter> CreateModelImporter();
 	};
+
+
 
 }
 

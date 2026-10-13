@@ -1,4 +1,5 @@
 #include "WindowRenderOutput.h"
+#include "Render/ShaderData.h"
 #include "Core/Input.h"
 #include <stdexcept>
 #include <algorithm>
@@ -339,30 +340,9 @@ namespace Hiwoong
         return pixels;
     }
 
- 
     COLORREF WindowRenderOutput::ToWindowColor(WORD color)
     {
-        static const COLORREF palette[16] =
-        {
-            RGB(0,   0,   0),     // 0: 검정
-            RGB(0,   0,   128),   // 1: 어두운 파랑
-            RGB(0,   128, 0),     // 2: 어두운 초록
-            RGB(0,   128, 128),   // 3: 어두운 청록
-            RGB(128, 0,   0),     // 4: 어두운 빨강
-            RGB(128, 0,   128),   // 5: 어두운 자홍
-            RGB(128, 128, 0),     // 6: 어두운 노랑
-            RGB(192, 192, 192),   // 7: 회색
-            RGB(128, 128, 128),   // 8: 어두운 회색
-            RGB(0,   0,   255),   // 9: 파랑
-            RGB(0,   255, 0),     // 10: 초록
-            RGB(0,   255, 255),   // 11: 청록
-            RGB(255, 0,   0),     // 12: 빨강
-            RGB(255, 0,   255),   // 13: 자홍
-            RGB(255, 255, 0),     // 14: 노랑
-            RGB(255, 255, 255)    // 15: 흰색
-        };
-
-        return palette[color & 0x0F];
+        return ShaderData::ColorPalette[color & 0x0F];
     }
 
     //지정한 크기의 고정폭 글꼴을 Windows에 요청하는 코드
