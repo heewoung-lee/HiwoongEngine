@@ -3,6 +3,7 @@
 #include "IModelSource.h"
 #include <algorithm>
 #include <cmath>
+#include <utility>
 namespace Hiwoong
 {
 	bool SkinWeightLoader::Load(const ModelImportContext& context, std::vector<ModelMesh>& meshes) const
@@ -89,7 +90,7 @@ namespace Hiwoong
                     }
                 }
 
-                mesh.skinWeights.push_back(vertexWeights);
+                mesh.skinWeights.push_back(std::move(vertexWeights));
             }
         }
 

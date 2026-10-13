@@ -4,15 +4,15 @@
 
 namespace Hiwoong
 {
-	std::vector<ModelMatrix> SkeletonPoseCalculator::Calculate(
+	std::vector<Matrix4x4> SkeletonPoseCalculator::Calculate(
 		const std::vector<SkeletonNode>& nodes
 	)
 	{
-		std::vector<ModelMatrix> matrices;
+		std::vector<Matrix4x4> matrices;
 
 		for (const SkeletonNode& node : nodes)
 		{
-			ModelMatrix matrix = ModelMatrix::FromNode(node);
+			Matrix4x4 matrix = CreateLocalMatrix(node);
 			int parentIdx = node.parentIdx;
 			std::size_t parentCount = 0;
 
@@ -31,7 +31,7 @@ namespace Hiwoong
 
 				const SkeletonNode& parent = nodes[parentIdx];
 
-				matrix = ModelMatrix::FromNode(parent).Multiply(matrix);
+				matrix = CreateLocalMatrix(parent) * matrix;
 				parentIdx = parent.parentIdx;
 			}
 
@@ -40,13 +40,13 @@ namespace Hiwoong
 
 		return matrices;
 	}
-	std::vector<ModelMatrix> SkeletonPoseCalculator::Calculate(
+	std::vector<Matrix4x4> SkeletonPoseCalculator::Calculate(
 		const std::vector<SkeletonNode>& modelNodes,
 		const AnimationClip& clip,
 		double time
 	)
 	{
-		std::vector<ModelMatrix> matrices = Calculate(modelNodes);
+		std::vector<Matrix4x4> matrices = Calculate(modelNodes);
 		if (clip.frames.empty())
 			return matrices;
 
@@ -62,7 +62,7 @@ namespace Hiwoong
 
 		const AnimationFrame& frame = clip.frames[frameIndex];
 
-		const std::vector<ModelMatrix> animationMatrices =
+		const std::vector<Matrix4x4> animationMatrices =
 			Calculate(frame.nodes);
 
 		if (clip.sourceNodeIndices.size() != matrices.size())
@@ -88,5 +88,34 @@ namespace Hiwoong
 			matrices[i] = animationMatrices[sourceIndex];
 		}
 		return matrices;
+	}
+	Matrix4x4 SkeletonPoseCalculator::CreateLocalMatrix(
+		const SkeletonNode& node
+	)
+	{
+		const Matrix4x4 translation = Matrix4x4::Translation(
+			Vector3(
+				node.localPositionX,
+				node.localPositionY,
+				node.localPositionZ
+			)
+		);
+
+		const Matrix4x4 rotation = Matrix4x4::RotationQuaternion(
+			node.localRotationX,
+			node.localRotationY,
+			node.localRotationZ,
+			node.localRotationW
+		);
+
+		const Matrix4x4 scale = Matrix4x4::Scale(
+			Vector3(
+				node.localScaleX,
+				node.localScaleY,
+				node.localScaleZ
+			)
+		);
+
+		return translation * rotation * scale;
 	}
 }

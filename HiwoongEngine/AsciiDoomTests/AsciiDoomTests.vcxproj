@@ -49,7 +49,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)AsciiDoomCore</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)AsciiDoomCore;$(ProjectDir)..\src</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -65,13 +65,18 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)AsciiDoomCore</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)AsciiDoomCore;$(ProjectDir)..\src</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)..\Library\HiwoongEngine\$(Configuration)\HiwoongEngine.dll" "$(TargetDir)" /Y /I</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ProjectReference Include="..\AsciiDoomCore\AsciiDoomCore.vcxproj">

@@ -1,5 +1,6 @@
 #include "MeshLoader.h"
 #include "IModelSource.h"
+#include <utility>
 
 namespace Hiwoong
 {
@@ -81,8 +82,8 @@ namespace Hiwoong
                 }
             }
 
-            result.meshes.push_back(mesh);
-            result.sourceMappings.push_back(mapping);
+            result.meshes.push_back(std::move(mesh));
+            result.sourceMappings.push_back(std::move(mapping));
         }
 
         result.success = true;

@@ -6,8 +6,8 @@ namespace Hiwoong
 	
 	std::vector<ModelVertex> SkinningCalculator::Calculate(
 		const ModelMesh& mesh,
-		const std::vector<ModelMatrix>& nodeMatrices,
-		const ModelMatrix& modelAlignment
+		const std::vector<Matrix4x4>& nodeMatrices,
+		const Matrix4x4& modelAlignment
 	)
 	{
 		// 원본을 보존하고, 복사본에 계산 결과를 넣는다
@@ -46,14 +46,19 @@ namespace Hiwoong
 				}
 
 				// 원본 정점 위치를 관절 기준으로 바꾼다
-				const ModelVertex boneVertex =
-					mesh.skinBindings[bindingIdx].geometryToBone.TransformPoint(
-						mesh.localVertices[index]
-					);
+				const ModelVertex& localVertex = mesh.localVertices[index];
 
+				const Vector4 boneVertex =
+					mesh.skinBindings[bindingIdx].geometryToBone * Vector4(
+						localVertex.x,
+						localVertex.y,
+						localVertex.z,
+						1.0f
+					);
 				// 현재 관절의 위치와 회전을 적용한다
-				const ModelVertex movedVertex =
-					nodeMatrices[weight.nodeIdx].TransformPoint(boneVertex);
+				const Vector4 movedVertex =
+					nodeMatrices[weight.nodeIdx] * boneVertex;
+
 
 
 				blendedVertex.x += movedVertex.x * weight.weight;
@@ -67,8 +72,13 @@ namespace Hiwoong
 				continue;
 
 			// 기존 메시와 같은 중심 기준으로 맞춘다.
-			const ModelVertex alignedVertex =
-				modelAlignment.TransformPoint(blendedVertex);
+			const Vector4 alignedVertex =
+				modelAlignment * Vector4(
+					blendedVertex.x,
+					blendedVertex.y,
+					blendedVertex.z,
+					1.0f
+				);
 
 			// 위치만 바꾸므로 기존 UV는 유지된다.
 			result[index].x = alignedVertex.x;

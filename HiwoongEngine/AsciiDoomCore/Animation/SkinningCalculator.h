@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../ModelImport/ModelMesh.h"
-#include "../ModelImport/ModelMatrix.h"
+#include "Math/Matrix4x4.h"
 #include <vector>
 
 namespace Hiwoong
@@ -15,8 +15,8 @@ namespace Hiwoong
 		//기존 정점의 위치와 UV를 복사해서 반환하는 틀
 		static std::vector<ModelVertex> Calculate(
 			const ModelMesh& mesh,
-			const std::vector<ModelMatrix>& nodeMatrices,
-			const ModelMatrix& modelAlignment
+			const std::vector<Matrix4x4>& nodeMatrices,
+			const Matrix4x4& modelAlignment
 		);
 
 

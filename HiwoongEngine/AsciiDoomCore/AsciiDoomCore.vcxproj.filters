@@ -108,9 +108,6 @@
     <ClInclude Include="ModelImport\SkinWeightLoader.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="ModelImport\ModelMatrix.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="ModelImport\SkinBinding.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -165,9 +162,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="ModelImport\SkinWeightLoader.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelImport\ModelMatrix.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Animation\SkeletonPoseCalculator.cpp">

@@ -27,7 +27,6 @@
     <ClInclude Include="ModelImport\MeshLoadResult.h" />
     <ClInclude Include="ModelImport\MeshSourceMapping.h" />
     <ClInclude Include="ModelImport\ModelData.h" />
-    <ClInclude Include="ModelImport\ModelMatrix.h" />
     <ClInclude Include="ModelImport\SkeletonLoader.h" />
     <ClInclude Include="ModelImport\ModelImportContext.h" />
     <ClInclude Include="ModelImport\ModelImporter.h" />
@@ -56,7 +55,6 @@
     <ClCompile Include="Animation\SkinningCalculator.cpp" />
     <ClCompile Include="ModelImport\AnimationLoader.cpp" />
     <ClCompile Include="ModelImport\MeshLoader.cpp" />
-    <ClCompile Include="ModelImport\ModelMatrix.cpp" />
     <ClCompile Include="ModelImport\SkeletonLoader.cpp" />
     <ClCompile Include="ModelImport\ModelImporter.cpp" />
     <ClCompile Include="ModelImport\PngTextureLoader.cpp" />
@@ -67,6 +65,11 @@
     <ClCompile Include="PathFinder\NavigationGrid.cpp" />
     <ClCompile Include="PathFinder\PathNode.cpp" />
     <ClCompile Include="ThirdParty\ufbx.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\src\hiwoongEngine.vcxproj">
+      <Project>{24249147-7b15-40ae-81ef-13f84ce22dde}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -108,6 +111,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -123,6 +127,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

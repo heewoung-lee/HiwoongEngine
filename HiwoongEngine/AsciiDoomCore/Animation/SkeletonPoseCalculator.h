@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../ModelImport/ModelMatrix.h"
 #include "../ModelImport/SkeletonNode.h"
+#include "Math/Matrix4x4.h"
 #include "AnimationClip.h"
 #include <vector>
 
@@ -14,14 +14,17 @@ namespace Hiwoong
 	class SkeletonPoseCalculator
 	{
 	public:
-		static std::vector<ModelMatrix> Calculate(
+		static std::vector<Matrix4x4> Calculate(
 			const std::vector<SkeletonNode>& nodes
 		);
 
-		static std::vector<ModelMatrix> Calculate(
+		static std::vector<Matrix4x4> Calculate(
 			const std::vector<SkeletonNode>& modelNodes,
 			const AnimationClip& clip,
 			double time
 		);
+
+	private:
+		static Matrix4x4 CreateLocalMatrix(const SkeletonNode& node);
 	};
 }

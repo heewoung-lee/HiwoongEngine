@@ -92,7 +92,7 @@ namespace Hiwoong
 		result.model.skeltonNodes = skeletonLoader->Load(context);
 
 		// 대응표를 전달해서 출력메시의 가중치를 채움
-		context.meshMappings = meshResult.sourceMappings;
+		context.meshMappings = std::move(meshResult.sourceMappings);
 
 		if (skinWeightLoader->Load(context, result.model.meshes) == false)
 		{
@@ -164,9 +164,9 @@ namespace Hiwoong
 		};
 
 		//기존 정점에서 빼던 중심값을 행렬에도 보관.
-		model.modelAlignment.values[0][3] = -center.x;
-		model.modelAlignment.values[1][3] = -center.y;
-		model.modelAlignment.values[2][3] = -center.z;
+		model.modelAlignment = Matrix4x4::Translation(
+			Vector3(-center.x, -center.y, -center.z)
+		);
 
 
 		for (ModelMesh& mesh : model.meshes)

@@ -44,6 +44,9 @@ namespace Hiwoong
         const AnimationClip& clip =
             model->animationClips[currentClipIndex];
 
+        if (lockUntilFinished && elapsedTime >= clip.duration)
+            return;
+
         elapsedTime += deltaTime;
 
         if (lockUntilFinished)
@@ -108,7 +111,7 @@ namespace Hiwoong
             model->animationClips[currentClipIndex];
 
         // 현재 재생 시간에 맞는 관절 행렬을 구한다.
-        const std::vector<ModelMatrix> matrices =
+        const std::vector<Matrix4x4> matrices =
             SkeletonPoseCalculator::Calculate(
                 model->skeltonNodes,
                 clip,

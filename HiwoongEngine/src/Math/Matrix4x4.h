@@ -18,6 +18,9 @@ namespace Hiwoong
 	public:
 		Matrix4x4();
 		
+		float GetValue(int row, int column) const;
+		void SetValue(int row, int column, float value);
+
 		// Creates an identity matrix that does not change the input vector.
 		static Matrix4x4 Identity();
 
@@ -88,8 +91,10 @@ namespace Hiwoong
 			float nearPlane,
 			float farPlane
 		);
-
-
+		//회전계산 행렬
+		static Matrix4x4 RotationQuaternion(
+			float x, float y, float z, float w
+		);
 	private:
 		float values[4][4];
 	};

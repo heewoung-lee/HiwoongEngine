@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ModelMatrix.h"
+#include "Math/Matrix4x4.h"
 
 namespace Hiwoong
 {
@@ -17,6 +17,6 @@ namespace Hiwoong
         int nodeIdx = -1;
 
         // 기본 자세의 원본 메시 정점을 관절 기준으로 바꾸는 행렬.
-        ModelMatrix geometryToBone;
+        Matrix4x4 geometryToBone = Matrix4x4::Identity();
     };
 }

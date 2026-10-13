@@ -4,7 +4,7 @@
 #include <filesystem>
 #include <cstdint>
 #include <cassert>
-
+#include <utility>
 namespace Hiwoong
 {
 	UfbxModelSource::UfbxModelSource(ufbx_scene* scene)
@@ -236,7 +236,7 @@ namespace Hiwoong
 				skeletonNode.parentIdx =
 					static_cast<int>(node->parent->typed_id);
 			}
-			nodes.push_back(skeletonNode);
+			nodes.push_back(std::move(skeletonNode));
 		}
 		return nodes;
 	}
@@ -311,8 +311,11 @@ namespace Hiwoong
 			{
 				for (int column = 0; column < 4; ++column)
 				{
-					binding.geometryToBone.values[row][column] =
-						static_cast<float>(matrix.cols[column].v[row]);
+					binding.geometryToBone.SetValue(
+						row,
+						column,
+						static_cast<float>(matrix.cols[column].v[row])
+					);
 				}
 			}
 
@@ -360,7 +363,7 @@ namespace Hiwoong
 				frame.time = time;
 				frame.nodes = frameSource.GetSkeletonNodes();
 
-				clip.frames.push_back(frame);
+				clip.frames.push_back(std::move(frame));
 
 				if (time >= clip.duration)
 					break;
@@ -368,7 +371,7 @@ namespace Hiwoong
 				++frameIndex;
 			}
 
-			clips.push_back(clip);
+			clips.push_back(std::move(clip));
 		}
 
 		return clips;

@@ -6,7 +6,7 @@
 #include "ModelImport/PngTextureLoader.h"
 #include "ModelImport/SkeletonLoader.h"
 #include "ModelImport/SkinWeightLoader.h"
-#include "ModelImport/ModelMatrix.h"
+#include "Math/Matrix4x4.h"
 #include "ModelImport/AnimationLoader.h"
 #include "Animation/SkeletonPoseCalculator.h"
 #include "Animation/SkinningCalculator.h"
@@ -17,6 +17,12 @@
 
 namespace Hiwoong::Tests
 {
+    static Matrix4x4 CalculateLocalMatrixForTest(SkeletonNode node)
+    {
+        node.parentIdx = -1;
+        return SkeletonPoseCalculator::Calculate({ node })[0];
+    }
+
 	class FakeTriangleSource final : public IModelSource
 	{
 	public:
@@ -256,8 +262,8 @@ namespace Hiwoong::Tests
 							const ufbx_transform expectedTransform = ufbx_evaluate_transform(
 								sourceClip->anim, referenceNode, sourceClip->time_begin + frame.time);
 							const ufbx_matrix expectedMatrix = ufbx_transform_to_matrix(&expectedTransform);
-							const ModelMatrix actualMatrix = ModelMatrix::FromNode(node);
-							const ModelMatrix firstMatrix = ModelMatrix::FromNode(
+							const Matrix4x4 actualMatrix = CalculateLocalMatrixForTest(node);
+							const Matrix4x4 firstMatrix = CalculateLocalMatrixForTest(
 								clip.frames.front().nodes[nodeIndex]);
 
 							// 회전 q와 -q는 같은 자세이므로 행렬로 비교한다.
@@ -265,11 +271,11 @@ namespace Hiwoong::Tests
 							{
 								for (int column = 0; column < 4; ++column)
 								{
-									if (!(std::abs(actualMatrix.values[row][column] -
+									if (!(std::abs(actualMatrix.GetValue(row, column) -
 										expectedMatrix.cols[column].v[row]) <= 0.0001))
 										matchesSourcePoses = false;
-									if (std::abs(actualMatrix.values[row][column] -
-										firstMatrix.values[row][column]) > 0.00001f)
+									if (std::abs(actualMatrix.GetValue(row, column) -
+										firstMatrix.GetValue(row, column)) > 0.00001f)
 										hasMovement = true;
 								}
 							}
@@ -287,7 +293,7 @@ namespace Hiwoong::Tests
 	}
 
     bool AnimationPoseMatches(
-        const std::vector<ModelMatrix>& matrices,
+        const std::vector<Matrix4x4>& matrices,
         const std::vector<float>& expectedXPositions
     )
     {
@@ -296,7 +302,7 @@ namespace Hiwoong::Tests
 
         for (std::size_t i = 0; i < matrices.size(); ++i)
         {
-            const ModelVertex position = matrices[i].TransformPoint({ 0.0f, 0.0f, 0.0f });
+            const Vector4 position = matrices[i] * Vector4(0.0f, 0.0f, 0.0f, 1.0f);
             if (!(std::abs(position.x - expectedXPositions[i]) < 0.0001f &&
                 std::abs(position.y) < 0.0001f && std::abs(position.z) < 0.0001f))
                 return false;
@@ -373,7 +379,7 @@ namespace Hiwoong::Tests
         }
 
         const std::vector<SkeletonNode> monsterNodes = modelSource.source->GetSkeletonNodes();
-        const std::vector<ModelMatrix> defaultMatrices = SkeletonPoseCalculator::Calculate(monsterNodes);
+        const std::vector<Matrix4x4> defaultMatrices = SkeletonPoseCalculator::Calculate(monsterNodes);
         std::vector<int> requiredNodeIndices;
         for (std::size_t meshIndex = 0; meshIndex < modelSource.source->GetMeshCount(); ++meshIndex)
         {
@@ -475,7 +481,7 @@ namespace Hiwoong::Tests
                             matchesWorldPoses = false;
                             break;
                         }
-                        const std::vector<ModelMatrix> actualMatrices =
+                        const std::vector<Matrix4x4> actualMatrices =
                             SkeletonPoseCalculator::Calculate(monsterNodes, loadedClip, sampleTime);
                         if (actualMatrices.size() != monsterNodes.size())
                             matchesWorldPoses = false;
@@ -488,8 +494,8 @@ namespace Hiwoong::Tests
                                 {
                                     for (int row = 0; row < 4; ++row)
                                         for (int column = 0; column < 4; ++column)
-                                            if (!(std::abs(actualMatrices[modelIndex].values[row][column] -
-                                                defaultMatrices[modelIndex].values[row][column]) <= 0.0001f))
+                                            if (!(std::abs(actualMatrices[modelIndex].GetValue(row, column) -
+                                                defaultMatrices[modelIndex].GetValue(row, column)) <= 0.0001f))
                                                 matchesWorldPoses = false;
                                     continue;
                                 }
@@ -501,7 +507,7 @@ namespace Hiwoong::Tests
                                 const ufbx_matrix& expected = evaluatedScene->nodes.data[sourceIndex]->node_to_world;
                                 for (int row = 0; row < 3; ++row)
                                     for (int column = 0; column < 4; ++column)
-                                        if (!(std::abs(actualMatrices[modelIndex].values[row][column] -
+                                        if (!(std::abs(actualMatrices[modelIndex].GetValue(row, column) -
                                             expected.cols[column].v[row]) <= 0.0001))
                                             matchesWorldPoses = false;
                             }
@@ -530,18 +536,18 @@ namespace Hiwoong::Tests
 		SkeletonNode child;
 		child.localPositionX = 2.0f;
 
-		const ModelMatrix parentMatrix = ModelMatrix::FromNode(parent);
-		const ModelMatrix childMatrix = ModelMatrix::FromNode(child);
-		const ModelMatrix combinedMatrix = parentMatrix.Multiply(childMatrix);
+		const Matrix4x4 parentMatrix = CalculateLocalMatrixForTest(parent);
+		const Matrix4x4 childMatrix = CalculateLocalMatrixForTest(child);
+		const Matrix4x4 combinedMatrix = parentMatrix * childMatrix;
 
-		const ModelVertex finalPosition =
-			combinedMatrix.TransformPoint({ 0.0f, 0.0f, 0.0f });
+		const Vector4 finalPosition =
+			combinedMatrix * Vector4(0.0f, 0.0f, 0.0f, 1.0f);
 
 		testRunner.Check(
 			std::abs(finalPosition.x - 10.0f) < 0.0001f &&
 			std::abs(finalPosition.y - 4.0f) < 0.0001f &&
 			std::abs(finalPosition.z) < 0.0001f,
-			"ModelMatrix applies parent transform to child"
+			"Matrix4x4 applies parent transform to child"
 		);
 
 		// 자식이 부모보다 먼저 있어도 모든 조상의 움직임을 반영한다.
@@ -557,7 +563,7 @@ namespace Hiwoong::Tests
 		hierarchyNodes[2].parentIdx = 0;
 		hierarchyNodes[2].localPositionX = 1.0f;
 
-		const std::vector<ModelMatrix> hierarchyMatrices =
+		const std::vector<Matrix4x4> hierarchyMatrices =
 			SkeletonPoseCalculator::Calculate(hierarchyNodes);
 		const std::vector<ModelVertex> expectedPositions = {
 			{ 10.0f, 4.0f, 0.0f },
@@ -572,8 +578,8 @@ namespace Hiwoong::Tests
 		{
 			for (std::size_t index = 0; index < hierarchyMatrices.size(); ++index)
 			{
-				const ModelVertex position =
-					hierarchyMatrices[index].TransformPoint({ 0.0f, 0.0f, 0.0f });
+				const Vector4 position =
+					hierarchyMatrices[index] * Vector4(0.0f, 0.0f, 0.0f, 1.0f);
 				const ModelVertex& expected = expectedPositions[index];
 
 				if (!(std::abs(position.x - expected.x) < 0.0001f &&
@@ -608,21 +614,22 @@ namespace Hiwoong::Tests
 
 		SkinBinding firstBinding;
 		firstBinding.nodeIdx = 0;
-		firstBinding.geometryToBone.values[0][3] = -1.0f;
+		firstBinding.geometryToBone = Matrix4x4::Translation(Vector3(-1.0f, 0.0f, 0.0f));
 
 		SkinBinding secondBinding;
 		secondBinding.nodeIdx = 1;
-		secondBinding.geometryToBone.values[0][3] = -1.0f;
+		secondBinding.geometryToBone = Matrix4x4::Translation(Vector3(-1.0f, 0.0f, 0.0f));
 
 		// 관절 번호와 바인딩 목록 순서가 달라도 올바르게 연결해야 한다.
 		skinMesh.skinBindings = { secondBinding, firstBinding };
 
-		std::vector<ModelMatrix> skinNodeMatrices(2);
-		skinNodeMatrices[0].values[0][3] = 3.0f;
-		skinNodeMatrices[1].values[0][3] = 7.0f;
+		const std::vector<Matrix4x4> skinNodeMatrices = {
+			Matrix4x4::Translation(Vector3(3.0f, 0.0f, 0.0f)),
+			Matrix4x4::Translation(Vector3(7.0f, 0.0f, 0.0f))
+		};
 
-		ModelMatrix skinAlignment;
-		skinAlignment.values[0][3] = -2.0f;
+		const Matrix4x4 skinAlignment =
+			Matrix4x4::Translation(Vector3(-2.0f, 0.0f, 0.0f));
 
 		const std::vector<ModelVertex> skinnedVertices =
 			SkinningCalculator::Calculate(skinMesh, skinNodeMatrices, skinAlignment);
@@ -967,7 +974,7 @@ namespace Hiwoong::Tests
 			!importResult.model.skeltonNodes.empty() &&
 			!importResult.model.meshes.empty())
 		{
-			const std::vector<ModelMatrix> defaultMatrices =
+			const std::vector<Matrix4x4> defaultMatrices =
 				SkeletonPoseCalculator::Calculate(importResult.model.skeltonNodes);
 			matchesSourcePose =
 				defaultMatrices.size() == referenceScene->nodes.count;
@@ -981,7 +988,7 @@ namespace Hiwoong::Tests
 					{
 						for (int column = 0; column < 4; ++column)
 						{
-							if (!(std::abs(defaultMatrices[index].values[row][column] -
+							if (!(std::abs(defaultMatrices[index].GetValue(row, column) -
 								reference.cols[column].v[row]) <= 0.0001))
 							{
 								matchesSourcePose = false;
@@ -1021,13 +1028,13 @@ namespace Hiwoong::Tests
 								matchesBindPose = false;
 								break;
 							}
-							ModelMatrix& matrix = bindMatrices[cluster->bone_node->typed_id];
+							Matrix4x4& matrix = bindMatrices[cluster->bone_node->typed_id];
 							for (int row = 0; row < 3; ++row)
 							{
 								for (int column = 0; column < 4; ++column)
 								{
-									matrix.values[row][column] =
-										static_cast<float>(cluster->bind_to_world.cols[column].v[row]);
+									matrix.SetValue(row, column,
+										static_cast<float>(cluster->bind_to_world.cols[column].v[row]));
 								}
 							}
 						}
