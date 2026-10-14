@@ -247,8 +247,9 @@ https://github.com/user-attachments/assets/29db8578-6d9d-4685-bcf5-1cb5c9d7054f
 
 https://github.com/user-attachments/assets/a587d522-dd43-43e6-b936-a2b5dfd70ab4
 
+### Step 15. 디버깅 툴
 
-
+https://github.com/user-attachments/assets/8c2243a4-dbe0-4dff-b0a9-fcb99bb69736
 
 
 ## 문제 해결 과정
