@@ -96,11 +96,14 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     <ClCompile Include="Component\CrossHairMoveComponent.cpp" />
     <ClCompile Include="Component\ModelAnimationComponent.cpp" />
     <ClCompile Include="Component\NavAIComponent.cpp" />
+    <ClCompile Include="Component\PlayerHitEffectComponent.cpp" />
+    <ClCompile Include="GameObject\AttackObject.cpp" />
     <ClCompile Include="GameObject\EffectViewObject.cpp" />
     <ClCompile Include="Component\MeshRenderComponent.cpp" />
     <ClCompile Include="Component\PauseMenuComponent.cpp" />
     <ClCompile Include="GameObject\Bullet.cpp" />
     <ClCompile Include="GameObject\Monster.cpp" />
+    <ClCompile Include="GameObject\ScreenEffectObject.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map\BuildImplements\EmptyTileBuilder.cpp" />
     <ClCompile Include="Map\BuildImplements\MonsterSpawnTileBuilder.cpp" />
@@ -118,6 +121,7 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     <ClCompile Include="Player\Gun.cpp" />
     <ClCompile Include="Player\GunAnimationData.cpp" />
     <ClCompile Include="Player\Player.cpp" />
+    <ClCompile Include="Player\PlayerHitAnimationData.cpp" />
     <ClCompile Include="Scene\DoomScene.cpp" />
     <ClCompile Include="Scene\MenuScene.cpp" />
     <ClCompile Include="UI\AmmoDisplay.cpp" />
@@ -134,11 +138,14 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     <ClInclude Include="Component\CrossHairMoveComponent.h" />
     <ClInclude Include="Component\ModelAnimationComponent.h" />
     <ClInclude Include="Component\NavAIComponent.h" />
+    <ClInclude Include="Component\PlayerHitEffectComponent.h" />
+    <ClInclude Include="GameObject\AttackObject.h" />
     <ClInclude Include="GameObject\EffectViewObject.h" />
     <ClInclude Include="Component\MeshRenderComponent.h" />
     <ClInclude Include="Component\PauseMenuComponent.h" />
     <ClInclude Include="GameObject\Bullet.h" />
     <ClInclude Include="GameObject\Monster.h" />
+    <ClInclude Include="GameObject\ScreenEffectObject.h" />
     <ClInclude Include="Interfaces\IDamageable.h" />
     <ClInclude Include="Map\BuildImplements\EmptyTileBuilder.h" />
     <ClInclude Include="Map\BuildImplements\MonsterSpawnTileBuilder.h" />
@@ -159,6 +166,7 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     <ClInclude Include="Player\Gun.h" />
     <ClInclude Include="Player\GunAnimationData.h" />
     <ClInclude Include="Player\Player.h" />
+    <ClInclude Include="Player\PlayerHitAnimationData.h" />
     <ClInclude Include="Scene\DoomScene.h" />
     <ClInclude Include="Scene\MenuScene.h" />
     <ClInclude Include="UI\AmmoDisplay.h" />

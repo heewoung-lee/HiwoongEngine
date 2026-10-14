@@ -115,6 +115,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClCompile Include="Component\SpriteRendererComponent.cpp" />
     <ClCompile Include="Component\TransformComponent.cpp" />
     <ClCompile Include="Core\Input.cpp" />
+    <ClCompile Include="DebugingTool\ColliderDebugRenderer.cpp" />
     <ClCompile Include="GameObject\GameObject.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Math\MathUtils.cpp" />
@@ -154,6 +155,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClInclude Include="Core\Core.h" />
     <ClInclude Include="Core\HiwoongObject.h" />
     <ClInclude Include="Core\Input.h" />
+    <ClInclude Include="DebugingTool\ColliderDebugRenderer.h" />
     <ClInclude Include="GameObject\GameObject.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Math\Color.h" />

@@ -9,6 +9,11 @@
 #include "Render/IRenderable3D.h"
 #include "GameObject/Bullet.h"
 #include "GameObject/Monster.h"
+
+#if defined(_DEBUG)
+#include "Core/Input.h"
+#endif
+
 namespace Hiwoong
 {
 
@@ -148,6 +153,16 @@ namespace Hiwoong
 		//메쉬렌더러가 붙여진 컴포넌트들의 메쉬렌더링 업데이트
 		//TODO:이건 특정 씬에서 하면 안된다. 모든 씬이 이 작업을 수행해야 하므로, 부모 메서드로 격상해야한다. 
 		RenderMeshes(renderView);
+
+
+		//디버그 모드에서 F3을 누르면 콜라이더 표시
+		#if defined(_DEBUG)
+
+				if (Input::Get().GetKeyDown(VK_F3))
+					colliderDebugRenderer.ToggleVisibility();
+
+				colliderDebugRenderer.Render(gameObjectList, renderView);
+		#endif
 	}
 
 

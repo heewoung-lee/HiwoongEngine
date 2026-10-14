@@ -8,6 +8,7 @@
 #include "ISkeletonLoader.h"
 #include "ISkinWeightLoader.h"
 #include "IAnimationLoader.h"
+#include "Math/Vector4.h"
 #include <algorithm>
 #include <limits>
 #include <utility>
@@ -36,7 +37,8 @@ namespace Hiwoong
 	}
 
 	ModelImportResult ModelImporter::Import(
-		const std::string& filePath
+		const std::string& filePath,
+		float frontRotationY
 	) const
 	{
 		ModelImportResult result;
@@ -101,8 +103,8 @@ namespace Hiwoong
 		}
 
 		//모델 정렬
-		CenterModel(result.model);
-
+		AlignModel(result.model, frontRotationY);
+		
 		result.success = true;
 
 		return result;
@@ -136,7 +138,7 @@ namespace Hiwoong
 
 		return true;
 	}
-	void ModelImporter::CenterModel(ModelData& model) const
+	void ModelImporter::AlignModel(ModelData& model, float frontRotationY) const
 	{
 		const float largest = std::numeric_limits<float>::max();
 
@@ -163,19 +165,24 @@ namespace Hiwoong
 			(minPosition.z + maxPosition.z) * 0.5f
 		};
 
-		//기존 정점에서 빼던 중심값을 행렬에도 보관.
-		model.modelAlignment = Matrix4x4::Translation(
-			Vector3(-center.x, -center.y, -center.z)
-		);
-
+		// 중심을 원점으로 옮긴 뒤, 정면 방향을 맞춘다.
+		model.modelAlignment =
+			Matrix4x4::RotationY(frontRotationY) *
+			Matrix4x4::Translation(
+				Vector3(-center.x, -center.y, -center.z)
+			);
 
 		for (ModelMesh& mesh : model.meshes)
 		{
 			for (ModelVertex& vertex : mesh.vertices)
 			{
-				vertex.x -= center.x;
-				vertex.y -= center.y;
-				vertex.z -= center.z;
+				const Vector4 position =
+					model.modelAlignment *
+					Vector4(vertex.x, vertex.y, vertex.z, 1.0f);
+
+				vertex.x = position.x;
+				vertex.y = position.y;
+				vertex.z = position.z;
 			}
 		}
 

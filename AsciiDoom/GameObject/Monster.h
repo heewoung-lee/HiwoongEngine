@@ -9,7 +9,9 @@ namespace Hiwoong
 {
 	class NavAIComponent;
 	class ModelAnimationComponent;
+	class AttackObject;
 	struct ModelData;
+
 
 	class Monster : public GameObject, public IDamageable
 	{
@@ -24,7 +26,8 @@ namespace Hiwoong
 			int hp = 30,
 			float speed = 1.0f,
 			float attackRange = 1.0f,
-			float scale = 0.7f
+			float scale = 0.7f,
+			int attackDamage = 10
 		);
 
 		void Start() override;
@@ -63,7 +66,8 @@ namespace Hiwoong
 		void UpdateState();
 		//경로요청 메서드
 		void RequestPath();
-
+		//어택 콜라이더 포지션 정렬 함수
+		void UpdateAttackPosition();
 		// 주어진 방향으로 몬스터의 몸을 돌린다.
 		void UpdateFacing(const Vector3& direction, double deltaTime);
 
@@ -72,10 +76,15 @@ namespace Hiwoong
 		std::vector<Vector3> path;
 		std::size_t currentPathIndex = 0;
 
+		int attackDamage;
+
 		//10.9일 몬스터에 대한 모델 fbx 추가
 		std::shared_ptr<const ModelData> model;
-
 		std::shared_ptr<ModelAnimationComponent> modelAnimationComponent;
+		std::shared_ptr<AttackObject> attackObject;
+
+		//10.14일 몬스터 애니메이션 이벤트
+		void InitAttackEvents();
 	};
 
 

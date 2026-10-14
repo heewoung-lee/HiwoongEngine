@@ -10,6 +10,8 @@
 #include "Component/MouseLookComponent.h"
 #include "Player/CrossHair.h"
 #include "Component/PauseMenuComponent.h"
+#include "Component/PlayerHitEffectComponent.h"
+#include "PlayerHitAnimationData.h"
 
 #include <cassert>
 #include <iostream>
@@ -42,7 +44,9 @@ namespace Hiwoong
 
 		AddComponent<MouseLookComponent>();
 		AddComponent<PauseMenuComponent>();
-
+		AddComponent<PlayerHitEffectComponent>(
+			PlayerHitAnimationData::Hit
+		);
 	
 	}
 

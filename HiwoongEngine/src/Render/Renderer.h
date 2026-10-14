@@ -1,4 +1,5 @@
 #pragma once
+
 #include "IRenderOutput.h"
 #include "Core/Core.h"
 #include "Math/Vector2.h"
@@ -91,6 +92,8 @@ namespace Hiwoong
 			int sortingOrder = 0;
 		};
 
+
+	
 	public:
 		Renderer(
 			const Vector2& screenSize,
@@ -204,6 +207,7 @@ namespace Hiwoong
 
 		// 프로젝트에서 선택한 화면 출력 구현
 		std::unique_ptr<IRenderOutput> renderOutput;
+
 
 	};
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include "Scene/Scene.h"
 #include "Camera/Camera3D.h"
 #include "Render/MeshRenderer.h"
@@ -8,6 +9,10 @@
 #include "Math/MathConstants.h"
 #include "Navigation/INavAIContext.h"
 #include <memory>
+
+#if defined(_DEBUG)
+#include "DebugingTool/ColliderDebugRenderer.h"
+#endif
 
 namespace Hiwoong
 {
@@ -68,7 +73,14 @@ namespace Hiwoong
 		std::shared_ptr<const IPathFinder> pathFinder;
 		std::shared_ptr<const ModelData> monsterModel;
 
+	private:
+		//µð¹ö±ë¿ë
+		#if defined(_DEBUG)
+				ColliderDebugRenderer colliderDebugRenderer;
+		#endif
+
 	};
+
 
 
 }
