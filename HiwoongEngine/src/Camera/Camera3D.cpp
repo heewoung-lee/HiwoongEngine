@@ -41,11 +41,15 @@ namespace Hiwoong
 	{
 		return Vector3(0,1,0);
 	}
-
+	Matrix4x4 Camera3D::GetCameraToWorldMatrix()
+	{
+		return Matrix4x4::Translation(GetPosition()) *
+			Matrix4x4::RotationY(GetYaw());
+	}
 	//GetView()는 현재 카메라의 위치와 방향을 View 행렬로 만들어 반환하는 함수.
 	Matrix4x4 Camera3D::GetViewMatrix()
 	{
-		Vector3 cameraPosition = transform.GetWorldPosition();
+		Vector3 cameraPosition = GetPosition();
 		Vector3 lookAtPoint = cameraPosition + GetForward();
 		Vector3 up(0, -1, 0);
 
@@ -95,4 +99,40 @@ namespace Hiwoong
 		return direction.Normalized();
 	}
 
+	void Camera3D::Shake(float strength, double duration)
+	{
+		assert(strength >= 0.0f);
+		assert(duration > 0.0);
+
+		shakeStrength = strength;
+		shakeDuration = duration;
+		shakeElapsedTime = 0.0;
+	}
+	void Camera3D::Update(double deltaTime)
+	{
+		if (shakeElapsedTime >= shakeDuration)
+			return;
+
+		shakeElapsedTime += deltaTime;
+
+		if (shakeElapsedTime >= shakeDuration)
+		{
+			SetPositionOffset(Vector3::Zero);
+			return;
+		}
+
+		const float time = static_cast<float>(shakeElapsedTime);
+
+		const float fade = 1.0f -
+			static_cast<float>(shakeElapsedTime / shakeDuration);
+
+		//강도는 우선 고정
+		const float x =
+			std::sin(time * 80.0f) * shakeStrength * fade;
+
+		const float y =
+			std::sin(time * 100.0f) * shakeStrength * fade;
+
+		SetPositionOffset(GetRight() * x + GetDown() * y);
+	}
 }

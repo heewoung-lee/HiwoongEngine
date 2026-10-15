@@ -357,5 +357,5 @@ namespace Hiwoong
 		screenSize = newScreenSize;
 		characterSize = renderOutput->GetCharacterSize();
 	}
-	
+
 }

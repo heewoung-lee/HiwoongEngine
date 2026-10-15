@@ -4,6 +4,7 @@
 #include "Render/WindowRenderOutput.h"
 #include "Bootstrap/DoomInstaller.h"
 #include "ModelImport/IModelImporter.h"
+#include "Math/MathConstants.h"
 #include <cassert>
 #include <utility>
 using namespace Hiwoong;
@@ -15,8 +16,11 @@ namespace
 	{
 		const auto modelImporter = DoomInstaller::CreateModelImporter();
 
+		//믹사모에서 얻은 FBX모델이 180도 만큼 틀어져 있어서,
+		//로드 할때에는 나의 엔진을 기준으로 모델이 정면을 보게 만들어야해서,
+		//180도 만큼 보정을 더함.
 		ModelImportResult result =
-			modelImporter->Import("Assets/Model/MonsterLow.fbx");
+			modelImporter->Import("Assets/Model/MonsterLow.fbx",MathConstants::Pi);
 
 
 

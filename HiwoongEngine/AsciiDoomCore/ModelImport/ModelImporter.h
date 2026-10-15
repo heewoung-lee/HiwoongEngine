@@ -23,7 +23,8 @@ namespace Hiwoong
         );
 
         ModelImportResult Import(
-            const std::string& filePath
+            const std::string& filePath,
+            float frontRotationY = 0.0f
         ) const override;
 
         bool ImportAnimation(
@@ -33,7 +34,12 @@ namespace Hiwoong
         ) const override;
 
     private:
-        void CenterModel(ModelData& model) const;
+        //모델외형의 방향을 내 게임엔진에 맞춘다.
+        void AlignModel(
+            ModelData& model,
+            float frontRotationY
+        ) const;
+
     private:
         std::shared_ptr<const IModelSourceReader> sourceReader;
         std::shared_ptr<const IMeshLoader> meshLoader;

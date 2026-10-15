@@ -7,6 +7,7 @@
 
 namespace Hiwoong
 {
+
     ModelAnimationComponent::ModelAnimationComponent(
         const std::shared_ptr<const ModelData>& model,
         const std::string& initialAnimationName
@@ -33,7 +34,17 @@ namespace Hiwoong
         if (currentClipIndex == -1)
             Play(initialAnimationName);
     }
+    void ModelAnimationComponent::AddAnimationEvent(const std::string& name, double normalizedTime, const std::function<void()>& callback)
+    {
+        assert(normalizedTime >= 0.0 && normalizedTime <= 1.0);
+        assert(callback);
 
+        animationEvents.push_back({
+            name,
+            normalizedTime,
+            callback
+            });
+    }
     void ModelAnimationComponent::Update(double deltaTime)
     {
         super::Update(deltaTime);
@@ -47,6 +58,7 @@ namespace Hiwoong
         if (lockUntilFinished && elapsedTime >= clip.duration)
             return;
 
+        double previousTime = elapsedTime;
         elapsedTime += deltaTime;
 
         if (lockUntilFinished)
@@ -56,10 +68,20 @@ namespace Hiwoong
         }
         else
         {
-            elapsedTime = std::fmod(elapsedTime, clip.duration);
+            while (elapsedTime >= clip.duration)
+            {
+                //락이 안걸린 애니메이션 이벤트
+                ProcessAnimationEvents(previousTime, clip.duration);
+
+                elapsedTime -= clip.duration;
+
+                // 새 회차의 0초 이벤트도 검사하기 위한 시작값.
+                previousTime = -1.0;
+            }
         }
 
         ApplyPose();
+        ProcessAnimationEvents(previousTime, elapsedTime);
     }
     bool ModelAnimationComponent::Play(const std::string& name)
     {
@@ -97,7 +119,11 @@ namespace Hiwoong
             currentClipIndex = i;
             elapsedTime = 0.0;
             this->lockUntilFinished = lockUntilFinished;
+
             ApplyPose();
+            //0초에서도 이벤트를 호출할 수 있게 처음을 -1초 해둠
+            ProcessAnimationEvents(-1.0, 0.0);
+
             return true;
         }
 
@@ -141,6 +167,29 @@ namespace Hiwoong
                     continue;
 
                 renderer->SetVertexPositions(vertices);
+            }
+        }
+    }
+    void ModelAnimationComponent::ProcessAnimationEvents(
+        double previousTime,
+        double currentTime
+    )
+    {
+        const AnimationClip& clip =
+            model->animationClips[currentClipIndex];
+
+        for (const AnimationEvent& event : animationEvents)
+        {
+            if (event.animationName != clip.name)
+                continue;
+
+            const double eventTime =
+                event.normalizedTime * clip.duration;
+
+            if (previousTime < eventTime &&
+                eventTime <= currentTime)
+            {
+                event.callback();
             }
         }
     }

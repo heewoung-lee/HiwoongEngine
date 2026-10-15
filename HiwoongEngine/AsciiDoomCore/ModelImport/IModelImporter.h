@@ -11,7 +11,8 @@ namespace Hiwoong
         virtual ~IModelImporter() = default;
 
         virtual ModelImportResult Import(
-            const std::string& filePath
+            const std::string& filePath,
+            float frontRotationY = 0.0f
         ) const = 0;
 
         virtual bool ImportAnimation(

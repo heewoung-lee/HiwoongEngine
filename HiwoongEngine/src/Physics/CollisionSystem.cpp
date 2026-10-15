@@ -75,6 +75,10 @@ namespace Hiwoong
 
 		if (movingCollider == nullptr) return false;
 
+		//10.14일 트리거 충돌추가
+		if (movingCollider->IsTrigger())
+			return true;
+
 
 		for (const std::shared_ptr<GameObject>& other : gameObjectList)
 		{
@@ -83,7 +87,11 @@ namespace Hiwoong
 
 			const std::shared_ptr<BoxCollider3DComponent> otherCollider = other->GetComponent<BoxCollider3DComponent>();
 			
-			if (otherCollider == nullptr) continue;
+			if (otherCollider == nullptr)
+				continue;
+
+			if (otherCollider->IsTrigger())
+				continue;
 
 			//이동예정위치에 상대와 겹치는경우
 			if (movingCollider->Intersects(

@@ -9,6 +9,7 @@
 #include "Math/MathUtils.h"
 #include "Scene/Scene.h"
 #include "Math/MathConstants.h"
+#include "GameObject/AttackObject.h"
 #include <cmath>
 #include <memory>
 #include <cassert>
@@ -21,14 +22,16 @@ namespace Hiwoong
 		int hp,
 		float speed,
 		float attackRange,
-		float scale
+		float scale,
+		int attackDamage
 	)
 		: GameObject(spawnPosition),
+		model(model),
 		currentHp(hp),
 		speed(speed),
 		attackRange(attackRange),
 		scale(scale),
-		model(model)
+		attackDamage(attackDamage)
 	{
 		assert(this->model != nullptr);
 	}
@@ -54,14 +57,22 @@ namespace Hiwoong
 			)
 		);
 		InitReferences();
-	
+
+		//매개변수 몬스터 데미지
+		attackObject = Instantiate<AttackObject>(attackDamage);
+		attackObject->SetParent(shared_from_this(), false);
+
+		//몬스터 공격범위의 콜라이더 위치 설정
+		UpdateAttackPosition();
+		//애니메이션 이벤트 삽입
+		InitAttackEvents();
 	}
 	void Monster::UpdateFacing(
 		const Vector3& direction,
 		double deltaTime)
 	{
 		const float targetAngle =
-			std::atan2(direction.x, direction.z) + MathConstants::Pi;
+			std::atan2(direction.x, direction.z);
 
 		const float currentAngle = transform->GetRotation().y;
 		const float ratio = 5.0f * static_cast<float>(deltaTime);
@@ -73,6 +84,9 @@ namespace Hiwoong
 		);
 
 		transform->SetRotation(Vector3(0.0f, nextAngle, 0.0f));
+
+		UpdateAttackPosition();
+
 	}
 	void Monster::Update(double deltaTime)
 	{
@@ -189,6 +203,13 @@ namespace Hiwoong
 
 		currentPathIndex = 0;
 	}
+	void Monster::UpdateAttackPosition()
+	{
+		const Vector3 offset =
+			transform->GetForward() * attackRange;
+
+		attackObject->SetPosition(offset);
+	}
 	void Monster::FollowPath(double deltaTime)
 	{
 		if (currentPathIndex >= path.size())
@@ -231,6 +252,27 @@ namespace Hiwoong
 		//회전 갱신
 		UpdateFacing(direction, deltaTime);
 		transform->SetWorldPosition(nextPosition);
+	}
+
+	void Monster::InitAttackEvents()
+	{
+		modelAnimationComponent->AddAnimationEvent(
+			"Attack",
+			0.45,
+			[this]()
+			{
+				attackObject->BeginAttack();
+			}
+		);
+
+		modelAnimationComponent->AddAnimationEvent(
+			"Attack",
+			0.5,
+			[this]()
+			{
+				attackObject->EndAttack();
+			}
+		);
 	}
 
 	void Monster::InitMeshRenderer()
