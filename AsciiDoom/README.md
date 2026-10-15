@@ -251,6 +251,11 @@ https://github.com/user-attachments/assets/a587d522-dd43-43e6-b936-a2b5dfd70ab4
 
 https://github.com/user-attachments/assets/8c2243a4-dbe0-4dff-b0a9-fcb99bb69736
 
+### Step 16. 피격 효과(스프라이트 애니메이션 + 카메라 쉐이킹)
+
+https://github.com/user-attachments/assets/0ebdb595-f1f2-4d75-a93b-43893689d83a
+
+
 
 ## 문제 해결 과정
 
