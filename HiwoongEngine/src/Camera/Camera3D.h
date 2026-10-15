@@ -12,12 +12,18 @@ namespace Hiwoong
 	public:
 
 		Camera3D(TransformComponent& transform, float fieldOfView);
-
-
+		inline void SetPositionOffset(const Vector3& value)
+		{
+			positionOffset = value;
+		}
+		Matrix4x4 GetCameraToWorldMatrix();
 		// 카메라가 사용하는 세로 시야각을 반환한다. 단위는 라디안.
 		inline float GetFieldOfView() const { return fieldOfView; }
 
-		inline Vector3 GetPosition() const { return transform.GetLocalPosition(); }
+		inline Vector3 GetPosition() const
+		{
+			return transform.GetWorldPosition() + positionOffset;
+		}
 		inline void SetTransform(TransformComponent& value) { transform = value; }
 
 		inline void SetYaw(float value)
@@ -40,7 +46,23 @@ namespace Hiwoong
 		);
 
 	private:
+		Vector3 positionOffset = Vector3::Zero;
 		TransformComponent& transform;
 		float fieldOfView;
+
+
+
+
+	//CameraShaking Function
+	public:
+		void Shake(float strength, double duration);
+		void Update(double deltaTime);
+
+	private:
+		float shakeStrength = 0.0f;
+		double shakeDuration = 0.0;
+		double shakeElapsedTime = 0.0;
+
+
 	};
 }

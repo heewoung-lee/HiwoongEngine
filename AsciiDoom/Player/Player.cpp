@@ -45,7 +45,9 @@ namespace Hiwoong
 		AddComponent<MouseLookComponent>();
 		AddComponent<PauseMenuComponent>();
 		AddComponent<PlayerHitEffectComponent>(
-			PlayerHitAnimationData::Hit
+			PlayerHitAnimationData::Hit,
+			0.05f,
+			0.2
 		);
 	
 	}

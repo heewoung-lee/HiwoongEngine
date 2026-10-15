@@ -2,19 +2,42 @@
 #include "Player/Player.h"
 #include "GameObject/ScreenEffectObject.h"
 #include "Scene/Scene.h"
+#include "Camera/Camera3D.h"
+#include "Scene/DoomScene.h"
 #include <cassert>
+
 namespace Hiwoong
 {
     PlayerHitEffectComponent::PlayerHitEffectComponent(
-        const SpriteAnimationClip& clip
+        const SpriteAnimationClip& clip,
+        float shakeStrength,
+        double shakeDuration
     )
-        : clip(clip)
+        : clip(clip),
+        shakeStrength(shakeStrength),
+        shakeDuration(shakeDuration)
     {
     }
+    void PlayerHitEffectComponent::Update(double deltaTime)
+    {
+        super::Update(deltaTime);
 
+        //카메라 쉐이킹
+        camera->Update(deltaTime);
+    }
     void PlayerHitEffectComponent::Start()
     {
         super::Start();
+
+        const auto scene =
+            std::dynamic_pointer_cast<DoomScene>(GetScene());
+
+        assert(scene != nullptr);
+
+        camera = scene->GetCamera();
+
+        assert(camera != nullptr);
+
 
         const auto player =
             std::dynamic_pointer_cast<Player>(GetOwner());
@@ -51,6 +74,8 @@ namespace Hiwoong
 
             if (effect != nullptr)
                 effect->Play();
+
+            camera->Shake(shakeStrength, shakeDuration);
         }
 
         previousHp = hp;
