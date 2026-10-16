@@ -259,7 +259,11 @@ https://github.com/user-attachments/assets/8c2243a4-dbe0-4dff-b0a9-fcb99bb69736
 
 https://github.com/user-attachments/assets/0ebdb595-f1f2-4d75-a93b-43893689d83a
 
-### 
+### Step 17. GameOver UI
+
+https://github.com/user-attachments/assets/56c527b8-fe3b-4dcb-b732-2340e3464220
+
+
 
 
 ## 문제 해결 과정
