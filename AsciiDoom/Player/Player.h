@@ -66,7 +66,7 @@ namespace Hiwoong
 		Vector3 direction;
 		float collisionHalfSize = 0.2f;//충돌크기
 
-		const int Hp = 100;
+		const int Hp = 10;
 		const int Ammo = 12;
 
 		int currentHp = 0;
