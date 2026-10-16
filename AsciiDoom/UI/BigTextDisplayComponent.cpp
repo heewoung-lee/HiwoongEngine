@@ -59,8 +59,10 @@ namespace Hiwoong
 
 
     BigTextDisplayComponent::BigTextDisplayComponent(
-        const std::string& text, int scale)
-        : text(text), scale(scale)
+        const std::string& text,
+        int scale,
+        char colorCode)
+        : text(text), scale(scale), colorCode(colorCode)
     {
         assert(scale >= 1);
     }
@@ -153,7 +155,7 @@ namespace Hiwoong
         std::vector<std::string> colorRows;
         for (const std::string& row : image)
         {
-            colorRows.emplace_back(row.size(), 'G');
+            colorRows.emplace_back(row.size(), colorCode);
         }
         return SpriteFrame(image,colorRows);
     }

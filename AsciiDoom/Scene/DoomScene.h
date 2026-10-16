@@ -17,6 +17,7 @@
 namespace Hiwoong
 {
 	class IPathFinder;
+	class ScreenEffectObject;
 	struct ModelData; //로드한 모델 데이터
 
 	class DoomScene : public Scene, public INavAIContext
@@ -58,6 +59,8 @@ namespace Hiwoong
 		std::shared_ptr<GameObject>
 			GetNavigationTarget() const override;
 
+		void OpenGameOver();
+
 	private :
 		std::shared_ptr<Player> player;
 		std::unique_ptr<Camera3D> camera;
@@ -72,6 +75,8 @@ namespace Hiwoong
 
 		std::shared_ptr<const IPathFinder> pathFinder;
 		std::shared_ptr<const ModelData> monsterModel;
+		std::shared_ptr<ScreenEffectObject> deathEffect;
+
 
 	private:
 		//디버깅용

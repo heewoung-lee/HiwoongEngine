@@ -9,6 +9,10 @@
 #include "Render/IRenderable3D.h"
 #include "GameObject/Bullet.h"
 #include "GameObject/Monster.h"
+#include "GameObject/ScreenEffectObject.h"
+#include "UI/ScreenTransitionData.h"
+#include "Scene/GameOverScene.h"
+#include "Core/Input.h"
 
 #if defined(_DEBUG)
 #include "Core/Input.h"
@@ -53,6 +57,17 @@ namespace Hiwoong
 			gameSize.y,
 			0.0f
 		));
+		//플레이어의 HP가 0이 될때 게임오버 callback
+		player->AddHPChangedCallback(
+			[this](int hp)
+			{
+				if (hp <= 0)
+				{
+					deathEffect->Play();
+				}
+			}
+		);
+
 	}
 
 	//TODO: 렌더링 방식이 정리 되고 안정화 되면, 부모 씬으로 격상시킬것.
@@ -102,6 +117,16 @@ namespace Hiwoong
 				this->SpawnPlayer();
 				this->SpawnTestMonster();
 			});
+
+		deathEffect = Instantiate<ScreenEffectObject>(
+			ScreenTransitionData::CreateClose(GetScreenSize()),
+			200,
+			[this]()
+			{
+				OpenGameOver();
+			}
+		);
+
 	}
 
 	void DoomScene::Update(double deltatime)
@@ -162,7 +187,23 @@ namespace Hiwoong
 				colliderDebugRenderer.Render(gameObjectList, renderView);
 		#endif
 	}
+	void DoomScene::OpenGameOver()
+	{
+		const auto restartPathFinder = pathFinder;
+		const auto restartMonsterModel = monsterModel;
 
+		Engine::Get().AddNewScene<GameOverScene>(
+			[restartPathFinder, restartMonsterModel]()
+			{
+				Input::Get().SetMouseLocked(true);
+
+				Engine::Get().AddNewScene<DoomScene>(
+					restartPathFinder,
+					restartMonsterModel
+				);
+			}
+		);
+	}
 
 	void DoomScene::SpawnTestMonster()
 	{
@@ -186,5 +227,8 @@ namespace Hiwoong
 	{
 		return player;
 	}
+
+	
+
 }
 

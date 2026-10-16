@@ -75,7 +75,6 @@ namespace Hiwoong
 		//ฤÝน้
 		std::vector<OnHpChange> hpChangeCallbacks;
 		std::vector<OnAmmoChange> ammoChangeCallbacks;
-
 	};
 }
 

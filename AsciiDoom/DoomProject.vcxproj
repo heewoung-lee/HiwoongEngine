@@ -111,10 +111,13 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     <ClCompile Include="Map\BuildImplements\WallTileBuilder.cpp" />
     <ClCompile Include="Map\DoomMap.cpp" />
     <ClCompile Include="Map\TileBuilderRegistry.cpp" />
+    <ClCompile Include="Menu\GameOverTitle.cpp" />
     <ClCompile Include="Menu\MenuBackground.cpp" />
+    <ClCompile Include="Menu\MenuCursor.cpp" />
     <ClCompile Include="Menu\MenuFrame.cpp" />
     <ClCompile Include="Menu\PauseTitle.cpp" />
     <ClCompile Include="Menu\QuitButton.cpp" />
+    <ClCompile Include="Menu\RestartButton.cpp" />
     <ClCompile Include="Menu\ResumeButton.cpp" />
     <ClCompile Include="ModelImport\ModelMeshConverter.cpp" />
     <ClCompile Include="Player\CrossHair.cpp" />
@@ -123,6 +126,7 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     <ClCompile Include="Player\Player.cpp" />
     <ClCompile Include="Player\PlayerHitAnimationData.cpp" />
     <ClCompile Include="Scene\DoomScene.cpp" />
+    <ClCompile Include="Scene\GameOverScene.cpp" />
     <ClCompile Include="Scene\MenuScene.cpp" />
     <ClCompile Include="UI\AmmoDisplay.cpp" />
     <ClCompile Include="UI\AmmoDisplayComponent.cpp" />
@@ -130,6 +134,7 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     <ClCompile Include="UI\HPDisplay.cpp" />
     <ClCompile Include="UI\HpDisplayComponent.cpp" />
     <ClCompile Include="UI\PlayerHUID.cpp" />
+    <ClCompile Include="UI\ScreenTransitionData.cpp" />
     <ClCompile Include="Util\PathFinder.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -154,10 +159,13 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     <ClInclude Include="Map\DoomMap.h" />
     <ClInclude Include="Map\ITileBuilder.h" />
     <ClInclude Include="Map\TileBuilderRegistry.h" />
+    <ClInclude Include="Menu\GameOverTitle.h" />
     <ClInclude Include="Menu\MenuBackground.h" />
+    <ClInclude Include="Menu\MenuCursor.h" />
     <ClInclude Include="Menu\MenuFrame.h" />
     <ClInclude Include="Menu\PauseTitle.h" />
     <ClInclude Include="Menu\QuitButton.h" />
+    <ClInclude Include="Menu\RestartButton.h" />
     <ClInclude Include="Menu\ResumeButton.h" />
     <ClInclude Include="ModelImport\ModelMeshConverter.h" />
     <ClInclude Include="Navigation\INavAIContext.h" />
@@ -168,6 +176,7 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     <ClInclude Include="Player\Player.h" />
     <ClInclude Include="Player\PlayerHitAnimationData.h" />
     <ClInclude Include="Scene\DoomScene.h" />
+    <ClInclude Include="Scene\GameOverScene.h" />
     <ClInclude Include="Scene\MenuScene.h" />
     <ClInclude Include="UI\AmmoDisplay.h" />
     <ClInclude Include="UI\AmmoDisplayComponent.h" />
@@ -175,6 +184,7 @@ xcopy "$(ProjectDir)Assets" "$(OutDir)Assets\" /E /Y /I</Command>
     <ClInclude Include="UI\HPDisplay.h" />
     <ClInclude Include="UI\HpDisplayComponent.h" />
     <ClInclude Include="UI\PlayerHUID.h" />
+    <ClInclude Include="UI\ScreenTransitionData.h" />
     <ClInclude Include="Util\PathFinder.h" />
   </ItemGroup>
   <ItemGroup>

@@ -4,11 +4,16 @@
 #include <cassert>
 namespace Hiwoong
 {
-
-	ScreenEffectObject::ScreenEffectObject(const SpriteAnimationClip& clip)
-		: clip(clip)
-	{
-	}
+    ScreenEffectObject::ScreenEffectObject(
+        const SpriteAnimationClip& clip,
+        int sortingOrder,
+        const std::function<void()>& onFinished
+    )
+        : clip(clip),
+        sortingOrder(sortingOrder),
+        onFinished(onFinished)
+    {
+    }
     void ScreenEffectObject::Start()
     {
         super::Start();
@@ -17,13 +22,15 @@ namespace Hiwoong
 
         AddComponent<SpriteRendererComponent>(
             SpriteFrame({}, {}),
-            140
+            sortingOrder
         );
 
         animation = AddComponent<SpriteAnimationComponent>(
             clip.frames,
             clip.duration
         );
+
+        animation->AddOnAnimationEnd(onFinished);
     }
     void ScreenEffectObject::Play()
     {

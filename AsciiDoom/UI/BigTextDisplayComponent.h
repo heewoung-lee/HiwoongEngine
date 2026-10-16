@@ -12,7 +12,10 @@ namespace Hiwoong
 
 	public:
 		explicit BigTextDisplayComponent(
-			const std::string& text, int scale);
+			const std::string& text,
+			int scale,
+			char colorCode = 'G'
+		);
 
 		void Start() override;
 		void SetText(const std::string& text);
@@ -29,6 +32,7 @@ namespace Hiwoong
 	private:
 		std::string text;
 		int scale;
+		char colorCode;
 	};
 
 

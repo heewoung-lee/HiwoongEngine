@@ -5,6 +5,7 @@
 #include "Bootstrap/DoomInstaller.h"
 #include "ModelImport/IModelImporter.h"
 #include "Math/MathConstants.h"
+#include "Scene/GameOverScene.h"
 #include <cassert>
 #include <utility>
 using namespace Hiwoong;
@@ -63,7 +64,6 @@ namespace
 
 		const auto pathFinder = DoomInstaller::CreatePathFinder();
 
-		
 		engine.AddNewScene<DoomScene>(pathFinder, monsterModel);
 	}
 
