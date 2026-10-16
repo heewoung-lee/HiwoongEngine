@@ -138,15 +138,41 @@ namespace Hiwoong
 
         result.vertices =
         {
-            Vertex{ Vector3(-halfSize, -halfSize, -halfSize) }, // 0
-            Vertex{ Vector3(halfSize, -halfSize, -halfSize) }, // 1
-            Vertex{ Vector3(halfSize,  halfSize, -halfSize) }, // 2
-            Vertex{ Vector3(-halfSize,  halfSize, -halfSize) }, // 3
+            // Front: 0~3
+            { Vector3(-halfSize, -halfSize, -halfSize), 0.0f, 1.0f },
+            { Vector3(halfSize, -halfSize, -halfSize), 1.0f, 1.0f },
+            { Vector3(halfSize,  halfSize, -halfSize), 1.0f, 0.0f },
+            { Vector3(-halfSize,  halfSize, -halfSize), 0.0f, 0.0f },
 
-            Vertex{ Vector3(-halfSize, -halfSize,  halfSize) }, // 4
-            Vertex{ Vector3(halfSize, -halfSize,  halfSize) }, // 5
-            Vertex{ Vector3(halfSize,  halfSize,  halfSize) }, // 6
-            Vertex{ Vector3(-halfSize,  halfSize,  halfSize) }  // 7
+            // Back: 4~7
+            { Vector3(-halfSize, -halfSize, halfSize), 1.0f, 1.0f },
+            { Vector3(halfSize, -halfSize, halfSize), 0.0f, 1.0f },
+            { Vector3(halfSize,  halfSize, halfSize), 0.0f, 0.0f },
+            { Vector3(-halfSize,  halfSize, halfSize), 1.0f, 0.0f },
+
+            // Left: 8~11
+            { Vector3(-halfSize, -halfSize, -halfSize), 1.0f, 1.0f },
+            { Vector3(-halfSize, -halfSize,  halfSize), 0.0f, 1.0f },
+            { Vector3(-halfSize,  halfSize,  halfSize), 0.0f, 0.0f },
+            { Vector3(-halfSize,  halfSize, -halfSize), 1.0f, 0.0f },
+
+            // Right: 12~15
+            { Vector3(halfSize, -halfSize, -halfSize), 0.0f, 1.0f },
+            { Vector3(halfSize,  halfSize, -halfSize), 0.0f, 0.0f },
+            { Vector3(halfSize,  halfSize,  halfSize), 1.0f, 0.0f },
+            { Vector3(halfSize, -halfSize,  halfSize), 1.0f, 1.0f },
+
+            // Top: 16~19
+            { Vector3(-halfSize, -halfSize, -halfSize), 0.0f, 0.0f },
+            { Vector3(halfSize, -halfSize, -halfSize), 1.0f, 0.0f },
+            { Vector3(halfSize, -halfSize,  halfSize), 1.0f, 1.0f },
+            { Vector3(-halfSize, -halfSize,  halfSize), 0.0f, 1.0f },
+
+            // Bottom: 20~23
+            { Vector3(-halfSize, halfSize, -halfSize), 0.0f, 0.0f },
+            { Vector3(-halfSize, halfSize,  halfSize), 0.0f, 1.0f },
+            { Vector3(halfSize, halfSize,  halfSize), 1.0f, 1.0f },
+            { Vector3(halfSize, halfSize, -halfSize), 1.0f, 0.0f }
         };
 
         result.edges =
@@ -173,28 +199,28 @@ namespace Hiwoong
         result.triangles =
         {
             // Front
-            Triangle{ 0, 2, 1 },
-            Triangle{ 0, 3, 2 },
+            { 0, 2, 1 },
+            { 0, 3, 2 },
 
             // Back
-            Triangle{ 4, 5, 6 },
-            Triangle{ 4, 6, 7 },
+            { 4, 5, 6 },
+            { 4, 6, 7 },
 
             // Left
-            Triangle{ 0, 4, 7 },
-            Triangle{ 0, 7, 3 },
+            { 8, 9, 10 },
+            { 8, 10, 11 },
 
             // Right
-            Triangle{ 1, 2, 6 },
-            Triangle{ 1, 6, 5 },
+            { 12, 13, 14 },
+            { 12, 14, 15 },
 
             // Top
-            Triangle{ 0, 1, 5 },
-            Triangle{ 0, 5, 4 },
+            { 16, 17, 18 },
+            { 16, 18, 19 },
 
             // Bottom
-            Triangle{ 3, 7, 6 },
-            Triangle{ 3, 6, 2 }
+            { 20, 21, 22 },
+            { 20, 22, 23 }
         };
 
 

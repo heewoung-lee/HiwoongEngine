@@ -40,6 +40,11 @@ namespace Hiwoong
 	{
 		super::Start();
 
+		//10.16 바닥을 만들었더니 발바닥이 잠겨서 offSet만듦
+		Vector3 position = transform->GetWorldPosition();
+		position.y -= 0.1f;
+		transform->SetWorldPosition(position);
+
 		transform->SetScale(
 			Vector3(scale, scale, scale)
 		);

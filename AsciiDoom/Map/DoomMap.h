@@ -13,6 +13,8 @@
 
 namespace Hiwoong
 {
+    struct ModelTexture;
+
     class DoomMap : public GameObject, public INavigationMap
     {
 
@@ -61,6 +63,19 @@ namespace Hiwoong
             const GridPosition& gridPosition
         ) const override;
 
+
+    private:
+        void LoadMap();
+        void BuildMap();
+        void RegisterTileBuilders();
+        void BroadcastOnMapBuilt();
+        void InitNavigationGrid();
+        void BuildFloor();
+        bool InitTexturedMeshRenderer(
+            const Mesh& mesh,
+            const std::string& texturePath
+        );
+
     private:
         std::string mapPath;
         std::vector<std::string> rows;
@@ -73,6 +88,7 @@ namespace Hiwoong
         std::vector<Vector3> monsterSpawnPositions;
 
         Mesh mapMesh;
+        Mesh floorMesh;
 
         //맵의 콜백함수들을 모은다.
         std::vector<std::function<void()>> onMapBuiltCallbacks;
@@ -80,12 +96,8 @@ namespace Hiwoong
         //각 칸에 이동 가능 여부를 보관
         std::unique_ptr<NavigationGrid> navigationGrid;
 
-        void LoadMap();
-        void BuildMap();
-        void RegisterTileBuilders();
-        void BroadcastOnMapBuilt();
-        void InitNavigationGrid();
+        std::string floorTexturePath;
+        std::string wallTexturePath;
 
-      
     };
 }

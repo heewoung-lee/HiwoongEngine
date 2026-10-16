@@ -31,10 +31,10 @@ namespace Hiwoong
         const Vector3 localPosition =
             worldPosition - map.GetWorldPosition();
 
-        for (const Vertex& vertex : wallMesh.vertices)
+        for (Vertex vertex : wallMesh.vertices)
         {
-            const Vector3 movedPosition = vertex.position + localPosition;
-            mapMesh.vertices.emplace_back(Vertex{ movedPosition });
+            vertex.position += localPosition;
+            mapMesh.vertices.push_back(vertex);
         }
 
         // 아래는 기존에 있던 이웃 벽 검사와 삼각형 추가 처리

@@ -1,3 +1,9 @@
+[Settings]
+floorTexture=Assets/Textures/Freedoom/floor.png
+wallTexture=Assets/Textures/Freedoom/wall.png
+
+
+[Map]
 ##########
 #PM......#
 #.####...#

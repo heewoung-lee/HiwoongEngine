@@ -4,6 +4,8 @@
 #include "BuildImplements/EmptyTileBuilder.h"
 #include "BuildImplements/PlayerSpawnTileBuilder.h"
 #include "BuildImplements/MonsterSpawnTileBuilder.h"
+#include "Render/MeshFactory.h"
+#include "ModelImport/PngTextureLoader.h"
 #include <memory>
 #include <fstream>
 #include <cassert>
@@ -12,6 +14,9 @@
 #include <cmath>
 namespace Hiwoong
 {
+
+
+
 	void DoomMap::AddOnMapBuilt(std::function<void()> callback)
 	{
 		if (callback == nullptr) return;
@@ -64,11 +69,21 @@ namespace Hiwoong
 		InitNavigationGrid();
 		RegisterTileBuilders();
 		BuildMap();
+		BuildFloor();
 
-		AddComponent<MeshRenderComponent>(mapMesh);
+		//벽 텍스쳐
+		if (InitTexturedMeshRenderer(mapMesh, wallTexturePath) == false)
+			return;
+
+		//바닥 텍스쳐
+		if (InitTexturedMeshRenderer(floorMesh, floorTexturePath) == false)
+			return;
 
 		BroadcastOnMapBuilt(); //콜백 호출
 	}
+
+
+
 	//인접칸이 벽인지 확인하는 메서드.
 	//
 	bool DoomMap::IsWallTile(int x, int z) const
@@ -169,18 +184,48 @@ namespace Hiwoong
 
 		assert(file.is_open() && "Failed to open map file");
 		
-		//한줄씩 저장.
+		std::string section;
 		std::string row;
-		while (std::getline(file,row))
+		const std::string textureKey = "floorTexture=";
+		const std::string wallTextureKey = "wallTexture=";
+
+		while (std::getline(file, row))
 		{
-			rows.emplace_back(row);
+			if (!row.empty() && row.back() == '\r')
+				row.pop_back();
+
+			if (row.empty())
+				continue;
+
+			if (row[0] == '[')
+			{
+				section = row;
+				continue;
+			}
+
+			if (section == "[Map]")
+			{
+				rows.push_back(row);
+			}
+			else if (section == "[Settings]")
+			{
+				if (row.find(textureKey) == 0)
+				{
+					floorTexturePath = row.substr(textureKey.size());
+				}
+				else if (row.find(wallTextureKey) == 0)
+				{
+					wallTexturePath = row.substr(wallTextureKey.size());
+				}
+			}
 		}
+
+		assert(!floorTexturePath.empty());
+		assert(!wallTexturePath.empty());
 		assert(!rows.empty() && "Map file is empty");
 
-		//행 크기 검사
-		const size_t mapWidth = rows[0].size();
+		const std::size_t mapWidth = rows[0].size();
 		assert(mapWidth > 0 && "Map width is zero");
-
 		for (const std::string& row : rows)
 		{
 			assert(
@@ -260,6 +305,64 @@ namespace Hiwoong
 		}
 		navigationGrid = std::make_unique<NavigationGrid>(walkableTiles);
 	}
+	void DoomMap::BuildFloor()
+	{
+		const Mesh tileMesh = MeshFactory::CreateQuad(1.0f, 1.0f);
+		//바닥 위치
+		const float floorHeight = 0.5f;
 
+		for (std::size_t z = 0; z < rows.size(); ++z)
+		{
+			for (std::size_t x = 0; x < rows[z].size(); ++x)
+			{
+				if (rows[z][x] == '#')
+					continue;
+
+				const std::size_t vertexOffset = floorMesh.vertices.size();
+
+				for (Vertex vertex : tileMesh.vertices)
+				{
+					vertex.position = Vector3(
+						vertex.position.x + static_cast<float>(x),
+						floorHeight,
+						vertex.position.y + static_cast<float>(z)
+					);
+
+					floorMesh.vertices.push_back(vertex);
+				}
+
+				for (const Triangle& triangle : tileMesh.triangles)
+				{
+					//바닥면이 위로 향하게끔 순서가 0 -> 2  -> 1 삼각형 순서
+					floorMesh.triangles.push_back({
+						triangle.index0 + vertexOffset,
+						triangle.index2 + vertexOffset,
+						triangle.index1 + vertexOffset
+						});
+				}
+			}
+		}
+	}
+	bool DoomMap::InitTexturedMeshRenderer(
+		const Mesh& mesh,
+		const std::string& texturePath
+	)
+	{
+		const auto texture = std::make_shared<ModelTexture>();
+
+		const bool loaded = LoadPngTexture(texturePath, *texture);
+		assert(loaded && "Failed to load map texture");
+
+		if (loaded == false)
+			return false;
+
+		AddComponent<MeshRenderComponent>(
+			mesh,
+			Color::White,
+			texture
+		);
+
+		return true;
+	}
 }
 
