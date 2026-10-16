@@ -66,6 +66,7 @@ namespace Hiwoong
 		UpdateAttackPosition();
 		//애니메이션 이벤트 삽입
 		InitAttackEvents();
+		InitDeathEvent();
 	}
 	void Monster::UpdateFacing(
 		const Vector3& direction,
@@ -91,6 +92,14 @@ namespace Hiwoong
 	void Monster::Update(double deltaTime)
 	{
 		super::Update(deltaTime);
+
+		if (currentState == MonsterState::Dead)
+		{
+			UpdateDeath(deltaTime);
+			return;
+		}
+
+
 		UpdateState();
 
 		if (currentState != MonsterState::Run)
@@ -109,6 +118,10 @@ namespace Hiwoong
 	}
 	void Monster::UpdateState()
 	{
+		if (currentState == MonsterState::Dead)
+			return;
+
+
 		const auto targetObject = target.lock();
 
 		if (targetObject ==nullptr || targetObject->IsActive() == false)
@@ -144,7 +157,13 @@ namespace Hiwoong
 	{
 		bool accepted = false;
 
-		if (nextState == MonsterState::Run)
+		if (nextState == MonsterState::Dead)
+		{
+			attackObject->EndAttack();
+			modelAnimationComponent->Stop();
+			accepted = modelAnimationComponent->Play("Dead", true);
+		}
+		else if (nextState == MonsterState::Run)
 		{
 			accepted = modelAnimationComponent->Play("Move");
 		}
@@ -175,14 +194,17 @@ namespace Hiwoong
 
 	void Monster::TakeDamage(int damage)
 	{
+		assert(damage >= 0);
+
+		if (currentState == MonsterState::Dead)
+			return;
+
 		currentHp -= damage;
 
 		if (currentHp <= 0)
 		{
-			//TODO: 죽음 애니메이션 실행.
-			Destroy();
+			ChangeState(MonsterState::Dead);
 		}
-
 	}
 	void Monster::RequestPath()
 	{
@@ -340,7 +362,28 @@ namespace Hiwoong
 			0.68f * scale
 		);
 	}
+	void Monster::InitDeathEvent()
+	{
+		modelAnimationComponent->AddAnimationEvent(
+			"Dead",
+			1.0,
+			[this]()
+			{
+				deathAnimationFinished = true;
+			}
+		);
+	}
+	void Monster::UpdateDeath(double deltaTime)
+	{
+		if (deathAnimationFinished == false)
+			return;
 
+		deathElapsedTime += deltaTime;
 
+		if (deathElapsedTime >= deathDestroyDelay)
+		{
+			Destroy();
+		}
+	}
 }
 

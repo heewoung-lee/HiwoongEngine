@@ -47,7 +47,13 @@ namespace
 			"Attack"
 		);
 
-		result.success = idleLoaded && moveLoaded && attackLoaded;
+		const bool deadLoaded = modelImporter->ImportAnimation(
+			result.model,
+			"Assets/Model/MonsterDead.fbx",
+			"Dead"
+		);
+
+		result.success = idleLoaded && moveLoaded && attackLoaded && deadLoaded;
 		assert(result.success);
 
 		return result;

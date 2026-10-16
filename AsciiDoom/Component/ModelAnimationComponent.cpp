@@ -170,6 +170,13 @@ namespace Hiwoong
             }
         }
     }
+    void ModelAnimationComponent::Stop()
+    {
+        currentClipIndex = -1;
+        elapsedTime = 0.0;
+        lockUntilFinished = false;
+    }
+
     void ModelAnimationComponent::ProcessAnimationEvents(
         double previousTime,
         double currentTime

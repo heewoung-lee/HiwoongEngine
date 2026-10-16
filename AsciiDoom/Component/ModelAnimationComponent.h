@@ -42,7 +42,10 @@ namespace Hiwoong
             const std::string& name,
             bool lockUntilFinished
         );
-
+        //10.16일 추가.
+        //공격 애니메이션은 강제로 끊을 수 없기에.
+        //공격중 죽는다면 Stop()을 호출하고 -> 죽은 애니메이션을 실행해야함
+        void Stop();
     private:
 
 

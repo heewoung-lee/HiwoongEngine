@@ -85,6 +85,16 @@ namespace Hiwoong
 
 		//10.14일 몬스터 애니메이션 이벤트
 		void InitAttackEvents();
+
+		//10.16 죽음 이벤트 추가
+		bool deathAnimationFinished = false;
+		void InitDeathEvent();
+
+		double deathElapsedTime = 0.0;
+		double deathDestroyDelay = 2.0;
+
+		void UpdateDeath(double deltaTime);
+
 	};
 
 
