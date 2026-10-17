@@ -70,7 +70,9 @@ namespace Hiwoong
 		RegisterTileBuilders();
 		BuildMap();
 		BuildFloor();
+		BuildCeiling();
 
+		AddComponent<MeshRenderComponent>(ceilingMesh);
 		//벽 텍스쳐
 		if (InitTexturedMeshRenderer(mapMesh, wallTexturePath) == false)
 			return;
@@ -364,5 +366,20 @@ namespace Hiwoong
 
 		return true;
 	}
+	void DoomMap::BuildCeiling()
+	{
+		ceilingMesh = floorMesh;
+
+		for (Vertex& vertex : ceilingMesh.vertices)
+		{
+			vertex.position.y = -0.5f;
+		}
+
+		for (Triangle& triangle : ceilingMesh.triangles)
+		{
+			std::swap(triangle.index1, triangle.index2);
+		}
+	}
+
 }
 

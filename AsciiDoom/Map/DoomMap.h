@@ -66,11 +66,15 @@ namespace Hiwoong
 
     private:
         void LoadMap();
-        void BuildMap();
         void RegisterTileBuilders();
         void BroadcastOnMapBuilt();
         void InitNavigationGrid();
+        
+        void BuildMap();
         void BuildFloor();
+        void BuildCeiling();
+
+
         bool InitTexturedMeshRenderer(
             const Mesh& mesh,
             const std::string& texturePath
@@ -89,6 +93,7 @@ namespace Hiwoong
 
         Mesh mapMesh;
         Mesh floorMesh;
+        Mesh ceilingMesh;
 
         //맵의 콜백함수들을 모은다.
         std::vector<std::function<void()>> onMapBuiltCallbacks;
