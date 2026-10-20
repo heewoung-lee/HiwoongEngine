@@ -8,21 +8,21 @@
 #include "Scene/GameOverScene.h"
 #include <cassert>
 #include <utility>
+#include <string>
 using namespace Hiwoong;
 
 //9.26일 의존성 주입 추가.
 namespace
 {
+	const std::string targetModel = "Zombie";
+
 	ModelImportResult LoadFBX()
 	{
 		const auto modelImporter = DoomInstaller::CreateModelImporter();
+		const std::string modelFolder = "Assets/Model/" + targetModel + "/";
 
-		//믹사모에서 얻은 FBX모델이 180도 만큼 틀어져 있어서,
-		//로드 할때에는 나의 엔진을 기준으로 모델이 정면을 보게 만들어야해서,
-		//180도 만큼 보정을 더함.
 		ModelImportResult result =
-			modelImporter->Import("Assets/Model/MonsterLow.fbx",MathConstants::Pi);
-
+			modelImporter->Import(modelFolder + "MonsterLow.fbx", 135.0f);
 
 
 		assert(result.success);
@@ -31,25 +31,25 @@ namespace
 
 		const bool idleLoaded = modelImporter->ImportAnimation(
 			result.model,
-			"Assets/Model/MonsterIdle.fbx",
+			modelFolder + "MonsterIdle.fbx",
 			"Idle"
 		);
 
 		const bool moveLoaded = modelImporter->ImportAnimation(
 			result.model,
-			"Assets/Model/MonsterWalk.fbx",
+			modelFolder + "MonsterWalk.fbx",
 			"Move"
 		);
 
 		const bool attackLoaded = modelImporter->ImportAnimation(
 			result.model,
-			"Assets/Model/MonsterAttack.fbx",
+			modelFolder + "MonsterAttack.fbx",
 			"Attack"
 		);
 
 		const bool deadLoaded = modelImporter->ImportAnimation(
 			result.model,
-			"Assets/Model/MonsterDead.fbx",
+			modelFolder + "MonsterDead.fbx",
 			"Dead"
 		);
 
