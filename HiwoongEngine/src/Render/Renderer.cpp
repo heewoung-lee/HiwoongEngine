@@ -17,7 +17,7 @@ namespace Hiwoong
 		
 		const int bufferCount = screenSize.x * screenSize.y;
 
-		charInfoArray = std::make_unique<CHAR_INFO[]>(bufferCount);
+		cells = std::make_unique<RenderCell[]>(bufferCount);
 		sortingOrderArray = std::make_unique<int[]>(bufferCount);
 		depthBufferArray = std::make_unique<float[]>(bufferCount);
 	}
@@ -40,9 +40,9 @@ namespace Hiwoong
 				const int index = (y * width) + x;
 
 				// initialize chrater value
-				CHAR_INFO& info = charInfoArray[index];
-				info.Char.AsciiChar = ' ';
-				info.Attributes = 0;
+				RenderCell& cell = cells[index];
+				cell.character = ' ';
+				cell.color = Color::Black;
 
 				// initialize draw soringorder
 				sortingOrderArray[index] = -1;
@@ -75,10 +75,9 @@ namespace Hiwoong
 		}
 
 		//Save data
-		CHAR_INFO& info = charInfoArray[index];
-
-		info.Char.AsciiChar = character;
-		info.Attributes = static_cast<WORD>(color);
+		RenderCell& cell = cells[index];
+		cell.character = character;
+		cell.color = color;
 
 		sortingOrderArray[index] = sortingOrder;
 
@@ -110,10 +109,9 @@ namespace Hiwoong
 		}
 
 		//Save data
-		CHAR_INFO& info = charInfoArray[index];
-
-		info.Char.AsciiChar = character;
-		info.Attributes = static_cast<WORD>(color);
+		RenderCell& cell = cells[index];
+		cell.character = character;
+		cell.color = color;
 
 		sortingOrderArray[index] = sortingOrder;
 		depthBufferArray[index] = depth;
@@ -190,7 +188,7 @@ namespace Hiwoong
 		const int cellCount = static_cast<int>(screenSize.x) * static_cast<int>(screenSize.y);
 
 		//현재 화면의 첫번쨰 칸 주소를 가져옴.
-		const CHAR_INFO* source = frame->charInfoArray.get();
+		const RenderCell* source = frame->cells.get();
 		//첫번쨰 주소부터 cellcount개 만큼 복사
 		capturedFrame.assign(source, source + cellCount);
 
@@ -323,9 +321,8 @@ namespace Hiwoong
 
 	void Renderer::Present()
 	{
-		renderOutput->Present(frame->charInfoArray.get());
+		renderOutput->Present(frame->cells.get());
 	}
-
 	void Renderer::DrawCapturedFrame()
 	{
 		if (frame == nullptr || capturedFrame.empty()) return;
@@ -336,11 +333,13 @@ namespace Hiwoong
 		//순회 하면서 사진에 있는 픽셀의 정보를 그대로 옮긴다.
 		for (std::size_t i = 0; i < capturedFrame.size(); ++i)
 		{
-			frame->charInfoArray[i] = capturedFrame[i];
+			RenderCell& cell = frame->cells[i];
+			cell = capturedFrame[i];
 
-			// 밝은 색상을 표시하는 속성을 끈다. 조금 어둡게
-			frame->charInfoArray[i].Attributes &=
-				static_cast<WORD>(~FOREGROUND_INTENSITY);
+			//표시할 복사본의 RGB만 절반으로 낮춰서 일시정지 배경을 만듬
+			cell.color.red /= 2;
+			cell.color.green /= 2;
+			cell.color.blue /= 2;
 		}
 	}
 	

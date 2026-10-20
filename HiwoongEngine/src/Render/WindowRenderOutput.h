@@ -13,7 +13,7 @@ namespace Hiwoong
         ~WindowRenderOutput() override;
 
         void Resize(const Vector2& screenSize) override;
-        void Present(const CHAR_INFO* cells) override;
+        void Present(const RenderCell* cells) override;
         Vector2 GetCharacterSize() const override;
         bool ProcessEvents() override;
 
@@ -24,9 +24,6 @@ namespace Hiwoong
 
 
     private:
-        //이거 나중에 하다가 컬러에서 따로 처리할꺼 지금은 테스트용도.
-        static COLORREF ToWindowColor(WORD color);
-
         void CreateRenderFont();
         HFONT fontHandle = nullptr;
 
@@ -59,7 +56,7 @@ namespace Hiwoong
         bool CreateGlyphBuffer(HDC referenceDC);
 
         //문자 그림이 캐시에 있으면 가져오고, 없으면 만들어 저장하는 함수
-        const std::vector<DWORD>& GetGlyphPixels(const CHAR_INFO& cell);
+        const std::vector<DWORD>& GetGlyphPixels(char character);
 
         //저장한 문자 그림들을 전체 화면에 복사하는 함수
         void ComposeFramePixels(int width, int height);
@@ -73,7 +70,7 @@ namespace Hiwoong
 
         Vector2 screenSize = Vector2::Zero;
 
-        std::vector<CHAR_INFO> frameCells;
+        std::vector<RenderCell> frameCells;
 
         //메모리에서 그림을 그릴 작업 공간.
         HDC backBufferDC = nullptr;

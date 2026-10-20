@@ -5,6 +5,7 @@
 #include "Math/Vector2.h"
 #include "Math/Color.h"
 #include "Render/Triangle.h"
+#include "Render/RenderCell.h"
 #include <iostream>
 #include <vector>
 #include <memory>
@@ -43,7 +44,7 @@ namespace Hiwoong
 			void Clear();
 
 			//2d charater Array
-			std::unique_ptr<CHAR_INFO[]> charInfoArray;
+			std::unique_ptr<RenderCell[]> cells;
 
 			// 2d Array to sort to draw
 			std::unique_ptr<int[]> sortingOrderArray;
@@ -190,7 +191,7 @@ namespace Hiwoong
 		std::unique_ptr<Frame> frame;
 
 		// 저장한 화면의 문자와 색상
-		std::vector<CHAR_INFO> capturedFrame;
+		std::vector<RenderCell> capturedFrame;
 
 		// 저장한 화면의 가로·세로 칸 수
 		Vector2 capturedFrameSize = Vector2::Zero;

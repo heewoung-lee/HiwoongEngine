@@ -1,5 +1,4 @@
 #include "WindowRenderOutput.h"
-#include "Render/ShaderData.h"
 #include "Core/Input.h"
 #include <stdexcept>
 #include <algorithm>
@@ -12,7 +11,7 @@ namespace Hiwoong
     WindowRenderOutput::WindowRenderOutput(
         const Vector2& characterSize)
         : characterSize(characterSize),
-        glyphCache(256 * 256)
+        glyphCache(256)
     {
         CreateRenderFont();
         try
@@ -75,7 +74,7 @@ namespace Hiwoong
         this->screenSize = screenSize;
     }
 
-    void WindowRenderOutput::Present(const CHAR_INFO* cells)
+    void WindowRenderOutput::Present(const RenderCell* cells)
     {
         if (cells == nullptr ||
             screenSize.x <= 0 || screenSize.y <= 0)
@@ -299,36 +298,32 @@ namespace Hiwoong
     }
 
     const std::vector<DWORD>& WindowRenderOutput::GetGlyphPixels(
-        const CHAR_INFO& cell)
+        char character)
     {
-        const unsigned char character =
-            cell.Char.AsciiChar == '\0'
-            ? ' '
-            : static_cast<unsigned char>(cell.Char.AsciiChar);
+        if (character == '\0')
+            character = ' ';
 
-        const WORD colors = cell.Attributes & 0x00FF;
+        auto& pixels =
+            glyphCache[static_cast<unsigned char>(character)];
 
-        // 문자와 색상 조합에 해당하는 저장 칸을 찾는다.
-        auto& pixels = glyphCache[colors * 256 + character];
-
-        // 이미 만든 그림이면 바로 반환한다.
-        if (!pixels.empty()) return pixels;
+        if (!pixels.empty())
+            return pixels;
 
         const int width = static_cast<int>(characterSize.x);
         const int height = static_cast<int>(characterSize.y);
         const RECT area{ 0, 0, width, height };
 
-        SetTextColor(glyphDC, ToWindowColor(colors));
-        SetBkColor(glyphDC, ToWindowColor(colors >> 4));
+        // 문자 모양을 흰색으로 저장한다.
+        SetTextColor(glyphDC, RGB(255, 255, 255));
+        SetBkColor(glyphDC, RGB(0, 0, 0));
 
         if (ExtTextOutA(
             glyphDC, 0, 0,
             ETO_OPAQUE | ETO_CLIPPED,
             &area,
-            reinterpret_cast<const char*>(&character),
+            &character,
             1, nullptr))
         {
-            // Windows의 그리기를 완료한 뒤 픽셀을 읽는다.
             GdiFlush();
 
             pixels.assign(
@@ -340,10 +335,6 @@ namespace Hiwoong
         return pixels;
     }
 
-    COLORREF WindowRenderOutput::ToWindowColor(WORD color)
-    {
-        return ShaderData::ColorPalette[color & 0x0F];
-    }
 
     //지정한 크기의 고정폭 글꼴을 Windows에 요청하는 코드
     void WindowRenderOutput::CreateRenderFont()
@@ -474,8 +465,14 @@ namespace Hiwoong
                 const auto& cell =
                     frameCells[static_cast<std::size_t>(y) * columns + x];
 
-                const auto& glyph = GetGlyphPixels(cell);
+                const auto& glyph = GetGlyphPixels(cell.character);
                 if (glyph.empty()) continue;
+
+                // Windows 픽셀 형식에 맞춰 RGB를 한 값으로 묶는다.
+                const DWORD pixelColor =
+                    (static_cast<DWORD>(cell.color.red) << 16) |
+                    (static_cast<DWORD>(cell.color.green) << 8) |
+                    static_cast<DWORD>(cell.color.blue);
 
                 // 창 밖으로 넘어가는 부분은 복사하지 않는다.
                 const int copyWidth =
@@ -492,9 +489,14 @@ namespace Hiwoong
                     const DWORD* source =
                         glyph.data() + row * cellWidth;
 
-                    std::memcpy(
-                        destination, source,
-                        copyWidth * sizeof(DWORD));
+                    for (int column = 0; column < copyWidth; ++column)
+                    {
+                        // 문자 모양이 있는 픽셀에만 색을 입힌다.
+                        if ((source[column] & 0x00FFFFFF) != 0)
+                        {
+                            destination[column] = pixelColor;
+                        }
+                    }
                 }
             }
         }

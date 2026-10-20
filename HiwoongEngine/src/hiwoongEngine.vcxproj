@@ -118,6 +118,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClCompile Include="DebugingTool\ColliderDebugRenderer.cpp" />
     <ClCompile Include="GameObject\GameObject.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
+    <ClCompile Include="Math\Color.cpp" />
     <ClCompile Include="Math\MathUtils.cpp" />
     <ClCompile Include="Math\Matrix4x4.cpp" />
     <ClCompile Include="Math\Vector2.cpp" />
@@ -174,6 +175,7 @@ xcopy ..\Config\Setting.txt $(Outdir)..\Config\ /e /y /i</Command>
     <ClInclude Include="Render\Mesh.h" />
     <ClInclude Include="Render\MeshFactory.h" />
     <ClInclude Include="Render\MeshRenderer.h" />
+    <ClInclude Include="Render\RenderCell.h" />
     <ClInclude Include="Render\Renderer.h" />
     <ClInclude Include="Render\RenderView.h" />
     <ClInclude Include="Render\ScreenBuffer.h" />

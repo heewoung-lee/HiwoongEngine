@@ -1,27 +1,27 @@
 #pragma once
 
 #include "Core/Core.h"
-#include <Windows.h>
+#include <cstdint>
 
 namespace Hiwoong
 {
-    enum class Hiwoong_API Color : WORD
+    //10.20 컬러 방식 수정
+    struct Hiwoong_API Color
     {
-        Black = 0,
-        Red = FOREGROUND_RED | FOREGROUND_INTENSITY,
-        Green = FOREGROUND_GREEN | FOREGROUND_INTENSITY,
-        Blue = FOREGROUND_BLUE | FOREGROUND_INTENSITY,
-        Cyan = FOREGROUND_GREEN | FOREGROUND_BLUE |
-        FOREGROUND_INTENSITY,
-        Yellow = FOREGROUND_RED | FOREGROUND_GREEN |
-        FOREGROUND_INTENSITY,
-        Magenta = FOREGROUND_RED | FOREGROUND_BLUE |
-        FOREGROUND_INTENSITY,
+        std::uint8_t red = 0;
+        std::uint8_t green = 0;
+        std::uint8_t blue = 0;
 
-        Orange = FOREGROUND_RED | FOREGROUND_GREEN,
-
-        Gray = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE,
-        White = Gray | FOREGROUND_INTENSITY,
-        BrightWhite = FOREGROUND_INTENSITY | White
-	};
+        static const Color Black;
+        static const Color Red;
+        static const Color Green;
+        static const Color Blue;
+        static const Color Cyan;
+        static const Color Yellow;
+        static const Color Magenta;
+        static const Color Orange;
+        static const Color Gray;
+        static const Color White;
+        static const Color BrightWhite;
+    };
 }

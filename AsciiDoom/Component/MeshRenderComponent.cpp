@@ -95,34 +95,11 @@ namespace Hiwoong
 		const std::size_t byteIndex =
 			(row * texture->width + column) * 3;
 
-		const int red = texture->rgbPixels[byteIndex];
-		const int green = texture->rgbPixels[byteIndex + 1];
-		const int blue = texture->rgbPixels[byteIndex + 2];
-
-		int bestDistance = INT_MAX;
-		Color bestColor = Color::Black;
-
-		for (int i = 0; i < 16; ++i)
-		{
-			const COLORREF candidate = ShaderData::ColorPalette[i];
-
-			const int redDifference = red - GetRValue(candidate);
-			const int greenDifference = green - GetGValue(candidate);
-			const int blueDifference = blue - GetBValue(candidate);
-
-			const int distance =
-				redDifference * redDifference +
-				greenDifference * greenDifference +
-				blueDifference * blueDifference;
-
-			if (distance < bestDistance)
-			{
-				bestDistance = distance;
-				bestColor = static_cast<Color>(i);
-			}
-		}
-
-		return bestColor;
+		return Color{
+					texture->rgbPixels[byteIndex],
+					texture->rgbPixels[byteIndex + 1],
+					texture->rgbPixels[byteIndex + 2]
+		};
 	}
 	void MeshRenderComponent::SetVertexPositions(
 		const std::vector<ModelVertex>& vertices

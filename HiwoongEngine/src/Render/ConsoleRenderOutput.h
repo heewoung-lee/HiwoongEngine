@@ -3,7 +3,7 @@
 #include "IRenderOutput.h"
 #include "Core/Core.h"
 #include <memory>
-
+#include <vector>
 namespace Hiwoong
 {
     class ScreenBuffer;
@@ -18,7 +18,7 @@ namespace Hiwoong
         ~ConsoleRenderOutput() override;
 
         void Resize(const Vector2& screenSize) override;
-        void Present(const CHAR_INFO* cells) override;
+        void Present(const RenderCell* cells) override;
 
         Vector2 GetCharacterSize() const override
         {
@@ -26,10 +26,16 @@ namespace Hiwoong
         }
 
     private:
+        static WORD ToConsoleColor(Color color);
+
+    private:
         std::unique_ptr<ScreenBuffer> buffers[2];
         int currentBufferIndex = 0;
 
         Vector2 characterSize = Vector2::Zero;
         ConsoleRenderOptions options;
+
+
+        std::vector<CHAR_INFO> consoleCells;
     };
 }

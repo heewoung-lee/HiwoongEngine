@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Math/Vector2.h"
+#include "Render/RenderCell.h"
 #include <Windows.h>
 
 namespace Hiwoong
@@ -14,7 +15,7 @@ namespace Hiwoong
         virtual void Resize(const Vector2& screenSize) = 0;
 
         // 완성된 문자·색상 배열을 화면에 표시한다.
-        virtual void Present(const CHAR_INFO* cells) = 0;
+        virtual void Present(const RenderCell* cells) = 0;
 
         // 문자 한 칸의 픽셀 크기를 반환한다.
         virtual Vector2 GetCharacterSize() const = 0;

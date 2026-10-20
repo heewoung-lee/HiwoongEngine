@@ -117,6 +117,9 @@
     <ClCompile Include="DebugingTool\ColliderDebugRenderer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Math\Color.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Engine.h">
@@ -255,6 +258,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="DebugingTool\ColliderDebugRenderer.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderCell.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
