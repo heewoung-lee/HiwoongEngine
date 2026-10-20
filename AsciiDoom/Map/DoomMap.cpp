@@ -27,7 +27,7 @@ namespace Hiwoong
 	}
 	DoomMap::DoomMap(const std::string& mapPath) : mapPath(mapPath)
 	{
-		
+
 	}
 	Mesh& DoomMap::GetMapMesh()
 	{
@@ -185,11 +185,14 @@ namespace Hiwoong
 		std::ifstream file(mapPath);
 
 		assert(file.is_open() && "Failed to open map file");
-		
+
 		std::string section;
 		std::string row;
+
 		const std::string textureKey = "floorTexture=";
 		const std::string wallTextureKey = "wallTexture=";
+		const std::string wallLayersKey = "wallLayers=";
+
 
 		while (std::getline(file, row))
 		{
@@ -211,17 +214,25 @@ namespace Hiwoong
 			}
 			else if (section == "[Settings]")
 			{
+
 				if (row.find(textureKey) == 0)
 				{
 					floorTexturePath = row.substr(textureKey.size());
 				}
+
 				else if (row.find(wallTextureKey) == 0)
 				{
 					wallTexturePath = row.substr(wallTextureKey.size());
 				}
-			}
-		}
 
+				else if (row.find(wallLayersKey) == 0)
+				{
+					wallLayers = std::stoi(row.substr(wallLayersKey.size()));
+				}
+			}
+
+		}
+		assert(wallLayers > 0);
 		assert(!floorTexturePath.empty());
 		assert(!wallTexturePath.empty());
 		assert(!rows.empty() && "Map file is empty");
@@ -372,7 +383,7 @@ namespace Hiwoong
 
 		for (Vertex& vertex : ceilingMesh.vertices)
 		{
-			vertex.position.y = -0.5f;
+			vertex.position.y = 0.5f - static_cast<float>(wallLayers);
 		}
 
 		for (Triangle& triangle : ceilingMesh.triangles)
@@ -382,4 +393,3 @@ namespace Hiwoong
 	}
 
 }
-

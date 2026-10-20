@@ -2,7 +2,6 @@
 #include "GameObject/GameObject.h"
 #include "TileBuilderRegistry.h"
 #include "Render/Mesh.h"
-#include "Math/Vector2.h"
 #include "Math/Vector3.h"
 #include "Navigation/INavigationMap.h"
 #include <memory>
@@ -13,8 +12,6 @@
 
 namespace Hiwoong
 {
-    struct ModelTexture;
-
     class DoomMap : public GameObject, public INavigationMap
     {
 
@@ -63,13 +60,15 @@ namespace Hiwoong
             const GridPosition& gridPosition
         ) const override;
 
+        int GetWallLayers() const { return wallLayers; }
+
 
     private:
         void LoadMap();
         void RegisterTileBuilders();
         void BroadcastOnMapBuilt();
         void InitNavigationGrid();
-        
+
         void BuildMap();
         void BuildFloor();
         void BuildCeiling();
@@ -85,10 +84,10 @@ namespace Hiwoong
         std::vector<std::string> rows;
         //값으로 두는 이유는 DoomMap이 사라질때 Builder도 같이 사라져야함.
         TileBuilderRegistry tileBuilderRegistry;
-        
+
         Vector3 playerSpawnPosition = Vector3::Zero;
         bool hasPlayerSpawnPosition = false;
-        
+
         std::vector<Vector3> monsterSpawnPositions;
 
         Mesh mapMesh;
@@ -103,6 +102,9 @@ namespace Hiwoong
 
         std::string floorTexturePath;
         std::string wallTexturePath;
+
+
+        int wallLayers = 1;
 
     };
 }

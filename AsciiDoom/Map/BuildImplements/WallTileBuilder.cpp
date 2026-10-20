@@ -11,57 +11,88 @@ namespace Hiwoong
 	const std::vector<int> dirX = { 0,0,-1,1 };
 	const std::vector<int> dirZ = { -1,1,0,0 };
 
-    void WallTileBuilder::Build(DoomMap& map, const Vector3& worldPosition)
+    void WallTileBuilder::Build(
+        DoomMap& map,
+        const Vector3& worldPosition
+    )
     {
-        Mesh& mapMesh = map.GetMapMesh();
-        const Mesh wallMesh = MeshFactory::CreateCube(1.0f);
+        const int layers = map.GetWallLayers();
 
-        const std::size_t vertexOffset = mapMesh.vertices.size();
+        // 충돌체는 쌓인 벽 전체를 감싸는 하나만 만든다.
+        const float halfHeight = static_cast<float>(layers) * 0.5f;
 
-        // 충돌용 오브젝트는 기존처럼 월드 위치에 생성
-        const std::shared_ptr<Scene> scene = map.GetOwner();
-        const std::shared_ptr<GameObject> wall =
-            scene->Instantiate<GameObject>(worldPosition);
+        // 바닥은 유지하고, 높아진 벽의 중심을 위로 옮긴다.
+        Vector3 wallCenter = worldPosition;
+        wallCenter.y -= halfHeight - 0.5f;
+
+        const auto scene = map.GetOwner();
+        const auto wall = scene->Instantiate<GameObject>(wallCenter);
 
         wall->AddComponent<BoxCollider3DComponent>(
-            Vector3(0.5f, 0.5f, 0.5f)
+            Vector3(0.5f, halfHeight, 0.5f)
         );
 
-        // 9.18일 변경 부분: 메시 정점에는 맵 기준 위치를 더한다.
+        Mesh& mapMesh = map.GetMapMesh();
+
+        // 각 층에서 같은 크기의 큐브와 UV를 재사용한다
+        const Mesh wallMesh = MeshFactory::CreateCube(1.0f);
+
+        // 맵의 Transform이 적용되므로 정점은 맵 기준 위치로 저장한다
         const Vector3 localPosition =
             worldPosition - map.GetWorldPosition();
 
-        for (Vertex vertex : wallMesh.vertices)
-        {
-            vertex.position += localPosition;
-            mapMesh.vertices.push_back(vertex);
-        }
-
-        // 아래는 기존에 있던 이웃 벽 검사와 삼각형 추가 처리
+        // 옆 칸에도 벽이 있는지 확인하기 위한 맵 칸 번호
         const int x = static_cast<int>(std::round(localPosition.x));
         const int z = static_cast<int>(std::round(localPosition.z));
 
-        for (std::size_t idx = 0; idx < wallMesh.triangles.size(); ++idx)
+        for (int layer = 0; layer < layers; ++layer)
         {
-            const Triangle& triangle = wallMesh.triangles[idx];
-            const std::size_t faceIndex = idx / 2;
+            // 이번 층의 정점이 전체 맵 메시에서 시작하는 번호
+            const std::size_t vertexOffset = mapMesh.vertices.size();
 
-            if (faceIndex < 4)
+            // 내 엔진은 -Y가 위쪽이므로 층마다 Y를 1씩 줄인다
+            Vector3 layerPosition = localPosition;
+            layerPosition.y -= static_cast<float>(layer);
+
+            // 위치만 옮기고 UV는 유지해서 무늬가 늘어나지 않게 한다
+            for (Vertex vertex : wallMesh.vertices)
             {
-                const int neighborX = x + dirX[faceIndex];
-                const int neighborZ = z + dirZ[faceIndex];
-
-                if (map.IsWallTile(neighborX, neighborZ))
-                    continue;
+                vertex.position += layerPosition;
+                mapMesh.vertices.push_back(vertex);
             }
 
-            mapMesh.triangles.emplace_back(
-                Triangle{
+            for (std::size_t idx = 0; idx < wallMesh.triangles.size(); ++idx)
+            {
+                const Triangle& triangle = wallMesh.triangles[idx];
+
+                // 큐브의 한 면은 삼각형 두 개로 구성된다.
+                const std::size_t faceIndex = idx / 2;
+
+                // 앞뒤좌우 면은 옆 칸이 벽이면 가려지므로 제외한다.
+                if (faceIndex < 4)
+                {
+                    const int neighborX = x + dirX[faceIndex];
+                    const int neighborZ = z + dirZ[faceIndex];
+
+                    if (map.IsWallTile(neighborX, neighborZ))
+                        continue;
+                }
+
+                // 윗면- 가장 위층에만 남긴다.
+                if (faceIndex == 4 && layer < layers - 1)
+                    continue;
+
+                // 아랫면- 가장 아래층에만 남긴다.
+                if (faceIndex == 5 && layer > 0)
+                    continue;
+
+                // 큐브 안의 정점 번호를 전체 맵의 정점 번호로 바꾼다.
+                mapMesh.triangles.push_back({
                     triangle.index0 + vertexOffset,
                     triangle.index1 + vertexOffset,
                     triangle.index2 + vertexOffset
-                }
-            );
+                    });
+            }
         }
     }
 }
