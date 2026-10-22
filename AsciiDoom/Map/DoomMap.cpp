@@ -369,6 +369,10 @@ namespace Hiwoong
 
 		SpotLight ceilingLight;
 		ceilingLight.direction = Vector3(0.0f, 1.0f, 0.0f);
+		ceilingLight.color = Color{ 255, 210, 150 };
+		ceilingLight.intensity = 2.0f;
+		ceilingLight.range = 7.0f;
+		ceilingLight.outerHalfAngleDegrees = 50.0f;
 
 		tileBuilderRegistry.RegisterBuilder(
 			'L',

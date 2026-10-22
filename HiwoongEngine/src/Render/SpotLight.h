@@ -1,6 +1,6 @@
 #pragma once
 #include "Math/Vector3.h"
-
+#include "Math/Color.h"
 namespace Hiwoong
 {
     struct SpotLight
@@ -11,5 +11,6 @@ namespace Hiwoong
         float outerHalfAngleDegrees = 30.0f;//빛의 퍼지는 각도 30은 빛 없음
         float innerHalfAngleDegrees = 20.0f;//안쪽각도 밝기 감소없음
         float intensity = 1.0f;
+        Color color = Color::White;
     };
 }

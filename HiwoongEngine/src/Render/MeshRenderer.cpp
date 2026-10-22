@@ -419,13 +419,24 @@ namespace Hiwoong
 
 			float spotBrightness = 0.0f;
 
+			// 기본 조명은 흰색으로 계산한다.
+			float redLight = baseBrightness;
+			float greenLight = baseBrightness;
+			float blueLight = baseBrightness;
+
 			for (const SpotLight& light : renderView.spotLights)
 			{
-				spotBrightness += CalculateSpotBrightness(
+				const float lightBrightness = CalculateSpotBrightness(
 					worldPosition,
 					worldNormal,
 					light
 				);
+
+				spotBrightness += lightBrightness;
+
+				redLight += light.color.red / 255.0f * lightBrightness;
+				greenLight += light.color.green / 255.0f * lightBrightness;
+				blueLight += light.color.blue / 255.0f * lightBrightness;
 			}
 
 			//9.19일 변경 Irenderable을 통해.
@@ -444,6 +455,23 @@ namespace Hiwoong
 				pixelColor) == false)
 			{
 				continue;
+			}
+
+			const float totalBrightness = baseBrightness + spotBrightness;
+
+			if (totalBrightness > 0.0f)
+			{
+				pixelColor.red = static_cast<std::uint8_t>(
+					pixelColor.red * redLight / totalBrightness
+					);
+
+				pixelColor.green = static_cast<std::uint8_t>(
+					pixelColor.green * greenLight / totalBrightness
+					);
+
+				pixelColor.blue = static_cast<std::uint8_t>(
+					pixelColor.blue * blueLight / totalBrightness
+					);
 			}
 
 			//픽셀 깊이.
