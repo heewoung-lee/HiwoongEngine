@@ -23,17 +23,20 @@ namespace Hiwoong
 		float speed,
 		float attackRange,
 		float scale,
-		int attackDamage
+		int attackDamage,
+		float detectionRange
 	)
 		: GameObject(spawnPosition),
 		model(model),
 		currentHp(hp),
 		speed(speed),
 		attackRange(attackRange),
+		detectionRange(detectionRange),
 		scale(scale),
 		attackDamage(attackDamage)
 	{
 		assert(this->model != nullptr);
+		assert(detectionRange >= attackRange);
 	}
 
 	void Monster::Start()
@@ -138,13 +141,23 @@ namespace Hiwoong
 			return;
 		}
 
-		if (IsWithinAttackRange(targetObject->GetWorldPosition()))
+		Vector3 difference = targetObject->GetWorldPosition() - GetWorldPosition();
+		difference.y = 0.0f;
+
+		const float distance = difference.Length();
+
+		if (distance <= attackRange)
 		{
 			ChangeState(MonsterState::Attack);
-			return;
 		}
-
-		ChangeState(MonsterState::Run);
+		else if (distance <= detectionRange)
+		{
+			ChangeState(MonsterState::Run);
+		}
+		else
+		{
+			ChangeState(MonsterState::Idle);
+		}
 	}
 	void Monster::InitReferences()
 	{
@@ -186,16 +199,6 @@ namespace Hiwoong
 
 		if (accepted)
 			currentState = nextState;
-	}
-
-	bool Monster::IsWithinAttackRange(
-		const Vector3& targetPosition
-	) const
-	{
-		Vector3 difference = targetPosition - GetWorldPosition();
-		difference.y = 0.0f;
-
-		return difference.Length() <= attackRange;
 	}
 
 	

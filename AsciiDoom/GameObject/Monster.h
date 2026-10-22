@@ -27,7 +27,8 @@ namespace Hiwoong
 			float speed = 1.0f,
 			float attackRange = 1.0f,
 			float scale = 0.7f,
-			int attackDamage = 10
+			int attackDamage = 10,
+			float detectionRange = 8.0f
 		);
 
 		void Start() override;
@@ -48,6 +49,7 @@ namespace Hiwoong
 		int currentHp;
 		float speed;
 		float attackRange;
+		float detectionRange;
 		const float scale;
 		std::shared_ptr<NavAIComponent> navAIComponent;
 		std::weak_ptr<GameObject> target;//대부분은 플레이어
@@ -59,10 +61,6 @@ namespace Hiwoong
 		void InitReferences();
 		//유한상태머신 행동변경
 		void ChangeState(MonsterState nextState);
-		//공격이 가능한 거리인지 판별
-		bool IsWithinAttackRange(
-			const Vector3& targetPosition
-		) const;
 		void UpdateState();
 		//경로요청 메서드
 		void RequestPath();
