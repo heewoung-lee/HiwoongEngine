@@ -200,61 +200,15 @@ flowchart TD
 
 ## 문제 해결 과정
 
-### 1. 길찾기를 게임 밖에서 반복 검증하기
+### 엔진 실행 없이 검증하는 TDD 환경과 DI
 
-| 어려웠던 점 | 바꾼 방법 | 확인할 수 있는 것 |
-|---|---|---|
-| 원하는 위치·벽 배치를 매번 플레이로 재현 | 작은 격자를 테스트 입력으로 사용 | 직선·대각선·벽 우회·도달 불가 |
-| 자료구조·탐색·이동 오류가 섞임 | 최소 힙과 A*를 따로 검사 | 어느 계산에서 잘못됐는지 |
+길찾기 알고리즘과 FBX Loader처럼 복잡한 로직을 게임 안에서만 확인하면, 테스트할 때마다 맵과 객체를 준비하고 엔진 실행 루프를 돌려야 합니다. 알고리즘과 데이터 변환의 오류를 이동·렌더링 문제와 분리해 확인할 수 있는 환경이 필요했습니다.
 
-```mermaid
-flowchart LR
-    A["입력·기대 경로로<br/>테스트 작성"] --> B["실패 확인"]
-    B --> C["구현·수정"]
-    C --> D["통과 확인"]
-    D -->|"다음 조건 추가"| A
-```
+이를 해결하기 위해 핵심 로직을 `AsciiDoomCore`에 두고, 게임을 실행하지 않고 테스트에서 직접 호출하는 `AsciiDoomTests`를 구성했습니다. 기대 결과를 테스트로 먼저 작성하고 구현·수정하며 검증하는 **TDD 방식으로 길찾기 알고리즘과 FBX Loader를 개발했습니다.** 작은 격자로 경로 탐색을 확인하고, 모델 데이터로 정점·UV·삼각형 변환 등을 검사할 수 있도록 했습니다.
 
-길찾기는 `AsciiDoomCore`에 두고, 게임에서는 `IPathFinder` 계약으로 사용합니다. `DoomInstaller`가 사용할 구현체를 만들어 전달하는 수동 DI 구조입니다.
+게임에 연결할 때는 **DI(의존성 주입)**를 적용했습니다. `DoomInstaller`에서 구현체를 생성·조립하고, 사용하는 쪽에는 `IPathFinder`와 `IModelImporter` 인터페이스로 전달합니다. 테스트에서 검증한 로직을 게임에서도 그대로 사용하면서 구현체 생성과 사용의 책임을 분리했습니다.
 
-관련 코드: [길찾기·최소 힙 테스트](../HiwoongEngine/AsciiDoomTests/PathFinder/AStarPathFinderTests.cpp), [구현체 조립](Bootstrap/DoomInstaller.cpp)
-
-### 2. 메시와 스프라이트가 같은 렌더러 사용하기
-
-```mermaid
-flowchart TD
-    A["3D 메시<br/>모양·재질 제공"] --> C["공통 렌더러<br/>투영·클리핑·깊이 검사"]
-    B["3D 스프라이트<br/>문자·색상 제공"] --> C
-    C --> D["같은 문자 화면에 출력"]
-```
-
-| 정리한 책임 | 효과 |
-|---|---|
-| 각 컴포넌트는 자기 모양·문자·색상 제공 | 표현 방식만 다르게 구성 |
-| 렌더러는 공통 계산 담당 | 같은 투영·깊이 계산을 중복 관리하지 않음 |
-| 클리핑할 때 위치와 UV를 함께 보간 | 잘린 부분도 원래 표면의 문자·색상 선택 |
-
-관련 코드: [공통 계약](../HiwoongEngine/src/Render/IRenderable3D.h), [공통 렌더러](../HiwoongEngine/src/Render/MeshRenderer.cpp), [3D 스프라이트](../HiwoongEngine/src/Component/SpriteRenderer3DComponent.cpp)
-
-### 3. FBX 파일마다 달랐던 몸체 기준 맞추기
-
-모델 교체 실험에서는 FBX가 정상적으로 읽혀도 Blender와 엔진의 포즈가 다르게 보이는 문제가 있었습니다.
-
-```mermaid
-flowchart TD
-    A["동작별 FBX 준비"] --> B["몸체·정점 순서·가중치<br/>하나의 기준으로 통일"]
-    B --> C["각 파일의<br/>뼈 움직임은 보존"]
-    C --> D["같은 모델에서 재생하고<br/>Blender와 포즈 비교"]
-```
-
-| 비교 기준 | 확인하는 내용 |
-|---|---|
-| 같은 메시·가중치 | 몸체 준비 차이로 생기는 오차 분리 |
-| 같은 좌표축·시간 | 같은 동작의 같은 순간을 비교 |
-
-모델 교체를 위한 에셋 준비 사례이며, 게임의 기본 모델은 Zombie입니다.
-
-관련 코드: [모델 변환](../HiwoongEngine/AsciiDoomCore/ModelImport/ModelImporter.cpp), [관절 포즈](../HiwoongEngine/AsciiDoomCore/Animation/SkeletonPoseCalculator.cpp), [스키닝](../HiwoongEngine/AsciiDoomCore/Animation/SkinningCalculator.cpp)
+관련 코드: [테스트 진입점](../HiwoongEngine/AsciiDoomTests/Main.cpp), [길찾기 테스트](../HiwoongEngine/AsciiDoomTests/PathFinder/AStarPathFinderTests.cpp), [FBX Loader 테스트](../HiwoongEngine/AsciiDoomTests/ModeImport/MeshLoaderTests.cpp), [의존성 조립](Bootstrap/DoomInstaller.cpp)
 
 ## 전체 구조와 역할
 
