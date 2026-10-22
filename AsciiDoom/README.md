@@ -242,19 +242,6 @@ flowchart TD
 
 관련 코드: [모델 변환](../HiwoongEngine/AsciiDoomCore/ModelImport/ModelImporter.cpp), [관절 포즈](../HiwoongEngine/AsciiDoomCore/Animation/SkeletonPoseCalculator.cpp), [스키닝](../HiwoongEngine/AsciiDoomCore/Animation/SkinningCalculator.cpp)
 
-## 전체 구조와 역할
-
-**게임 객체는 행동을 결정하고, 계산 기능과 표시 기능을 조합합니다.** 아래 그림은 책임과 기능 요청을 나타냅니다.
-
-```mermaid
-flowchart TD
-    A["Scene<br/>객체 생성·수명 관리"] --> B["게임 객체<br/>행동·이동·상태 결정"]
-    B -->|"목적지"| C["길찾기<br/>경로 계산"]
-    C -->|"이동 경로"| B
-    B -->|"동작 요청"| E["애니메이션<br/>포즈·스키닝 계산"]
-    E -->|"바뀐 모양"| D["표시 기능<br/>3D 장면·문자·HUD"]
-    B -->|"위치·HP·탄약"| D
-```
 
 | 역할 | 주요 담당 |
 |---|---|
