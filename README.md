@@ -112,7 +112,7 @@ GameObject의 추가·삭제와 Component의 추가는 예약 목록을 통해 �
 
 | 셀별 데이터 | 역할 |
 |---|---|
-| `CHAR_INFO` | 표시할 문자와 전경·배경 색상 속성 |
+| `RenderCell` | 표시할 문자와 RGB 색상 |
 | `sortingOrder` | 겹친 2D 요소와 3D 장면 사이의 표시 우선순위 |
 | Depth Buffer | 같은 표시 순서의 3D 셀 중 가까운 표면 선택 |
 

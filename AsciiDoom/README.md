@@ -176,31 +176,15 @@ flowchart TD
 
 관련 코드: [테스트 진입점](../HiwoongEngine/AsciiDoomTests/Main.cpp), [길찾기 테스트](../HiwoongEngine/AsciiDoomTests/PathFinder/AStarPathFinderTests.cpp), [FBX Loader 테스트](../HiwoongEngine/AsciiDoomTests/ModeImport/MeshLoaderTests.cpp), [의존성 조립](Bootstrap/DoomInstaller.cpp)
 
-
-| 역할 | 주요 담당 |
-|---|---|
-| 맵 배치·스폰 위치·길찾기 격자 | [DoomMap](Map/DoomMap.cpp) |
-| 플레이어 이동·HP·탄약 | [Player](Player/Player.cpp) |
-| 몬스터 행동·경로 이동 | [Monster](GameObject/Monster.cpp) |
-| 경로 계산 연결 | [NavAIComponent](Component/NavAIComponent.cpp) |
-| 동작 재생·포즈 적용 | [ModelAnimationComponent](Component/ModelAnimationComponent.cpp) |
-| 충돌 검사 / 공격 피해 전달 | [CollisionSystem](../HiwoongEngine/src/Physics/CollisionSystem.cpp) / [AttackObject](GameObject/AttackObject.cpp) |
-| HUD 배치·값 표시 | [PlayerHUID](UI/PlayerHUID.cpp)·[UI](UI) |
-
-객체를 생성한 관계와 Transform의 부모·자식 관계는 별개입니다. `PlayerHUID`는 소스에서 사용하는 HUD 클래스 이름입니다.
-
 ## 실행과 조작
 
-### Release 빌드와 실행
+### 다운로드 및 실행
 
 [게임 다운로드 · v0.2.0 (Windows x64)](https://github.com/heewoung-lee/HiwoongEngine/releases/tag/v0.2.0)
 
-```mermaid
-flowchart LR
-    A["FBX·텍스처 준비"] --> B["솔루션 열기"]
-    B --> C["x64 · Release<br/>시작 프로젝트·작업 폴더 설정"]
-    C --> D["Release 빌드·실행"]
-```
+1. 릴리스의 **Assets**에서 `AsciiDoom-Portable-20261022.zip`을 다운로드합니다.
+2. ZIP 파일을 전부 압축 해제합니다.
+3. 압축을 푼 폴더의 `Start-Game.cmd`를 실행합니다.
 
 에셋 고지: [환경 에셋 라이선스](Assets/Environment/CeilingLight/LICENSE.txt), [Freedoom 텍스처 고지](Assets/Textures/Freedoom/COPYING.adoc)
 
@@ -214,8 +198,6 @@ flowchart LR
 | 사격 / 재장전 | 마우스 왼쪽 클릭 / `R`. 탄약이 없을 때 클릭해도 재장전 요청 |
 | 일시정지 / 재개 | `Esc` |
 | 메뉴 선택 / 실행 | `↑`·`↓` / `Enter` |
-
-관련 코드: [테스트 진입점](../HiwoongEngine/AsciiDoomTests/Main.cpp), [FBX 테스트 경로](../HiwoongEngine/AsciiDoomTests/ModeImport/MeshLoaderTests.cpp)
 
 ## 개발 기록
 
