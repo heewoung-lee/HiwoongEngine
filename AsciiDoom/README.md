@@ -1,10 +1,10 @@
 # ASCII Doom
 
+https://github.com/user-attachments/assets/31e2e76d-bf96-4367-9f9f-1c5504e425ce
+
 **직접 만든 C++ 엔진으로 3D 공간을 문자와 RGB 색상으로 그리는 1인칭 게임입니다.**
 
-작은 맵 하나에서 총 한 종류와 몬스터 한 종류를 사용하는 단일 스테이지 데모를 개발하고 있습니다.
-
-<!-- 최신 대표 화면과 통합 플레이 영상은 촬영 후 이 위치에 추가합니다. -->
+한 종류의 총으로 몬스터와 전투하는 단일 스테이지 구성입니다.
 
 ```mermaid
 flowchart LR
@@ -14,13 +14,14 @@ flowchart LR
 
 | 구분 | 구성 |
 |---|---|
-| 개발 환경 | C++17 · Windows API · GDI |
-| 직접 구현 | 렌더링, 길찾기, 모델 데이터 변환, 관절 포즈·스키닝, 게임 로직 |
+| 기술 구성 | C++17 · Windows API · GDI |
+| 실행 기준 | Windows x64 · Release |
+| 직접 구현 | 렌더링, 길찾기, 모델 데이터 변환, 게임 로직 |
 | 사용한 외부 코드 | FBX 읽기: [ufbx](../HiwoongEngine/AsciiDoomCore/ThirdParty/ufbx.h) / PNG 읽기: [stb_image](../HiwoongEngine/AsciiDoomCore/ThirdParty/stb_image.h) |
 
-[현재 구현](#현재-구현과-개발-상태) · [핵심 구현](#핵심-구현) · [문제 해결](#문제-해결-과정) · [구조와 역할](#전체-구조와-역할) · [실행과 조작](#실행과-조작) · [개발 기록](#개발-기록)
+[주요 기능](#주요-기능) · [핵심 구현](#핵심-구현) · [문제 해결](#문제-해결-과정) · [구조와 역할](#전체-구조와-역할) · [실행과 조작](#실행과-조작) · [개발 기록](#개발-기록)
 
-## 현재 구현과 개발 상태
+## 주요 기능
 
 | 게임에서 할 수 있는 일 | 연결한 기능 |
 |---|---|
@@ -29,8 +30,8 @@ flowchart LR
 | 상태 확인하기 | 체력·탄약 HUD, 피격 화면 효과·카메라 흔들림 |
 | 멈추고 이어 하기 | 일시정지·재개 |
 | 죽은 뒤 다시 시작하기 | GameOver·재시작·종료 |
-| 충돌 범위 확인하기 | Debug 빌드의 F3 콜라이더 표시 |
-| 아직 없는 흐름 | 모든 몬스터 처치·탈출에 따른 스테이지 클리어·승리 |
+
+플레이 흐름은 탐색 → 전투 → 사망 → 재시작이며, 별도의 스테이지 클리어·승리 판정은 없습니다.
 
 ## 핵심 구현
 
@@ -111,7 +112,7 @@ flowchart TD
 | 관절·가중치 | 어느 뼈가 각 점을 얼마나 움직이는지 |
 | 애니메이션 클립 | 시간에 따른 뼈의 움직임 |
 
-현재는 Zombie 기준 모델에 `Idle`·`Move`·`Attack`·`Dead` 클립을 붙입니다. 포즈·스키닝은 CPU에서 계산하고, `ModelAnimationComponent`가 재생과 화면 반영을 연결합니다.
+Zombie 기준 모델에 `Idle`·`Move`·`Attack`·`Dead` 클립을 붙입니다. 포즈·스키닝은 CPU에서 계산하고, `ModelAnimationComponent`가 재생과 화면 반영을 연결합니다.
 
 관련 코드: [모델·클립 로딩](Main.cpp), [모델 데이터 변환](../HiwoongEngine/AsciiDoomCore/ModelImport), [포즈·스키닝 계산](../HiwoongEngine/AsciiDoomCore/Animation), [애니메이션 재생](Component/ModelAnimationComponent.cpp)
 
@@ -249,7 +250,7 @@ flowchart TD
 | 같은 메시·가중치 | 몸체 준비 차이로 생기는 오차 분리 |
 | 같은 좌표축·시간 | 같은 동작의 같은 순간을 비교 |
 
-모델 교체를 위한 에셋 준비 사례이며, 현재 게임의 기본 모델은 Zombie입니다.
+모델 교체를 위한 에셋 준비 사례이며, 게임의 기본 모델은 Zombie입니다.
 
 관련 코드: [모델 변환](../HiwoongEngine/AsciiDoomCore/ModelImport/ModelImporter.cpp), [관절 포즈](../HiwoongEngine/AsciiDoomCore/Animation/SkeletonPoseCalculator.cpp), [스키닝](../HiwoongEngine/AsciiDoomCore/Animation/SkinningCalculator.cpp)
 
@@ -277,17 +278,17 @@ flowchart TD
 | 충돌 검사 / 공격 피해 전달 | [CollisionSystem](../HiwoongEngine/src/Physics/CollisionSystem.cpp) / [AttackObject](GameObject/AttackObject.cpp) |
 | HUD 배치·값 표시 | [PlayerHUID](UI/PlayerHUID.cpp)·[UI](UI) |
 
-객체를 생성한 관계와 Transform의 부모·자식 관계는 별개입니다. `PlayerHUID`는 현재 소스의 클래스 이름입니다.
+객체를 생성한 관계와 Transform의 부모·자식 관계는 별개입니다. `PlayerHUID`는 소스에서 사용하는 HUD 클래스 이름입니다.
 
 ## 실행과 조작
 
-### 개발 환경과 실행
+### Release 빌드와 실행
 
 ```mermaid
 flowchart LR
     A["FBX·텍스처 준비"] --> B["솔루션 열기"]
-    B --> C["실행 프로젝트·<br/>구성·작업 폴더 설정"]
-    C --> D["빌드·실행"]
+    B --> C["x64 · Release<br/>시작 프로젝트·작업 폴더 설정"]
+    C --> D["Release 빌드·실행"]
 ```
 
 | 설정 | 값 |
@@ -296,13 +297,13 @@ flowchart LR
 | 컴파일 도구 | MSVC v143 · Windows SDK · C++17 |
 | 솔루션 | [HiwoongEngine.sln](../HiwoongEngine/HiwoongEngine.sln) |
 | 시작 프로젝트 | `AsciiDoom` |
-| 플랫폼·구성 | `x64` · `Debug` 또는 `Release` |
-| 디버깅 → 작업 디렉터리 | `$(TargetDir)` |
-| 출력 폴더 | `HiwoongEngine/Bin/<구성>/AsciiDoom/` |
+| 플랫폼·구성 | `x64` · `Release` |
+| 작업 디렉터리 | `$(TargetDir)` |
+| 출력 폴더 | `HiwoongEngine/Bin/Release/AsciiDoom/` |
 
-빌드 후 엔진 DLL과 `Assets`가 실행 파일 폴더로 복사됩니다. [실행 진입점](Main.cpp)은 문자 셀 크기 `4×8`의 Win32 창 출력을 선택합니다.
+빌드 후 엔진 DLL과 `Assets`가 실행 파일 폴더로 복사됩니다. 출력 폴더의 `AsciiDoom.exe`를 실행합니다. [실행 진입점](Main.cpp)은 문자 셀 크기 `4×8`의 Win32 창 출력을 선택합니다.
 
-**필요한 에셋:** FBX는 현재 Git 추적 대상에 없으므로 별도로 준비해야 합니다. FBX가 참조하는 PNG와 옆의 `textures/` 경로도 확인합니다.
+**필요한 에셋:** FBX는 저장소에 포함되지 않으므로 소스에서 빌드할 때 별도로 준비해야 합니다. FBX가 참조하는 PNG와 옆의 `textures/` 경로도 확인합니다.
 
 | 폴더 | 필요한 FBX |
 |---|---|
@@ -325,7 +326,6 @@ flowchart LR
 | 사격 / 재장전 | 마우스 왼쪽 클릭 / `R`. 탄약이 없을 때 클릭해도 재장전 요청 |
 | 일시정지 / 재개 | `Esc` |
 | 메뉴 선택 / 실행 | `↑`·`↓` / `Enter` |
-| 충돌체 표시 전환 | `F3`. Debug 빌드에서 사용 |
 
 ### 테스트 실행
 
@@ -336,9 +336,9 @@ flowchart LR
     C --> D["콘솔에 결과 표시"]
 ```
 
-| 항목 | 실행 방법·현재 제약 |
+| 항목 | 실행 방법 |
 |---|---|
-| 실행 | `AsciiDoomTests`를 시작 프로젝트로 빌드·실행 |
+| 실행 | `x64` · `Release`에서 `AsciiDoomTests`를 시작 프로젝트로 빌드·실행 |
 | 검사 대상 | 길찾기·격자·모델 임포트·포즈·스키닝 |
 | 결과 | 자체 TestRunner 사용. 실패가 있으면 종료 코드 1 |
 | FBX 통합 테스트 | 개발 PC의 절대 경로와 별도 모델을 사용하므로 환경에 맞게 경로·에셋 준비 |
