@@ -21,8 +21,6 @@ flowchart LR
 | 직접 구현 | 렌더링, 길찾기, 모델 데이터 변환, 게임 로직 |
 | 사용한 외부 코드 | FBX 읽기: [ufbx](../HiwoongEngine/AsciiDoomCore/ThirdParty/ufbx.h) / PNG 읽기: [stb_image](../HiwoongEngine/AsciiDoomCore/ThirdParty/stb_image.h) |
 
-[주요 기능](#주요-기능) · [핵심 구현](#핵심-구현) · [문제 해결](#문제-해결-과정) · [구조와 역할](#전체-구조와-역할) · [실행과 조작](#실행과-조작) · [개발 기록](#개발-기록)
-
 ## 주요 기능
 
 | 게임에서 할 수 있는 일 | 연결한 기능 |
