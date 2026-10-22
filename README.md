@@ -10,13 +10,12 @@ Scene, GameObject, Component로 게임을 구성하고, CPU에서 계산한 3D �
 
 ## 엔진으로 만든 작품
 
-### [1. 아스키 둠 · ASCII Doom](AsciiDoom/README.md) (~진행중)
+### [1. 아스키 둠 · ASCII Doom](AsciiDoom/README.md)
 
 3D 맵 위에서 이동하며 조명을 비추고, 일시정지 메뉴와 체력·탄약 UI를 사용하는 개발 중인 1인칭 데모입니다.
 
-<p align="center">
-  <a href="AsciiDoom/README.md"><img src="https://github.com/user-attachments/assets/6aa996cd-3888-4ba7-840a-eed2e2bc6dde" width="760" alt="ASCII Doom 최종 목표 목업"></a><br>
-</p>
+https://github.com/user-attachments/assets/81984e31-71cc-48f2-ba54-3f6739af3593
+
 
 [게임 다운로드 · v0.2.0 (Windows x64)](https://github.com/heewoung-lee/HiwoongEngine/releases/tag/v0.2.0)
 
