@@ -248,19 +248,6 @@ flowchart TD
 
 관련 코드: [모델 변환](../HiwoongEngine/AsciiDoomCore/ModelImport/ModelImporter.cpp), [관절 포즈](../HiwoongEngine/AsciiDoomCore/Animation/SkeletonPoseCalculator.cpp), [스키닝](../HiwoongEngine/AsciiDoomCore/Animation/SkinningCalculator.cpp)
 
-## 전체 구조와 역할
-
-**게임 객체는 행동을 결정하고, 계산 기능과 표시 기능을 조합합니다.** 아래 그림은 책임과 기능 요청을 나타냅니다.
-
-```mermaid
-flowchart TD
-    A["Scene<br/>객체 생성·수명 관리"] --> B["게임 객체<br/>행동·이동·상태 결정"]
-    B -->|"목적지"| C["길찾기<br/>경로 계산"]
-    C -->|"이동 경로"| B
-    B -->|"동작 요청"| E["애니메이션<br/>포즈·스키닝 계산"]
-    E -->|"바뀐 모양"| D["표시 기능<br/>3D 장면·문자·HUD"]
-    B -->|"위치·HP·탄약"| D
-```
 
 | 역할 | 주요 담당 |
 |---|---|
@@ -278,35 +265,14 @@ flowchart TD
 
 ### Release 빌드와 실행
 
+[게임 다운로드 · v0.2.0 (Windows x64)](https://github.com/heewoung-lee/HiwoongEngine/releases/tag/v0.2.0)
+
 ```mermaid
 flowchart LR
     A["FBX·텍스처 준비"] --> B["솔루션 열기"]
     B --> C["x64 · Release<br/>시작 프로젝트·작업 폴더 설정"]
     C --> D["Release 빌드·실행"]
 ```
-
-| 설정 | 값 |
-|---|---|
-| 개발 환경 | Windows · Visual Studio 2022 · C++ 데스크톱 개발 |
-| 컴파일 도구 | MSVC v143 · Windows SDK · C++17 |
-| 솔루션 | [HiwoongEngine.sln](../HiwoongEngine/HiwoongEngine.sln) |
-| 시작 프로젝트 | `AsciiDoom` |
-| 플랫폼·구성 | `x64` · `Release` |
-| 작업 디렉터리 | `$(TargetDir)` |
-| 출력 폴더 | `HiwoongEngine/Bin/Release/AsciiDoom/` |
-
-빌드 후 엔진 DLL과 `Assets`가 실행 파일 폴더로 복사됩니다. 출력 폴더의 `AsciiDoom.exe`를 실행합니다. [실행 진입점](Main.cpp)은 문자 셀 크기 `4×8`의 Win32 창 출력을 선택합니다.
-
-**필요한 에셋:** FBX는 저장소에 포함되지 않으므로 소스에서 빌드할 때 별도로 준비해야 합니다. FBX가 참조하는 PNG와 옆의 `textures/` 경로도 확인합니다.
-
-| 폴더 | 필요한 FBX |
-|---|---|
-| `Assets/Model/Zombie/` | `MonsterLow.fbx`, `MonsterIdle.fbx`, `MonsterWalk.fbx`, `MonsterAttack.fbx`, `MonsterDead.fbx` |
-| `Assets/Environment/Crate/` | `Crate.fbx` |
-| `Assets/Environment/Barrel/` | `Barrel.fbx` |
-| `Assets/Environment/Column/` | `Column.fbx` |
-| `Assets/Environment/Beam/` | `Beam.fbx` |
-| `Assets/Environment/CeilingLight/` | `CeilingLight.fbx` |
 
 에셋 고지: [환경 에셋 라이선스](Assets/Environment/CeilingLight/LICENSE.txt), [Freedoom 텍스처 고지](Assets/Textures/Freedoom/COPYING.adoc)
 
@@ -320,22 +286,6 @@ flowchart LR
 | 사격 / 재장전 | 마우스 왼쪽 클릭 / `R`. 탄약이 없을 때 클릭해도 재장전 요청 |
 | 일시정지 / 재개 | `Esc` |
 | 메뉴 선택 / 실행 | `↑`·`↓` / `Enter` |
-
-### 테스트 실행
-
-```mermaid
-flowchart LR
-    A["작은 격자·모델 입력"] --> B["경로·모델 계산"]
-    B --> C["기대 결과와 비교"]
-    C --> D["콘솔에 결과 표시"]
-```
-
-| 항목 | 실행 방법 |
-|---|---|
-| 실행 | `x64` · `Release`에서 `AsciiDoomTests`를 시작 프로젝트로 빌드·실행 |
-| 검사 대상 | 길찾기·격자·모델 임포트·포즈·스키닝 |
-| 결과 | 자체 TestRunner 사용. 실패가 있으면 종료 코드 1 |
-| FBX 통합 테스트 | 개발 PC의 절대 경로와 별도 모델을 사용하므로 환경에 맞게 경로·에셋 준비 |
 
 관련 코드: [테스트 진입점](../HiwoongEngine/AsciiDoomTests/Main.cpp), [FBX 테스트 경로](../HiwoongEngine/AsciiDoomTests/ModeImport/MeshLoaderTests.cpp)
 
