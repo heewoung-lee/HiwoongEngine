@@ -15,12 +15,18 @@ flowchart LR
 | 구분 | 구성 |
 |---|---|
 | 개발 환경 | C++17 · Windows API · GDI |
-| 직접 구현 | 렌더링, 길찾기, 모델 데이터 변환, 관절 포즈·스키닝, 게임 로직 |
+| 직접 구현 | 렌더링, 길찾기, 모델 데이터 변환,게임 로직 |
 | 사용한 외부 코드 | FBX 읽기: [ufbx](../HiwoongEngine/AsciiDoomCore/ThirdParty/ufbx.h) / PNG 읽기: [stb_image](../HiwoongEngine/AsciiDoomCore/ThirdParty/stb_image.h) |
 
 [현재 구현](#현재-구현과-개발-상태) · [핵심 구현](#핵심-구현) · [문제 해결](#문제-해결-과정) · [구조와 역할](#전체-구조와-역할) · [실행과 조작](#실행과-조작) · [개발 기록](#개발-기록)
 
-## 현재 구현과 개발 상태
+## 구현
+
+
+
+https://github.com/user-attachments/assets/31e2e76d-bf96-4367-9f9f-1c5504e425ce
+
+
 
 | 게임에서 할 수 있는 일 | 연결한 기능 |
 |---|---|
