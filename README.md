@@ -16,9 +16,6 @@ Scene, GameObject, Component로 게임을 구성하고, CPU에서 계산한 3D �
 
 https://github.com/user-attachments/assets/81984e31-71cc-48f2-ba54-3f6739af3593
 
-
-[게임 다운로드 · v0.2.0 (Windows x64)](https://github.com/heewoung-lee/HiwoongEngine/releases/tag/v0.2.0)
-
 ### [2. 아스키 큐브 · ASCII Cube](AsciiCube/README.md)
 
 회전하는 큐브를 통해 좌표 변환, 삼각형 채우기, 깊이 판정과 법선 기반 조명을 확인하는 3D 렌더링 데모입니다.
