@@ -62,30 +62,6 @@ flowchart LR
 
 관련 코드: [공통 렌더러](../HiwoongEngine/src/Render/MeshRenderer.cpp), [문자·텍스처 선택](Component/MeshRenderComponent.cpp), [창 출력](../HiwoongEngine/src/Render/WindowRenderOutput.cpp)
 
-### TXT 문자로 맵 배치하기
-
-**TXT의 한 칸이 게임 공간의 한 칸에 대응합니다.** 아래는 배치 원리를 보여주는 7×5 예시입니다.
-
-```text
-#######
-#P.C.M#
-#..B..#
-#.IHL.#
-#######
-```
-
-```mermaid
-flowchart TD
-    A["TXT의 C 한 칸"] --> B["같은 위치에 상자 배치"]
-    B --> C["외형<br/>FBX 모델"]
-    B --> D["이동 충돌<br/>모델 크기의 충돌체"]
-    B --> E["길찾기<br/>통과할 수 없는 칸"]
-```
-
-천장에 있는 보·조명 아래는 길찾기를 허용합니다. 실제 이동은 충돌체로 검사하며, X축과 Z축을 따로 확인해 벽에 막히지 않은 방향으로 움직입니다.
-
-관련 코드: [실제 맵](Assets/Maps/Level01.txt), [문자별 배치](Map/DoomMap.cpp), [타일 빌더](Map/BuildImplements), [소품·충돌체 구성](GameObject/MapPropObject.cpp), [이동 검사](Player/Player.cpp)
-
 ### 뼈 움직임으로 3D 모델 움직이기
 
 **스키닝은 뼈의 움직임에 맞춰 몸체의 점들을 움직이는 계산입니다.**
