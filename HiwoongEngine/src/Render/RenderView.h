@@ -3,7 +3,7 @@
 #include "Math/Matrix4x4.h"
 #include "Math/Vector2.h"
 #include "Render/SpotLight.h"
-
+#include <vector>
 namespace Hiwoong
 {
 	//이번 프레임에서 모든 MEsh가 공유할 카메라 계산 결과를 전달하는 구조체.
@@ -30,7 +30,7 @@ namespace Hiwoong
 		float nearPlane; // 거리
 		float ambientBrightness = 0.15f;    // 기본 밝기
 		float directionalIntensity = 0.2f; // 방향광 세기
-		SpotLight spotLight;
+		std::vector<SpotLight> spotLights;
 		Matrix4x4 cameraToWorld = Matrix4x4::Identity(); //카메라 좌표->월드좌표
 	};
 }

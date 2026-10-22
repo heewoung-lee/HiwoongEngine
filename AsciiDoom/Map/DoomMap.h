@@ -4,6 +4,7 @@
 #include "Render/Mesh.h"
 #include "Math/Vector3.h"
 #include "Navigation/INavigationMap.h"
+#include "Render/SpotLight.h"
 #include <memory>
 #include <string>
 #include <vector>
@@ -12,6 +13,8 @@
 
 namespace Hiwoong
 {
+    struct ModelData;
+
     class DoomMap : public GameObject, public INavigationMap
     {
 
@@ -61,7 +64,14 @@ namespace Hiwoong
         ) const override;
 
         int GetWallLayers() const { return wallLayers; }
+        float GetFloorHeight() const { return floorHeight; }
 
+        void AddSpotLight(const SpotLight& light);
+
+        const std::vector<SpotLight>& GetSpotLights() const
+        {
+            return spotLights;
+        }
 
     private:
         void LoadMap();
@@ -71,13 +81,23 @@ namespace Hiwoong
 
         void BuildMap();
         void BuildFloor();
-        void BuildCeiling();
-
 
         bool InitTexturedMeshRenderer(
             const Mesh& mesh,
             const std::string& texturePath
         );
+
+        std::shared_ptr<const ModelData> LoadPropModel(
+            const std::string& filePath
+        );
+        
+        //오브젝트를 등록하는 메서드
+        void RegisterCrate();
+        void RegisterBarrel();
+        void RegisterColumn();
+        void RegisterBeam();
+        void RegisterCeilingLight();
+
 
     private:
         std::string mapPath;
@@ -92,7 +112,6 @@ namespace Hiwoong
 
         Mesh mapMesh;
         Mesh floorMesh;
-        Mesh ceilingMesh;
 
         //맵의 콜백함수들을 모은다.
         std::vector<std::function<void()>> onMapBuiltCallbacks;
@@ -105,6 +124,7 @@ namespace Hiwoong
 
 
         int wallLayers = 1;
-
+        float floorHeight = 0.5f;
+        std::vector<SpotLight> spotLights;
     };
 }

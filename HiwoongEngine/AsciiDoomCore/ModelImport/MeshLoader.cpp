@@ -23,9 +23,8 @@ namespace Hiwoong
             ModelMesh mesh;
             mesh.name = source->GetMeshName(meshIndex);
 
-            mesh.diffuseTexturePaths =
-                source->GetDiffuseTexturePaths(meshIndex);
-
+            mesh.diffuseTextureInfos =
+                source->GetDiffuseTextureInfos(meshIndex);
 
             MeshSourceMapping mapping;
             mapping.sourceMeshIndex = meshIndex;

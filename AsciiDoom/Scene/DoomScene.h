@@ -8,6 +8,7 @@
 #include "Map/DoomMap.h"
 #include "Math/MathConstants.h"
 #include "Navigation/INavAIContext.h"
+
 #include <memory>
 
 #if defined(_DEBUG)

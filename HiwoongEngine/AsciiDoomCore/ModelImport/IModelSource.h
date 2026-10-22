@@ -9,6 +9,7 @@
 #include "SkeletonNode.h"
 #include "SkinWeight.h"
 #include "SkinBinding.h"
+#include "ModelTexture.h"
 #include "../Animation/AnimationClip.h"
 namespace Hiwoong
 {
@@ -67,9 +68,8 @@ namespace Hiwoong
 			std::size_t cornerIndex
 		) const = 0;
 
-		// 재질 번호 순서의 색상 이미지 경로.
-		// 이미지가 없는 재질도 빈 문자열로 자리를 유지한다.
-		virtual std::vector<std::string> GetDiffuseTexturePaths(
+		// 재질 번호 순서의 이미지 경로와 반복 설정.
+		virtual std::vector<ModelTextureInfo> GetDiffuseTextureInfos(
 			std::size_t meshIndex
 		) const = 0;
 

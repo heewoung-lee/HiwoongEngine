@@ -417,11 +417,16 @@ namespace Hiwoong
 				worldPosition4.z
 			);
 
-			const float spotBrightness = CalculateSpotBrightness(
-				worldPosition,
-				worldNormal,
-				renderView.spotLight
-			);
+			float spotBrightness = 0.0f;
+
+			for (const SpotLight& light : renderView.spotLights)
+			{
+				spotBrightness += CalculateSpotBrightness(
+					worldPosition,
+					worldNormal,
+					light
+				);
+			}
 
 			//9.19일 변경 Irenderable을 통해.
 			//3D렌러링이 필요한 정보를 제공할 수 있게.

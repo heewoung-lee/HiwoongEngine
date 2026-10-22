@@ -65,23 +65,26 @@ namespace Hiwoong
 
 		for (ModelMesh& mesh : meshResult.meshes)
 		{
-			mesh.diffuseTextures.resize(mesh.diffuseTexturePaths.size());
+			mesh.diffuseTextures.resize(mesh.diffuseTextureInfos.size());
 
 			for (std::size_t i = 0;
-				i < mesh.diffuseTexturePaths.size();
+				i < mesh.diffuseTextureInfos.size();
 				++i)
 			{
-				const std::string& texturePath = mesh.diffuseTexturePaths[i];
+				const ModelTextureInfo& textureInfo =
+					mesh.diffuseTextureInfos[i];
 
-				if (texturePath.empty())
+				if (textureInfo.filePath.empty())
 					continue;
 
 				auto texture = std::make_shared<ModelTexture>();
 
-				if (!LoadPngTexture(texturePath, *texture))
+				texture->info = textureInfo;
+
+				if (!LoadPngTexture(textureInfo.filePath, *texture))
 				{
 					result.errorMessage =
-						"Failed to load texture: " + texturePath;
+						"Failed to load texture: " + textureInfo.filePath;
 
 					return result;
 				}

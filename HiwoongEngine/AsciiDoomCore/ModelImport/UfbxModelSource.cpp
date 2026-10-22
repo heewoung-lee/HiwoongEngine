@@ -150,7 +150,7 @@ namespace Hiwoong
 
 		return mesh->vertex_indices.data[cornerIndex];
 	}
-	std::vector<std::string> UfbxModelSource::GetDiffuseTexturePaths(
+	std::vector<ModelTextureInfo> UfbxModelSource::GetDiffuseTextureInfos(
 		std::size_t meshIndex
 	) const
 	{
@@ -159,8 +159,12 @@ namespace Hiwoong
 		assert(mesh->instances.count == 1);
 		const ufbx_node* node = mesh->instances.data[0];
 
-		// 재질 개수만큼 빈 문자열을 만들어 번호를 유지한다.
-		std::vector<std::string> paths(node->materials.count);
+		// 재질 번호와 같은 순서로 보관한다.
+		std::vector<ModelTextureInfo> infos(node->materials.count);
+
+		const std::filesystem::path fbxPath(
+			scene->metadata.filename.data
+		);
 
 		for (std::size_t i = 0; i < node->materials.count; ++i)
 		{
@@ -172,32 +176,24 @@ namespace Hiwoong
 			{
 				texture = material->pbr.base_color.texture;
 			}
-			if (texture != nullptr && texture->filename.length > 0)
-			{
-				// fbxPath 생성
-				const std::filesystem::path fbxPath(
-					std::string(
-						scene->metadata.filename.data,
-						scene->metadata.filename.length
-					)
-				);
-				// imagePath 생성
-				const std::filesystem::path imagePath(
-					std::string(
-						texture->filename.data,
-						texture->filename.length
-					)
-				);
-				// paths[i] 대입
-				paths[i] = (
-					fbxPath.parent_path() / "textures" / imagePath.filename()
-					).string();
 
-			}
+			if (texture == nullptr || texture->filename.length == 0)
+				continue;
 
+			const std::filesystem::path imagePath(
+				texture->filename.data
+			);
+
+			infos[i].filePath = (
+				fbxPath.parent_path() / "textures" / imagePath.filename()
+				).string();
+
+			// FBX에 저장된 가로·세로 반복 설정을 읽는다.
+			infos[i].repeatU = texture->wrap_u == UFBX_WRAP_REPEAT;
+			infos[i].repeatV = texture->wrap_v == UFBX_WRAP_REPEAT;
 		}
 
-		return paths;
+		return infos;
 	}
 	std::vector<SkeletonNode> UfbxModelSource::GetSkeletonNodes() const
 	{

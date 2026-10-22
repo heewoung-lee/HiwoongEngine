@@ -49,7 +49,7 @@ namespace Hiwoong
             std::size_t cornerIndex
         ) const override;
 
-        std::vector<std::string> GetDiffuseTexturePaths(
+        std::vector<ModelTextureInfo> GetDiffuseTextureInfos(
             std::size_t meshIndex
         ) const override;
 

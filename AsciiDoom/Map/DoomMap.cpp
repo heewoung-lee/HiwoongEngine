@@ -6,6 +6,11 @@
 #include "BuildImplements/MonsterSpawnTileBuilder.h"
 #include "Render/MeshFactory.h"
 #include "ModelImport/PngTextureLoader.h"
+#include "BuildImplements/ModelTileBuilder.h"
+#include "Bootstrap/DoomInstaller.h"
+#include "ModelImport/IModelImporter.h"
+#include "BuildImplements/CeilingLightTileBuilder.h"
+
 #include <memory>
 #include <fstream>
 #include <cassert>
@@ -70,9 +75,6 @@ namespace Hiwoong
 		RegisterTileBuilders();
 		BuildMap();
 		BuildFloor();
-		BuildCeiling();
-
-		AddComponent<MeshRenderComponent>(ceilingMesh);
 		//벽 텍스쳐
 		if (InitTexturedMeshRenderer(mapMesh, wallTexturePath) == false)
 			return;
@@ -127,6 +129,11 @@ namespace Hiwoong
 			0.0f,
 			static_cast<float>(gridPosition.row)
 		);
+	}
+
+	void DoomMap::AddSpotLight(const SpotLight& light)
+	{
+		spotLights.push_back(light);
 	}
 
 	bool DoomMap::CanMoveTo(const Vector3& worldPosition, float halfSize) const
@@ -280,6 +287,96 @@ namespace Hiwoong
 		tileBuilderRegistry.RegisterBuilder('.',std::make_unique<EmptyTileBuilder>());
 		tileBuilderRegistry.RegisterBuilder('P', std::make_unique<PlayerSpawnTileBuilder>());
 		tileBuilderRegistry.RegisterBuilder('M', std::make_unique<MonsterSpawnTileBuilder>());
+
+		RegisterCrate();
+		RegisterBarrel();
+		RegisterColumn();
+		RegisterBeam();
+		RegisterCeilingLight();
+	}
+
+	void DoomMap::RegisterCrate()
+	{
+		const auto crateModel = LoadPropModel(
+			"Assets/Environment/Crate/Crate.fbx"
+		);
+
+		if (crateModel == nullptr)
+			return;
+
+		tileBuilderRegistry.RegisterBuilder(
+			'C',
+			std::make_unique<ModelTileBuilder>(crateModel)
+		);
+	}
+
+	void DoomMap::RegisterBarrel()
+	{
+		const auto barrelModel = LoadPropModel(
+			"Assets/Environment/Barrel/Barrel.fbx"
+		);
+
+		if (barrelModel == nullptr)
+			return;
+
+		tileBuilderRegistry.RegisterBuilder(
+			'B',
+			std::make_unique<ModelTileBuilder>(barrelModel)
+		);
+	}
+
+	void DoomMap::RegisterColumn()
+	{
+		const auto columnModel = LoadPropModel(
+			"Assets/Environment/Column/Column.fbx"
+		);
+
+		if (columnModel == nullptr)
+			return;
+
+		tileBuilderRegistry.RegisterBuilder(
+			'I',
+			std::make_unique<ModelTileBuilder>(columnModel)
+		);
+	}
+
+	void DoomMap::RegisterBeam()
+	{
+		const auto beamModel = LoadPropModel(
+			"Assets/Environment/Beam/Beam.fbx"
+		);
+
+		if (beamModel == nullptr)
+			return;
+
+		tileBuilderRegistry.RegisterBuilder(
+			'H',
+			std::make_unique<ModelTileBuilder>(
+				beamModel,
+				static_cast<float>(wallLayers)
+			)
+		);
+	}
+
+	void DoomMap::RegisterCeilingLight()
+	{
+		const auto ceilingLightModel = LoadPropModel(
+			"Assets/Environment/CeilingLight/CeilingLight.fbx"
+		);
+
+		if (ceilingLightModel == nullptr)
+			return;
+
+		SpotLight ceilingLight;
+		ceilingLight.direction = Vector3(0.0f, 1.0f, 0.0f);
+
+		tileBuilderRegistry.RegisterBuilder(
+			'L',
+			std::make_unique<CeilingLightTileBuilder>(
+				ceilingLight,
+				ceilingLightModel
+			)
+		);
 	}
 
 	void DoomMap::BroadcastOnMapBuilt() //콜백 호출
@@ -310,7 +407,9 @@ namespace Hiwoong
 				const bool walkable =
 					tile == '.' ||
 					tile == 'P' ||
-					tile == 'M';
+					tile == 'M' ||
+					tile == 'H' ||
+					tile == 'L';
 
 				walkableRow.push_back(walkable);
 			}
@@ -322,7 +421,6 @@ namespace Hiwoong
 	{
 		const Mesh tileMesh = MeshFactory::CreateQuad(1.0f, 1.0f);
 		//바닥 위치
-		const float floorHeight = 0.5f;
 
 		for (std::size_t z = 0; z < rows.size(); ++z)
 		{
@@ -377,19 +475,22 @@ namespace Hiwoong
 
 		return true;
 	}
-	void DoomMap::BuildCeiling()
+	std::shared_ptr<const ModelData> DoomMap::LoadPropModel(
+		const std::string& filePath
+	)
 	{
-		ceilingMesh = floorMesh;
+		const auto importer = DoomInstaller::CreateModelImporter();
 
-		for (Vertex& vertex : ceilingMesh.vertices)
-		{
-			vertex.position.y = 0.5f - static_cast<float>(wallLayers);
-		}
+		ModelImportResult result = importer->Import(filePath);
 
-		for (Triangle& triangle : ceilingMesh.triangles)
-		{
-			std::swap(triangle.index1, triangle.index2);
-		}
+		assert(result.success && "Failed to load prop model");
+
+		if (!result.success)
+			return nullptr;
+
+		return std::make_shared<ModelData>(
+			std::move(result.model)
+		);
 	}
 
 }

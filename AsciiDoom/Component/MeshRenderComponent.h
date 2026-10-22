@@ -56,7 +56,6 @@ namespace Hiwoong
 		std::shared_ptr<TransformComponent> transform;
 		Color color;
 		std::shared_ptr<const ModelTexture> texture;
-
 	};
 }
 

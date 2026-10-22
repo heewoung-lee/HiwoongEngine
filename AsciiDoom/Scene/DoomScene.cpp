@@ -168,9 +168,17 @@ namespace Hiwoong
 		renderView.ambientBrightness = 0.2f;
 		renderView.directionalIntensity = 0.0f;
 
-		renderView.spotLight.position = player->GetWorldPosition();
-		renderView.spotLight.direction = camera->GetForward().Normalized();
-		
+		SpotLight flashlight;
+		flashlight.position = player->GetWorldPosition();
+		flashlight.direction = camera->GetForward().Normalized();
+
+		renderView.spotLights.push_back(flashlight);
+		for (const SpotLight& light : doomMap->GetSpotLights())
+		{
+			renderView.spotLights.push_back(light);
+		}
+
+
 		renderView.cameraToWorld = camera->GetCameraToWorldMatrix();
 
 		//메쉬렌더러가 붙여진 컴포넌트들의 메쉬렌더링 업데이트

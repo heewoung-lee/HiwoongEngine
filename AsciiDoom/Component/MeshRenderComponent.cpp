@@ -2,6 +2,7 @@
 #include "GameObject/GameObject.h"
 #include "Render/IRenderable3D.h"
 #include "Render/ShaderData.h"
+#include <cmath>
 #include <algorithm>
 #include <vector>
 #include <cassert>
@@ -20,7 +21,6 @@ namespace Hiwoong
 		texture(texture)
 	{
 	}
-
 	void MeshRenderComponent::Start()
 	{
 		super::Start();
@@ -75,10 +75,27 @@ namespace Hiwoong
 		assert(texture->rgbPixels.size() ==
 			texture->width * texture->height * 3);
 
-		u = std::clamp(u, 0.0f, 1.0f);
+		//반복 설정이 켜져 있으면 1.3 → 0.3, -0.3 → 0.7처럼 이미지 범위 안으로 돌아오게 하는 계산.
+		if (texture->info.repeatU)
+		{
+			u -= std::floor(u);
+		}
+		else
+		{
+			u = std::clamp(u, 0.0f, 1.0f);
+		}
 
-		// PNG는 위에서부터 저장되므로 세로 방향을 맞춘다.
-		v = std::clamp(1.0f - v, 0.0f, 1.0f);
+		if (texture->info.repeatV)
+		{
+			v -= std::floor(v);
+		}
+		else
+		{
+			v = std::clamp(v, 0.0f, 1.0f);
+		}
+
+		// PNG의 위아래 방향을 맞춘다.
+		v = 1.0f - v;
 
 		const std::size_t column = (std::min)(
 			static_cast<std::size_t>(
