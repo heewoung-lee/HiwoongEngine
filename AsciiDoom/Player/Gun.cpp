@@ -98,7 +98,9 @@ namespace Hiwoong
 			const auto bullet = Instantiate<Bullet>(
 				player,
 				player->GetWorldPosition(),
-				shotDirection
+				shotDirection,
+				0.03f,
+				10
 			);
 			assert(bullet != nullptr);
 

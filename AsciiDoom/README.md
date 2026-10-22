@@ -1,485 +1,377 @@
 # ASCII Doom
 
-**직접 제작한 C++ 게임 엔진 HiwoongEngine으로 3D 공간을 문자와 색상으로 표현하는 개발 중인 1인칭 게임입니다.**
+**직접 제작한 C++ 게임 엔진 HiwoongEngine으로 3D 공간을 문자와 RGB 색상으로 표현하는 1인칭 게임입니다.**
 
-CPU에서 정점 변환, 삼각형 래스터화, 깊이 판정과 조명을 계산하고, 그 결과를 ASCII 문자 셀로 출력합니다. 공통 엔진의 Scene·GameObject·Component 구조 위에 맵, 무기, HUD와 몬스터를 구성하며, 길찾기 로직은 엔진과 독립된 Core에서 테스트합니다.
+CPU에서 정점 변환, 삼각형 래스터화, 깊이 판정과 조명을 계산하고, 그 결과를 ASCII 문자 셀로 출력합니다. 공통 엔진의 Scene·GameObject·Component 구조 위에 TXT 맵, 무기, 3D 몬스터와 HUD를 구성했습니다.
 
-목표는 작은 평면 맵 하나에서 총 한 종류와 몬스터 한 종류의 추적·전투를 완성하는 단일 스테이지 데모입니다.
+작은 평면 맵 하나, 총 한 종류, 몬스터 한 종류를 사용하는 단일 스테이지 데모를 개발하고 있습니다.
 
-**개발 시연:** [문자 셀별 색상](#step-13-픽셀-컬러-표시) · [길찾기](#step-11-길찾기-알고리즘) · [탄환과 피격 효과](#step-9-탄환-발사-및-피격-효과)
+<!-- 최신 대표 화면과 통합 플레이 영상은 촬영 후 이 위치에 추가합니다. -->
+
+**기술 구성:** C++17 · Windows API · GDI · CPU 소프트웨어 렌더링
+
+FBX 파싱에는 [ufbx](../HiwoongEngine/AsciiDoomCore/ThirdParty/ufbx.h), PNG 읽기에는 [stb_image](../HiwoongEngine/AsciiDoomCore/ThirdParty/stb_image.h)를 사용합니다. 모델 데이터를 엔진 형식으로 변환하는 로더, 관절 포즈·스키닝 계산, 렌더링, 길찾기와 게임 로직은 직접 구현했습니다.
+
+[현재 구현](#현재-구현과-개발-상태) · [핵심 구현](#핵심-구현) · [문제 해결](#문제-해결-과정) · [구조와 역할](#전체-구조와-역할) · [실행과 조작](#실행과-조작) · [개발 기록](#개발-기록)
 
 ## 현재 구현과 개발 상태
 
-
 | 분야 | 구현 내용 |
 |---|---|
-| 3D 렌더링 | 원근 투영, 근평면 클리핑, 뒷면 제거, 삼각형 래스터화, 깊이 버퍼, 손전등 명암 |
-| 맵·이동 | TXT 타일 맵 구성, 벽 충돌체, WASD 이동, 벽을 따라 미끄러지는 이동 검사 |
+| 3D 렌더링 | 원근 투영, 근평면 클리핑, 뒷면 제거, 삼각형 래스터화, 깊이 버퍼 |
+| 색상·재질·조명 | RGB 문자 셀, PNG 텍스처의 UV 매핑, 손전등과 천장 조명 |
+| 맵·이동 | TXT 기반 벽·바닥·천장과 소품 배치, WASD 이동, 벽을 따라 미끄러지는 이동 검사 |
 | 무기 | 조준점 방향으로 탄환 발사, 발사·재장전 애니메이션, 탄약 소비와 재장전 |
-| 충돌·피해 | 탄환의 발사자 충돌 제외, `IDamageable` 대상에 피해 전달, 충돌 효과 재생과 종료 후 제거 |
-| HUD·메뉴 | HP·AMMO 변경 콜백에 따른 표시 갱신, 게임 상태를 보존하는 일시정지·재개 |
-| 길찾기 | 직접 만든 최소 힙을 사용하는 대각선 A*, 벽 모서리 통과 방지, `NavAIComponent`의 월드 좌표 경로 반환 |
-| 몬스터 | 맵의 `M` 위치에서 생성, 충돌체와 HP, 거리 기반 FSM 상태 판단, 탄환에 의한 피해 처리 |
+| 3D 몬스터 | FBX 모델·애니메이션 로딩, CPU 스키닝, Idle·Move·Attack·Dead 재생 |
+| 추적·전투 | 대각선 A* 경로 추적, 거리 기반 FSM, 공격 애니메이션 이벤트, 충돌 피해와 사망 후 제거 |
+| HUD·피격 효과 | HP·AMMO 변경 알림에 따른 표시 갱신, 피격 화면 효과와 카메라 흔들림 |
+| 메뉴·게임 흐름 | 상태를 보존하는 일시정지·재개, 플레이어 사망 시 GameOver, 재시작·종료 |
+| 디버깅 | Debug 빌드에서 F3로 콜라이더 표시 전환 |
 
-진행 중인 작업은 다음과 같습니다.
-
-- **추적·전투 연결:** A* 경로 반환은 구현되어 있으나, 현재 Monster에 경로를 따라 이동하는 처리는 연결되지 않았습니다. 몬스터 공격의 플레이어 피해, 죽음 연출, 승리·패배 흐름도 미완료입니다.
-- **관절형 3D 몬스터:** 외형과 Idle·Move를 별도 시제품에서 검증했습니다. 시제품은 보관된 상태이며 현재 게임 코드에는 아직 통합하지 않았습니다. 작업 브랜치에서는 기존 몬스터 스프라이트를 정리하고 3D 전환을 준비하고 있습니다.
-- **FBX·Mixamo 연동 준비:** `ModelVertex`, `ModelTriangle`, `ModelMesh`, `ModelData` 중간 데이터 구조를 정의했습니다. 실제 FBX 읽기, 관절·가중치·클립 변환과 인게임 재생은 이후 작업입니다.
-
-## 실행과 조작
-
-공통 빌드 환경은 [루트 README](../README.md)를 참고하세요. Visual Studio에서 [공유 솔루션](../HiwoongEngine/HiwoongEngine.sln)을 열고 `AsciiDoom`을 시작 프로젝트로 선택해 빌드·실행합니다. 길찾기 단위 테스트는 같은 솔루션의 `AsciiDoomTests` 프로젝트에서 실행합니다.
-
-[Main.cpp](Main.cpp)는 `WindowRenderOutput(Vector2(4, 8))`을 선택합니다. 계산한 문자·색상 셀은 Win32 창에 출력하고, 해당 창을 마우스 입력 대상으로 사용합니다. 공통 엔진은 `IRenderOutput`으로 출력 구현을 교체할 수 있습니다.
-
-| 입력 | 동작 |
-|---|---|
-| `W` / `S` | 전진 / 후진 |
-| `A` / `D` | 왼쪽 / 오른쪽 이동 |
-| 마우스 좌우 | 수평 시점 회전 |
-| 마우스 상하 | 조준점의 제한된 세로 이동 |
-| 마우스 왼쪽 클릭 | 사격. 탄약이 없으면 재장전 요청 |
-| `R` | 재장전 |
-| 플레이 중 `Esc` | 일시정지 메뉴 열기 |
-| 메뉴에서 `↑` / `↓` | RESUME / QUIT 선택 |
-| 메뉴에서 `Enter` | 선택 실행 |
-| 메뉴에서 `Esc` | 게임 재개 |
-
+현재는 이동·사격·몬스터 추적과 전투·플레이어 사망·재시작을 연결한 상태입니다. 모든 몬스터 처치나 탈출에 따른 스테이지 클리어·승리 조건은 아직 구현하지 않았습니다.
 
 ## 핵심 구현
 
-### 공통 3D 렌더링과 ASCII 명암
+### 공통 3D 렌더링과 RGB 문자 출력
 
-`DoomScene`은 카메라의 View·Projection과 광원 정보를 구성하고, `IRenderable3D`를 구현한 컴포넌트를 공용 `MeshRenderer`에 전달합니다. 각 컴포넌트는 메시, 모델 행렬, 문자·색상 선택을 제공하며, 투영·클리핑·깊이 계산은 같은 렌더러를 사용합니다.
+`DoomScene`은 카메라의 View·Projection과 광원 정보를 구성하고, `IRenderable3D`를 구현한 컴포넌트를 공용 `MeshRenderer`에 전달합니다. 각 컴포넌트는 메시, 모델 행렬과 표면의 문자·색상을 제공하며, 투영·클리핑·깊이 계산은 같은 렌더러를 사용합니다.
 
 ```text
 정점의 Model·View 변환
     → 근평면 클리핑
     → 원근 투영
     → 화면 셀별 깊이·UV·공간 위치 계산
-    → 깊이 판정과 조명 계산
-    → 문자·색상 셀 출력
+    → 조명에 따른 문자와 RGB 색상 계산
+    → 깊이 판정과 문자 셀 출력
 ```
 
-손전등의 위치는 플레이어, 방향은 카메라 정면을 따릅니다. 렌더러는 화면 셀에 대응하는 공간 위치를 원근 보정하여 복원하고, 빛과의 거리·각도·표면 방향으로 밝기를 계산합니다. 메시 표면은 이 밝기를 [ShaderData](../HiwoongEngine/src/Render/ShaderData.h)의 10단계 문자표로 변환합니다.
+메시의 밝기는 [ShaderData](../HiwoongEngine/src/Render/ShaderData.h)의 10단계 문자 밀도로 표현합니다. 재질 색상은 UV로 PNG에서 읽고, 텍스처가 없으면 설정된 색상을 사용합니다. 공통 렌더러가 광원의 RGB를 반영한 뒤 GDI 기반 `WindowRenderOutput`으로 출력합니다.
 
-현재 기본 밝기는 `0.2`, 방향광 세기는 `0`이며, 손전등을 더해 표면의 명암을 표현합니다. `SpriteFrame`은 셀마다 문자와 색상을 저장합니다. 3D 스프라이트는 UV로 해당 셀을 선택해 저장된 문자·색상을 반환하며, 현재 스프라이트 색상 자체는 광원 밝기에 따라 변하지 않습니다.
+손전등은 플레이어 위치와 카메라 정면을 따르고, 천장 조명은 맵에 배치된 위치·방향·색상·범위로 계산합니다. 문자 셀의 가로·세로 비율은 3D 투영의 화면 비율에도 반영합니다.
 
-관련 코드: [DoomScene](Scene/DoomScene.cpp), [IRenderable3D](../HiwoongEngine/src/Render/IRenderable3D.h), [MeshRenderer](../HiwoongEngine/src/Render/MeshRenderer.cpp), [SpriteRenderer3DComponent](../HiwoongEngine/src/Component/SpriteRenderer3DComponent.cpp)
+관련 코드: [DoomScene](Scene/DoomScene.cpp), [MeshRenderer](../HiwoongEngine/src/Render/MeshRenderer.cpp), [MeshRenderComponent](Component/MeshRenderComponent.cpp), [WindowRenderOutput](../HiwoongEngine/src/Render/WindowRenderOutput.cpp)
 
-### 텍스트 맵과 이동·충돌
+### TXT 맵과 이동·충돌
 
-[Level01.txt](Assets/Maps/Level01.txt)의 문자를 타일 생성 규칙과 연결합니다.
+[Level01.txt](Assets/Maps/Level01.txt)의 문자 하나를 타일 생성 규칙에 연결합니다. 같은 TXT에서 벽·소품·조명과 플레이어·몬스터의 시작 위치를 관리합니다.
 
-| 문자 | 처리 |
-|---|---|
-| `#` | 벽 메시와 충돌체 생성 |
-| `.` | 빈 공간 |
-| `P` | 플레이어 시작 위치 저장 |
-| `M` | 몬스터 시작 위치 저장 |
+| 문자 | 배치 내용 | 길찾기 통과 |
+|---|---|---|
+| `#` | 벽 메시와 충돌체 | 불가 |
+| `.` | 빈 공간 | 가능 |
+| `P` | 플레이어 시작점 | 가능 |
+| `M` | 몬스터 시작점 | 가능 |
+| `C` | 상자 모델과 충돌체 | 불가 |
+| `B` | 드럼통 모델과 충돌체 | 불가 |
+| `I` | 기둥 모델과 충돌체 | 불가 |
+| `H` | 천장 높이의 보 모델과 충돌체 | 가능 |
+| `L` | 천장 조명 모델·충돌체와 광원 | 가능 |
 
-`DoomMap`은 파일을 읽고, `TileBuilderRegistry`가 문자에 해당하는 `ITileBuilder`를 선택합니다. 벽은 공용 큐브 메시로 구성하되 이웃 벽에 가려지는 측면은 삼각형 목록에서 제외합니다. 벽 충돌체는 각 객체에 유지합니다.
+`DoomMap`이 파일을 읽으면 `TileBuilderRegistry`가 문자에 해당하는 `ITileBuilder`를 선택합니다. 벽은 이웃 벽에 가려지는 측면을 삼각형 목록에서 제외합니다. 소품은 공용 `ModelTileBuilder`와 `MapPropObject`를 재사용하며, 모델 정점 범위로 충돌체 크기를 구합니다.
 
-맵 완성 콜백을 받은 `DoomScene`은 플레이어·카메라·HUD를 준비하고, 모든 `M` 위치에 몬스터를 생성합니다.
+길찾기 격자의 통과 여부와 실제 이동 충돌은 별도로 처리합니다. 천장에 있는 `H`·`L` 칸은 경로 탐색을 허용하고, 실제 이동은 `Scene::CanMoveTo()`와 공통 `CollisionSystem`의 AABB 충돌 검사로 판단합니다.
 
-플레이어 이동은 방향을 정규화하고 `deltaTime`을 반영합니다. 이동 예정 위치를 X축과 Z축으로 나누어 `Scene::CanMoveTo()`에 검사하므로, 한 축이 벽에 막혀도 다른 축으로 이동할 수 있습니다. 실제 충돌 검사는 공통 `CollisionSystem`과 AABB Collider가 담당합니다.
+플레이어 이동은 방향을 정규화하고 `deltaTime`을 반영합니다. 이동 예정 위치를 X축과 Z축으로 나누어 검사하므로, 한 축이 막혀도 다른 축으로 이동해 벽을 따라 미끄러질 수 있습니다.
 
-관련 코드: [DoomMap](Map/DoomMap.cpp), [TileBuilderRegistry](Map/TileBuilderRegistry.cpp), [WallTileBuilder](Map/BuildImplements/WallTileBuilder.cpp), [Player](Player/Player.cpp), [CollisionSystem](../HiwoongEngine/src/Physics/CollisionSystem.cpp)
+관련 코드: [DoomMap](Map/DoomMap.cpp), [타일 빌더](Map/BuildImplements), [MapPropObject](GameObject/MapPropObject.cpp), [Player](Player/Player.cpp), [CollisionSystem](../HiwoongEngine/src/Physics/CollisionSystem.cpp)
 
-### 무기·충돌 효과·HUD
+### FBX 모델과 관절 애니메이션
 
-`Gun`은 발사 애니메이션이 시작되면 조준점 방향으로 `Bullet`을 생성하고 탄약을 한 발 소비합니다. 재장전 애니메이션이 끝나면 탄약을 최대치로 채웁니다.
+FBX에서 메시·UV·재질, 관절 계층과 정점별 가중치를 읽어 `ModelData`로 변환합니다. 현재 진입점은 `Assets/Model/Zombie/`의 기준 모델에 별도 FBX의 `Idle`·`Move`·`Attack`·`Dead` 클립을 추가합니다.
 
-`Bullet`은 발사자와의 충돌을 제외하고, 상대가 `IDamageable`을 구현했다면 피해를 전달합니다. 충돌 시 별도의 `EffectViewObject`를 생성하고 탄환은 제거합니다. 효과 객체는 자신의 애니메이션 종료 알림을 받아 제거됩니다.
+```text
+FBX 읽기
+    → 메시·관절·가중치·애니메이션 데이터 변환
+    → 현재 클립과 시간에 맞는 관절 포즈 계산
+    → 가중치를 적용한 CPU 스키닝
+    → MeshRenderComponent의 정점 위치 갱신
+    → 공통 3D 렌더러로 출력
+```
 
-HP·AMMO 표시 컴포넌트는 Player의 값 변경 콜백을 구독합니다. `BigTextDisplayComponent`가 문자열을 5×5 문자 패턴으로 확장해 표시하며, 값이 실제로 바뀔 때 HUD를 갱신합니다. `Player::TakeDamage()`에서 HP 표시로 이어지는 경로는 있으나, 몬스터 공격이 이 기능을 호출하는 연결은 아직 없습니다.
+`ModelAnimationComponent`가 클립 재생·포즈 적용·애니메이션 이벤트를 담당합니다. 관절 행렬과 스키닝 계산은 `AsciiDoomCore`에 두고, 게임 컴포넌트는 계산 결과를 렌더러에 전달합니다.
 
-게임 영역 아래에 HUD 영역을 두고, 총·조준점은 화면 좌표와 출력 순서로 배치합니다. 문자 셀의 가로·세로 비율은 3D 투영의 화면 비율에도 반영합니다.
+관련 코드: [Main](Main.cpp), [모델 임포트](../HiwoongEngine/AsciiDoomCore/ModelImport), [포즈·스키닝 계산](../HiwoongEngine/AsciiDoomCore/Animation), [ModelAnimationComponent](Component/ModelAnimationComponent.cpp)
 
-관련 코드: [Gun](Player/Gun.cpp), [Bullet](GameObject/Bullet.cpp), [EffectViewObject](GameObject/EffectViewObject.cpp), [IDamageable](Interfaces/IDamageable.h), [HUD](UI)
+### 몬스터 FSM과 길찾기·공격
 
-### 상태를 보존하는 일시정지
+`NavAIComponent`는 시작·목적지의 월드 좌표를 받아 격자 좌표로 변환하고, `IPathFinder`에서 구한 경로를 월드 좌표 목록으로 반환합니다. A*는 직접 만든 최소 힙을 사용하며, 직선 비용 10·대각선 비용 14와 벽 모서리 통과 방지를 적용합니다.
 
-`PauseMenuComponent`가 Esc 입력을 받아 엔진에 메뉴 Scene 전환을 요청합니다. 엔진은 게임 Scene을 보관하고 업데이트를 멈추며, 직전 문자 프레임을 어둡게 표시한 메뉴를 엽니다. 재개 시 같은 Scene으로 돌아가 위치·방향·상태를 유지하고 마우스 잠금을 복구합니다.
+`Monster`의 FSM이 대상과의 거리에 따라 Idle·Run·Attack·Dead 상태를 선택합니다. Run에서는 경로를 요청해 경유점을 따라 이동하고, 이동이 충돌로 막히면 경로를 비워 다시 탐색합니다. 길찾기 컴포넌트는 경로 계산을, Monster는 이동·공격 판단을 담당합니다.
 
-관련 코드: [PauseMenuComponent](Component/PauseMenuComponent.cpp), [MenuScene](Scene/MenuScene.cpp), [Engine](../HiwoongEngine/src/Engine/Engine.h)
+공격 애니메이션의 지정 시점에 `AttackObject`를 활성화하고 종료 시점에 비활성화합니다. 공격 객체는 충돌한 `IDamageable`에 피해를 전달하며, 같은 공격에서 이미 맞은 대상은 다시 처리하지 않습니다. 몬스터는 HP가 0이 되면 공격을 종료하고, 사망 애니메이션이 끝난 뒤 일정 시간이 지나면 제거됩니다.
+
+관련 코드: [Monster](GameObject/Monster.cpp), [NavAIComponent](Component/NavAIComponent.cpp), [AStarPathFinder](../HiwoongEngine/AsciiDoomCore/PathFinder/Implements/AStarPathFinder.cpp), [AttackObject](GameObject/AttackObject.cpp), [IDamageable](Interfaces/IDamageable.h)
+
+### 무기·HUD·피격 효과
+
+`Gun`은 발사 애니메이션 재생이 받아들여지면 조준점 방향으로 `Bullet`을 생성하고 탄약을 소비합니다. 재장전 애니메이션이 끝나면 탄약을 최대치로 채웁니다. 탄환은 발사자와의 충돌을 제외하고, `IDamageable` 대상에 피해를 전달한 뒤 충돌 효과를 생성하고 제거됩니다.
+
+HP·AMMO 표시 컴포넌트는 Player의 값 변경 콜백을 구독합니다. `BigTextDisplayComponent`가 수치를 5×5 문자 패턴으로 확장하며, 값이 실제로 바뀔 때 HUD를 갱신합니다. 총·조준점·HUD는 3D 장면 위에 2D 스프라이트로 표시합니다.
+
+`PlayerHitEffectComponent`도 HP 변경 알림을 구독합니다. 이전보다 HP가 감소하면 피격 화면 애니메이션과 카메라 흔들림을 요청합니다. 충돌 효과와 화면 효과는 기존 스프라이트 렌더러·애니메이션 컴포넌트를 재사용합니다.
+
+관련 코드: [Gun](Player/Gun.cpp), [Bullet](GameObject/Bullet.cpp), [EffectViewObject](GameObject/EffectViewObject.cpp), [HUD](UI), [PlayerHitEffectComponent](Component/PlayerHitEffectComponent.cpp)
+
+### 일시정지와 GameOver·재시작
+
+`PauseMenuComponent`가 Esc 입력을 받아 메뉴 Scene 전환을 요청합니다. 엔진은 게임 Scene을 보관하고 업데이트를 멈추며, 직전 프레임을 어둡게 표시한 메뉴를 엽니다. 재개 시 같은 Scene으로 돌아가 위치·방향·상태를 유지하고 마우스 잠금을 복구합니다.
+
+플레이어 HP가 0이 되면 화면이 닫히는 전환 효과를 재생하고 `GameOverScene`으로 이동합니다. RESTART를 선택하면 기존 길찾기·모델 데이터를 전달해 새 `DoomScene`을 만들고, QUIT를 선택하면 종료합니다.
+
+관련 코드: [PauseMenuComponent](Component/PauseMenuComponent.cpp), [MenuScene](Scene/MenuScene.cpp), [DoomScene](Scene/DoomScene.cpp), [GameOverScene](Scene/GameOverScene.cpp)
 
 ## 문제 해결 과정
 
-### 1. 의존성 주입 및 TDD 테스트 적용
+### 1. 길찾기를 게임 실행과 분리해 TDD로 검증
 
-**문제**
+**문제:** 추적 로직을 게임 안에서만 확인하면 원하는 벽 배치와 시작·목표 위치를 매번 재현해야 했습니다. A*와 우선순위 큐를 동시에 연결하면 오류가 자료구조·탐색·이동 중 어디에서 발생했는지도 구분하기 어려웠습니다.
 
-초기에는 게임을 실행하면 변경한 결과를 바로 볼 수 있었습니다. 몬스터 추적을 구현하는 단계에서는 원하는 위치와 벽 배치를 재현하고 이동을 관찰해야 했으므로, 여러 조건을 빠르게 반복 검증하기 어려워졌습니다. A*와 우선순위 큐를 동시에 게임에 붙이면 오류가 자료구조, 탐색, 이동 중 어디에서 발생했는지도 구분하기 어려웠습니다.
+**접근:** 길찾기를 `AsciiDoomCore`에 두고, 작은 격자와 기대 경로로 테스트를 먼저 작성했습니다. 직접 만든 최소 힙은 삽입·최소 비용 노드 선택·제거 후 힙 복원을 따로 검사합니다. 게임은 `IPathFinder` 계약에 의존하고, `DoomInstaller`가 구체 구현체를 만들어 주입하는 수동 DI를 사용합니다.
 
-**선택한 방법**
+**결과:** 게임을 플레이하지 않고 직선·대각선·벽 우회·도달 불가·잘못된 좌표와 큐 동작을 반복 검증할 수 있는 테스트 작업대를 만들었습니다. 경로 계산과 실제 이동을 분리해 문제의 범위를 좁힐 수 있습니다.
 
-길찾기를 엔진에 의존하지 않는 `AsciiDoomCore`로 분리하고, 게임은 `IPathFinder` 계약에 의존하도록 구성했습니다. `DoomInstaller`가 구체 구현체를 만들고 Main에서 `DoomScene`에 전달하는 수동 의존성 주입을 사용합니다.
-
-테스트에서는 작은 격자와 시작점·목표점으로 원하는 동작을 먼저 정의하고, 실패를 확인한 뒤 구현을 추가하는 TDD 방식으로 진행했습니다. 직접 만든 최소 힙도 삽입 후 최소 비용 노드 선택과 제거 후 힙 복원을 별도로 검증하도록 구성했습니다. 기존 프로젝트에서 사용하던 의존성 분리와 테스트 방식을 직접 만든 C++ 엔진에도 적용한 것입니다.
-
-```mermaid
-flowchart LR
-    T["AsciiDoomTests<br/>작은 입력과 기대 결과"] --> A["AStarPathFinder"]
-    T --> Q["AStarPriorityQueue<br/>직접 만든 최소 힙"]
-    A -->|"탐색에 사용"| Q
-    A -->|"인터페이스 구현"| I["IPathFinder"]
-    D["DoomInstaller"] -->|"IPathFinder 생성·반환"| M["Main"]
-    M -->|"생성자로 주입"| S["DoomScene"]
-    S -->|"INavAIContext로 참조 제공"| N["NavAIComponent"]
-    N -->|"계약으로 경로 요청"| I
-    N -->|"격자·월드 좌표 변환"| MAP["INavigationMap / DoomMap"]
-    MON["Monster FSM"] -.->|"경로 소비·추적 이동 연결 예정"| N
-```
-
-실선은 구현된 연결이며, 점선은 미완료인 몬스터 추적 이동 연결입니다. `NavAIComponent`는 경로를 반환하고, 완성 시 이동·공격 판단은 Monster의 FSM이 담당합니다. 현재 Monster에는 거리 기반 상태 판단만 연결되어 있습니다.
-
-**결과**
-
-게임을 실행하지 않고 직선·벽 우회·도달 불가·잘못된 좌표와 우선순위 큐 동작을 확인할 수 있는 테스트 작업대를 만들었습니다. A*는 직선 비용 10, 대각선 비용 14를 사용하고, 대각선의 두 옆칸 중 하나라도 벽이면 후보를 제외합니다. 알고리즘과 게임 이동을 나누어 검증할 수 있으며, 테스트가 있는 경로 탐색과 실제 몬스터 이동의 완성 상태도 구분합니다.
-
-관련 코드: [IPathFinder](../HiwoongEngine/AsciiDoomCore/PathFinder/Interfaces/IPathFinder.h), [AStarPathFinder](../HiwoongEngine/AsciiDoomCore/PathFinder/Implements/AStarPathFinder.cpp), [PathNode·우선순위 큐](../HiwoongEngine/AsciiDoomCore/PathFinder/PathNode.cpp), [단위 테스트](../HiwoongEngine/AsciiDoomTests/PathFinder/AStarPathFinderTests.cpp), [DoomInstaller](Bootstrap/DoomInstaller.cpp), [NavAIComponent](Component/NavAIComponent.cpp)
+관련 코드: [길찾기·우선순위 큐 테스트](../HiwoongEngine/AsciiDoomTests/PathFinder/AStarPathFinderTests.cpp), [DoomInstaller](Bootstrap/DoomInstaller.cpp)
 
 ### 2. 메시와 3D 스프라이트의 렌더링 통일
 
-3D 스프라이트를 추가하면서 투영·클리핑·깊이 처리를 별도로 구현하면 같은 렌더링 계산이 두 곳으로 나뉘는 문제가 생깁니다. `IRenderable3D`를 통해 각 컴포넌트가 자신의 메시와 표면 정보를 제공하고 공통 렌더러가 출력하도록 구성했습니다.
+**문제:** 3D 스프라이트의 투영·클리핑·깊이 처리를 별도로 만들면 같은 렌더링 계산을 두 곳에서 관리하게 됩니다.
 
-근평면에서 삼각형을 자를 때 정점 위치와 UV를 함께 보간해, 잘린 경계에서도 원래 스프라이트의 문자 셀을 선택할 수 있게 했습니다. 깊이 처리와 광원 계산은 공통으로 유지하고, 메시와 스프라이트의 문자·색상 선택만 각 구현체가 담당합니다.
+**접근:** `IRenderable3D`를 통해 각 컴포넌트가 자신의 메시와 문자·색상을 제공하고, 공통 렌더러가 투영과 깊이를 처리하도록 구성했습니다. 근평면 클리핑에서는 정점 위치와 UV를 함께 보간합니다.
 
-## 객체와 컴포넌트의 역할
+**결과:** 메시와 스프라이트가 같은 렌더링 경로를 사용하며, 잘린 삼각형에서도 원래 UV에 해당하는 문자·색상을 선택할 수 있습니다.
 
-GameObject의 생성·수명은 Scene이 관리합니다. 객체가 생성한 다른 객체와 Transform의 부모·자식 관계는 별개이며, 아래 목록은 기능 구성과 생성 관계를 설명합니다.
+관련 코드: [IRenderable3D](../HiwoongEngine/src/Render/IRenderable3D.h), [MeshRenderer](../HiwoongEngine/src/Render/MeshRenderer.cpp), [SpriteRenderer3DComponent](../HiwoongEngine/src/Component/SpriteRenderer3DComponent.cpp)
 
-| 담당 | 책임·주요 컴포넌트 |
+### 3. 별도 FBX 클립의 기준 메시·가중치 통일
+
+**문제:** 모델 교체를 검토하면서 동작별 FBX는 정상적으로 로드되지만 일부 포즈가 Blender와 엔진에서 다르게 보이는 문제를 확인했습니다. 관절 이름과 계층이 같아도 파일별 가중치와 바인딩 행렬은 다를 수 있었습니다.
+
+**접근:** 기준 모델의 메시·정점 순서·관절 가중치를 유지한 채 각 클립의 관절 동작을 가져오도록 에셋을 정리했습니다. 좌표축과 샘플 시간을 맞추고 Blender와 엔진의 포즈를 비교했습니다.
+
+**결과:** 파일 로드 성공뿐 아니라 같은 기준 메시에서의 포즈를 비교하는 검증 기준을 마련했습니다. 이는 모델 교체를 위한 에셋 준비 사례이며, 현재 게임의 기본 모델은 `Main.cpp`에서 선택한 Zombie입니다.
+
+관련 코드: [ModelImporter](../HiwoongEngine/AsciiDoomCore/ModelImport/ModelImporter.cpp), [SkeletonPoseCalculator](../HiwoongEngine/AsciiDoomCore/Animation/SkeletonPoseCalculator.cpp), [SkinningCalculator](../HiwoongEngine/AsciiDoomCore/Animation/SkinningCalculator.cpp)
+
+## 전체 구조와 역할
+
+```mermaid
+flowchart LR
+    D["DoomInstaller"] -->|"IPathFinder 생성"| M["Main"]
+    D -->|"IModelImporter 생성"| M
+    M -->|"길찾기·모델 데이터 전달"| S["DoomScene"]
+    S -->|"객체 생성·참조 제공"| MON["Monster FSM"]
+    S -->|"INavAIContext"| N["NavAIComponent"]
+    MON -->|"경로 요청"| N
+    N -->|"탐색 요청"| I["IPathFinder"]
+    N -->|"격자·월드 좌표 변환"| MAP["INavigationMap / DoomMap"]
+    MON -->|"클립 재생 요청"| ANIM["ModelAnimationComponent"]
+    ANIM -->|"포즈·스키닝 계산"| CORE["AsciiDoomCore"]
+    T["AsciiDoomTests"] -->|"길찾기·모델 로직 검증"| CORE
+```
+
+GameObject의 생성·수명은 Scene이 관리합니다. 아래 표는 각 객체와 컴포넌트의 책임을 나타내며, 객체를 생성한 관계와 Transform의 부모·자식 관계는 별개입니다.
+
+| 담당 | 책임 |
 |---|---|
-| [DoomScene](Scene/DoomScene.cpp) | 맵 완성 후 객체 생성, 카메라·렌더 뷰, 내비게이션 참조 제공 |
-| [DoomMap](Map/DoomMap.cpp) | 텍스트 맵, 벽 메시, 스폰 위치, 내비게이션 격자와 좌표 변환 |
-| [Player](Player/Player.cpp) | 이동·HP·AMMO, Collider·MouseLook·PauseMenu, Gun·Crosshair 생성과 참조 연결 |
-| [Gun](Player/Gun.cpp) | SpriteRenderer·SpriteAnimation, 탄환 생성·탄약 소비·재장전 |
-| [Bullet](GameObject/Bullet.cpp) | MeshRender·Collider, 이동·수명, 충돌 피해와 효과 생성 |
-| [EffectViewObject](GameObject/EffectViewObject.cpp) | SpriteRenderer3D·SpriteAnimation, 충돌 연출과 종료 후 제거 |
-| [Monster](GameObject/Monster.cpp) | Collider·NavAI, HP와 FSM. 3D 전환 작업에서 기존 스프라이트 표현을 정리한 상태 |
-| [NavAIComponent](Component/NavAIComponent.cpp) | IPathFinder·INavigationMap 참조, 시작·목적지로 월드 좌표 경로 반환 |
-| [PlayerHUID](UI/PlayerHUID.cpp)·[UI](UI) | HPDisplay·AmmoDisplay 배치, 값 변경 구독과 큰 문자 표시 |
+| [DoomScene](Scene/DoomScene.cpp) | 맵 완성 후 객체 생성, 카메라·렌더 뷰, 내비게이션 참조와 게임 흐름 연결 |
+| [DoomMap](Map/DoomMap.cpp) | TXT 배치, 벽·바닥·천장, 스폰 위치, 내비게이션 격자와 좌표 변환 |
+| [MapPropObject](GameObject/MapPropObject.cpp) | 소품의 메시·재질 표시와 모델 크기에 맞춘 Collider 구성 |
+| [Player](Player/Player.cpp) | 이동·HP·AMMO, 입력 컴포넌트 조합, Gun·Crosshair 생성과 참조 연결 |
+| [Gun](Player/Gun.cpp)·[Bullet](GameObject/Bullet.cpp) | 발사·재장전과 탄환 생성 / 탄환 이동·수명·충돌 피해·효과 생성 |
+| [Monster](GameObject/Monster.cpp) | 대상·경로·HP·FSM, 이동·공격·사망 판단과 애니메이션 요청 |
+| [NavAIComponent](Component/NavAIComponent.cpp) | 길찾기 계약과 맵을 연결해 월드 좌표 경로 반환 |
+| [ModelAnimationComponent](Component/ModelAnimationComponent.cpp) | 클립 재생, 관절 포즈·스키닝 적용, 애니메이션 이벤트 실행 |
+| [AttackObject](GameObject/AttackObject.cpp) | 공격 유효 구간의 충돌 피해 전달과 같은 공격의 중복 피격 방지 |
+| [PlayerHUID](UI/PlayerHUID.cpp)·[UI](UI) | HUD 배치, 값 변경 구독과 큰 문자 표시 |
+| [PlayerHitEffectComponent](Component/PlayerHitEffectComponent.cpp) | HP 감소에 반응하는 화면 효과·카메라 흔들림 |
+| [GameOverScene](Scene/GameOverScene.cpp) | 게임 오버 메뉴와 재시작·종료 선택 |
 
-`PlayerHUID`는 현재 소스의 클래스 이름입니다. HPDisplay·AmmoDisplay는 HUD에 Transform 부모를 연결하지만, Gun·Crosshair는 Player가 생성하고 참조를 연결하는 Scene 객체입니다.
+`PlayerHUID`는 현재 소스의 클래스 이름입니다. Collider는 형상·크기와 충돌 판정을 제공하며, 피해 적용은 `IDamageable` 구현체가 담당합니다.
 
-## 개발 과정
+## 실행과 조작
 
-아래 자료는 각 기능을 추가하던 시점의 시연입니다. 몬스터 관련 영상에는 이전 2D 스프라이트 구현이 포함되어 있으며, 현재 3D 전환 작업의 결과를 의미하지 않습니다.
+### 개발 환경과 실행
 
-### Step 1. 맵 렌더링과 플레이어 이동
+Windows의 Visual Studio 2022에서 **C++를 사용한 데스크톱 개발**, MSVC v143과 Windows SDK를 사용합니다. 프로젝트의 언어 표준은 C++17이며, 플랫폼은 x64입니다.
+
+1. [공유 솔루션](../HiwoongEngine/HiwoongEngine.sln)을 열고 `AsciiDoom`을 시작 프로젝트로 지정합니다.
+2. `x64`와 `Debug` 또는 `Release` 구성을 선택합니다.
+3. 프로젝트 속성의 **디버깅 → 작업 디렉터리**를 `$(TargetDir)`로 설정합니다.
+4. 빌드한 뒤 실행합니다. 빌드 후 엔진 DLL과 `Assets`가 실행 파일 폴더로 복사됩니다.
+
+출력 폴더는 `HiwoongEngine/Bin/<구성>/AsciiDoom/`입니다. [Main.cpp](Main.cpp)는 `WindowRenderOutput(Vector2(4, 8))`을 선택하며, 계산된 문자·색상 셀을 Win32 창에 표시합니다.
+
+**에셋 준비:** FBX 파일은 현재 Git 추적 대상에 포함되어 있지 않아, 저장소를 내려받는 것만으로 모델이 준비되지는 않습니다. 실행 전에 다음 파일과 FBX가 참조하는 텍스처를 준비해야 합니다. PNG는 각 FBX 옆의 `textures/` 경로도 확인합니다.
+
+| 폴더 | 필요한 FBX |
+|---|---|
+| `Assets/Model/Zombie/` | `MonsterLow.fbx`, `MonsterIdle.fbx`, `MonsterWalk.fbx`, `MonsterAttack.fbx`, `MonsterDead.fbx` |
+| `Assets/Environment/Crate/` | `Crate.fbx` |
+| `Assets/Environment/Barrel/` | `Barrel.fbx` |
+| `Assets/Environment/Column/` | `Column.fbx` |
+| `Assets/Environment/Beam/` | `Beam.fbx` |
+| `Assets/Environment/CeilingLight/` | `CeilingLight.fbx` |
+
+저장소에 포함된 에셋 고지는 [환경 에셋 라이선스](Assets/Environment/CeilingLight/LICENSE.txt)와 [Freedoom 텍스처 고지](Assets/Textures/Freedoom/COPYING.adoc)에서 확인할 수 있습니다.
+
+### 조작
+
+| 입력 | 동작 |
+|---|---|
+| `W` / `S` | 전진 / 후진 |
+| `A` / `D` | 왼쪽 / 오른쪽 이동 |
+| `Q` / `E` | 왼쪽 / 오른쪽 시점 회전 |
+| 마우스 좌우 | 수평 시점 회전 |
+| 마우스 상하 | 조준점의 제한된 세로 이동 |
+| 마우스 왼쪽 클릭 | 사격. 탄약이 없으면 재장전 요청 |
+| `R` | 재장전 |
+| 플레이 중 `Esc` | 일시정지 메뉴 열기 |
+| 메뉴에서 `↑` / `↓` | 항목 선택: RESUME·QUIT 또는 RESTART·QUIT |
+| 메뉴에서 `Enter` | 선택 실행 |
+| 일시정지 메뉴에서 `Esc` | 게임 재개 |
+| `F3` | 콜라이더 표시 전환. Debug 빌드에서 사용 |
+
+### 테스트 실행
+
+같은 솔루션의 `AsciiDoomTests`를 시작 프로젝트로 지정해 빌드·실행합니다. 자체 TestRunner를 사용하는 콘솔 프로젝트이며, 길찾기·격자·모델 임포트·포즈·스키닝 계산을 검사합니다. 실패가 있으면 종료 코드 1을 반환합니다.
+
+FBX 통합 테스트 일부는 개발 PC의 절대 경로와 별도 테스트 모델 파일을 참조합니다. 다른 환경에서는 [MeshLoaderTests.cpp](../HiwoongEngine/AsciiDoomTests/ModeImport/MeshLoaderTests.cpp)의 경로와 에셋을 맞춰야 합니다.
+
+## 개발 기록
+
+각 항목을 펼치면 당시의 시연을 볼 수 있습니다. 초기 몬스터 영상은 2D 스프라이트 방식이며, Step 14부터 3D 메시·애니메이션 전환 과정을 담았습니다.
+
+<details>
+<summary>Step 1. 맵 렌더링과 플레이어 이동</summary>
 
 https://github.com/user-attachments/assets/865c266e-8450-480e-a423-dcdda1b79d45
 
-### Step 2. 손전등
+</details>
+
+<details>
+<summary>Step 2. 손전등</summary>
 
 https://github.com/user-attachments/assets/5a2b94c3-1b5d-4a2d-8865-a76ca032c596
 
-### Step 3. 총과 조준점 표시
+</details>
+
+<details>
+<summary>Step 3. 총과 조준점 표시</summary>
 
 https://github.com/user-attachments/assets/ad7fd86f-5ee3-47ba-800e-8a30ebba1aff
 
-### Step 4. 일시정지 메뉴
+</details>
+
+<details>
+<summary>Step 4. 일시정지 메뉴</summary>
 
 https://github.com/user-attachments/assets/472910dd-32d5-4a0f-b779-d556f6dc4e8c
 
-### Step 5. 마우스 커서 숨기기
+</details>
+
+<details>
+<summary>Step 5. 마우스 커서 숨기기</summary>
 
 https://github.com/user-attachments/assets/da1e2ae7-e510-43eb-9f87-d4b80016d05d
 
-### Step 6. HP·AMMO UI
+</details>
+
+<details>
+<summary>Step 6. HP·AMMO UI</summary>
 
 ![ASCII Doom HP·AMMO UI 구현 당시 화면: 맵, 총, 조준점, HP와 AMMO](https://github.com/user-attachments/assets/3ea52078-7417-41f8-8499-c2cbdfe82e95)
 
+</details>
 
-### Step 7. 발사 애니메이션
+<details>
+<summary>Step 7. 발사 애니메이션</summary>
 
 https://github.com/user-attachments/assets/add28a26-4993-4756-ac9e-6a16d6e0a38a
 
+</details>
 
-### Step 8. 재장전 애니메이션
+<details>
+<summary>Step 8. 재장전 애니메이션</summary>
 
 https://github.com/user-attachments/assets/4a433b47-2877-48de-bc82-da66d511ef53
 
+</details>
 
-### Step 9. 탄환 발사 및 피격 효과
+<details>
+<summary>Step 9. 탄환 발사 및 피격 효과</summary>
 
 https://github.com/user-attachments/assets/98f8e1cd-fc63-4a95-9056-60def4282a98
 
+</details>
 
-### Step 10. 적 테스트
+<details>
+<summary>Step 10. 적 테스트</summary>
 
 https://github.com/user-attachments/assets/4320f76c-edb7-43d7-a17d-4f33a0b32d38
 
+</details>
 
-### Step 11. 길찾기 알고리즘
+<details>
+<summary>Step 11. 길찾기 알고리즘</summary>
 
 https://github.com/user-attachments/assets/e4fcf815-cd4e-40b7-b00a-c392d1a5de45
 
+</details>
 
-### Step 12. 애니메이션 상태변경
-
+<details>
+<summary>Step 12. 애니메이션 상태 변경</summary>
 
 https://github.com/user-attachments/assets/5fe08a5e-9f18-4f6a-a9cd-0fca11ac458e
 
-### Step 13. 픽셀 컬러 표시
+</details>
+
+<details>
+<summary>Step 13. 문자 셀별 색상 표시</summary>
 
 https://github.com/user-attachments/assets/b942b436-fb5e-4eb5-ae30-a69bb85c9eeb
 
+</details>
 
-### Step 14. 몬스터의 2D 스프라이트 렌더러 -> 3D 메쉬 렌더러 방식 변경
+<details>
+<summary>Step 14. 몬스터의 2D 스프라이트에서 3D 메시로 전환</summary>
 
-1) FBX를 통해 메쉬 가져오기
-   
+**1. FBX 메시 불러오기**
+
 https://github.com/user-attachments/assets/beae9df2-e230-4d57-ae9d-7412b1c976b0
 
-2) UV매핑
+**2. UV 매핑**
 
 https://github.com/user-attachments/assets/9676c227-d0d1-4a04-aa30-9be947be6c2f
 
-3) 애니메이션
+**3. 애니메이션**
 
 https://github.com/user-attachments/assets/745eb1be-686a-4f3c-84c6-df437a77ef4b
- 
+
 https://github.com/user-attachments/assets/29db8578-6d9d-4685-bcf5-1cb5c9d7054f
 
 https://github.com/user-attachments/assets/a587d522-dd43-43e6-b936-a2b5dfd70ab4
 
 https://github.com/user-attachments/assets/1a291b9e-4f09-4719-a87f-283d3b530960
 
+</details>
 
-
-### Step 15. 디버깅 툴
+<details>
+<summary>Step 15. 디버깅 툴</summary>
 
 https://github.com/user-attachments/assets/8c2243a4-dbe0-4dff-b0a9-fcb99bb69736
 
-### Step 16. 피격 효과(스프라이트 애니메이션 + 카메라 쉐이킹)
+</details>
+
+<details>
+<summary>Step 16. 피격 효과(스프라이트 애니메이션 + 카메라 쉐이킹)</summary>
 
 https://github.com/user-attachments/assets/0ebdb595-f1f2-4d75-a93b-43893689d83a
 
-### Step 17. GameOver UI
+</details>
+
+<details>
+<summary>Step 17. GameOver UI</summary>
 
 https://github.com/user-attachments/assets/56c527b8-fe3b-4dcb-b732-2340e3464220
 
-
-
-
-## 문제 해결 과정
-
-### 1. 의존성 주입 및 TDD 테스트 적용
-
-
-**문제**
-
-몬스터를 제작한 뒤 플레이어를 추적하는 로직을 구현하려고 했습니다만, 이전에는 게임을 실행하면 구현 결과를 바로 확인할 수 있어 테스트 과정이 크게 번거롭지 않았습니다. 하지만 프로젝트가 복잡해지면서, 추적 로직을 확인하려면 게임을 플레이하고 몬스터의 상태와 이동을 관찰해야 했습니다. 원하는 상황을 매번 재현해야 하므로 다양한 조건을 즉시 검증하기 어려워졌습니다.
-
-또한 A* 알고리즘뿐 아니라 탐색에 유리한 자료구조도 직접 구현하고자 하였기에 이를 한꺼번에 게임에 연결하면 문제가 발생했을 때 자료구조, 경로 탐색, 몬스터 이동 중 어디에서 잘못됐는지 구분하기 어려웠습니다. 
-
-그래서 단계적으로 로직을 분리하고 테스트 결과를 확인하기 위해.
-DI 프레임 워크와 TDD를 이용했습니다.
-
-게임엔진 라이프 사이클을 밟지않고 테스트를 통해 결과를 확인할 수 있게 했습니다.
-
-```mermaid
-flowchart LR
-    subgraph BEFORE["기존: 플레이하며 결과 관찰"]
-        direction TB
-        B1["코드 수정"] --> B2["게임 실행"]
-        B2 --> B3["검사할 상황까지 플레이"]
-        B3 --> B4["몬스터의 상태와 이동 관찰"]
-        B4 -->|"문제 수정 후 다시 확인"| B1
-    end
-
-    subgraph AFTER["개선: 로직을 작은 단위로 자동 검증"]
-        direction TB
-        A1["입력과 기대 결과로 테스트 작성<br/>실패 확인"] --> A2["로직 구현"]
-        A2 --> A3["자동 테스트 실행"]
-        A3 -->|"실패"| A2
-        A3 -->|"통과"| A4["다음 조건의 테스트 추가"]
-        A4 --> A1
-    end
-
-    classDef manual fill:#fff7ed,stroke:#c2410c,color:#111827
-    classDef automated fill:#eff6ff,stroke:#2563eb,color:#111827
-    class B1,B2,B3,B4 manual
-    class A1,A2,A3,A4 automated
-```
-
-**해결 접근**
-
-이를 해결하기 위해 의존성 주입(DI)과 TDD를 도입했습니다. 몬스터의 추적 기능은 구체적인 A* 구현체 대신 길찾기 인터페이스에 의존하도록 설계했습니다. 게임플레이에서 `IPathFinder` 구현체를 사용하는 맵은 외부에서 구현체를 주입받고, 몬스터에는 이동에 필요한 경로를 제공하는 역할을 맡도록 계획했습니다. 길찾기 로직은 엔진에 의존하지 않는 `AsciiDoomCore`로 분리하고, `AsciiDoomTests`에서 게임을 실행하지 않고 입력과 결과를 직접 검증할 수 있게 했습니다.
-
-테스트에서는 작은 격자와 시작점·목표점을 넣고 예상 경로를 확인합니다. 먼저 원하는 동작을 테스트로 작성해 실패를 확인한 뒤, 이를 통과하도록 구현을 추가하는 방식으로 진행했습니다. 직접 만든 우선순위 큐도 삽입 후 최소 비용 노드가 선택되는지, 제거 후 다음 노드가 올바르게 선택되는지 별도로 검사합니다. 이렇게 각 로직을 작은 단위로 검증한 뒤 조합하고, 마지막에 몬스터에 연결하는 흐름을 선택했습니다.
-
-테스트에서는 구현체를 직접 만들어 검증하고, 게임에서는 인터페이스를 통해 사용할 수 있도록 구성합니다. 아래 그림은 맵과 몬스터를 게임플레이로 묶은 개념도입니다. **실선은 현재 구현된 관계**, **점선은 이후 연결할 관계**입니다.
-
-```mermaid
-flowchart TB
-    TEST["AsciiDoomTests<br/>게임 실행 없이 입력과 결과 검증"]
-
-    subgraph CORE["AsciiDoomCore · 엔진과 독립된 로직"]
-        CONTRACT["IPathFinder<br/>길찾기 계약"]
-        ASTAR["AStarPathFinder<br/>탐색 로직 구현 중"]
-        QUEUE["AStarPriorityQueue<br/>직접 만든 최소 힙"]
-        ASTAR -->|"인터페이스 구현"| CONTRACT
-        ASTAR -.->|"탐색에 사용 예정"| QUEUE
-    end
-
-    TEST -->|"경로 결과 검사"| ASTAR
-    TEST -->|"삽입·삭제·우선순위 검사"| QUEUE
-
-    subgraph GAME["게임 연결 · 예정"]
-        INSTALLER["Bootstrap / Installer<br/>사용할 구현체 선택"]
-        GAMEPLAY["게임플레이<br/>DoomMap · 몬스터 추적"]
-        INSTALLER -.->|"맵에 구현체 주입"| GAMEPLAY
-    end
-
-    INSTALLER -.->|"구현체 생성·선택"| ASTAR
-    GAMEPLAY -.->|"계약에 의존"| CONTRACT
-
-    classDef tests fill:#eff6ff,stroke:#2563eb,color:#111827
-    classDef core fill:#f0fdf4,stroke:#15803d,color:#111827
-    classDef planned fill:#fff7ed,stroke:#c2410c,color:#111827,stroke-dasharray:5 5
-    class TEST tests
-    class CONTRACT,ASTAR,QUEUE core
-    class INSTALLER,GAMEPLAY planned
-```
-
-
-
-관련 코드: [IPathFinder](../HiwoongEngine/AsciiDoomCore/PathFinder/Interfaces/IPathFinder.h), [PathNode 및 우선순위 큐](../HiwoongEngine/AsciiDoomCore/PathFinder/PathNode.cpp), [길찾기·우선순위 큐 테스트](../HiwoongEngine/AsciiDoomTests/PathFinder/AStarPathFinderTests.cpp)
-
-## 객체와 컴포넌트의 역할
-
-공통 엔진의 Scene·GameObject·Component 구조를 재사용합니다. 게임 객체가 필요한 기능을 조합하고, 표시·입력·상태 전달을 나누어 구성했습니다.
-
-```text
-DoomScene
-├─ DoomMap                  텍스트 맵, 벽 메시, 스폰 위치
-├─ Player                   이동, HP·AMMO 값
-│  ├─ BoxCollider3DComponent
-│  ├─ MouseLookComponent
-│  ├─ PauseMenuComponent
-│  ├─ Gun                   SpriteRendererComponent
-│  └─ Crosshair             SpriteRendererComponent + CrossHairMoveComponent
-└─ PlayerHUID               HUD 배치
-   ├─ HPDisplay             HpDisplayComponent + BigTextDisplayComponent + SpriteRendererComponent
-   └─ AmmoDisplay           AmmoDisplayComponent + BigTextDisplayComponent + SpriteRendererComponent
-```
-
-위 트리는 객체의 구성 관계를 나타냅니다. GameObject의 수명과 등록은 Scene이 관리하며, 부모·자식 관계는 Transform 연결과 함께 설정합니다. `PlayerHUID`는 현재 소스에 사용된 클래스 이름입니다.
-
-| 책임 | 구현 위치 |
-|---|---|
-| 맵 완성 후 플레이어·카메라·HUD 연결 | [DoomScene.cpp](Scene/DoomScene.cpp) |
-
-
-
-| 이동 입력과 이동 적용, HP·AMMO 상태 | [Player.cpp](Player/Player.cpp) |
-| 수평 시점 회전 | [MouseLookComponent.cpp](../HiwoongEngine/src/Component/MouseLookComponent.cpp) |
-| 총 표시 | [Gun.cpp](Player/Gun.cpp) |
-| 조준점 세로 이동 | [CrossHairMoveComponent.cpp](Component/CrossHairMoveComponent.cpp) |
-| HUD 객체 배치와 수치 표시 | [PlayerHUID.cpp](UI/PlayerHUID.cpp), [UI 폴더](UI) |
-
-현재 이동과 HP·AMMO 값은 `Player`에 있습니다. 발사와 몬스터 행동을 추가할 때는 기존 컴포넌트를 재사용할 수 있는지 먼저 검토하고, 기능별 책임을 분리하는 방향으로 확장합니다.
-
-## 텍스트 맵을 3D 공간으로 구성
-
-[Level01.txt](Assets/Maps/Level01.txt)는 가로 10칸, 세로 6칸의 평면 맵입니다.
-
-```text
-##########
-#P.......#
-#.####...#
-#....#..M#
-#..M.....#
-##########
-```
-
-| 문자 | 빌더가 수행하는 작업 |
-|---|---|
-| `#` | 벽 메시를 합치고 `BoxCollider3DComponent`가 있는 벽 객체 생성 |
-| `.` | 빈 공간으로 처리 |
-| `P` | 플레이어 시작 위치 저장 |
-| `M` | 향후 몬스터 배치에 사용할 위치 저장 |
-
-`DoomMap`은 파일을 읽고 타일 문자를 순회합니다. `TileBuilderRegistry`가 문자에 해당하는 `ITileBuilder`를 찾고, 각 빌더의 `Build(DoomMap&, const Vector3&)`가 타일별 작업을 수행합니다. 맵 읽기와 타일 생성 규칙을 분리한 팩토리 구조입니다.
-
-벽은 공용 `MeshFactory::CreateCube(1.0f)`로 만듭니다. 각 벽의 정점을 하나의 맵 메시로 합치고, 이웃도 벽인 측면은 삼각형 목록에 넣지 않습니다. 벽 사이에 가려진 면의 렌더링을 줄이는 방식이며, 충돌체는 벽 객체마다 유지합니다.
-
-맵 구성이 끝나면 `AddOnMapBuilt(...)`로 등록한 콜백을 실행합니다. `DoomScene`은 이 알림을 받은 뒤 플레이어를 저장된 시작점에 배치하고, 플레이어 Transform을 참조하는 카메라와 HUD를 생성합니다.
-
-`M`은 현재 위치를 수집하는 표식입니다. 몬스터 인스턴스 생성이나 AI 실행으로 이어지는 코드는 아직 없습니다.
-
-관련 코드: [DoomMap.cpp](Map/DoomMap.cpp), [TileBuilderRegistry.cpp](Map/TileBuilderRegistry.cpp), [WallTileBuilder.cpp](Map/BuildImplements/WallTileBuilder.cpp)
-
-## 이동과 충돌
-
-WASD 입력을 플레이어의 수평 회전 방향에 맞는 이동 벡터로 바꿉니다. 벡터를 정규화한 뒤 `deltaTime`을 곱해, 대각선 이동이 더 빨라지지 않도록 합니다.
-
-이동 적용은 X축과 Z축으로 나누어 처리합니다. X축 이동 가능 여부를 먼저 확인하고, 그 결과 위치에서 Z축을 검사합니다. 한 축이 벽에 막혀도 다른 축으로는 움직일 수 있어 벽을 따라 미끄러집니다.
-
-충돌은 `Scene::CanMoveTo(...)`를 통해 공용 `CollisionSystem`에 요청합니다. 플레이어와 벽의 축 정렬 상자 충돌체를 비교하며, 현재 이동 경로는 `DoomMap::CanMoveTo(...)`의 타일 검사 함수를 사용하지 않습니다.
-
-관련 코드: [Player.cpp](Player/Player.cpp), [CollisionSystem.cpp](../HiwoongEngine/src/Physics/CollisionSystem.cpp), [BoxCollider3DComponent.cpp](../HiwoongEngine/src/Component/BoxCollider3DComponent.cpp)
-
-## 3D 공간과 2D 화면의 결합
-
-### 손전등과 ASCII 명암
-
-`DoomScene`은 매 프레임 카메라의 View·Projection 행렬을 계산하고, 공용 `MeshRenderer`에 맵 메시를 전달합니다. 카메라 앞 경계면에서 삼각형을 자르는 Near Plane 클리핑과 깊이 버퍼도 공용 렌더러를 재사용합니다.
-
-손전등의 위치는 플레이어, 방향은 카메라 정면을 따릅니다. 렌더러는 화면 셀에 대응하는 공간 위치를 원근 보정하여 복원하고, 빛과의 거리·각도·표면 방향으로 밝기를 계산합니다. 그 결과를 공백·`.`·`:`·`*`·`#`·`@` 중 하나로 바꿉니다.
-
-현재 Doom의 기본 밝기는 `0.2`, 방향광 세기는 `0`입니다. 기본 밝기에 손전등을 더해 가까운 벽과 정면을 향한 표면을 구분합니다.
-
-관련 코드: [DoomScene.cpp](Scene/DoomScene.cpp), [MeshRenderer.cpp](../HiwoongEngine/src/Render/MeshRenderer.cpp)
-
-### 총·조준점과 HUD 영역
-
-총과 조준점은 Player의 자식 GameObject이며, 기존 `SpriteRendererComponent`로 여러 줄의 문자를 출력합니다. 공백 구간은 렌더 명령에서 제외하므로 뒤의 맵을 가리지 않습니다. 출력 순서 값으로 총·조준점·HUD가 3D 맵 위에 보이게 합니다.
-
-`DoomScene`은 원래 화면 크기를 `gameSize`로 보관하고, 전체 출력 높이에 HUD용 10행을 추가합니다. 3D 투영은 `gameSize`를 기준으로 계산하고, HUD는 그 아래에서 시작합니다. 문자 셀의 가로·세로 비율도 투영의 화면 비율에 반영합니다.
-
-총의 로컬 위치는 게임 영역 하단을 기준으로 계산합니다. 조준점은 중앙에서 시작하며, `CrossHairMoveComponent`가 마우스 Y 이동량을 받아 로컬 Y를 `30~50`으로 제한합니다. 카메라의 상하 회전은 연결하지 않았습니다.
-
-관련 코드: [Gun.cpp](Player/Gun.cpp), [CrossHair.cpp](Player/CrossHair.cpp), [SpriteRendererComponent.cpp](../HiwoongEngine/src/Component/SpriteRendererComponent.cpp)
-
-### 값 변경에 반응하는 HUD
-
-HP·AMMO 표시 컴포넌트는 시작할 때 현재 값을 표시하고, Player의 변경 콜백에 등록합니다. `SetHp(int)`와 `SetAmmo(int)`는 음수를 0으로 제한하며, 실제 값이 달라질 때만 콜백을 호출합니다.
-
-`BigTextDisplayComponent`는 문자열을 5×5 문자 패턴으로 확장해 SpriteRenderer에 전달합니다. HUD 배치는 이 컴포넌트가 계산한 크기를 사용합니다. 콜백은 표시 컴포넌트를 `weak_ptr`로 참조해 UI의 수명을 불필요하게 연장하지 않습니다.
-
-현재는 수치 변경과 화면 갱신 경로까지 구현되어 있습니다. HP 감소를 일으키는 피격이나 AMMO를 소비하는 발사는 아직 연결되지 않았습니다.
-
-관련 코드: [HpDisplayComponent.cpp](UI/HpDisplayComponent.cpp), [AmmoDisplayComponent.cpp](UI/AmmoDisplayComponent.cpp), [BigTextDisplayComponent.cpp](UI/BigTextDisplayComponent.cpp)
-
-## 상태를 유지하는 일시정지
-
-`PauseMenuComponent`가 Esc 입력을 받아 `Engine::OpenPauseScene<MenuScene>()`을 호출합니다. 엔진은 진행 중인 게임 Scene을 `pausedScene`에 보관하고 MenuScene으로 전환합니다. 메뉴가 활성화된 동안 게임 Scene의 업데이트는 실행하지 않습니다.
-
-메뉴 배경에는 전환 직전의 문자 프레임을 캡처해 사용합니다. 저장된 프레임의 밝기 속성을 낮추고 그 위에 메뉴를 그리므로, 멈춘 게임 화면을 유지하면서 선택 항목을 강조할 수 있습니다.
-
-재개 시 `ResumeScene()`은 보관했던 같은 Scene으로 돌아갑니다. 맵과 플레이어를 다시 만들지 않아 위치·방향·상태가 유지됩니다. 메뉴 진입 시 마우스 잠금을 풀고, 재개 시 잠금과 이동량 기준을 초기화합니다.
-
-관련 코드: [PauseMenuComponent.cpp](Component/PauseMenuComponent.cpp), [MenuScene.cpp](Scene/MenuScene.cpp), [Engine.h](../HiwoongEngine/src/Engine/Engine.h), [Renderer.cpp](../HiwoongEngine/src/Render/Renderer.cpp)
-
-## 실행과 조작
-
-공통 빌드 안내는 [루트 README](../README.md)를 참고하세요. [공유 솔루션](../HiwoongEngine/HiwoongEngine.sln)에서 `AsciiDoom` 프로젝트를 선택합니다.
-
-현재 [Main.cpp](Main.cpp)는 `WindowRenderOutput(Vector2(4, 8))`을 엔진에 전달합니다. 렌더러가 만든 문자·색상 셀을 Win32 창에 출력하며, 게임 창을 마우스 입력 대상으로 연결합니다. 공용 엔진은 `IRenderOutput`으로 출력 구현을 교체할 수 있고, Doom의 실행 진입점은 창 출력을 선택합니다.
-
-| 입력 | 동작 |
-|---|---|
-| `W` / `S` | 전진 / 후진 |
-| `A` / `D` | 왼쪽 / 오른쪽 이동 |
-| 마우스 좌우 | 수평 시점 회전 |
-| 마우스 상하 | 조준점의 제한된 세로 이동 |
-| 플레이 중 `Esc` | 일시정지 메뉴 열기 |
-| 메뉴에서 `↑` / `↓` | RESUME / QUIT 선택 |
-| 메뉴에서 `Enter` | 선택 실행 |
-| 메뉴에서 `Esc` | 게임 재개 |
+</details>

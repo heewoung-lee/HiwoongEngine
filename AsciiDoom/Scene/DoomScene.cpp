@@ -165,7 +165,7 @@ namespace Hiwoong
 		);
 
 		//기본 밝기 조정.
-		renderView.ambientBrightness = 0.2f;
+		renderView.ambientBrightness = 0.1f;
 		renderView.directionalIntensity = 0.0f;
 
 		SpotLight flashlight;

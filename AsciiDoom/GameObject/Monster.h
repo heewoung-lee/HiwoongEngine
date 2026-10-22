@@ -75,6 +75,8 @@ namespace Hiwoong
 
 		std::vector<Vector3> path;
 		std::size_t currentPathIndex = 0;
+		float repathInterval = 0.25f;
+		float repathElapsedTime = repathInterval;
 
 		int attackDamage;
 

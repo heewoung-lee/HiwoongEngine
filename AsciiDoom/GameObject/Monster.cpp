@@ -113,8 +113,11 @@ namespace Hiwoong
 			return;
 		}
 
-		// 경로가 없거나 끝까지 이동했다면 다시 요청한다.
-		if (currentPathIndex >= path.size())
+		repathElapsedTime += static_cast<float>(deltaTime);
+
+		// 경로가 없거나 끝까지 이동했다면 일정 간격으로 다시 요청한다.
+		if (currentPathIndex >= path.size() &&
+			repathElapsedTime >= repathInterval)
 		{
 			RequestPath();
 		}
@@ -217,6 +220,8 @@ namespace Hiwoong
 		if (targetObject == nullptr)
 			return;
 
+		repathElapsedTime = 0.0f;
+
 		path = navAIComponent->FindPath(
 			GetWorldPosition(),
 			targetObject->GetWorldPosition()
@@ -253,6 +258,16 @@ namespace Hiwoong
 		if (distance <= 0.01f)
 		{
 			++currentPathIndex;
+
+			if (repathElapsedTime >= repathInterval)
+			{
+				RequestPath();
+
+				// 이미 도착한 시작 경유지는 건너뛴다.
+				if (path.size() > 1)
+					currentPathIndex = 1;
+			}
+
 			return;
 		}
 
