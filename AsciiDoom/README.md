@@ -6,8 +6,6 @@ https://github.com/user-attachments/assets/31e2e76d-bf96-4367-9f9f-1c5504e425ce
 
 **직접 만든 C++ 엔진으로 3D 공간을 문자와 RGB 색상으로 그리는 1인칭 게임입니다.**
 
-한 종류의 총으로 몬스터와 전투하는 단일 스테이지 구성입니다.
-
 ```mermaid
 flowchart LR
     A["맵·모델·동작 파일"] --> B["직접 만든 C++ 엔진<br/>모양·깊이·빛 계산"]
