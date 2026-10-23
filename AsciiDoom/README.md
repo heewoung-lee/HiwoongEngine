@@ -35,6 +35,8 @@ flowchart LR
 
 ## 핵심 구현
 
+기능별 영상은 개발 당시의 구현 결과입니다. 최신 통합 플레이는 문서 맨 위 영상에서 볼 수 있습니다.
+
 ### 3D 모양을 문자 화면으로 바꾸기
 
 **3D 모양을 화면에 배치하고, 각 칸에 쓸 문자와 색을 계산합니다.**
@@ -60,6 +62,18 @@ flowchart LR
 
 메시와 3D 스프라이트는 투영·클리핑·깊이 처리를 공유합니다. 문자와 색을 고르는 방식은 각 렌더 컴포넌트가 제공합니다.
 
+**손전등 명암 · Step 2**
+
+손전등 조명을 적용해 벽의 밝기를 문자 명암으로 표현한 결과입니다.
+
+https://github.com/user-attachments/assets/5a2b94c3-1b5d-4a2d-8865-a76ca032c596
+
+**문자 셀별 색상 · Step 13**
+
+문자 셀마다 색상을 지정해 컬러 화면으로 출력한 결과입니다.
+
+https://github.com/user-attachments/assets/b942b436-fb5e-4eb5-ae30-a69bb85c9eeb
+
 관련 코드: [공통 렌더러](../HiwoongEngine/src/Render/MeshRenderer.cpp), [문자·텍스처 선택](Component/MeshRenderComponent.cpp), [창 출력](../HiwoongEngine/src/Render/WindowRenderOutput.cpp)
 
 ### 뼈 움직임으로 3D 모델 움직이기
@@ -81,6 +95,24 @@ flowchart TD
 | 애니메이션 클립 | 시간에 따른 뼈의 움직임 |
 
 Zombie 기준 모델에 `Idle`·`Move`·`Attack`·`Dead` 클립을 붙입니다. 포즈·스키닝은 CPU에서 계산하고, `ModelAnimationComponent`가 재생과 화면 반영을 연결합니다.
+
+**FBX 모델 불러오기 · Step 14**
+
+FBX에서 읽은 메시를 공통 렌더러로 표시한 결과입니다.
+
+https://github.com/user-attachments/assets/beae9df2-e230-4d57-ae9d-7412b1c976b0
+
+**UV 매핑 적용 · Step 14**
+
+모델의 UV에 맞춰 텍스처를 표면에 표시한 결과입니다.
+
+https://github.com/user-attachments/assets/9676c227-d0d1-4a04-aa30-9be947be6c2f
+
+**관절 애니메이션 재생 · Step 14**
+
+관절의 움직임을 몸체 정점에 반영해 3D 모델을 움직인 결과입니다.
+
+https://github.com/user-attachments/assets/745eb1be-686a-4f3c-84c6-df437a77ef4b
 
 관련 코드: [모델·클립 로딩](Main.cpp), [모델 데이터 변환](../HiwoongEngine/AsciiDoomCore/ModelImport), [포즈·스키닝 계산](../HiwoongEngine/AsciiDoomCore/Animation), [애니메이션 재생](Component/ModelAnimationComponent.cpp)
 
@@ -112,6 +144,20 @@ A*는 상하좌우·대각선으로 경로를 찾으며, 벽 모서리를 가로
 
 공격 동작을 마친 뒤 거리 조건을 다시 반영합니다. HP가 0이 되면 즉시 공격을 끊고 사망 동작을 재생하며, 동작 종료 후 일정 시간이 지나면 제거됩니다.
 
+아래 두 영상은 2D 스프라이트 방식으로 몬스터를 구현하던 당시의 기록입니다.
+
+**길찾기 적용 · Step 11**
+
+몬스터의 경로 탐색 기능을 구현한 기록입니다.
+
+https://github.com/user-attachments/assets/e4fcf815-cd4e-40b7-b00a-c392d1a5de45
+
+**행동에 따른 애니메이션 전환 · Step 12**
+
+몬스터의 상태에 맞춰 재생할 애니메이션을 바꾸는 기능을 구현한 기록입니다.
+
+https://github.com/user-attachments/assets/5fe08a5e-9f18-4f6a-a9cd-0fca11ac458e
+
 관련 코드: [행동·이동](GameObject/Monster.cpp), [경로 요청](Component/NavAIComponent.cpp), [A* 탐색](../HiwoongEngine/AsciiDoomCore/PathFinder/Implements/AStarPathFinder.cpp), [공격 피해](GameObject/AttackObject.cpp)
 
 ### 사격·피격과 화면 반응
@@ -124,6 +170,12 @@ flowchart LR
     B -->|"발사자 외 물체와 충돌"| C["충돌 효과 재생<br/>탄환 제거"]
     B -->|"피해 가능한 대상 명중"| D["대상에게 피해 전달"]
 ```
+
+**탄환 충돌 효과 · Step 9**
+
+탄환 발사와 충돌 지점의 효과를 연결한 결과입니다.
+
+https://github.com/user-attachments/assets/98f8e1cd-fc63-4a95-9056-60def4282a98
 
 **플레이어의 체력이 바뀌면 필요한 기능이 각각 알림을 받습니다.**
 
@@ -140,6 +192,12 @@ flowchart TD
 | 피해 전달 | `IDamageable` 계약 사용. 같은 공격에서 같은 대상을 중복 처리하지 않음 |
 | 재장전 | 재장전 동작 종료 후 탄약을 최대치로 채움 |
 | 탄약 HUD | 탄약 값이 실제로 바뀌었을 때 표시 갱신 |
+
+**플레이어 피격 효과 · Step 16**
+
+피격 반응으로 화면 애니메이션과 카메라 흔들림을 적용한 결과입니다.
+
+https://github.com/user-attachments/assets/0ebdb595-f1f2-4d75-a93b-43893689d83a
 
 관련 코드: [총](Player/Gun.cpp), [탄환](GameObject/Bullet.cpp), [피해 계약](Interfaces/IDamageable.h), [HUD](UI), [플레이어 피격 효과](Component/PlayerHitEffectComponent.cpp)
 
@@ -161,6 +219,18 @@ flowchart TD
 |---|---|
 | RESUME | 보관했던 같은 Scene으로 복귀. 위치·HP·탄약 유지 |
 | RESTART | 새 Scene 생성. 길찾기와 읽어 둔 모델 데이터 재사용 |
+
+**일시정지 메뉴 · Step 4**
+
+게임 화면 위에 일시정지 메뉴를 표시한 결과입니다.
+
+https://github.com/user-attachments/assets/472910dd-32d5-4a0f-b779-d556f6dc4e8c
+
+**GameOver 화면 · Step 17**
+
+게임 오버 화면과 메뉴 UI를 구현한 결과입니다.
+
+https://github.com/user-attachments/assets/56c527b8-fe3b-4dcb-b732-2340e3464220
 
 관련 코드: [일시정지 메뉴](Scene/MenuScene.cpp), [사망·재시작 연결](Scene/DoomScene.cpp), [GameOver 메뉴](Scene/GameOverScene.cpp)
 
