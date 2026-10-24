@@ -21,7 +21,7 @@ A first-person demo in development, featuring movement through a 3D map, lightin
 
 https://github.com/user-attachments/assets/81984e31-71cc-48f2-ba54-3f6739af3593
 
-### [2. ASCII Cube](AsciiCube/README.md)
+### [2. ASCII Cube](AsciiCube/README.en.md)
 
 A 3D rendering demo that uses a rotating cube to demonstrate coordinate transformations, triangle filling, depth testing, and normal-based lighting.
 

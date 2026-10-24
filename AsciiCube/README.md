@@ -1,3 +1,8 @@
+<p align="right">
+  <a href="README.md"><img src="https://img.shields.io/badge/%ED%95%9C%EA%B5%AD%EC%96%B4-1F6FEB?style=for-the-badge" alt="한국어 (선택됨)"></a>
+  <a href="README.en.md"><img src="https://img.shields.io/badge/English-30363D?style=for-the-badge" alt="English"></a>
+</p>
+
 # ASCII Cube
 HiwoongEngine의 3D 수학과 소프트웨어 렌더링을 확인하는 ASCII 큐브 데모입니다.
 CPU에서 정점을 변환하고 삼각형을 문자 셀로 채워, 회전하는 입체를 Windows 콘솔에 출력합니다.
