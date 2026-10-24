@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="570" viewBox="0 0 1400 570" role="img" aria-labelledby="title desc">
+  <title id="title">HiwoongEngine frame composition and output</title>
+  <desc id="desc">SpriteRenderer submits draw commands to a shared RGB RenderCell frame. IRenderOutput presents it through a Win32 GDI window or a console backend. Only the console backend uses two ScreenBuffers.</desc>
+  <defs>
+    <linearGradient id="rbg" x1="0" x2="1"><stop stop-color="#081018"/><stop offset="1" stop-color="#131827"/></linearGradient>
+    <marker id="ra" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L0 6L9 3z" fill="#64748b"/></marker>
+    <style>.t{font:700 30px 'Segoe UI','Noto Sans KR',sans-serif;fill:#f8fafc}.s{font:400 16px 'Segoe UI','Noto Sans KR',sans-serif;fill:#94a3b8}.h{font:700 18px 'Segoe UI','Noto Sans KR',sans-serif;fill:#f8fafc}.b{font:400 14px 'Segoe UI','Noto Sans KR',sans-serif;fill:#cbd5e1}.a{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#ra)}</style>
+  </defs>
+  <rect width="1400" height="570" rx="24" fill="url(#rbg)"/>
+  <text x="55" y="59" class="t">Every character passes through the rendering pipeline</text>
+  <text x="55" y="90" class="s">A shared RGB frame is presented through a Win32 GDI window or the Windows console.</text>
+  <g transform="translate(50 155)">
+    <rect width="210" height="120" rx="18" fill="#3b0764" stroke="#c084fc" stroke-width="2"/>
+    <text x="105" y="43" text-anchor="middle" class="h">SpriteRenderer</text><text x="105" y="73" text-anchor="middle" class="b">Character · position · RGB</text><text x="105" y="97" text-anchor="middle" class="b">Submit sorting order</text>
+    <path d="M215 60 H255" class="a"/>
+    <g transform="translate(265)"><rect width="210" height="120" rx="18" fill="#172554" stroke="#60a5fa" stroke-width="2"/><text x="105" y="43" text-anchor="middle" class="h">Render Queue</text><text x="105" y="73" text-anchor="middle" class="b">Collect draw commands</text><text x="105" y="97" text-anchor="middle" class="b">Defer rendering</text></g>
+    <path d="M480 60 H520" class="a"/>
+    <g transform="translate(530)"><rect width="210" height="120" rx="18" fill="#083344" stroke="#22d3ee" stroke-width="2"/><text x="105" y="43" text-anchor="middle" class="h">Frame</text><text x="105" y="73" text-anchor="middle" class="b">RenderCell[] · RGB</text><text x="105" y="97" text-anchor="middle" class="b">Sorting order · depth</text></g>
+    <path d="M745 60 H785" class="a"/>
+    <g transform="translate(795)"><rect width="210" height="120" rx="18" fill="#052e16" stroke="#4ade80" stroke-width="2"/><text x="105" y="43" text-anchor="middle" class="h">IRenderOutput</text><text x="105" y="73" text-anchor="middle" class="b">Console / Win32 window</text><text x="105" y="97" text-anchor="middle" class="b">Backend-specific output</text></g>
+    <path d="M1010 60 H1050" class="a"/>
+    <g transform="translate(1060)"><rect width="210" height="120" rx="18" fill="#422006" stroke="#fbbf24" stroke-width="2"/><text x="105" y="43" text-anchor="middle" class="h">Display</text><text x="105" y="73" text-anchor="middle" class="b">GDI / Windows console API</text><text x="105" y="97" text-anchor="middle" class="b">Present the final frame</text></g>
+  </g>
+  <rect x="185" y="350" width="1030" height="150" rx="20" fill="#0f172a" stroke="#334155"/>
+  <text x="700" y="389" text-anchor="middle" class="h">Console backend: why two buffers?</text>
+  <rect x="285" y="420" width="270" height="52" rx="12" fill="#172554" stroke="#60a5fa"/><text x="420" y="452" text-anchor="middle" class="b">While Buffer A is displayed</text>
+  <path d="M565 446 H625" class="a"/>
+  <rect x="635" y="420" width="270" height="52" rx="12" fill="#052e16" stroke="#4ade80"/><text x="770" y="452" text-anchor="middle" class="b">Write the next frame to B</text>
+  <path d="M915 446 H975" class="a"/>
+  <rect x="985" y="420" width="130" height="52" rx="12" fill="#3b0764" stroke="#c084fc"/><text x="1050" y="452" text-anchor="middle" class="b">Swap buffers</text>
+  <text x="700" y="536" text-anchor="middle" class="s">Double buffering reduces incomplete frames and helps limit console flicker.</text>
+</svg>

@@ -63,7 +63,7 @@ The technology stack is **C++17 · Windows API · Win32 Console · GDI**. Vertex
 
 ### 1. Scene → GameObject → Component
 
-<img width="1200" alt="Composition of Transform, rendering, and input Components on a GameObject" src="https://github.com/user-attachments/assets/979efaba-61a9-4fea-9b56-c14d5356b9fd" />
+<img width="1200" alt="Composition of Transform, rendering, and input Components on a GameObject" src="docs/images/readme/en/component-architecture.png" />
 
 `Input` is a separate object managed by the engine. In Tetris, `PlayerInputComponent` reads key states from this object to handle movement and rotation.
 
@@ -95,7 +95,7 @@ Component lookup uses type IDs and parent-type checks from [HiwoongObject](Hiwoo
 
 ### 2. Frame Execution Order
 
-<img width="1400" height="430" alt="Flow of input, initialization, Start, Update, Draw, scene transitions, and deferred operations" src="https://github.com/user-attachments/assets/a1110a71-ddfb-4340-880d-df0695fc9a08" />
+<img width="1400" height="430" alt="Flow of input, initialization, Start, Update, Draw, scene transitions, and deferred operations" src="docs/images/readme/en/frame-lifecycle.svg" />
 
 
 Once the configured frame interval has elapsed, `Engine::Run()` reads input and passes the actual elapsed time, `deltaTime`, to `Update()`. Initialization and `Start()` check each object's state and run once for objects that need them.
@@ -108,7 +108,7 @@ Related code: [Engine.cpp](HiwoongEngine/src/Engine/Engine.cpp), [Scene.cpp](Hiw
 
 ### 3. Compositing 2D and 3D Results into One Character Frame
 
-<img width="1400" height="570" alt="Character render commands displayed through a Frame and two console screen buffers" src="https://github.com/user-attachments/assets/2af7be33-54b8-41ff-814e-af8d0d4072fe" />
+<img width="1400" height="570" alt="Character commands composed into an RGB Frame and presented through a console or Win32 output backend" src="docs/images/readme/en/frame-composition.svg" />
 
 
 `SpriteRendererComponent` reads text line by line and submits non-space runs to the Renderer. Each character's position accounts for the GameObject's world position. This keeps empty space around sprites from obscuring the scene behind them.
@@ -127,7 +127,7 @@ Related code: [Renderer.cpp](HiwoongEngine/src/Render/Renderer.cpp)
 
 ### 4. How 3D Triangles Become ASCII Characters
 
-<img width="1400" height="740" alt="Comparison of 2D character placement and 3D coordinate transformation, triangle rasterization, and depth testing" src="https://github.com/user-attachments/assets/1b041d32-4405-4913-aed2-ace02550b80a" />
+<img width="1400" height="740" alt="Comparison of 2D character placement and 3D coordinate transformation, triangle rasterization, and depth testing" src="docs/images/readme/en/rendering-pipeline.svg" />
 
 `MeshRenderer`, the shared 3D rendering path, processes the scene in this order.
 
