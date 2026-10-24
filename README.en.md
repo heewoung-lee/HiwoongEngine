@@ -27,15 +27,15 @@ A 3D rendering demo that uses a rotating cube to demonstrate coordinate transfor
 
 https://github.com/user-attachments/assets/639897e7-3dc8-43dd-8a19-020b15c6207a
 
-### [3. ASCII Tetris](AsciiTetris/README.md)
+### [3. ASCII Tetris](AsciiTetris/README.en.md)
 
 A game that applies the engine's 2D object structure and scene transitions to block movement, rotation, falling, line clearing, scoring, and levels.
 
 <table align="center">
   <tr>
-    <td align="center"><a href="AsciiTetris/README.md"><img width="240" alt="ASCII Tetris block movement, rotation, and falling demo" src="https://github.com/user-attachments/assets/e3aac143-c780-4849-aec3-6f6c003a9c8e"></a><br><sub>Gameplay</sub></td>
-    <td align="center"><a href="AsciiTetris/README.md"><img width="240" alt="ASCII Tetris transition to the game over screen" src="https://github.com/user-attachments/assets/1b7be359-cb4a-4c1d-8970-8a63505e4a90"></a><br><sub>Game Over</sub></td>
-    <td align="center"><a href="AsciiTetris/README.md"><img width="240" alt="ASCII Tetris level advancement and falling speed changes" src="https://github.com/user-attachments/assets/cdb4ea95-407a-477e-874d-57338bec7e0d"></a><br><sub>Level Up</sub></td>
+    <td align="center"><a href="AsciiTetris/README.en.md"><img width="240" alt="ASCII Tetris block movement, rotation, and falling demo" src="https://github.com/user-attachments/assets/e3aac143-c780-4849-aec3-6f6c003a9c8e"></a><br><sub>Gameplay</sub></td>
+    <td align="center"><a href="AsciiTetris/README.en.md"><img width="240" alt="ASCII Tetris transition to the game over screen" src="https://github.com/user-attachments/assets/1b7be359-cb4a-4c1d-8970-8a63505e4a90"></a><br><sub>Game Over</sub></td>
+    <td align="center"><a href="AsciiTetris/README.en.md"><img width="240" alt="ASCII Tetris level advancement and falling speed changes" src="https://github.com/user-attachments/assets/cdb4ea95-407a-477e-874d-57338bec7e0d"></a><br><sub>Level Up</sub></td>
   </tr>
 </table>
 

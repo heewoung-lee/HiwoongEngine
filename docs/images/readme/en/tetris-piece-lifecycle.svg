@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="560" viewBox="0 0 1400 560" role="img" aria-labelledby="title desc">
+  <title id="title">Tetris piece lifecycle</title>
+  <desc id="desc">Select the next piece, spawn, move and rotate, lock, clear lines, update the score, and spawn again.</desc>
+  <defs><linearGradient id="bg4" x1="0" x2="1"><stop stop-color="#081018"/><stop offset="1" stop-color="#131827"/></linearGradient><marker id="a4" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L0 6L9 3z" fill="#64748b"/></marker><style>.t{font:700 30px 'Segoe UI','Noto Sans KR',sans-serif;fill:#f8fafc}.s{font:400 16px 'Segoe UI','Noto Sans KR',sans-serif;fill:#94a3b8}.h{font:700 18px 'Segoe UI','Noto Sans KR',sans-serif;fill:#f8fafc}.b{font:400 14px 'Segoe UI','Noto Sans KR',sans-serif;fill:#cbd5e1}.a{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#a4)}</style></defs>
+  <rect width="1400" height="560" rx="24" fill="url(#bg4)"/>
+  <text x="56" y="60" class="t">Tetris rules built from engine components</text>
+  <text x="56" y="91" class="s">A piece moves from spawning to locking, line clearing, and the next spawn.</text>
+  <g transform="translate(55 155)">
+    <rect width="180" height="105" rx="18" fill="#172554" stroke="#60a5fa" stroke-width="2"/><text x="90" y="43" text-anchor="middle" class="h">Queue next piece</text><text x="90" y="72" text-anchor="middle" class="b">Random index: 0–6</text>
+    <path d="M185 52 H225" class="a"/>
+    <g transform="translate(235)"><rect width="180" height="105" rx="18" fill="#083344" stroke="#22d3ee" stroke-width="2"/><text x="90" y="43" text-anchor="middle" class="h">Spawn piece</text><text x="90" y="72" text-anchor="middle" class="b">7 shapes and colors</text></g>
+    <path d="M420 52 H460" class="a"/>
+    <g transform="translate(470)"><rect width="180" height="105" rx="18" fill="#3b0764" stroke="#c084fc" stroke-width="2"/><text x="90" y="43" text-anchor="middle" class="h">Move / rotate</text><text x="90" y="72" text-anchor="middle" class="b">Input + occupancy check</text></g>
+    <path d="M655 52 H695" class="a"/>
+    <g transform="translate(705)"><rect width="180" height="105" rx="18" fill="#422006" stroke="#fbbf24" stroke-width="2"/><text x="90" y="43" text-anchor="middle" class="h">Lock</text><text x="90" y="72" text-anchor="middle" class="b">Lock to board cells</text></g>
+    <path d="M890 52 H930" class="a"/>
+    <g transform="translate(940)"><rect width="180" height="105" rx="18" fill="#052e16" stroke="#4ade80" stroke-width="2"/><text x="90" y="43" text-anchor="middle" class="h">Check lines</text><text x="90" y="72" text-anchor="middle" class="b">Clear + shift down</text></g>
+    <path d="M1125 52 H1145" class="a"/>
+    <g transform="translate(1155)"><rect width="170" height="105" rx="18" fill="#500724" stroke="#f472b6" stroke-width="2"/><text x="85" y="43" text-anchor="middle" class="h">Score / Level</text><text x="85" y="72" text-anchor="middle" class="b">Update status UI</text></g>
+  </g>
+  <path d="M1315 270 C1315 370 155 370 155 270" stroke="#475569" stroke-width="2" stroke-dasharray="8 8" fill="none" marker-end="url(#a4)"/>
+  <text x="735" y="405" text-anchor="middle" class="s">Spawn the next piece when space is available</text>
+  <path d="M290 430 H1110" stroke="#334155" stroke-width="2"/>
+  <rect x="460" y="455" width="480" height="62" rx="16" fill="#450a0a" stroke="#ef4444"/>
+  <text x="700" y="482" text-anchor="middle" class="h">If the new piece cannot spawn</text><text x="700" y="505" text-anchor="middle" class="b">GameOver scene · R: retry · Esc: quit</text>
+</svg>
