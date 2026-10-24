@@ -1,3 +1,8 @@
+<p align="right">
+  <a href="README.md"><img src="https://img.shields.io/badge/%ED%95%9C%EA%B5%AD%EC%96%B4-1F6FEB?style=for-the-badge" alt="한국어 (선택됨)"></a>
+  <a href="README.en.md"><img src="https://img.shields.io/badge/English-30363D?style=for-the-badge" alt="English"></a>
+</p>
+
 # ASCII Doom
 
 https://github.com/user-attachments/assets/31e2e76d-bf96-4367-9f9f-1c5504e425ce

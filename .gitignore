@@ -42,6 +42,7 @@
 *.md
 !**/README.md
 !/README.en.md
+!/AsciiDoom/README.en.md
 
 
 # Build output
