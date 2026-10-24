@@ -1,4 +1,7 @@
-[한국어](README.md) | **English**
+<p align="right">
+  <a href="README.md"><img src="https://img.shields.io/badge/%ED%95%9C%EA%B5%AD%EC%96%B4-30363D?style=for-the-badge" alt="한국어"></a>
+  <a href="README.en.md"><img src="https://img.shields.io/badge/English-1F6FEB?style=for-the-badge" alt="English (selected)"></a>
+</p>
 
 # HiwoongEngine
 
