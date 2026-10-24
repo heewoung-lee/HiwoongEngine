@@ -1,3 +1,5 @@
+**한국어** | [English](README.en.md)
+
 # HiwoongEngine
 
 **C++로 게임의 구조와 렌더링 과정을 직접 구현한 2D·3D ASCII 게임 엔진입니다.**

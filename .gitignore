@@ -41,6 +41,7 @@
 # Markdown documents
 *.md
 !**/README.md
+!/README.en.md
 
 
 # Build output
