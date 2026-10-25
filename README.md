@@ -17,7 +17,7 @@ Scene, GameObject, Component로 게임을 구성하고, CPU에서 계산한 3D �
 
 ### [1. 아스키 둠 · ASCII Doom](AsciiDoom/README.md)
 
-3D 맵 위에서 이동하며 조명을 비추고, 일시정지 메뉴와 체력·탄약 UI를 사용하는 개발 중인 1인칭 데모입니다.
+3D 맵 위에서 이동하며 조명을 비추고, 일시정지 메뉴와 체력·탄약 UI를 사용하는 게임 입니다.
 
 https://github.com/user-attachments/assets/81984e31-71cc-48f2-ba54-3f6739af3593
 
